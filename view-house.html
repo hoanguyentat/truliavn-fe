@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="viewHouseCtrl">
+<head>
+	<meta charset="UTF-8">
+	<title>Trang chu</title>
+
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="js/jquery/jquery/jquery.js"></script>
+	<script src="js/jquery/bootstrap.js"></script>
+	<script type="text/javascript" src ="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+</head>
+<body >
+<ng-include src="'view/templates/nav.html'" scope="" onload=""></ng-include>	
+		<div class="container main">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4">
+					<div class="insideContact">
+						<h3>Liên hệ để biết thêm thông tin</h3>
+						<div class="seller">
+							<img src="http://photos1.zillowstatic.com/h_n/IS1neprzsdqp9q1000000000.jpg" alt="" class="seller">
+							<ul class="seller">
+								<li>Bui Van X</li>
+								<li>1900xxxx</li>
+								<li>10 recent sale</li>
+							</ul>
+						</div>
+						<form action="" role="form">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Name">
+								<input type="text" class="form-control" placeholder="Email">
+								<input type="text" class="form-control" placeholder="Phone">
+								<input type="text" class="form-control" placeholder="I am interested in .....">
+							</div>
+							<button class="btn btn-primary">Liên hệ với nhân viên</button>
+						</form>
+					</div>
+				</div>
+
+				<div class=" col-xs-12 col-sm-8">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Gingerbread_House_Essex_CT.jpg" alt="" class="img-responsive home_image">
+				</div>
+
+				<div class="col-xs-12 col-sm-8">
+					<div class="general_info col-xs-12"> 
+						<h2>Nhà riêng</h2>
+						<h4>Mã đăng ký trên trang</h4>
+						<h4>Địa chỉ nhà</h4>
+					</div>
+
+					<div class="room col-xs-6 col-sm-4">{{house.noOfBedrooms}} Phòng ngủ</div>
+					<div class="room col-xs-6 col-sm-4">{{house.noOfBathrooms}} phòng tắm</div>
+					<div class="room col-xs-6 col-sm-4">{{house.noOfFloors}} Tầng</div>
+					<div class="room col-xs-6 col-sm-4">1 nhà bếp</div>
+					<div class="room col-xs-6 col-sm-4">1 bể bơi</div>
+					<div class="room col-xs-6 col-sm-4">1 vườn cây</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="container homeDetail" >
+			<h1>Chi tiết ngôi nhà</h1>
+			<div class="row">
+				<div class="col-sm-5 col-xs-12 describe">
+					<p>
+						Condo #2 is a 2-bedroom unit, It faces a green belt, with a distant view of the pool. The 2nd bedroom has its own entry door. Its on a lower floor of a 2 story 8-plex. The complex has 40 un its on 4.5 acres. The complex is situated on a 26 acre desert lake that is used to water the GREENS of the Tierra Del Sol golf course on the other side of the lake. The complex has its own pool & the City has another pool across the lake. The cities recreation on the west side of the lake has a city park, tennis courts, a gymnasium, ball fields and the golf course wraps around the West side of th...e lake. The Condo's are directly East of the lake. HOA dues are $185.00 The facility has its own laundryroom, with carports for parking. The lake is stocked with catfish by the city and non motorized boats are permitted. The canoe in the photo's was mine, a 16 foot Pelican Canoe. The older woman in the canoe is my mother and the owner seller, she turns 92 years old this July. My mother was in the rental business and once owned 16 of the 40 units. Unit #2 is one of 8 units she still owns. California City is 110 miles North of Los Angeles, in Southern California. This is the Mojave Desert and the city of Mojave is 15 miles South & West. Elevation is about 2600 feet. The population is about 12,000 people. You can view the lower Sierra Mountains to the West, this is East Kern County. Bakersfield is about 60 miles West. At near 92 years old my mother is retiring. Right now we have a tenant who would like to stay, they are however on a month to month contract should you want to owner occupy. 
+					</p>
+				</div>
+				<div class="col-sm-4 col-xs-12 school">
+					<table class="table">
+						<thread>
+							<th class="active"><h4>Trường học gần đây</h4></th>
+						</thread>		
+						<tbody>
+							<tr class="active">
+								<td>
+									Trường tiểu học
+									<h4>Trung bình</h4>
+								</td>
+							</tr>
+							<tr class="active">
+								<td>
+									Trường trung học
+									<h4>Khá</h4>
+								</td>
+							</tr>
+							<tr class="active">
+								<td>
+									Trường phổ thông trung học
+									<h4>Trung bình</h4>	
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-3 col-xs-12">
+					<h3>Quảng cáo</h3>
+				</div>
+			</div>
+		</div>
+		<div class="container regional">
+			<div class="row">
+				<div class="col-sm-6 col-xs-12"></div>
+				<div class="col-sm-6 col-xs-12"></div>
+			</div>
+		</div>
+		<ng-include src="'view/templates/footer.html'" scope="" onload=""></ng-include>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/MainController.js"></script>
+</body>
+</html>

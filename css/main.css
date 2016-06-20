@@ -31,3 +31,13 @@ ul.seller{
 	background: #ccf;
 	min-height:700px;
 }
+.navbar-default{
+	background-color: #2ecc71;
+}
+.navbar-default .navbar-nav>li>a {
+	color: #fff;
+}
+
+.navbar-default .navbar-brand {
+    color: #f5f5f5;
+}
