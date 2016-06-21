@@ -5,7 +5,7 @@ angular.
 
 	$routeProvider
 	.when('/', {
-		template: '<view-house></view-house>'
+		template: '<index></index>'
 	})
 	.when('/houses', {
 		template: '<all-house></all-house>'
