@@ -1,1 +1,1 @@
-angular.module('viewHouse', []);
+angular.module('houseDetail', []);

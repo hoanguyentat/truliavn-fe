@@ -8,10 +8,10 @@ angular.
 		template: '<index></index>'
 	})
 	.when('/houses', {
-		template: '<all-house></all-house>'
+		template: '<house-list></house-list>'
 	})
 	.when('/houses/:houseId', {
-		template: '<view-house></view-house>'
+		template: '<house-detail></house-detail>'
 	})
 	.otherwise('');
 }]);

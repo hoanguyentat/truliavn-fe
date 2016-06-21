@@ -1,16 +1,13 @@
-angular.module('viewHouse')
-.component('viewHouse', {
-	controller: ['$http', '$scope', function ViewHouseController($http, $scope){
+angular.module('houseDetail')
+.component('houseDetail', {
+	controller: function HouseDetailController($http, $routeParams){
 		var url = '../../data/houses.json';
+		var self = this;
 		$http.get(url).then(function success(response){
-			// console.log(response);
-			var self = this;
+
 			self.house = response.data[0];
-			console.dir(self.house);
-		},
-		function error(response){
-			// $scope.error = response.status;
 		});
-	}],
-	templateUrl: 'view/house-detail/house-detail.template.html'
+	},
+	templateUrl: 'view/house-detail/house-detail.template.html',
+	controllerAs: 'ctrl'
 });	

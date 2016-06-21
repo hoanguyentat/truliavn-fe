@@ -1,6 +1,6 @@
 angular.module('truliavnApp', [
 	'houseList',
 	'homePage',
-	'viewHouse',
+	'houseDetail',
 	'ngRoute'
 ]);

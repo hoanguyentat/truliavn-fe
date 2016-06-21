@@ -10,18 +10,18 @@
 	
 	<script type="text/javascript" src="asset/js/angular/angular.js"></script>
 	<script type="text/javascript" src="asset/js/angular-route/angular-route.js"></script>
-	<script type="text/javascript" src="app.module.js"></script>
-	<script type="text/javascript" src="app.config.js"></script>
-	<script type="text/javascript" src="view/house-detail/house-detail.module.js"></script>
-	<script type="text/javascript" src="view/house-detail/house-detail.component.js"></script>
-	<script type="text/javascript" src="view/house-list/house-list.module.js"></script>
-	<script type="text/javascript" src="view/house-list/house-list.component.js"></script>
-	<script type="text/javascript" src="view/home-page/home.module.js"></script>
-	<script type="text/javascript" src="view/home-page/home.component.js"></script>
+	<script src="app.module.js"></script>
+	<script src="app.config.js"></script>
+	<script src="view/house-detail/house-detail.module.js"></script>
+	<script src="view/house-detail/house-detail.component.js"></script>
+	<script src="view/house-list/house-list.module.js"></script>
+	<script src="view/house-list/house-list.component.js"></script>
+	<script src="view/home-page/home.module.js"></script>
+	<script src="view/home-page/home.component.js"></script>
 </head>
 <body>
 	<ng-include src="'view/templates/nav.template.html'" scope="" onload=""></ng-include>
-	<ng-view></ng-view>
+	<div ng-view></div>
 	<ng-include src="'view/templates/footer.template.html'" scope="" onload=""></ng-include>
 </body>
 </html>
