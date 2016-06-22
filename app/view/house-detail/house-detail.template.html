@@ -1,5 +1,6 @@
 <div class="container main">
 	<div class="row">
+	<center><h2>Thong tin chi tiet</h2></center>
 		<div class="col-xs-12 col-sm-4">
 			<div class="insideContact">
 				<h3>Liên hệ để biết thêm thông tin</h3>
@@ -29,15 +30,15 @@
 
 		<div class="col-xs-12 col-sm-8">
 			<div class="general_info col-xs-12"> 
-				<h2>Nhà riêng</h2>
+				<h2>{{ctrl.house.type}}</h2>
 				<h4>Mã đăng ký trên trang</h4>
-				<h4>Địa chỉ nhà</h4>
+				<h4>Địa chỉ nhà: {{ctrl.house.address}} - {{ctrl.house.district}}</h4>
 			</div>
 
-			<div class="room col-xs-6 col-sm-4">{{ctrl.house.bedrooms}} Phòng ngủ</div>
-			<div class="room col-xs-6 col-sm-4">2 phòng tắm</div>
-			<div class="room col-xs-6 col-sm-4">2 Tầng</div>
-			<div class="room col-xs-6 col-sm-4">1 nhà bếp</div>
+			<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfBedrooms}} Phòng ngủ</div>
+			<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfBathrooms}} phòng tắm</div>
+			<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfFloors}} Tầng</div>
+			<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfFloors}} nhà bếp</div>
 			<div class="room col-xs-6 col-sm-4">1 bể bơi</div>
 			<div class="room col-xs-6 col-sm-4">1 vườn cây</div>
 		</div>

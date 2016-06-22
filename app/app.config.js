@@ -13,5 +13,5 @@ angular.
 	.when('/houses/:houseId', {
 		template: '<house-detail></house-detail>'
 	})
-	.otherwise('');
+	.otherwise('/');
 }]);
