@@ -41,11 +41,11 @@ angular.module('truliavnApp')
 		return deferred.promise;
 	}	
 
-	function login(username, password){
+	function login(email, password){
 		var deferred = $q.defer();
 
-		$http.post('http://localhost:3000/api/login',{username: username, password: password}).success(function(data, status){
-			if (status == 200 && data.status) {
+		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
+			if (status == 200 && data.status =="success") {
 				user = true;
 				deferred.resolve();
 			} else{
