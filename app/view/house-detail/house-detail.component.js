@@ -4,12 +4,14 @@ angular.module('houseDetail')
 		console.log($routeParams);
 		var url = 'http://localhost:3000/api/house/' + $routeParams.houseId;
 		var self = this;
+		var status;
 		$http.get(url).then(function success(response){
-			console.log(response.data);
 			self.house = response.data.house;
-			console.log(self.house);
+			console.log(response.data);
+			status = response.data.status;
+			console.log(status);
 		});
-		var status = self.house.status;
+		console.log(status);
 	},
 	templateUrl: function(){
 		console.log(status);
