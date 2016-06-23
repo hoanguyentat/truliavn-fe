@@ -31,3 +31,19 @@ ul.seller{
 	background: #ccf;
 	min-height:700px;
 }
+
+ .SearchPage{
+	background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/c0/Gingerbread_House_Essex_CT.jpg") no-repeat center center fixed;+6
+	background-size: cover;
+	height: 98vh;
+} 
+
+.search{
+	top : 50%;
+	margin : auto;
+	/*background: rgba(0, 0, 0, 0.5);*/
+}
+
+html{
+	height: 100%;
+}
