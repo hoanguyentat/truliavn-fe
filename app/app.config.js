@@ -7,6 +7,17 @@ angular.
 	.when('/', {
 		template: '<index></index>'
 	})
+	.when('/login', {
+		templateUrl: 'view/user/login/login.html',
+		controller: 'LoginController'
+	})
+	.when('/register', {
+		templateUrl: 'view/user/register/register.html',
+		controller: 'RegisterController'
+	})
+	.when('logout', {
+		controller: 'LogoutController'
+	})
 	.when('/houses', {
 		template: '<house-list></house-list>'
 	})

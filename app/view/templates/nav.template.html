@@ -19,6 +19,7 @@
 				<li><a href="">Cần mua - Cần thuê</a></li>
 				<li><a href="">Tin tức</a></li>
 				<li><a href="">Phong thủy</a></li>
+				<li><a href="">Tư vấn - Hỏi đáp</a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -40,7 +41,9 @@
 						<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
 					</form>
 				</li>
-				<li><a href="#">Tư vấn - Hỏi đáp</a></li>
+				<li ng-controller="LogoutControler">
+					<a ng-click="logout()">Logout</a>
+				</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div>
