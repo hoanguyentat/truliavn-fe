@@ -1,0 +1,44 @@
+<div class="container main">
+	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+		<center><h3>Sửa nhà</h3></center>
+		<form ng-submit="addhouse()" enctype="multipart/form-data">
+			<input type="hidden" name="" id="input" class="form-control" ng-value="">
+			<div class="form-group">
+				<label for="type" class="control-label"></label>
+				<select name="type" id="type" class="form-control" required="required">
+					<option value="0">Nhà riêng</option>
+					<option value="1">Chung cư</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="address" class="control-label">Address</label>
+				<textarea name="" id="input" class="form-control" rows="3" required="required"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="interior">Add Feature</label>
+				<input name="interior" id="interior" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="bedroom" class="control-label"></label>
+				<input name="bedroom" id="bedroom" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="bathroom" class="control-label"></label>
+				<input name="bathroom" id="bathroom" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="description" class="control-label"></label>
+				<textarea name="description" id="description" class="form-control" rows="3" required="required"></textarea>
+			</div>
+			<input type="hidden" name="email" value="ngocdon127@gmail.com">
+			<input type="hidden" name="token" value="ece44e64c04368f6650b45ca503a747e">
+			<div class="form-group">
+				<label for="images" class="control-label"></label>
+				<input type="file" name="images" multiple="">
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Submit" class="btn btn-primary">
+			</div>
+		</form>
+	</div>
+</div>

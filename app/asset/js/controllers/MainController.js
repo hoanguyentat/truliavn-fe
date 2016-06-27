@@ -1,5 +1,4 @@
-angular.module('truliavnApp')
-.controller('LoginController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
+angular.module('truliavnApp').controller('LoginController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
 	$scope.login = function(){
 		$scope.error = false;
 		$scope.disabled = true;
@@ -20,8 +19,7 @@ angular.module('truliavnApp')
 	};
 }]);
 
-angular.module('truliavnApp')
-.controller('RegisterController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
+angular.module('truliavnApp').controller('RegisterController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
 
 	$scope.register = function(){
 		$scope.error = false;
@@ -42,8 +40,7 @@ angular.module('truliavnApp')
 	};
 }]);
 
-angular.module('truliavnApp')
-.controller('LogoutControler', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
+angular.module('truliavnApp').controller('LogoutControler', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
 	$scope.logout = function(){
 		AuthService.logout()
 		.then(function(){
@@ -51,3 +48,13 @@ angular.module('truliavnApp')
 		});
 	};
 }]);
+
+angular.module('truliavnApp').controller('AddHouseCtrl', ['$scope', function($scope){
+	
+}])
+angular.module('truliavnApp').controller('EditHouseCtrl', ['$scope', function($scope){
+	
+}])
+angular.module('truliavnApp').controller('DeleteHouseCtrl', ['$scope', function($scope){
+	
+}])

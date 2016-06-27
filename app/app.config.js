@@ -24,13 +24,15 @@ angular.
 		template: '<house-list></house-list>'
 	})
 	.when('/addhouse', {
-		template: '<house-list></house-list>'
+		templateUrl: 'view/user/addhouse.template.html',
+		controller: 'AddHouseCtrl'
 	})
 	.when('/:postId/delete', {
-		template: '<house-list></house-list>'
+		controller: 'DeleteHouseCtrl'
 	})
 	.when('/:postId/edit', {
-		template: '<house-list></house-list>'
+		templateUrl: 'view/user/edithouse.template.html',
+		controller: 'EditHouseCtrl'
 	})
 	// user feature
 	.when('/login', {
@@ -44,8 +46,11 @@ angular.
 	.when('logout', {
 		controller: 'LogoutController'
 	})
+	.when('/:user', {
+		template: 'Trang thông tin cá nhân'
+	})
 	.when('/:user/edit', {
-		template: '<house-list></house-list>'
+		template: 'Trang chỉnh sửa thông tin cá nhân'
 	})
 	
 	.otherwise('/');
