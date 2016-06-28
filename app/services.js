@@ -1,9 +1,13 @@
 angular.module('truliavnApp')
 .factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $http){
-	var user = null;	
+	var user = null;
+	var token = "";
+	var email = "";
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
+		getUserToken: getUserToken,
+		getUserEmail: getUserEmail,
 		login: login,
 		logout: logout,
 		register: register
@@ -19,6 +23,12 @@ angular.module('truliavnApp')
 
 	function getUserStatus(){
 		return user;
+	}
+	function getUserToken(){
+		return token;
+	}
+	function getUserEmail(){
+		return email;
 	}
 
 	function register(email, password, address, phone, fullname){
@@ -46,6 +56,9 @@ angular.module('truliavnApp')
 
 		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
 			if (status == 200 && data.status =="success") {
+				console.log(data);
+				token = data.user.token;
+				email = data.user.email;
 				user = true;
 				deferred.resolve();
 			} else{
@@ -65,8 +78,9 @@ angular.module('truliavnApp')
 		var deferred = $q.defer();
 
 		//sent request logout
-		$http.get('/logout')
+		$http.post('http://localhost:3000/api/logout', {email: email, token: token})
 		.success(function(data){
+			console.log("Thanh cmn cong");
 			user = false;
 			deferred.resolve();
 		})

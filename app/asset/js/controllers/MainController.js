@@ -7,6 +7,10 @@ angular.module('truliavnApp').controller('LoginController', ['$scope', '$locatio
 		AuthService.login($scope.loginForm.username, $scope.loginForm.password)
 			.then(function(){
 				$location.path('/');
+				$scope.token = AuthService.getUserToken();
+				$scope.userEmail = AuthService.getUserStatus();
+				console.log($scope.username);
+				console.log($scope.token);
 				$scope.disabled = false;
 				$scope.loginForm = {};
 			})
@@ -25,7 +29,7 @@ angular.module('truliavnApp').controller('RegisterController', ['$scope', '$loca
 		$scope.error = false;
 		$scope.disabled = true;
 
-		AuthService.register($scope.registerForm.email, $scope.registerForm.password, $scope.registerForm.address, $scope.registerForm.phone, $scope.registerForm.fullname)
+		AuthService.register($scope.registerForm.email, $scope.registerForm.password, $scope.registerForm.address, $scope.registerForm.phone, $scope.registerForm.fullName)
 		//handle suscess
 		.then(function(){
 			$location.path('#!/login');
