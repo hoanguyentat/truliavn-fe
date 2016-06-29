@@ -4,10 +4,10 @@ angular.module('houseList')
 	controller:['$http', function($http){
 		var url = 'http://localhost:3000/api/houses';
 		var list = this;
-		// $http.get(url).then(function success(response){
-		// 	list.houses = response.data.houses;
-		// 	console.log(list.houses);
-		// });
+		$http.get(url).then(function success(response){
+			list.houses = response.data.houses;
+			console.log(list.houses);
+		});
 		$http.get('http://localhost:3000/api/districts').then(function success(response){
 			list.districts = response.data.districts;
 			console.log(list.districts);

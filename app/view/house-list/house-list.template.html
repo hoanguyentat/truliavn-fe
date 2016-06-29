@@ -52,16 +52,16 @@
 					</div>
 					<div class="row">
 						<ul class="houses">
-						<li ng-repeat="house in ctrl.houses | filter: " class="thumbnail row">
+						<li ng-repeat="house in ctrl.houses" class="thumbnail row">
 							<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 								<a href="#!/houses/{{house.id}}" class="thumb">
-								<img ng-src="{{house.images[0]}}" class="img img-responsive" alt="{{house.address}}" />
+								<img ng-src="{{'http://localhost:3000/' + house.images[0]}}" class="img img-responsive" alt="{{house.address}}" />
 								</a>
 							</div>
 							<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 								
 								<a href="#!/houses/{{house.id}}">{{house.address}}</a>
-								<p ng-bind-html="house.description"></p>
+								<p ng-bind="house.description"></p>
 								</div>
 							</li>
 							
