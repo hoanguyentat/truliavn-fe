@@ -1,19 +1,21 @@
 <span ng-if="ctrl.status == 'success'">
 	<div class="container main">
-		<div class="row">
+		<div class="row" style="padding-bottom: 20px;">
 		<center><h2>Thông tin chi tiết căn hộ</h2></center>
 			<div class="col-xs-12 col-sm-4">
 				<div class="insideContact">
 					<h3>Liên hệ để biết thêm thông tin</h3>
-					<div class="seller">
-						<img src="http://photos1.zillowstatic.com/h_n/IS1neprzsdqp9q1000000000.jpg" alt="" class="seller">
-						<ul class="seller">
-							<li>Tên chủ nhà</li>
-							<li>Số điện thoại</li>
-							<li>10 recent sale</li>
+					<div>
+						<div class="row">
+							<center><img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img img-responsive img-thumbnail" alt=""></center>
+						</div>
+						<ul class="list-group">
+							<li class="list-group-item">Tên chủ nhà: {{ctrl.house.ownerInfo.fullname}}</li>
+							<li class="list-group-item" type="phone">Phone: {{ctrl.house.ownerInfo.phone}}</li>
+							<li class="list-group-item">Address: {{ctrl.house.ownerInfo.address}}</li>
 						</ul>
 					</div>
-					<form action="" method="POST" role="form">
+<!-- 					<form action="" method="POST" role="form">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Name">
 							<input type="text" class="form-control" placeholder="Email">
@@ -21,34 +23,31 @@
 							<input type="text" class="form-control" placeholder="I am interested in .....">
 						</div>
 						<button class="btn btn-primary">Liên hệ với nhân viên</button>
-					</form>
+					</form> -->
 				</div>
 			</div>
 
 			<div class=" col-xs-12 col-sm-8">
-				<img ng-src="ctrl.house.images[0]" alt="" class="img-responsive home_image">
+				<img ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}" alt="" class="img-responsive home_image">
 			</div>
 
 			<div class="col-xs-12 col-sm-8">
 				<div class="general_info col-xs-12"> 
 					<h2>{{ctrl.house.type}}</h2>
-					<h4>Mã đăng ký trên trang</h4>
 					<h4>Địa chỉ nhà: {{ctrl.house.address}} - {{ctrl.house.district}}</h4>
 				</div>
 
-				<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfBedrooms}} Phòng ngủ</div>
+				<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfBedrooms}} phòng ngủ</div>
 				<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfBathrooms}} phòng tắm</div>
-				<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfFloors}} Tầng</div>
+				<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfFloors}} tầng</div>
 				<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfFloors}} nhà bếp</div>
-				<div class="room col-xs-6 col-sm-4">1 bể bơi</div>
-				<div class="room col-xs-6 col-sm-4">1 vườn cây</div>
 			</div>
 		</div>
 	</div>
 
 
 	<div class="container homeDetail" >
-		<h1>Chi tiết ngôi nhà</h1>
+		<h1>Mô tả ngôi nhà</h1>
 		<div class="row">
 			<div class="col-sm-5 col-xs-12 describe">
 				<p>
