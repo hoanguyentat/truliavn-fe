@@ -1,4 +1,4 @@
-angular.module('truliavnApp', [
+var app = angular.module('truliavnApp', [
 	'houseList',
 	'homePage',
 	'houseDetail',

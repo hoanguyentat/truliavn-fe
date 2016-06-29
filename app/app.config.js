@@ -17,11 +17,15 @@ angular.
 		access: {restricted: false}
 	})
 	.when('/for-rent', {
-		template: 'Trang này hiển thị danh sách nhà cho thuê',
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'HouseForRentCtrl',
+		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
-	.when('/for-sale', {
-		template: 'Trang này hiển thị danh sách nhà để bán',
+	.when('/for-sell', {
+		template: 'view/house-list/house-list.template.html',
+		controller: 'HouseForSellCtrl',
+		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
 	// house feature

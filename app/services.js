@@ -1,5 +1,6 @@
-angular.module('truliavnApp')
-.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $http){
+
+//Handling user authentication service
+app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $http){
 	var user = null;
 	var token = "";
 	var email = "";
@@ -24,6 +25,8 @@ angular.module('truliavnApp')
 	function getUserStatus(){
 		return user;
 	}
+
+	//return a token + email to user can use to add a new post
 	function getUserToken(){
 		return token;
 	}
@@ -92,3 +95,5 @@ angular.module('truliavnApp')
 		return deferred.promise;
 	}
 }]);
+
+//House feature service
