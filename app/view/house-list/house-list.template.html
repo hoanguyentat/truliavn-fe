@@ -52,7 +52,7 @@
 					</div>
 					<div class="row">
 						<ul class="houses">
-						<li ng-repeat="house in ::ctrl.houses track by house.id" class="thumbnail row">
+						<li ng-repeat="house in ctrl.houses | startFrom: ctrl.currentPage*ctrl.pageSize | limitTo: ctrl.pageSize" class="thumbnail row">
 							<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 								<a href="#!/houses/{{::house.id}}" class="thumb">
 								<img ng-src="{{'http://localhost:3000/' + house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
@@ -67,6 +67,13 @@
 							
 						</ul>
 					</div>
+					   <button ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
+					        Previous
+					    </button>
+					    {{ctrl.currentPage+1}}/{{ctrl.numberOfPages()}}
+					    <button ng-disabled="ctrl.currentPage >= ctrl.houses.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
+					        Next
+					    </button>
 				</div>		
 			</div>
 		</div>
