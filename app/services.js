@@ -11,7 +11,8 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		getUserEmail: getUserEmail,
 		login: login,
 		logout: logout,
-		register: register
+		register: register,
+		hostName: 'http://localhost:3000'
 	});
 
 	function isLoggedIn(){
