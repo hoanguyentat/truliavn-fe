@@ -6,16 +6,15 @@ angular.module('houseList')
 		var list = this;
 		list.currentPage = 0;
 		list.pageSize = 20;
-		list.numberOfPages = function(){
-			return Math.ceil(list.houses.length/list.pageSize); 
-		};
+		
 		$http.get(url).then(function success(response){
 			list.houses = response.data.houses;
 			console.log(list.houses);
+			list.numberOfPages = function(){
+				return Math.ceil(list.houses.length/list.pageSize); 
+			};
 			angular.forEach(list.houses, function(val, key){
-				// console.log(val.description);
 				val.description = val.description.slice(0, 150) + '....';
-				// console.log(val.description);
 			});
 		});
 		$http.get(AuthService.hostName + '/api/districts').then(function success(response){

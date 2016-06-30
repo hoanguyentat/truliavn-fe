@@ -15,15 +15,13 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'AuthService', function($
 	listRent.currentPage = 0;
 	listRent.pageSize = 20;
 	listRent.numberOfPages = function(){
-			return Math.ceil(listRent.houses.length/listRent.pageSize); 
-		};
+		return Math.ceil(listRent.houses.length/listRent.pageSize); 
+	};
 	$http.get(rentUrl).then(function(response){
 		listRent.houses = response.data.houses;
-		// console.log(listRent.houses);
+
 		angular.forEach(listRent.houses, function(val, key){
-				// console.log(val.description);
 			val.description = val.description.slice(0, 150) + '....';
-			// console.log(val.description);
 		});
 	});
 	console.log(listRent.currentPage, listRent.pageSize);

@@ -67,7 +67,7 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 	}	
 
 	function login(email, password){
-		// var deferred = $q.defer();
+		var deferred = $q.defer();
 
 		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
 			if (status == 200 && data.status =="success") {
@@ -75,7 +75,7 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 				token = data.user.token;
 				emailUser = data.user.email;
 				user = true;
-				// deferred.resolve();
+				deferred.resolve();
 			} else{
 				user = false;
 				deferred.reject();
@@ -83,10 +83,10 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		})
 		.error(function(data){
 			user = false;
-			// deferred.reject();
+			deferred.reject();
 		});
 
-		// return deferred.promise;
+		return deferred.promise;
 	}
 
 	function logout(){
@@ -95,12 +95,13 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		//sent request logout
 		$http.post('http://localhost:3000/api/logout', {email: emailUser, token: token})
 		.success(function(data){
-			console.log("Thanh cmn cong");
+			console.log("Logout thanh cong");
 			user = false;
 			deferred.resolve();
 		})
 		.error(function(data){
 			user = false;
+			console.log("Logout khong thanh cong");
 			deferred.reject();
 		});
 

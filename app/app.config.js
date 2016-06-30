@@ -50,7 +50,8 @@ angular.
 	// user feature
 	.when('/login', {
 		templateUrl: 'view/user/login/login.html',
-		controller: 'LoginController'
+		controller: 'LoginController',
+		access: {restricted: false}
 	})
 	.when('/register', {
 		templateUrl: 'view/user/register/register.html',
@@ -58,7 +59,8 @@ angular.
 		access: {restricted: false}
 	})
 	.when('logout', {
-		controller: 'LogoutController'
+		controller: 'LogoutController',
+		access: {restricted: false}
 	})
 	.when('/:user', {
 		template: 'Trang thông tin cá nhân',

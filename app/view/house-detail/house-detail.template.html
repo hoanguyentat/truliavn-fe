@@ -28,8 +28,8 @@
 			</div>
 
 			<div class=" col-xs-12 col-sm-8">
-				<img ng-if="{{'http://localhost:3000/' + ctrl.house.images[0]}}" ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}" alt="" class="img-responsive home_image">
-				<img onerror="this.onerror=null; this.src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'">
+				<img ng-if="ctrl.house.images[0]" ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}" alt="" class="img-responsive home_image">
+				<img ng-if="!ctrl.house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
 			</div>
 
 			<div class="col-xs-12 col-sm-8">
