@@ -76,7 +76,7 @@ angular.
 angular.module('truliavnApp')
 .run(function($rootScope, $location, $route, AuthService){
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
-		//user must logged in to access the route
+		//user must login to access the route
 		AuthService.getUserStatus()
 		.then(function success(){
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
@@ -104,4 +104,4 @@ angular.module('matchPassword', [])
         });
       }
     }
-  }]);
+}]);

@@ -46,21 +46,23 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		return emailUser;
 	}
 
-	function register(email, password, address, phone, fullname){
+	function register(email, password, repeatPassword, address, phone, fullname){
 		//creat a new instance of deferred
 		var deferred = $q.defer();
 
-		$http.post('http://localhost:3000/api/register',{email: email, password: password, address: address, phone: phone, fullname: fullname})
+		$http.post('http://localhost:3000/api/register',{email: email, password: password, repeatPassword: repeatPassword, address: address, phone: phone, fullname: fullname})
 		//handle success
 		.success(function(data, status){
 			if (status == 200 && data.status) {
 				deferred.resolve();
+				console.log(data, status);
 			} else{
 				deferred.reject();
 			}
 		})
 		//handle error
 		.error(function(data){
+			console.log(data);
 			deferred.reject();
 		});
 		return deferred.promise;
@@ -71,6 +73,9 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 
 		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
 			if (status == 200 && data.status =="success") {
+				$http.get('http://localhost:3000/api/user/edit').then(function(response){
+					console.log(response);
+				});
 				console.log(data);
 				token = data.user.token;
 				emailUser = data.user.email;
@@ -110,3 +115,93 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 }]);
 
 //House feature service
+app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $timeout){
+	return ({
+		addHouse: addHouse,
+		editHouse: editHouse,
+		deleteHouse: deleteHouse,	
+	});
+
+	function addHouse(email, token, type, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description){
+		var houseData = {
+			email: email,
+			token: token,
+			type: type,
+			address: address,
+			area: area,
+			houseFor: houseFor,
+			noOfBathrooms: noOfBathrooms,
+			noOfBedrooms: noOfBedrooms,
+			noOfFloors: noOfFloors,
+			interior: interior,
+			buildIn: buildIn,
+			price: price,
+			feePeriod: feePeriod,
+			city: city,
+			district: district,
+			ward: ward,
+			description: description
+		};
+		var deferred = $q.defer();
+
+		//sent request add house
+		$http.post('http://localhost:3000/api/house', houseData)
+		.success(function(data){
+			console.log("Them nha thanh cong");
+			deferred.resolve();
+		})
+		.error(function(data){
+			console.log("Them nha khong thanh cong");
+			deferred.reject();
+		});
+
+		return deferred.promise;
+	}
+
+	function editHouse(email, token, type, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description, houseId){
+		var houseData = {
+			email: email,
+			token: token,
+			type: type,
+			address: address,
+			area: area,
+			houseFor: houseFor,
+			noOfBathrooms: noOfBathrooms,
+			noOfBedrooms: noOfBedrooms,
+			noOfFloors: noOfFloors,
+			interior: interior,
+			buildIn: buildIn,
+			price: price,
+			feePeriod: feePeriod,
+			city: city,
+			district: district,
+			ward: ward,
+			description: description,
+			houseId: houseId
+		};
+		var deferred = $q.defer();
+
+		//sent request add house
+		$http.post('http://localhost:3000/api/house/edit', houseData)
+		.success(function(data){
+			console.log("Sua nha thanh cong");
+			deferred.resolve();
+		})
+		.error(function(data){
+			console.log("Sua nha khong thanh cong");
+			deferred.reject();
+		});
+
+		return deferred.promise;
+	}
+
+	function deleteHouse(email, houseId, token){
+		var deferred = $q.defer();
+
+		$http.post('http://localhost:3000/api/house/delete', {email: email, token: token, houseId: houseId})
+		.success(function(response){
+			console.log("Xoa nha thanh cong");
+			deferred.resolve();
+		})
+	}
+}]);

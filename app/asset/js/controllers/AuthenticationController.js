@@ -1,18 +1,19 @@
-app.controller('LoginController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
+app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http', function($scope, $location, AuthService, $http){
 	$scope.login = function(){
 		$scope.error = false;
 		$scope.disabled = true;
-
+		
 		//call login from service
 		AuthService.login($scope.loginForm.username, $scope.loginForm.password)
 			.then(function(){
-				$location.path('/');
+
 				$scope.token = AuthService.getUserToken();
 				$scope.userEmail = AuthService.getUserEmail();
 				console.log($scope.userEmail);
 				console.log($scope.token);
 				$scope.disabled = false;
 				$scope.loginForm = {};
+				$location.path('/');
 			})
 			.catch(function(){
 				$scope.error = true;
@@ -29,7 +30,7 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 		$scope.error = false;
 		$scope.disabled = true;
 
-		AuthService.register($scope.registerForm.email, $scope.registerForm.password, $scope.registerForm.address, $scope.registerForm.phone, $scope.registerForm.fullName)
+		AuthService.register($scope.registerForm.email, $scope.registerForm.password, $scope.registerForm.repass, $scope.registerForm.address, $scope.registerForm.phone, $scope.registerForm.fullName)
 		//handle suscess
 		.then(function(){
 			$location.path('#!/login');
