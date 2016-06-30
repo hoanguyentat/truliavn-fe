@@ -3,7 +3,7 @@
 app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $http){
 	var user = null;
 	var token = "";
-	var email = "";
+	var emailUser = "";
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
@@ -24,7 +24,18 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 	}
 
 	function getUserStatus(){
-		return user;
+		return $http.get('http://localhost:3000/api/userstatus')
+		.success(function(data){
+			console.log(data);
+			if (data.status) {
+				user = true;
+			} else {
+				user = false;
+			}
+		})
+		.error(function(data) {
+			user = false;
+		});
 	}
 
 	//return a token + email to user can use to add a new post
@@ -32,7 +43,7 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		return token;
 	}
 	function getUserEmail(){
-		return email;
+		return emailUser;
 	}
 
 	function register(email, password, address, phone, fullname){
@@ -56,15 +67,15 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 	}	
 
 	function login(email, password){
-		var deferred = $q.defer();
+		// var deferred = $q.defer();
 
 		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
 			if (status == 200 && data.status =="success") {
 				console.log(data);
 				token = data.user.token;
-				email = data.user.email;
+				emailUser = data.user.email;
 				user = true;
-				deferred.resolve();
+				// deferred.resolve();
 			} else{
 				user = false;
 				deferred.reject();
@@ -72,17 +83,17 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		})
 		.error(function(data){
 			user = false;
-			deferred.reject();
+			// deferred.reject();
 		});
 
-		return deferred.promise;
+		// return deferred.promise;
 	}
 
 	function logout(){
 		var deferred = $q.defer();
 
 		//sent request logout
-		$http.post('http://localhost:3000/api/logout', {email: email, token: token})
+		$http.post('http://localhost:3000/api/logout', {email: emailUser, token: token})
 		.success(function(data){
 			console.log("Thanh cmn cong");
 			user = false;

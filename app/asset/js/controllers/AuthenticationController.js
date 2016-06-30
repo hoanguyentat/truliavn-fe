@@ -8,8 +8,8 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', functio
 			.then(function(){
 				$location.path('/');
 				$scope.token = AuthService.getUserToken();
-				$scope.userEmail = AuthService.getUserStatus();
-				console.log($scope.username);
+				$scope.userEmail = AuthService.getUserEmail();
+				console.log($scope.userEmail);
 				console.log($scope.token);
 				$scope.disabled = false;
 				$scope.loginForm = {};

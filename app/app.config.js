@@ -75,9 +75,14 @@ angular.module('truliavnApp')
 .run(function($rootScope, $location, $route, AuthService){
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
 		//user must logged in to access the route
-		if (next.access.restricted && AuthService.isLoggedIn() === false) {
-			$location.path('/login');
-		}
+		AuthService.getUserStatus()
+		.then(function success(){
+			if (next.access.restricted && !AuthService.isLoggedIn()) {
+				$location.path('/login');
+			}
+		}, function error(){
+			console.log("Lay trang thai khong thanh cong");
+		});
 	});
 });
 
