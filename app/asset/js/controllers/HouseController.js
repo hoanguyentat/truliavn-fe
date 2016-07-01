@@ -1,6 +1,8 @@
-app.controller('AddHouseCtrl', ['$scope', function($scope){
-	
-}])
+app.controller('AddHouseCtrl', ['$scope', 'AuthService', function($scope, AuthService){
+	$scope.addHouse = function(){
+		console.log(AuthService.getUserToken, AuthService.getUseremail());
+	}
+}]);
 app.controller('EditHouseCtrl', ['$scope', function($scope){
 	
 }])

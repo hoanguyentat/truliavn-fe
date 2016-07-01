@@ -60,7 +60,7 @@ angular.
 	})
 	.when('logout', {
 		controller: 'LogoutController',
-		access: {restricted: false}
+		access: {restricted: true}
 	})
 	.when('/:user', {
 		template: 'Trang thông tin cá nhân',
@@ -81,9 +81,8 @@ angular.module('truliavnApp')
 		.then(function success(){
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
 				$location.path('/login');
+				$route.reload();
 			}
-		}, function error(){
-			console.log("Lay trang thai khong thanh cong");
 		});
 	});
 });
