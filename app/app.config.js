@@ -75,10 +75,15 @@ angular.
 
 angular.module('truliavnApp')
 .run(function($rootScope, $location, $route, AuthService){
+
+	// console.log($rootScope.userStatus);
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
 		//user must login to access the route
+
 		AuthService.getUserStatus()
 		.then(function success(){
+				$rootScope.userStatus = AuthService.isLoggedIn();
+				console.log($rootScope.userStatus);
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
 				$location.path('/login');
 				$route.reload();

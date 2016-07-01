@@ -26,19 +26,24 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
-		console.log(userId);
-		return $http.get('http://localhost:3000/api/user/' + userId)
-		.success(function(data){
-			console.log("Trang thai user: ", data,'\n...................');
-			if (data.user.status) {
-				user = true;
-			} else {
+		console.log($http.get('http://localhost:3000/api/user'));
+		if (userId == null) {
+			return $http.get('http://localhost:3000/api/user').success(function(){user = false;}).error(function(){user = false;});
+		} else{		
+			console.log(userId);
+			return $http.get('http://localhost:3000/api/user/' + userId)
+			.success(function(data){
+				console.log("Trang thai user: ", data,'\n...................');
+				if (data.user.status) {
+					user = true;
+				} else {
+					user = false;
+				}
+			})
+			.error(function(data) {
 				user = false;
-			}
-		})
-		.error(function(data) {
-			user = false;
-		});
+			});
+		}
 	}
 
 	//return a token + email to user can use to add a new post
@@ -56,7 +61,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		$http.post('http://localhost:3000/api/register',{email: email, password: password, repeatPassword: repeatPassword, address: address, phone: phone, fullname: fullname})
 		//handle success
 		.success(function(data, status){
-			if (status == 200 && data.status) {
+			if (status == 200 && data.status == 'success') {
 				deferred.resolve();
 				console.log(data, status);
 			} else{
@@ -73,9 +78,6 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 	function login(email, password){
 		var deferred = $q.defer();
-		console.log('1-------')
-		console.log(user);
-		console.log('1-------')
 		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
 			console.log(data);
 			if (status == 200 && data.status =="success") {
@@ -85,10 +87,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 				$cookies.put('user.id', data.user.id);
 				token = data.user.token;
 				emailUser = data.user.email;
-				console.log('2-------')
 				user = true;
-				console.log(user);
-				console.log('2-------')
 				// $cookieStore.put('globals', $rootScope.globals);
 
 				deferred.resolve();
@@ -101,11 +100,6 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			user = false;
 			deferred.reject();
 		});
-		setTimeout(function(){
-			console.log('3-------')
-			console.log(user);
-			console.log('3-------')
-		}, 5000);
 		return deferred.promise;
 	}
 

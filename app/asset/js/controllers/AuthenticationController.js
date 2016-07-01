@@ -1,4 +1,4 @@
-app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http', function($scope, $location, AuthService, $http){
+app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http', '$rootScope', function($scope, $location, AuthService, $http, $rootScope){
 	$scope.login = function(){
 		$scope.error = false;
 		$scope.disabled = true;
@@ -9,8 +9,12 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 
 				$scope.token = AuthService.getUserToken();
 				$scope.userEmail = AuthService.getUserEmail();
-				console.log($scope.userEmail);
-				console.log($scope.token);
+				
+				console.log('1-------------------');
+				// console.log($rootScope.userStatus);
+				console.log('1-------------------');
+				// console.log($scope.userEmail);
+				// console.log($scope.token);
 				$scope.disabled = false;
 				$scope.loginForm = {};
 				$location.path('/');
@@ -49,7 +53,7 @@ app.controller('LogoutControler', ['$scope', '$location', 'AuthService', functio
 	$scope.logout = function(){
 		AuthService.logout()
 		.then(function(){
-			$location.path('#!/');
+			$location.path('/');
 		});
 	};
 }]);
