@@ -3,13 +3,15 @@ var app = angular.module('truliavnApp', [
 	'homePage',
 	'houseDetail',
 	'ngRoute',
+	'ngCookies',
 	'matchPassword'
+
 ]);
 
 app.filter('startFrom', function(){
 	return function(house, start){
 		start = parseInt(start);
-		console.log(house);
+		// console.log(house);
 		return house.slice(start);
 	};
 });
