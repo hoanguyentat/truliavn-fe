@@ -5,7 +5,8 @@
 
 	$routeProvider
 	.when('/', {
-		template: '<index></index>',
+		templateUrl: 'view/home-page/home.template.html',
+		controller: 'HomeController',
 		access: {restricted: false}
 	})
 	.when('/houses', {

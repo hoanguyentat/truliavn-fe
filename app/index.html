@@ -2,7 +2,7 @@
 <html lang="en" ng-app="truliavnApp">
 <head>
 	<meta charset="UTF-8">
-	<title>Trang chủ</title>
+	<title>{{title}}</title>
 	<link rel="stylesheet" type="text/css" href="asset/css/bootstrap/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="asset/css/main.css">
 	<script type="text/javascript" src="asset/js/jquery/jquery/jquery.js"></script>
@@ -20,12 +20,11 @@
 	<script type="text/javascript" src="app.config.js"></script>
 	<script src="asset/js/controllers/AuthenticationController.js"></script>
 	<script src="asset/js/controllers/HouseController.js"></script>
+	<script type="text/javascript" src="asset/js/controllers/HomeController.js"></script>
 	<script src="view/house-detail/house-detail.module.js"></script>
 	<script src="view/house-detail/house-detail.component.js"></script>
 	<script src="view/house-list/house-list.module.js"></script>
 	<script src="view/house-list/house-list.component.js"></script>
-	<script src="view/home-page/home.module.js"></script>
-	<script src="view/home-page/home.component.js"></script>
 </head>
 <body>
 	<ng-include src="'view/templates/nav.template.html'" scope="" onload=""></ng-include>
