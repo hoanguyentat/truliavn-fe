@@ -3,7 +3,7 @@
 app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $http){
 	var user = null;
 	var token = "";
-	var email = "";
+	var emailUser = "";
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
@@ -11,7 +11,8 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		getUserEmail: getUserEmail,
 		login: login,
 		logout: logout,
-		register: register
+		register: register,
+		update : update
 	});
 
 	function isLoggedIn(){
@@ -31,7 +32,7 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		return token;
 	}
 	function getUserEmail(){
-		return email;
+		return emailUser;
 	}
 
 	function register(email, password, address, phone, fullname){
@@ -54,6 +55,27 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		return deferred.promise;
 	}	
 
+	function update(fullname, phone, address, oldPassword, newPassword, repeatPassword){
+		var deferred = $q.defer();
+		$http.post('http://localhost:3000/api/user/edit', {fullname : fullname, 
+													phone : phone, 
+													address : address, 
+													oldPassword : oldPassword,
+													newPassword : newPassword,
+													repeatPassword : repeatPassword})
+		.success(function(data, status){
+			if(status == 200 && data.status == 'success'){
+				deferred.resolve();
+			}
+			else {
+				deferred.reject();
+			}
+		})
+		.error(function(data){
+			deferred.reject();
+		});
+		return deferred.promise;
+	}
 	function login(email, password){
 		var deferred = $q.defer();
 
@@ -61,8 +83,10 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 			if (status == 200 && data.status =="success") {
 				console.log(data);
 				token = data.user.token;
-				email = data.user.email;
-				user = true;
+				emailUser = data.user.email;
+				// user = true;
+				user = {};
+				user.email = data.user.email;
 				deferred.resolve();
 			} else{
 				user = false;
@@ -81,7 +105,7 @@ app.factory('AuthService', ['$q', '$timeout', '$http', function($q, $timeout, $h
 		var deferred = $q.defer();
 
 		//sent request logout
-		$http.post('http://localhost:3000/api/logout', {email: email, token: token})
+		$http.post('http://localhost:3000/api/logout', {email: emailUser, token: token})
 		.success(function(data){
 			console.log("Thanh cmn cong");
 			user = false;

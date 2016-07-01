@@ -56,3 +56,41 @@ ul.seller{
     color:#F00;
     font-size:14px;
 }
+.neighbor{
+	color: green;
+	font-size: 18px;
+}
+tr.column_name{
+	font-weight: bold;
+	font-size: 20px;
+	color: gray;
+}
+tr.header{
+	font-weight: bold;
+	font-size: 30px;
+	color: gray;
+}
+
+#description, 
+#school{
+	color: #f06;
+}
+
+#map{
+	height: 400px;
+}
+
+.school_name,
+.distance{
+	color: green;
+	font-weight: bold;
+}
+.distance{
+	padding-left: 10px;
+}
+.span-extend {
+	float: right;
+}
+.homeDetail{
+	color: gray;
+}
