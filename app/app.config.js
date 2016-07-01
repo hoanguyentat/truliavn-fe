@@ -50,7 +50,8 @@
 	// user feature
 	.when('/login', {
 		templateUrl: 'view/user/login/login.html',
-		controller: 'LoginController'
+		controller: 'LoginController',
+		access: {restricted: false}
 	})
 	.when('/register', {
 		templateUrl: 'view/user/register/register.html',
@@ -63,7 +64,8 @@
 		access : {restricted : false}
 	})
 	.when('logout', {
-		controller: 'LogoutController'
+		controller: 'LogoutController',
+		access: {restricted: false}
 	})
 	.when('/:user', {
 		template: 'Trang thông tin cá nhân',
@@ -79,10 +81,15 @@
 angular.module('truliavnApp')
 .run(function($rootScope, $location, $route, AuthService){
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
-		//user must logged in to access the route
-		if (next.access.restricted && AuthService.isLoggedIn() === false) {
-			$location.path('/login');
-		}
+		//user must login to access the route
+		AuthService.getUserStatus()
+		.then(function success(){
+			if (next.access.restricted && !AuthService.isLoggedIn()) {
+				$location.path('/login');
+			}
+		}, function error(){
+			console.log("Lay trang thai khong thanh cong");
+		});
 	});
 });
 
@@ -102,4 +109,4 @@ angular.module('matchPassword', [])
         });
       }
     }
-  }]);
+}]);

@@ -2,9 +2,8 @@ angular.module('houseDetail')
 .component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams){
 		// console.log($routeParams);
-		var url = 'http://localhost:3000/api/house/' + $routeParams.houseId;
+		var url = 'http://localhost:3000/api/house/' + $routeParams.houseId + '&specific=1';
 		var self = this;
-		self.txt='Ronalkean';
 	
 		$http.get(url).then(function successCallback(response){
 			var data = response.data;
