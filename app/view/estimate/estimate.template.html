@@ -1,0 +1,38 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-xs-12" id="description">
+			<h2>Chi tiết ngôi nhà</h2>
+			<p>
+				Condo #2 is a 2-bedroom unit, It faces a green belt, with a distant view of the pool. The 2nd bedroom has its own entry door. Its on a lower floor of a 2 story 8-plex
+			</p>
+		</div>
+		<div class="col-xs-12 col-sm-6" id="map"></div>
+		<div class="col-sm-6 col-xs-12" id="school">
+			<h2>Các trường gần đây</h2>
+			<school info = "primaries"></school>
+			<school info = "juniors"></school>
+			<school info = "seniors"></school>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Giá các nhà lân cận</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Địa điểm</td>
+					<td>Khoảng cách</td>
+					<td>Giá</td>
+				</tr>
+				<tr ng-repeat="i in data">
+					<td>{{i.address}}</td>
+					<td></td>
+					<td>{{i.price}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

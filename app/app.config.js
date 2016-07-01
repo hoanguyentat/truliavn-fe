@@ -1,4 +1,4 @@
-angular.
+	angular.
 	module('truliavnApp').
 	config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
@@ -57,6 +57,11 @@ angular.
 		templateUrl: 'view/user/register/register.html',
 		controller: 'RegisterController',
 		access: {restricted: false}
+	})
+	.when('/update', {
+		templateUrl : 'view/user/update/update.html',
+		controller : 'UpdateController',
+		access : {restricted : false}
 	})
 	.when('logout', {
 		controller: 'LogoutController',

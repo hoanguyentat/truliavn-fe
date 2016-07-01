@@ -49,6 +49,26 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 	};
 }]);
 
+app.controller('UpdateController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
+	$scope.update = function(){
+		AuthService.update($scope.updateForm.fullName, 
+							$scope.updateForm.phone, 
+							$scope.updateForm.address, 
+							$scope.updateForm.oldpass, 
+							$scope.updateForm.newpass,
+							$scope.updateForm.confirmpass)
+		.then(function(){
+			$location.path("#!/");
+			$scope.updateForm = {};
+			console.log("dk roi");
+		})
+		.catch(function(){
+			$scope.errorMessage = "Wrong password";
+			$scope.updateForm = {};
+			console.log("eo dk");
+		})
+	}
+}]);
 app.controller('LogoutControler', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
 	$scope.logout = function(){
 		AuthService.logout()

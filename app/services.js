@@ -13,6 +13,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		login: login,
 		logout: logout,
 		register: register,
+		update : update,
 		hostName: 'http://localhost:3000'
 	});
 
@@ -76,6 +77,27 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		return deferred.promise;
 	}	
 
+	function update(fullname, phone, address, oldPassword, newPassword, repeatPassword){
+		var deferred = $q.defer();
+		$http.post('http://localhost:3000/api/user/edit', {fullname : fullname, 
+													phone : phone, 
+													address : address, 
+													oldPassword : oldPassword,
+													newPassword : newPassword,
+													repeatPassword : repeatPassword})
+		.success(function(data, status){
+			if(status == 200 && data.status == 'success'){
+				deferred.resolve();
+			}
+			else {
+				deferred.reject();
+			}
+		})
+		.error(function(data){
+			deferred.reject();
+		});
+		return deferred.promise;
+	}
 	function login(email, password){
 		var deferred = $q.defer();
 		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
