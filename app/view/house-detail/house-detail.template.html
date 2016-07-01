@@ -15,7 +15,7 @@
 							<li class="list-group-item">Address: {{ctrl.house.ownerInfo.address}}</li>
 						</ul>
 					</div>
-<!-- 					<form action="" method="POST" role="form">
+					 <form action="" method="POST" role="form">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Name">
 							<input type="text" class="form-control" placeholder="Email">
@@ -23,7 +23,7 @@
 							<input type="text" class="form-control" placeholder="I am interested in .....">
 						</div>
 						<button class="btn btn-primary">Liên hệ với nhân viên</button>
-					</form> -->
+					</form>
 				</div>
 			</div>
 
@@ -51,53 +51,77 @@
 		<h1>Mô tả ngôi nhà</h1>
 		<div class="row">
 			<div class="col-sm-5 col-xs-12 describe">
+				<h1>Chi tiết ngôi nhà</h1>
 				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, iste quaerat. Quisquam accusamus illo perferendis aperiam exercitationem delectus maxime dicta cupiditate doloremque quis, magni, voluptas perspiciatis asperiores cum nulla quae.
 					{{ctrl.house.description}}
 				</p>
 			</div>
 			<div class="col-sm-4 col-xs-12 school">
-				<table class="table">
-					<thread>
-						<th class="active"><h4>Trường học gần đây</h4></th>
-					</thread>		
-					<tbody>
-						<tr class="active">
-							<td>
-								Trường tiểu học
-								<h4>Trung bình</h4>
-							</td>
-						</tr>
-						<tr class="active">
-							<td>
-								Trường trung học
-								<h4>Khá</h4>
-							</td>
-						</tr>
-						<tr class="active">
-							<td>
-								Trường phổ thông trung học
-								<h4>Trung bình</h4>	
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<h1>Trường học gần đây</h1>
+				<div class="col-xs-12">
+					<h3>{{ctrl.primaries.title}}
+						<span class="btn_collapse glyphicon glyphicon-menu-hamburger span-extend" data-toggle="collapse" data-target='#{{ctrl.primaries.type}}'>		
+						</span>
+					</h3>
+					<div id={{ctrl.primaries.type}} class="collapse">
+						<table class="table table-condensed">
+							<thead></thead>
+							<tbody>
+								<tr ng-repeat="item in ctrl.primaries">
+									<td class="school_name">{{item.name}}</td>
+									<td class="distance">{{item.distance}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 			<div class="col-sm-3 col-xs-12">
-				<h3>Quảng cáo</h3>
+				<h1>Quảng cáo</h1>
 			</div>
 		</div>
 	</div>
-	<div class="container regional">
-		<div class="row">
-			<div class="col-sm-6 col-xs-12"></div>
-			<div class="col-sm-6 col-xs-12"></div>
+
+	<div class="container">
+		<div class="col-xs-12">
+			<div id="map"></div>
+			<table class="table table-hover">
+				<thead>
+					<tr class='header'>
+						<th>Giá các nhà lân cận</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="column_name">
+						<td>Địa điểm</td>
+						<td>Khoảng cách</td>
+						<td>Giá bán</td>
+						<td>Ngày bán</td>
+						<td>So sánh</td>
+					</tr>
+					<tr ng-repeat="item in ctrl.neighbor" class='neighbor'>
+						<td>{{item.address}}</td>
+						<td class="dist">{{item.distance}}</td>
+						<td>{{item.price}}</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<h2 ng-model="city" id = 'city'>{{ctrl.house.city}}</h2>
 		</div>
 	</div>
-</span>
-<span ng-if="ctrl.status == 'error'">
+
+	<span ng-if="ctrl.status == 'error'">
 		<div class="container main">
-		<div class="row">
-			<center><h4>Trang web không tồn tại</h4></center>
+			<div class="row">
+				<center><h4>Trang web không tồn tại</h4></center>
+			</div>
 		</div>
-	</div>
-</span>
+	</span>
+	<!-- <script ng-bind='ctrl.initMap'> -->
+	<!-- </script> -->
+	<!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2p-8sv_q6LMzBJyU526vs1F6cnW61-9A&callback=initMap">
+    </script> -->
