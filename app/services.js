@@ -13,7 +13,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		login: login,
 		logout: logout,
 		register: register,
-		update : update
+		update : update,
 		hostName: 'http://localhost:3000'
 	});
 

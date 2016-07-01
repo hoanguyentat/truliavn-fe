@@ -2,24 +2,24 @@ angular.module('houseDetail')
 .component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams){
 		// console.log($routeParams);
-		var url = 'http://localhost:3000/api/house/' + $routeParams.houseId + '&specific=1';
+		var url = 'http://localhost:3000/api/house/' + $routeParams.houseId + '?raw=1';
 		var self = this;
 	
 		$http.get(url).then(function successCallback(response){
 			var data = response.data;
 			self.status = data.status;
-			self.house = data.houses;
-			console.log(data.houses.description);
+			self.house = data.houses[0];
+			console.log(self.house.ward);
 
 			self.house.description = data.houses.description;
-			var latitude = self.house[0].lat;
+			var latitude = self.house.lat;
 			console.log(latitude);
-			var longitude = self.house[0].lon;
+			var longitude = self.house.lon;
 			var position = latitude + ',' + longitude;
 			console.log('pos = ' + position);
 			var api = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" + position + "&destinations=";
 			var key = "&key=AIzaSyD2p-8sv_q6LMzBJyU526vs1F6cnW61-9A";
-			var url = "http://localhost:3000/api/houses" + '?ward=' + self.house[0].ward + '&district=' + self.house[0].district + '&city=' + self.house[0].city + '&specific=1';
+			var url = "http://localhost:3000/api/houses" + '?ward=' + self.house.ward + '&district=' + self.house.district + '&city=' + self.house.city + '&specific=1';
 			console.log(url);
 			self.txt = "kien";
 
