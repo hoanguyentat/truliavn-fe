@@ -1,4 +1,7 @@
-<span ng-if="ctrl.status == 'success'">
+<!-- 	<script ng-bind='ctrl.initMap'>
+	console.log("start");
+</script> -->
+<div ng-if="ctrl.status == 'success'">
 	<div class="container main">
 		<div class="row" style="padding-bottom: 20px;">
 		<center><h2>Thông tin chi tiết căn hộ</h2></center>
@@ -79,7 +82,7 @@
 			<div class="row">
 				<div class="col-sm-5 col-xs-12">
 					<h1>Chi tiết ngôi nhà</h1>
-					<p ng-bind-html-unsafe="ctrl.house.description">
+					<p ng-bind="ctrl.house.description">
 						Loading...
 					</p>
 				</div>
@@ -111,7 +114,8 @@
 	</div>
 	<div class="container">
 		<div class="col-xs-12">
-			<div id="map"></div>
+			<!-- <div id="map"></div> -->
+			<ui-gmap-google-map center='ctrl.showMap.center' zoom='ctrl.showMap.zoom'></ui-gmap-google-map>
 			<table class="table table-hover">
 				<thead>
 					<tr class='header'>
@@ -137,15 +141,16 @@
 			</table>
 		</div>
 	</div>
-
-	<span ng-if="ctrl.status == 'error'">
-		<div class="container main">
-			<div class="row">
-				<center><h4>Trang web không tồn tại</h4></center>
-			</div>
+</div>
+<span ng-if="ctrl.status == 'error'">
+	<div class="container main">
+		<div class="row">
+			<center><h4>Trang web không tồn tại</h4></center>
 		</div>
-	</span>
-	<script ng-bind='ctrl.initMap'>
-	</script>
-	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2p-8sv_q6LMzBJyU526vs1F6cnW61-9A"></script> -->
+	</div>
+</span>
+
+
+
+
 

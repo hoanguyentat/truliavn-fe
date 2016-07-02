@@ -25,6 +25,9 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		}
 	}
 
+	function getUserInfo(id){
+
+	}
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
 		console.log($http.get('http://localhost:3000/api/user'));
@@ -77,9 +80,10 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		return deferred.promise;
 	}	
 
-	function update(fullname, phone, address, oldPassword, newPassword, repeatPassword){
+	function update(id,fullname, phone, address, oldPassword, newPassword, repeatPassword){
 		var deferred = $q.defer();
-		$http.post('http://localhost:3000/api/user/edit', {fullname : fullname, 
+		$http.post('http://localhost:3000/api/user/edit', {id : id,
+													fullname : fullname, 
 													phone : phone, 
 													address : address, 
 													oldPassword : oldPassword,
@@ -241,6 +245,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 app.factory('API', ['AuthService',function(AuthService){
 	return ({
 		getHouses: getHouses,
+		getUserInfo: getUserInfo,
 		getHouseDetail: getHouseDetail,
 		getHousesNearby: getHousesNearby,
 		getHousesForRent: getHousesForRent,
@@ -248,6 +253,9 @@ app.factory('API', ['AuthService',function(AuthService){
 		getServicesNearBy: getServicesNearBy
 	});
 
+	function getUserInfo(id){
+		return AuthService.hostName + '/api/user/' + id;
+	}
 	function getHouses(){
 		return AuthService.hostName + '/api/houses';
 	}

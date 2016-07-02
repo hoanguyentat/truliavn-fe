@@ -76,9 +76,6 @@ tr.header{
 	color: #f06;
 }
 
-#map{
-	height: 400px;
-}
 
 .school_name,
 .distance{
@@ -94,3 +91,5 @@ tr.header{
 .homeDetail{
 	color: gray;
 }
+
+.angular-google-map-container { height: 400px; }
