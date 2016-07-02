@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', '$rootScope', '$http', 'AuthService', 'API', function($scope, $rootScope, $http, AuthService, API){
+app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API', function($scope, $rootScope, $http, API){
 	// console.log("Hehe");
 	var url = API.getHouses();
 	var house = this;
