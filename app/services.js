@@ -244,7 +244,8 @@ app.factory('API', ['AuthService',function(AuthService){
 		getHouseDetail: getHouseDetail,
 		getHousesNearby: getHousesNearby,
 		getHousesForRent: getHousesForRent,
-		getHousesForSell: getHousesForSell
+		getHousesForSell: getHousesForSell,
+		getServicesNearBy: getServicesNearBy
 	});
 
 	function getHouses(){
@@ -255,7 +256,7 @@ app.factory('API', ['AuthService',function(AuthService){
 	}
 
 	function getHousesNearby(){
-
+		
 	}
 
 	function getHousesForRent(){
@@ -264,5 +265,9 @@ app.factory('API', ['AuthService',function(AuthService){
 
 	function getHousesForSell(){
 		return AuthService.hostName + '/api/houses?housefor=sell';
+	}
+
+	function getServicesNearBy(){
+		return AuthService.hostName + '/api/nearby';
 	}
 }]);
