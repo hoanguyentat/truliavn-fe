@@ -2,6 +2,7 @@ angular.module('houseList')
 .component('houseList', {
 	templateUrl: 'view/house-list/house-list.template.html',
 	controller:['$http', 'AuthService', function($http, AuthService){
+
 		var url = AuthService.hostName + '/api/houses';
 		var list = this;
 		list.currentPage = 0;

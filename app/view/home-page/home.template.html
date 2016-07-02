@@ -30,7 +30,9 @@
 							Tin rao dành cho bạn
 						</div>
 						<div class="panel-body">
-							Basic panel example
+							<div ng-repeat="post in ctrl.newPost | limitTo: 2">
+								{{post.id}}
+							</div>
 						</div>
 					</div>
 					<div class="panel panel-default">

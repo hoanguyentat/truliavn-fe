@@ -27,19 +27,24 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
-		console.log(userId);
-		return $http.get('http://localhost:3000/api/user/' + userId)
-		.success(function(data){
-			console.log("Trang thai user: ", data,'\n...................');
-			if (data.user.status) {
-				user = true;
-			} else {
+		console.log($http.get('http://localhost:3000/api/user'));
+		if (userId == null) {
+			return $http.get('http://localhost:3000/api/user').success(function(){user = false;}).error(function(){user = false;});
+		} else{		
+			console.log(userId);
+			return $http.get('http://localhost:3000/api/user/' + userId)
+			.success(function(data){
+				console.log("Trang thai user: ", data,'\n...................');
+				if (data.user.status) {
+					user = true;
+				} else {
+					user = false;
+				}
+			})
+			.error(function(data) {
 				user = false;
-			}
-		})
-		.error(function(data) {
-			user = false;
-		});
+			});
+		}
 	}
 
 	//return a token + email to user can use to add a new post
@@ -57,7 +62,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		$http.post('http://localhost:3000/api/register',{email: email, password: password, repeatPassword: repeatPassword, address: address, phone: phone, fullname: fullname})
 		//handle success
 		.success(function(data, status){
-			if (status == 200 && data.status) {
+			if (status == 200 && data.status == 'success') {
 				deferred.resolve();
 				console.log(data, status);
 			} else{
@@ -95,9 +100,6 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	}
 	function login(email, password){
 		var deferred = $q.defer();
-		console.log('1-------')
-		console.log(user);
-		console.log('1-------')
 		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
 			console.log(data);
 			if (status == 200 && data.status =="success") {
@@ -107,10 +109,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 				$cookies.put('user.id', data.user.id);
 				token = data.user.token;
 				emailUser = data.user.email;
-				console.log('2-------')
 				user = true;
-				console.log(user);
-				console.log('2-------')
 				// $cookieStore.put('globals', $rootScope.globals);
 
 				deferred.resolve();
@@ -123,11 +122,6 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			user = false;
 			deferred.reject();
 		});
-		setTimeout(function(){
-			console.log('3-------')
-			console.log(user);
-			console.log('3-------')
-		}, 5000);
 		return deferred.promise;
 	}
 
@@ -244,88 +238,31 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 	}
 }]);
 
-app.factory('Base64', function () {
-    /* jshint ignore:start */
- 
-    var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
- 
-    return {
-        encode: function (input) {
-            var output = "";
-            var chr1, chr2, chr3 = "";
-            var enc1, enc2, enc3, enc4 = "";
-            var i = 0;
- 
-            do {
-                chr1 = input.charCodeAt(i++);
-                chr2 = input.charCodeAt(i++);
-                chr3 = input.charCodeAt(i++);
- 
-                enc1 = chr1 >> 2;
-                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-                enc4 = chr3 & 63;
- 
-                if (isNaN(chr2)) {
-                    enc3 = enc4 = 64;
-                } else if (isNaN(chr3)) {
-                    enc4 = 64;
-                }
- 
-                output = output +
-                    keyStr.charAt(enc1) +
-                    keyStr.charAt(enc2) +
-                    keyStr.charAt(enc3) +
-                    keyStr.charAt(enc4);
-                chr1 = chr2 = chr3 = "";
-                enc1 = enc2 = enc3 = enc4 = "";
-            } while (i < input.length);
- 
-            return output;
-        },
- 
-        decode: function (input) {
-            var output = "";
-            var chr1, chr2, chr3 = "";
-            var enc1, enc2, enc3, enc4 = "";
-            var i = 0;
- 
-            // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
-            var base64test = /[^A-Za-z0-9\+\/\=]/g;
-            if (base64test.exec(input)) {
-                window.alert("There were invalid base64 characters in the input text.\n" +
-                    "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
-                    "Expect errors in decoding.");
-            }
-            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
- 
-            do {
-                enc1 = keyStr.indexOf(input.charAt(i++));
-                enc2 = keyStr.indexOf(input.charAt(i++));
-                enc3 = keyStr.indexOf(input.charAt(i++));
-                enc4 = keyStr.indexOf(input.charAt(i++));
- 
-                chr1 = (enc1 << 2) | (enc2 >> 4);
-                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                chr3 = ((enc3 & 3) << 6) | enc4;
- 
-                output = output + String.fromCharCode(chr1);
- 
-                if (enc3 != 64) {
-                    output = output + String.fromCharCode(chr2);
-                }
-                if (enc4 != 64) {
-                    output = output + String.fromCharCode(chr3);
-                }
- 
-                chr1 = chr2 = chr3 = "";
-                enc1 = enc2 = enc3 = enc4 = "";
- 
-            } while (i < input.length);
- 
-            return output;
-        }
-    };
- 
-    /* jshint ignore:end */
-});
+app.factory('API', ['AuthService',function(AuthService){
+	return ({
+		getHouses: getHouses,
+		getHouseDetail: getHouseDetail,
+		getHousesNearby: getHousesNearby,
+		getHousesForRent: getHousesForRent,
+		getHousesForSell: getHousesForSell
+	});
+
+	function getHouses(){
+		return AuthService.hostName + '/api/houses';
+	}
+	function getHouseDetail(id){
+		return AuthService.hostName + '/api/house/' + id + '?raw=1';
+	}
+
+	function getHousesNearby(){
+
+	}
+
+	function getHousesForRent(){
+		return AuthService.hostName + '/api/houses?housefor=rent';
+	}
+
+	function getHousesForSell(){
+		return AuthService.hostName + '/api/houses?housefor=sell';
+	}
+}]);

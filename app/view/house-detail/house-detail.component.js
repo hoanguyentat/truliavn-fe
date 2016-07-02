@@ -1,17 +1,16 @@
 angular.module('houseDetail')
 .component('houseDetail', {
-	controller: function HouseDetailController($scope, $http, $routeParams){
+	controller: function HouseDetailController($scope, $http, $routeParams, API){
 		// console.log($routeParams);
-		var url = 'http://localhost:3000/api/house/' + $routeParams.houseId + '?raw=1';
+		var url = API.getHouseDetail($routeParams.houseId);
 		var self = this;
-	
 		$http.get(url).then(function successCallback(response){
 			var data = response.data;
 			self.status = data.status;
 			self.house = data.houses[0];
-			console.log(self.house.ward);
+			console.log(self.house.description);
 
-			self.house.description = data.houses.description;
+			// self.house.description = data.houses.description;
 			var latitude = self.house.lat;
 			console.log(latitude);
 			var longitude = self.house.lon;
@@ -21,7 +20,6 @@ angular.module('houseDetail')
 			var key = "&key=AIzaSyD2p-8sv_q6LMzBJyU526vs1F6cnW61-9A";
 			var url = "http://localhost:3000/api/houses" + '?ward=' + self.house.ward + '&district=' + self.house.district + '&city=' + self.house.city + '&specific=1';
 			console.log(url);
-			self.txt = "kien";
 
 			self.initMap = 
 			   "var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';"

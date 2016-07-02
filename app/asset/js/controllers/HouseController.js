@@ -10,8 +10,8 @@ app.controller('DeleteHouseCtrl', ['$scope', function($scope){
 	
 }]);
 
-app.controller('HouseForRentCtrl', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService){
-	var rentUrl = AuthService.hostName + '/api/houses?housefor=rent';
+app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+	var rentUrl = API.getHousesForRent();
 	console.log(rentUrl);
 	var listRent = this;
 	listRent.currentPage = 0;
@@ -29,8 +29,8 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'AuthService', function($
 	console.log(listRent.currentPage, listRent.pageSize);
 }]);
 
-app.controller('HouseForSellCtrl', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService){
-	var sellUrl  = AuthService.hostName + '/api/houses?housefor=sell';
+app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+	var sellUrl  = API.getHousesForSell();
 	var listSell = this;
 	listSell.currentPage = 0;
 	listSell.pageSize = 20;
