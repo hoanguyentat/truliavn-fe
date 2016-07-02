@@ -24,7 +24,37 @@ angular.module('houseDetail')
 			self.txt = "kien";
 
 			self.initMap = 
-			'function innitMap() {' + 
+			   "var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';"
+      			+"var labelIndex = 0;"
+				+"function initialize() {"
+			        +"var pos = { lat:" + latitude + ", lng:" +  longitude + "};"
+			        +"var map = new google.maps.Map(document.getElementById('map'), {"
+			          +"zoom: 12,"
+			          +"center: pos"
+			        +"});"
+
+			        // This event listener calls addMarker() when the map is clicked.
+			        +"google.maps.event.addListener(map, 'click', function(event) {"
+		          	+"addMarker(event.latLng, map);"
+			        +"});"
+
+			        // Add a marker at the center of the map.
+			        +"addMarker(pos, map);"
+			      +"}"
+
+			      // Adds a marker to the map.
+			      +"function addMarker(location, map) {"
+			        // Add the marker at the clicked location, and add the next-available label
+			        // from the array of alphabetical characters.
+			        "var marker = new google.maps.Marker({"
+			          +"position: location,"
+			          +"label: labels[labelIndex++ % labels.length],"
+			          +"map: map"
+			        +"});"
+			      +"}"
+
+      			+"google.maps.event.addDomListener(window, 'load', initialize);";
+			/*'function initMap() {' + 
 				'var mapDiv = document.getElementById("map") ;' 
 				+'var map = new google.maps.Map(mapDiv,{' 
 					+'center : { lat :' + latitude + ',' + 'lng :' + longitude + ' },'
@@ -36,7 +66,8 @@ angular.module('houseDetail')
 				+ 'map: map,'
 				+ 'icon: iconBase + "schools_maps.png"'
 				+'});'
-			+'}';
+			+'}';*/
+
 
 			$http.post('http://localhost:3000/api/nearby',{lat : latitude, 
 															lon : longitude, 
