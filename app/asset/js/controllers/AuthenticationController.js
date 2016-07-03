@@ -2,19 +2,12 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 	$scope.login = function(){
 		$scope.error = false;
 		$scope.disabled = true;
-		
+
 		//call login from service
 		AuthService.login($scope.loginForm.username, $scope.loginForm.password)
 			.then(function(){
-
 				$scope.token = AuthService.getUserToken();
 				$scope.userEmail = AuthService.getUserEmail();
-				
-				console.log('1-------------------');
-				// console.log($rootScope.userStatus);
-				console.log('1-------------------');
-				// console.log($scope.userEmail);
-				// console.log($scope.token);
 				$scope.disabled = false;
 				$scope.loginForm = {};
 				$location.path('/');
@@ -30,7 +23,7 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 
 app.controller('RegisterController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
 
-	$scope.register = function(){
+		$scope.register = function(){
 		$scope.error = false;
 		$scope.disabled = true;
 
@@ -41,6 +34,7 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 			$scope.disabled = false;
 			$scope.registerForm ={};
 		})
+		// catch error when user register not success
 		.catch(function(){
 			$scope.error = true;
 			$scope.errorMessage = "Some thing went wrong";
@@ -49,12 +43,13 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 	};
 }]);
 
+// change user info
 app.controller('UpdateController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
 	$scope.update = function(){
-		AuthService.update($scope.updateForm.fullName, 
-							$scope.updateForm.phone, 
-							$scope.updateForm.address, 
-							$scope.updateForm.oldpass, 
+		AuthService.update($scope.updateForm.fullName,
+							$scope.updateForm.phone,
+							$scope.updateForm.address,
+							$scope.updateForm.oldpass,
 							$scope.updateForm.newpass,
 							$scope.updateForm.confirmpass)
 		.then(function(){

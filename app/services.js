@@ -24,17 +24,20 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			return false;
 		}
 	}
-
+// return status user to check user logged in
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
-		console.log($http.get('http://localhost:3000/api/user'));
 		if (userId == null) {
-			return $http.get('http://localhost:3000/api/user').success(function(){user = false;}).error(function(){user = false;});
-		} else{		
-			console.log(userId);
+			return $http.get('http://localhost:3000/api/user').success(function(){
+				user = false;
+			})
+			.error(function(){
+				user = false;
+			});
+		} else{
 			return $http.get('http://localhost:3000/api/user/' + userId)
 			.success(function(data){
-				console.log("Trang thai user: ", data,'\n...................');
+
 				if (data.user.status) {
 					user = true;
 				} else {
@@ -49,10 +52,10 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 	//return a token + email to user can use to add a new post
 	function getUserToken(){
-		return token;
+		return $cookies.get('user.token');
 	}
 	function getUserEmail(){
-		return emailUser;
+		return $cookies.get('user.email');
 	}
 
 	function register(email, password, repeatPassword, address, phone, fullname){
@@ -75,13 +78,13 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			deferred.reject();
 		});
 		return deferred.promise;
-	}	
+	}
 
 	function update(fullname, phone, address, oldPassword, newPassword, repeatPassword){
 		var deferred = $q.defer();
-		$http.post('http://localhost:3000/api/user/edit', {fullname : fullname, 
-													phone : phone, 
-													address : address, 
+		$http.post('http://localhost:3000/api/user/edit', {fullname : fullname,
+													phone : phone,
+													address : address,
 													oldPassword : oldPassword,
 													newPassword : newPassword,
 													repeatPassword : repeatPassword})
@@ -106,9 +109,11 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 				$http.get('http://localhost:3000/api/user/' + data.user.id).then(function(response){
 					console.log(response);
 				});
+
+				//put userId to cookies
 				$cookies.put('user.id', data.user.id);
-				token = data.user.token;
-				emailUser = data.user.email;
+				$cookies.put('user.email', data.user.email);
+				$cookies.put('user.token', data.user.token);
 				user = true;
 				// $cookieStore.put('globals', $rootScope.globals);
 
@@ -134,6 +139,8 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			console.log("Logout thanh cong");
 			user = false;
 			$cookies.remove('user.id');
+			$cookies.remove('user.token');
+			$cookies.remove('user.email');
 			deferred.resolve();
 		})
 		.error(function(data){
@@ -151,7 +158,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 	return ({
 		addHouse: addHouse,
 		editHouse: editHouse,
-		deleteHouse: deleteHouse,	
+		deleteHouse: deleteHouse,
 	});
 
 	function addHouse(email, token, type, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description){
@@ -256,7 +263,7 @@ app.factory('API', ['AuthService',function(AuthService){
 	}
 
 	function getHousesNearby(){
-		
+
 	}
 
 	function getHousesForRent(){

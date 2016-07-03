@@ -30,19 +30,17 @@
 			<div class=" col-xs-12 col-sm-8">
 				<img ng-if="ctrl.house.images[0]" ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}" alt="" class="img-responsive home_image">
 
-				<div id="carousel-id" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<li data-target="#carousel-id" data-slide-to="0" class=""></li>
-						<li data-target="#carousel-id" data-slide-to="1" class=""></li>
-						<li data-target="#carousel-id" data-slide-to="2" class="active"></li>
+				
+				<!-- <div id="carousel-id" class="carousel slide" data-ride="carousel" >
+					<ol class="carousel-indicators" ng-repeat="(key, image) in ctrl.house.images">
+						<li data-target="#carousel-id" data-slide-to="{{key}}" class=""></li>
 					</ol>
-					<div class="carousel-inner">
-						<div class="item" ng-repeat="(id, image) in ctrl.house.images">
-							<img ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}">
+					<div class="carousel-inner" ng-repeat="(key, image) in ctrl.house.images">
+						<div class="item">
+							<img data-src="{{'http://localhost:3000/' + image}}">
 							<div class="container">
 								<div class="carousel-caption">
 									<h1>Example headline.</h1>
-									<p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
 									<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
 								</div>
 							</div>
@@ -50,8 +48,7 @@
 					</div>
 					<a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
 					<a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-				</div>
-
+				</div> -->
 
 
 				<img ng-if="!ctrl.house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
@@ -79,7 +76,7 @@
 			<div class="row">
 				<div class="col-sm-5 col-xs-12">
 					<h1>Chi tiết ngôi nhà</h1>
-					<p ng-bind-html-unsafe="ctrl.house.description">
+					<p ng-bind="ctrl.house.description">
 						Loading...
 					</p>
 				</div>
@@ -126,12 +123,13 @@
 						<td>Ngày bán</td>
 						<td>So sánh</td>
 					</tr>
-					<tr ng-repeat="item in ctrl.neighbor" class='neighbor'>
-						<td>{{item.address}}</td>
+					<tr ng-repeat="item in ::ctrl.neighbor" class='neighbor'>
+						<td><a href="#!/houses/{{::item.id}}">{{item.address}}</a></td>
 						<td class="dist">{{item.distance}}</td>
 						<td>{{item.price}}</td>
 						<td></td>
 						<td></td>
+
 					</tr>
 				</tbody>
 			</table>

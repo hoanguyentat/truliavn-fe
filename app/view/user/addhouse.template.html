@@ -1,34 +1,73 @@
 <div class="container main">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-		<center><h3>Thêm nhà mới</h3></center>
+		<center><h3>Thêm bài đăng tin thuê/bán nhà</h3></center>
 		<form ng-submit="addhouse()" enctype="multipart/form-data">
 			<input type="hidden" name="" id="input" class="form-control" ng-value="">
 			<div class="form-group">
 				<label for="type" class="control-label"></label>
-				<select name="type" id="type" class="form-control" required="required">
+				<select name="type" id="type" class="form-control" required="required" ng-model="addHouseForm.type">
 					<option value="0">Nhà riêng</option>
 					<option value="1">Chung cư</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="address" class="control-label">Address</label>
-				<textarea name="" id="input" class="form-control" rows="3" required="required"></textarea>
+				<textarea name="address" id="input" class="form-control" required="required" ng-model="addHouseForm.address"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="interior">Add Feature</label>
-				<input name="interior" id="interior" class="form-control">
+				<label for="area">Diện tích</label>
+				<input name="area" id="area" class="form-control" ng-model="addHouseForm.area">
+			</div>
+			<select name="houseFor" id="houseFor" class="form-control" required="required" ng-model="addHouseForm.houseFor">
+				<option value="0">Cho thuê</option>
+				<option value="1">Rao bán</option>
+			</select>
+			<div class="form-group">
+				<label for="bedroom" class="control-label">Số phòng ngủ</label>
+				<input name="bedroom" type="number" id="bedroom" class="form-control" ng-model="addHouseForm.bedroom">
 			</div>
 			<div class="form-group">
-				<label for="bedroom" class="control-label"></label>
-				<input name="bedroom" id="bedroom" class="form-control">
+				<label for="bathroom" class="control-label">Số phòng tắm</label>
+				<input name="bathroom" type="number" id="bathroom" class="form-control" ng-model="addHouseForm.bathroom">
 			</div>
 			<div class="form-group">
-				<label for="bathroom" class="control-label"></label>
-				<input name="bathroom" id="bathroom" class="form-control">
+				<label for="floor" class="control-label">Số tầng</label>
+				<input name="floor" id="floor" type="number" class="form-control" required="required" ng-model="addHouseForm.floor"></input>
 			</div>
 			<div class="form-group">
-				<label for="description" class="control-label"></label>
-				<textarea name="description" id="description" class="form-control" rows="3" required="required"></textarea>
+				<label for="interior" class="control-label">Nội thất</label>
+				<input name="interior" id="interior" class="form-control" required ng-model="addHouseForm.interior">
+			</div>
+			<div class="form-group">
+				<label for="buildIn" class="control-label">Nhà xây năm</label>
+				<input name="buildIn" id="buildIn" class="form-control" required ng-model="addHouseForm.buildIn">
+			</div>
+			<div class="form-group">
+				<label for="price" class="control-label">Giá nhà </label>
+				<input name="price" id="price" class="form-control" required ng-model="addHouseForm.price">
+			</div>
+			<div class="form-group">
+				<label for="feePeriod" class="control-label">Thời gian trả tiền </label>
+				<input name="feePeriod" id="feePeriod" class="form-control" required ng-model="addHouseForm.feePeriod">
+			</div>
+			<select name="city" id="city" class="form-control" required="required" ng-model="addHouseForm.city">
+				<option value="">Tỉnh</option>
+				<option value="0">Cho thuê</option>
+				<option value="1">Rao bán</option>
+			</select>
+			<select name="district" id="district" class="form-control" required="required" ng-model="addHouseForm.district">
+				<option value="">Huyện</option>
+				<option value="0">Cho thuê</option>
+				<option value="1">Rao bán</option>
+			</select>
+			<select name="ward" id="wards" class="form-control" required="required" ng-model="addHouseForm.ward">
+				<option value="">Xã</option>
+				<option value="0">Cho thuê</option>
+				<option value="1">Rao bán</option>
+			</select>
+			<div class="form-group">
+				<label for="description" class="control-label">Mô tả:</label>
+				<textarea name="description" id="description" class="form-control" required="required" ng-model="addHouseForm.description"></textarea>
 			</div>
 			<input type="hidden" name="email" value="ngocdon127@gmail.com">
 			<input type="hidden" name="token" value="ece44e64c04368f6650b45ca503a747e">

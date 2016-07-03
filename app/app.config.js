@@ -7,6 +7,7 @@
 	.when('/', {
 		templateUrl: 'view/home-page/home.template.html',
 		controller: 'HomeController',
+		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
 	.when('/houses', {
@@ -62,7 +63,7 @@
 	.when('/update', {
 		templateUrl : 'view/user/update/update.html',
 		controller : 'UpdateController',
-		access : {restricted : false}
+		access : {restricted : true}
 	})
 	.when('logout', {
 		controller: 'LogoutController',
@@ -89,7 +90,7 @@ angular.module('truliavnApp')
 		AuthService.getUserStatus()
 		.then(function success(){
 				$rootScope.userStatus = AuthService.isLoggedIn();
-				console.log($rootScope.userStatus);
+				// console.log($rootScope.userStatus);
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
 				$location.path('/login');
 				$route.reload();

@@ -1,13 +1,15 @@
 app.controller('AddHouseCtrl', ['$scope', 'AuthService', function($scope, AuthService){
+	console.log(AuthService.getUserToken(), AuthService.getUserEmail());
 	$scope.addHouse = function(){
-		console.log(AuthService.getUserToken, AuthService.getUseremail());
-	}
+		console.log(AuthService.getUserToken(), AuthService.getUserEmail());
+
+	};
 }]);
 app.controller('EditHouseCtrl', ['$scope', function($scope){
-	
+
 }])
 app.controller('DeleteHouseCtrl', ['$scope', function($scope){
-	
+
 }]);
 
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
@@ -17,7 +19,7 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 	listRent.currentPage = 0;
 	listRent.pageSize = 20;
 	listRent.numberOfPages = function(){
-		return Math.ceil(listRent.houses.length/listRent.pageSize); 
+		return Math.ceil(listRent.houses.length/listRent.pageSize);
 	};
 	$http.get(rentUrl).then(function(response){
 		listRent.houses = response.data.houses;
@@ -35,7 +37,7 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 	listSell.currentPage = 0;
 	listSell.pageSize = 20;
 	listSell.numberOfPages = function(){
-			return Math.ceil(listSell.houses.length/listSell.pageSize); 
+			return Math.ceil(listSell.houses.length/listSell.pageSize);
 		};
 	$http.get(sellUrl).then(function(response){
 		listSell.houses = response.data.houses;
