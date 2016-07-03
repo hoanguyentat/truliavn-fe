@@ -23,7 +23,7 @@ ul.seller{
 }
 .main{
 	position: relative;
-	height: 800px;
+	height: auto;
 }
 
 .contact{
@@ -67,7 +67,7 @@ tr.column_name{
 }
 tr.header{
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 25px;
 	color: gray;
 }
 
@@ -76,9 +76,6 @@ tr.header{
 	color: #f06;
 }
 
-#map{
-	height: 400px;
-}
 
 .school_name,
 .distance{
@@ -87,10 +84,12 @@ tr.header{
 }
 .distance{
 	padding-left: 10px;
-}
+} 	
 .span-extend {
 	float: right;
 }
 .homeDetail{
-	color: gray;
+	color: #002699;
 }
+
+.angular-google-map-container { height: 500px; }

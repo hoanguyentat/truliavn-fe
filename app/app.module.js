@@ -3,7 +3,8 @@ var app = angular.module('truliavnApp', [
 	'houseDetail',
 	'ngRoute',
 	'ngCookies',
-	'matchPassword'
+	'matchPassword',
+	'uiGmapgoogle-maps'
 
 ]);
 

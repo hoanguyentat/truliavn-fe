@@ -1,6 +1,14 @@
-	angular.
-	module('truliavnApp').
-	config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
+app.config(
+    ['uiGmapGoogleMapApiProvider', function(GoogleMapApiProviders) {
+        GoogleMapApiProviders.configure({
+            v: '3.20', //defaults to latest 3.X anyhow
+        	libraries: 'weather,geometry,visualization'
+        });
+	}
+]);
+angular.
+module('truliavnApp')
+.config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
 
 	$routeProvider

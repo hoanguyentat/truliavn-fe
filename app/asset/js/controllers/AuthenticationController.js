@@ -21,9 +21,11 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 	};
 }]);
 
+
 app.controller('RegisterController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
 
 		$scope.register = function(){
+
 		$scope.error = false;
 		$scope.disabled = true;
 
@@ -43,12 +45,20 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 	};
 }]);
 
-// change user info
-app.controller('UpdateController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
+
+app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', 'AuthService', 'API', function($scope, $location,$http, $cookies, AuthService, API){
+	var userID = $cookies.get('user.id');
+	$http.get(API.getUserInfo(userID))
+	.then(function (res){
+		$scope.userInfo = res.data.user;
+		console.log(res.data.user);
+	})
 	$scope.update = function(){
-		AuthService.update($scope.updateForm.fullName,
-							$scope.updateForm.phone,
-							$scope.updateForm.address,
+		console.log(userID + "hehe");
+		AuthService.update( userID,
+							$scope.updateForm.fullName, 
+							$scope.updateForm.phone, 
+							$scope.updateForm.address, 
 							$scope.updateForm.oldpass,
 							$scope.updateForm.newpass,
 							$scope.updateForm.confirmpass)

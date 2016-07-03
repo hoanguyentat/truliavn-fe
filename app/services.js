@@ -25,6 +25,11 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		}
 	}
 // return status user to check user logged in
+
+
+	function getUserInfo(id){
+
+	}
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
 		if (userId == null) {
@@ -80,10 +85,12 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		return deferred.promise;
 	}
 
-	function update(fullname, phone, address, oldPassword, newPassword, repeatPassword){
+	function update(id,fullname, phone, address, oldPassword, newPassword, repeatPassword){
 		var deferred = $q.defer();
-		$http.post('http://localhost:3000/api/user/edit', {fullname : fullname,
-													phone : phone,
+
+		$http.post('http://localhost:3000/api/user/edit', {id : id,
+													fullname : fullname, 
+													phone : phone, 
 													address : address,
 													oldPassword : oldPassword,
 													newPassword : newPassword,
@@ -248,13 +255,18 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 app.factory('API', ['AuthService',function(AuthService){
 	return ({
 		getHouses: getHouses,
+		getUserInfo: getUserInfo,
 		getHouseDetail: getHouseDetail,
 		getHousesNearby: getHousesNearby,
+		getDistanceNearBy : getDistanceNearBy,
 		getHousesForRent: getHousesForRent,
 		getHousesForSell: getHousesForSell,
 		getServicesNearBy: getServicesNearBy
 	});
 
+	function getUserInfo(id){
+		return AuthService.hostName + '/api/user/' + id;
+	}
 	function getHouses(){
 		return AuthService.hostName + '/api/houses';
 	}
@@ -262,8 +274,13 @@ app.factory('API', ['AuthService',function(AuthService){
 		return AuthService.hostName + '/api/house/' + id + '?raw=1';
 	}
 
-	function getHousesNearby(){
 
+	function getHousesNearby(city, district, ward){
+		return AuthService.hostName + '/api/houses?city=' + city  + '&district=' + district + '&ward=' + ward +'&specific=1';
+	}
+
+	function getDistanceNearBy(){
+		return AuthService.hostName + '/api/distance';
 	}
 
 	function getHousesForRent(){
