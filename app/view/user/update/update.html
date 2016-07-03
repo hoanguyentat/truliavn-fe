@@ -5,15 +5,15 @@
         <form class="form" ng-submit="update()" name="myForm">
             <div class="form-group">
                 <label>Họ và tên</label>
-                <input type="text" class="form-control" name="fullname" ng-model="updateForm.fullName" ng-required>
+                <input type="text" class="form-control" name="fullname" ng-model="updateForm.fullName" ng-value = "userInfo.fullname" ng-required>
             </div>    
             <div class="form-group">
                 <label>Số điện thoại</label>
-                <input type="number" class="form-control" name="phone" ng-model="updateForm.phone" ng-required>
+                <input type="number" class="form-control" name="phone" ng-model="updateForm.phone" ng-value = "userInfo.phone" ng-required>
             </div>
              <div class="form-group">
                 <label>Địa chỉ</label>
-                <input type="text" class="form-control" name="address" ng-model="updateForm.address" required>
+                <input type="text" class="form-control" name="address" ng-model="updateForm.address" ng-value = "userInfo.address" required>
             </div>
             <div class="form-group">
                 <label>Thay đổi mật khẩu </label>
