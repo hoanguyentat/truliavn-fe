@@ -67,7 +67,7 @@ tr.column_name{
 }
 tr.header{
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 25px;
 	color: gray;
 }
 
@@ -84,12 +84,12 @@ tr.header{
 }
 .distance{
 	padding-left: 10px;
-}
+} 	
 .span-extend {
 	float: right;
 }
 .homeDetail{
-	color: gray;
+	color: #002699;
 }
 
-.angular-google-map-container { height: 400px; }
+.angular-google-map-container { height: 500px; }

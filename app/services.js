@@ -248,6 +248,7 @@ app.factory('API', ['AuthService',function(AuthService){
 		getUserInfo: getUserInfo,
 		getHouseDetail: getHouseDetail,
 		getHousesNearby: getHousesNearby,
+		getDistanceNearBy : getDistanceNearBy,
 		getHousesForRent: getHousesForRent,
 		getHousesForSell: getHousesForSell,
 		getServicesNearBy: getServicesNearBy
@@ -263,8 +264,12 @@ app.factory('API', ['AuthService',function(AuthService){
 		return AuthService.hostName + '/api/house/' + id + '?raw=1';
 	}
 
-	function getHousesNearby(){
-		
+	function getHousesNearby(city, district, ward){
+		return AuthService.hostName + '/api/houses?city=' + city  + '&district=' + district + '&ward=' + ward +'&specific=1';
+	}
+
+	function getDistanceNearBy(){
+		return AuthService.hostName + '/api/distance';
 	}
 
 	function getHousesForRent(){
