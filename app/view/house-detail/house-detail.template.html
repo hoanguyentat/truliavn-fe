@@ -1,7 +1,7 @@
 <div ng-if="ctrl.status == 'success'">
 	<div class="container house-for">
 		<div class="row" style="padding-bottom: 20px;">
-		<center><h2>Thông tin chi tiết căn hộ</h2></center>
+		<center  style="padding-bottom: 20px;"><h2><strong>Thông tin chi tiết căn hộ</strong></h2></center>
 			<div class="col-xs-12 col-sm-4">
 				<div class="insideContact">
 					<h3>Liên hệ để biết thêm thông tin</h3>
@@ -28,27 +28,16 @@
 			</div>
 
 			<div class=" col-xs-12 col-sm-8">
-				<img ng-if="ctrl.house.images[0]" ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}" alt="" class="img-responsive home_image">
+				<!-- <img ng-if="ctrl.house.images[0]" ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}" alt="" class="img-responsive home_image"> -->
 
 				
-				<!-- <div id="carousel-id" class="carousel slide" data-ride="carousel" >
-					<ol class="carousel-indicators" ng-repeat="(key, image) in ctrl.house.images">
-						<li data-target="#carousel-id" data-slide-to="{{key}}" class=""></li>
-					</ol>
-					<div class="carousel-inner" ng-repeat="(key, image) in ctrl.house.images">
-						<div class="item">
-							<img data-src="{{'http://localhost:3000/' + image}}">
-							<div class="container">
-								<div class="carousel-caption">
-									<h1>Example headline.</h1>
-									<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-					<a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-				</div> -->
+				<div ng-if="ctrl.house.images[0]" >
+				    <uib-carousel active="active" interval="3000" no-wrap="false">
+				      	<uib-slide ng-repeat="(key, slide) in ctrl.house.images track by key" index="key">
+				        	<img ng-src="{{'http://localhost:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail">
+				      	</uib-slide>
+				    </uib-carousel>
+				</div>
 
 
 				<img ng-if="!ctrl.house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>

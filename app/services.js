@@ -14,7 +14,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		logout: logout,
 		register: register,
 		update : update,
-		hostName: 'http://localhost:3000'
+		hostName: 'http://ngocdon.me:3000'
 	});
 
 	function isLoggedIn(){
