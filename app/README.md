@@ -5,10 +5,10 @@
 ## Required
   NodeJS && NPM
   Http-server: Can install through NPM by:
-         $ npm install http-server -g
+    $ npm install http-server -g
 ----------------------------------
 ## Run
   In the /app directory cmd type:
-         $ http-server.
+    $ http-server.
   The Appliction run in http://localhost:8080
   
