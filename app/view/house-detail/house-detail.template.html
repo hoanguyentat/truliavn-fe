@@ -1,5 +1,5 @@
 <div ng-if="ctrl.status == 'success'">
-	<div class="container main">
+	<div class="container house-for">
 		<div class="row" style="padding-bottom: 20px;">
 		<center><h2>Thông tin chi tiết căn hộ</h2></center>
 			<div class="col-xs-12 col-sm-4">
@@ -7,7 +7,7 @@
 					<h3>Liên hệ để biết thêm thông tin</h3>
 					<div>
 						<div class="row">
-							<center><img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img img-responsive img-thumbnail" alt=""></center>
+							<center><img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail" alt=""></center>
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item">Tên chủ nhà: {{ctrl.house.ownerInfo.fullname}}</li>
@@ -148,7 +148,7 @@
 	</div>
 </div>
 <span ng-if="ctrl.status == 'error'">
-	<div class="container main">
+	<div class="container house-for">
 		<div class="row">
 			<center><h4>Trang web không tồn tại</h4></center>
 		</div>

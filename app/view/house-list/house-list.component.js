@@ -1,9 +1,9 @@
 angular.module('houseList')
 .component('houseList', {
 	templateUrl: 'view/house-list/house-list.template.html',
-	controller:['$http', 'AuthService', function($http, AuthService){
+	controller:['$http', 'AuthService', 'API', function($http, AuthService, API){
 
-		var url = AuthService.hostName + '/api/houses';
+		var url = API.getHouses();
 		var list = this;
 		list.currentPage = 0;
 		list.pageSize = 20;
@@ -19,14 +19,14 @@ angular.module('houseList')
 			});
 		});
 		$http.get(AuthService.hostName + '/api/districts').then(function success(response){
+			// console.log(list.districts);
 			list.districts = response.data.districts;
-			console.log(list.districts);
 		});
-		var url2 = AuthService.hostName + '/api/wards?districts=' + list.districtSelected;
-		console.log(url2);
+		var url2 = AuthService.hostName + '/api/wards';
+		// console.log(url2);
 		$http.get(url2).then(function success(response){
 			list.wards = response.data.wards;
-			console.log(list.wards);
+			// console.log(list.wards);
 		});
 		
 	}],
