@@ -7,9 +7,11 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', function($scope, AuthSe
 }]);
 app.controller('EditHouseCtrl', ['$scope', function($scope){
 
-}])
-app.controller('DeleteHouseCtrl', ['$scope', function($scope){
-
+}]);
+app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams' , function($scope, AuthService, $routeParams){
+	$scope.deletaHouse = function(){
+		
+	};
 }]);
 
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
@@ -19,6 +21,7 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 	listRent.currentPage = 0;
 	listRent.pageSize = 20;
 	listRent.numberOfPages = function(){
+		// console.log(listRent.houses.length);
 		return Math.ceil(listRent.houses.length/listRent.pageSize);
 	};
 	$http.get(rentUrl).then(function(response){
@@ -41,7 +44,7 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 		};
 	$http.get(sellUrl).then(function(response){
 		listSell.houses = response.data.houses;
-		// console.log(listSell.houses);
+		console.log(listSell.houses);
 		angular.forEach(listSell.houses, function(val, key){
 				// console.log(val.description);
 			val.description = val.description.slice(0, 150) + '....';

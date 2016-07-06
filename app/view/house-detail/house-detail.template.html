@@ -1,12 +1,12 @@
 <div ng-if="ctrl.status == 'success'">
-	<div class="container main">
+	<div class="container house-for">
 		<div class="row" style="padding-bottom: 20px;">
-		<center><h2>Thông tin chi tiết căn hộ</h2></center>
+		<center  style="padding-bottom: 20px;"><h2><strong>Thông tin chi tiết căn hộ</strong></h2></center>
 			<div class="col-xs-12 col-sm-4">
 					<!-- <h3>Liên hệ để biết thêm thông tin</h3> -->
 				<div>
-					<div>
-						<center><img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img img-responsive img-thumbnail" alt=""></center>
+					<div class="row">
+						<center><img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail" alt=""></center>
 					</div>
 					<ul class="list-group">
 						<li class="list-group-item">Tên chủ nhà: {{ctrl.house.ownerInfo.fullname}}</li>
@@ -32,17 +32,8 @@
 		    	</form>
 
 			</div>
-
 			<div class="col-xs-12 col-sm-8">
-				<!-- <img ng-if="ctrl.house.images[0]" ng-src="{{'http://localhost:3000/' + ctrl.house.images[0]}}" alt="" class="img-responsive home_image"> -->
-				 <div class="col-xs-12 house-carousel">
-				    <uib-carousel active="0" interval="3000" no-wrap="false">
-				      	<uib-slide ng-repeat="(key,url) in ctrl.house.images" index='key'>
-				        	<img ng-src="{{'http://localhost:3000/' + url}}" class="img-house">
-				      	</uib-slide>
-				    </uib-carousel>
-				    <img ng-if="!ctrl.house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
-				</div>
+
 				<div class="col-xs-12">
 					<div class="general_info"> 
 						<h2 ng-show="ctrl.house.type">Nhà riêng</h2>
@@ -55,27 +46,20 @@
 					<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfFloors}} tầng</div>
 					<div class="room col-xs-6 col-sm-4">{{ctrl.house.noOfFloors}} nhà bếp</div>
 				</div>
+			</div>
 
 				
-				<!-- <div id="carousel-id" class="carousel slide" data-ride="carousel" >
-					<ol class="carousel-indicators" ng-repeat="(key, image) in ctrl.house.images">
-						<li data-target="#carousel-id" data-slide-to="{{key}}" class=""></li>
-					</ol>
-					<div class="carousel-inner" ng-repeat="(key, image) in ctrl.house.images">
-						<div class="item">
-							<img data-src="{{'http://localhost:3000/' + image}}">
-							<div class="container">
-								<div class="carousel-caption">
-									<h1>Example headline.</h1>
-									<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-					<a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-				</div> -->
+			<div class=" col-xs-12 col-sm-8">
 				
+				<div ng-if="ctrl.house.images[0]" >
+				    <uib-carousel active="active" interval="3000" no-wrap="false">
+				      	<uib-slide ng-repeat="(key, slide) in ctrl.house.images track by key" index="key">
+				        	<img ng-src="{{'http://localhost:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail">
+				      	</uib-slide>
+				    </uib-carousel>
+				</div>
+
+				<img ng-if="!ctrl.house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
 			</div>
 
 
@@ -155,7 +139,7 @@
 	</div>
 </div>
 <span ng-if="ctrl.status == 'error'">
-	<div class="container main">
+	<div class="container house-for">
 		<div class="row">
 			<center><h4>Trang web không tồn tại</h4></center>
 		</div>

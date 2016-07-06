@@ -1,104 +1,87 @@
-<div class="container main">
+<div class="container-fluid home">
 	<div class="row">
-		<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-			<div class="row">
-				<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Công cụ tìm kiếm
-						</div>
-						<div class="panel-body">
-							Basic panel example
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Các bài báo nói gì
-						</div>
-						<div class="panel-body">
-							Basic panel example
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Tin rao dành cho bạn
-						</div>
-						<div class="panel-body">
-							<ul ng-repeat = "post in ctrl.newPost | limitTo: 2">
-								<li>{{post.id}}</li>
-							</ul>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Các bài viết mới 
-						</div>
-						<div class="panel-body">
-							Basic panel example
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
-					<div class="row">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Tiêu điểm tuần qua
-							</div>
-							<div class="panel-body">
-								Basic panel example
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Lời khuyên dành cho bạn
-							</div>
-							<div class="panel-body">
-								Basic panel example
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="panel panel-default">
-							<div class="panel-heading">
-								Từ khóa tìm kiếm tiêu biểu tuần qua
-							</div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-										<ul>
-											<li>Ha Noi</li>
-											<li>Ha Noi</li>
-											<li>Ha Noi</li>
-										</ul>
-									</div>
-									<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-										<ul>
-											<li>Ha Noi</li>
-											<li>Ha Noi</li>
-											<li>Ha Noi</li>
-										</ul>
-									</div>
-									<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-										<ul>
-											<li>Ha Noi</li>
-											<li>Ha Noi</li>
-											<li>Ha Noi</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 sidebar-left">
+			<div class="search">
+				<form action="" class="navbar-form navbar-left">
+				<h1 style="color: white;">Trang chủ bất động sản Việt Nam</h1>
+				   <div class="row">
+		       			<div class="col-sm-2  col-md-2 col-lg-2">
+		       				<select name="" id="input" class="form-control" required="required" style="display: inline;">
+		       					<option value="0">Cho thuê</option>
+		       					<option value="1">Bán</option>
+		       				</select>
+		       			</div>
+				       	<div class="col-sm-4 col-md-4 col-lg-4">	
+				       <input type="Search" placeholder="Hà Nội" class="form-control" style="display: inline;" />
+				       </div>
+				       <div class="col-sm-2 col-md-2 col-lg-2">				       <!-- <div class="input-group-btn"> -->
+				           <button class="btn btn-info">
+				           <span class="glyphicon glyphicon-search"></span> Search
+				           </button>
+				       </div>
+				   </div>
+				</form>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="background-color: green;">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<div class="sidebar-right">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h2 style="font-family: 'Open Sans', sans-serif;">Danh sách nhà mới</h2>
+					<h5>Một số ngôi nhà mới đăng trên trang:</h5>
+					<ul class="list-group" ng-repeat="house in ::ctrl.allHouses | limitTo: 2">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<li class="list-group-item"><a href="#!/houses/{{::house.id}}" class="thumb"><img ng-src="{{'http://localhost:3000/' + house.images[0]}}" alt="" class="img-responsive home_image"></a></li>
+							
+						</div>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h2 style="font-family: 'Open Sans', sans-serif;">Hà nội</h2>
+					<ul class="list-group" ng-repeat="cityHouse in ::ctrl.cityHouses | limitTo: 4">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<li class="list-group-item"><a href="#!/houses/{{::cityHouse.id}}" class="thumb"><img ng-src="{{'http://localhost:3000/' + cityHouse.images[0]}}" alt="" class="img-responsive home_image"></a></li>
+						</div>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h2 style="font-family: 'Open Sans', sans-serif;">Danh sách nhà yêu thích</h2>
+					<ul class="list-group">
+						<li class="list-group-item">Item 1</li>
+						<li class="list-group-item">Item 2</li>
+						<li class="list-group-item">Item 3</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h2 style="font-family: 'Open Sans', sans-serif;">Danh sách nhà yêu thích</h2>
+					<ul class="list-group">
+						<li class="list-group-item">Item 1</li>
+						<li class="list-group-item">Item 2</li>
+						<li class="list-group-item">Item 3</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" style="padding-top: 20px;">
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			<img src="//static.trulia-cdn.com/images/footer/discovery-ill.svg" width="200" height="125" class="img img-responsive">
+		</div>
+			<div class="h4">Trulia is the best place to start your real estate search.</div>
+			<div>Trulia is an all-in-one real estate site that gives you the local scoop about homes for sale, apartments for rent, <a href="/real_estate/Dix_Hills-New_York/">neighborhood insights</a>, and real estate markets and trends to help you figure out exactly what, where, and when to buy, sell or rent. You can also find a real estate agent, view prices of recently sold homes, and see home values in your community. Get advice and opinions from local real estate agents, brokers, and other local experts on Trulia Voices, Trulia's online real estate community.</div>
+			<div><a href="http://www.trulia.com/about/" class="typeHighlight">Learn more about us</a></div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Open+Sans::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
