@@ -9,7 +9,6 @@ angular.module('houseDetail')
 			var data = response.data;
 			self.status = data.status;
 			self.house = data.houses[0];
-			console.log(self.house);
 
 			var latitude = self.house.lat;
 			var longitude = self.house.lon;
@@ -17,49 +16,14 @@ angular.module('houseDetail')
 
 
 			// marker position of the house 
-			self.showMap = { center: { latitude: latitude, longitude: longitude }, zoom: 16 };
 			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 16 };
-		    
-		    $scope.options = {scrollwheel: false};
-		    $scope.coordsUpdates = 0;
-		    $scope.dynamicMoveCtr = 0;
-		    $scope.marker = {
-		      	id: 0,
-			    	coords: {
-			        	latitude: latitude,
-			        	longitude: longitude
-			      	},
-			      	options: { draggable: true },
-			      	events: {
-		        		dragend: function (marker, eventName, args) {
-		          		$log.log('marker dragend');
-		          		var lat = marker.getPosition().lat();
-		          		var lon = marker.getPosition().lng();
-		          		$log.log(lat);
-		          		$log.log(lon);
-
-		          	$scope.marker.options = {
-		            draggable: true,
-			            labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-			            labelAnchor: "100 0",
-			            labelClass: "marker-labels"
-		          	};
-		        }
-		      }
-		    };
-
-		    $scope.$watchCollection("marker.coords", function (newVal, oldVal) {
-		      	if (_.isEqual(newVal, oldVal))
-		        	return;
-		     	$scope.coordsUpdates++;
-		    });
 		    // end location
 
 
 		    // find the school near by
 			$http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
-												radius : 1000, 
+												radius : 2000, 
 												type : 'school'})
 			.success(function(data, status){
 				if(status == 200 && data.status == 'success'){
@@ -162,18 +126,26 @@ angular.module('houseDetail')
 						var lat = neighbor[i].lat;
 						var lon = neighbor[i].lon;
 						coor_neighbor += '|' + lat + ',' + lon;
-						
+						var content = '<div><table class="table table-map"><tr><td>Địa chỉ</td>'
+										+'<td>' + neighbor[i].address+'</td>'
+										+'</tr><tr><td>Giá</td>'
+										+'<td>' + neighbor[i].price+' tỉ đô'+'</td>'
+										+'</tr></table></div>';
 						var ret = {
 							id : parseInt(i),
 							latitude : lat,
 							longitude : lon,
-							title : 'neighbor' + i
+							title : neighbor[i].address,
+							price : neighbor[i].price,
+							content : content,
+							options : {labelClass : 'marker_labels', labelContent : ''},
+							icon : "http://maps.google.com/mapfiles/kml/paddle/grn-stars.png"
 						}
 						coor_neighbor_marker.push(ret);
 					}
 					coor_neighbor.substring(1);
 
-					// console.log(coor_neighbor_marker);
+					console.log(coor_neighbor_marker);
 
 					//marker all your neighborhood 
 					$scope.map = {
@@ -183,24 +155,38 @@ angular.module('houseDetail')
 					    },
 					    zoom: 12,
 					    bounds: coor_neighbor_marker
-					    };
-					    $scope.options = {
-					    	scrollwheel: false
-					    };
-					  
-					    $scope.randomMarkers = [];
-					    // Get the bounds from the map once it's loaded
-					    $scope.$watch(function() {
-					    	return $scope.map.bounds;
-					    }, function() {
-					    	var markers = [];
-					        for (var i = 0; i <$scope.map.bounds.length; i++) {
-					          // console.log('i = ' + i);
-					        	markers.push($scope.map.bounds[i])
-					        }
+					};
+				    $scope.options = {
+				    	scrollwheel: false
+				    };
+				  
+				    $scope.neighborMarkers = [];
+				    // Get the bounds from the map once it's loaded
+				    $scope.$watch(function() {
+				    	return $scope.map.bounds;
+				    }, function() {
+				    	var markers = [];
+				        for (var i = 0; i <$scope.map.bounds.length; i++) {
+				          // console.log('i = ' + i);
+				        	markers.push($scope.map.bounds[i])
+				        }
 
-					        $scope.randomMarkers = markers;
-					    }, true);
+				        $scope.neighborMarkers = markers;
+				    }, true);
+					$scope.map.markersEvents = {
+			            mouseover: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseover');
+			              	model.options.labelContent = model.content;
+			              	marker.showWindow = true;
+			              	$scope.$apply();
+			            },
+			            mouseout: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseout');
+			               model.options.labelContent = ' ';
+			               marker.showWindow = false;
+			               $scope.$apply();
+			            }
+			        };
 
 					$http.post(API.getDistanceNearBy(), {origin : position, 
 														destination : coor_neighbor})

@@ -4,7 +4,8 @@ var app = angular.module('truliavnApp', [
 	'ngRoute',
 	'ngCookies',
 	'matchPassword',
-	'uiGmapgoogle-maps'
+	'uiGmapgoogle-maps',
+	'ui.bootstrap'
 
 ]);
 
