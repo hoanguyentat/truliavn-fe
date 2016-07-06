@@ -74,11 +74,12 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 		})
 	}
 }]);
-app.controller('LogoutControler', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
+app.controller('LogoutControler', ['$scope', '$location', 'AuthService', '$route', function($scope, $location, AuthService, $route){
 	$scope.logout = function(){
 		AuthService.logout()
 		.then(function(){
 			$location.path('/');
+			$route.reload();	
 		});
 	};
 }]);
