@@ -33,7 +33,7 @@ module('truliavnApp')
 		access: {restricted: false}
 	})
 	.when('/for-sell', {
-		template: 'view/house-list/house-list.template.html',
+		templateUrl: 'view/house-list/house-list.template.html',
 		controller: 'HouseForSellCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
@@ -98,6 +98,7 @@ angular.module('truliavnApp')
 		AuthService.getUserStatus()
 		.then(function success(){
 				$rootScope.userStatus = AuthService.isLoggedIn();
+				$rootScope.userName = AuthService.getUserName();
 				// console.log($rootScope.userStatus);
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
 				$location.path('/login');

@@ -6,7 +6,7 @@ app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API', functi
 	//get some new house
 	$http.get(urlHouses).then(function success(response){
 		list.allHouses = response.data.houses;
-		console.dir(list.allHouses);
+		// console.dir(list.allHouses);
 	}, function error(response){
 		console.log(response);
 	});

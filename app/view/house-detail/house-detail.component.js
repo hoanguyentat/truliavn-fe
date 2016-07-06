@@ -93,7 +93,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_primary.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
-								var res = data.results.rows[0].elements;
+								var res = data.results.rows.elements;
 								for(var i in res){
 									primaries[i].distance = res[i].distance.text;
 								}
@@ -108,7 +108,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_junior.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
-								var res = data.results.rows[0].elements;
+								var res = data.results.rows.elements;
 								for(var i in res){
 									juniors[i].distance = res[i].distance.text;
 								}
@@ -123,7 +123,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_senior.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
-								var res = data.results.rows[0].elements;
+								var res = data.results.rows.elements;
 								for(var i in res){
 									seniors[i].distance = res[i].distance.text;
 								}
@@ -206,7 +206,7 @@ angular.module('houseDetail')
 														destination : coor_neighbor})
 					.success(function(data, status){
 						if(status == 200 && data.status == 'success'){
-							var res = data.results.rows[0].elements;
+							var res = data.results.rows.elements;
 							for(var i in res){
 								neighbor[i].distance = res[i].distance.text;
 							}

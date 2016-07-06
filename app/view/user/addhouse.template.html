@@ -72,10 +72,10 @@
 			</div>
 			<div class="form-group">
 				<label for="images" class="control-label"></label>
-				<input type="file" name="images" multiple="">
+				<input type="file" name="images" multiple="" ng-model="addHouseForm.images">
 			</div>
 			<div class="form-group">
-				<input type="submit" value="submit" ng-click="addHouse()" ng-disabled="disabled" lass="btn btn-primary">
+				<button type="submit" ng-click="addHouse()" ng-disabled="disabled" class="btn btn-primary">Thêm bài đăng</button>
 			</div>
 		</form>
 	</div>

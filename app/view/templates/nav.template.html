@@ -16,12 +16,9 @@
 			<ul class="nav navbar-nav">
 				<li><a href="#!/for-sell">Nhà đất bán</a></li>
 				<li><a href="#!/for-rent">Nhà đất cho thuê</a></li>
-				<li><a href="">Cần mua - Cần thuê</a></li>
+				<!-- <li><a href="">Cần mua - Cần thuê</a></li> -->
 				<li><a href="">Tin tức</a></li>
 				<li><a href="">Tư vấn - Hỏi đáp</a></li>
-				<li ng-show="userStatus" ng-controller="LogoutControler">
-					<a id="logout" href="#!/addhouse">Thêm bài đăng</a>					
-				</li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -36,12 +33,21 @@
 					<!-- </div> -->
 				</li>
 				<li ng-show="userStatus" ng-controller="LogoutControler">
-					<a id="logout" ng-click="logout()" href="">Logout</a>					
+					<div class="dropdown">
+					  <p class="dropbtn">{{userName}}<b class="caret"></b></p>
+					  <div class="dropdown-content">
+					    <a href="#">Thông tin cá nhân</a>
+					    <a href="#">Các bài đã đăng</a>
+					    <a href="#!/addhouse">Thêm bài đăng</a>
+					    <a id="logout" ng-click="logout()" href="">Logout</a>
+					  </div>
+					</div>			
 				</li>
 				<li>
 					<!-- <a ng-if="user" href="http://localhost:8080/#!/login">Login</a> -->
 					<a ng-hide="userStatus" href="#!/login">Login</a>
 				</li>
+				<li><a href=""></a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div>

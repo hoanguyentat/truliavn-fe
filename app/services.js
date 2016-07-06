@@ -2,13 +2,13 @@
 //Handling user authentication service
 app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies', function($q, $timeout, $rootScope, $http, $cookies){
 	var user = null;
-	var emailUser;
-	var token;
+	var userName;
 	var userId = "";
 	var host = 'http://ngocdon.me:3000';
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
+		getUserName: getUserName,
 		getUserToken: getUserToken,
 		getUserEmail: getUserEmail,
 		login: login,
@@ -28,8 +28,9 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 // return status user to check user logged in
 
 
-	function getUserInfo(id){
-
+	function getUserName(){
+		userName = $cookies.get('userName');
+		return userName;
 	}
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
@@ -73,14 +74,12 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		.success(function(data, status){
 			if (status == 200 && data.status == 'success') {
 				deferred.resolve();
-				console.log(data, status);
 			} else{
 				deferred.reject();
 			}
 		})
 		//handle error
 		.error(function(data){
-			console.log(data);
 			deferred.reject();
 		});
 		return deferred.promise;
@@ -112,13 +111,11 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	function login(email, password){
 		var deferred = $q.defer();
 		$http.post(host +'/api/login',{email: email, password: password}).success(function(data, status){
-			console.log(data);
 			if (status == 200 && data.status =="success") {
-				$http.get(host +'/api/user/' + data.user.id).then(function(response){
-					console.log(response);
-				});
 
 				//put userId to cookies
+				console.log(data.user);
+				$cookies.put('userName', data.user.fullname);
 				$cookies.put('user.id', data.user.id);
 				$cookies.put('user.email', data.user.email);
 				$cookies.put('user.token', data.user.token);
@@ -142,7 +139,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		var deferred = $q.defer();
 
 		//sent request logout
-		$http.post(host +'/api/logout', {email: emailUser, token: token})
+		$http.post(host +'/api/logout', {email: $cookies.get('user.email'), token: $cookies.get('user.token')})
 		.success(function(data){
 			console.log("Logout thanh cong");
 			user = false;
@@ -191,7 +188,6 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 			ward: ward,
 			description: description
 		};
-		console.log(houseData);
 		var deferred = $q.defer();
 
 		//sent request add house
@@ -201,7 +197,6 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 			deferred.resolve();
 		})
 		.error(function(data){
-			console.log(data);
 			console.log("Them nha khong thanh cong");
 			deferred.reject();
 		});
