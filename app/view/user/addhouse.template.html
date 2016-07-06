@@ -1,10 +1,10 @@
-<div class="container main">
+<div class="container house-for">
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 		<center><h3>Thêm bài đăng tin thuê/bán nhà</h3></center>
-		<form ng-submit="addhouse()" enctype="multipart/form-data">
+		<form enctype="multipart/form-data">
 			<input type="hidden" name="" id="input" class="form-control" ng-value="">
 			<div class="form-group">
-				<label for="type" class="control-label"></label>
+				<label for="type" class="control-label">Kiểu loại</label>
 				<select name="type" id="type" class="form-control" required="required" ng-model="addHouseForm.type">
 					<option value="0">Nhà riêng</option>
 					<option value="1">Chung cư</option>
@@ -13,6 +13,10 @@
 			<div class="form-group">
 				<label for="address" class="control-label">Address</label>
 				<textarea name="address" id="input" class="form-control" required="required" ng-model="addHouseForm.address"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="title" class="control-label">Title</label>
+				<textarea name="title" id="input" class="form-control" required="required" ng-model="addHouseForm.title"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="area">Diện tích</label>
@@ -51,32 +55,27 @@
 				<input name="feePeriod" id="feePeriod" class="form-control" required ng-model="addHouseForm.feePeriod">
 			</div>
 			<select name="city" id="city" class="form-control" required="required" ng-model="addHouseForm.city">
-				<option value="">Tỉnh</option>
-				<option value="0">Cho thuê</option>
-				<option value="1">Rao bán</option>
+				<option value="">Chọn tỉnh/Thành phố</option>
+				<option value="1">Hà Nội</option>
 			</select>
-			<select name="district" id="district" class="form-control" required="required" ng-model="addHouseForm.district">
-				<option value="">Huyện</option>
-				<option value="0">Cho thuê</option>
-				<option value="1">Rao bán</option>
+			<select name="ward" id="input" class="form-control" ng-model="addHouseForm.district" required="required">
+				<option value="">Chọn quận/huyện</option>
+				<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
 			</select>
-			<select name="ward" id="wards" class="form-control" required="required" ng-model="addHouseForm.ward">
-				<option value="">Xã</option>
-				<option value="0">Cho thuê</option>
-				<option value="1">Rao bán</option>
+			<select name="ward" id="input" class="form-control" ng-model="addHouseForm.ward" required="required">
+				<option value="">Chọn phường/xã</option>
+				<option ng-repeat="(key, ward) in wards | customDistrict: addHouseForm.district" value="{{key}}">{{ward.wardName}}</option>
 			</select>
 			<div class="form-group">
 				<label for="description" class="control-label">Mô tả:</label>
 				<textarea name="description" id="description" class="form-control" required="required" ng-model="addHouseForm.description"></textarea>
 			</div>
-			<input type="hidden" name="email" value="ngocdon127@gmail.com">
-			<input type="hidden" name="token" value="ece44e64c04368f6650b45ca503a747e">
 			<div class="form-group">
 				<label for="images" class="control-label"></label>
 				<input type="file" name="images" multiple="">
 			</div>
 			<div class="form-group">
-				<input type="submit" value="Submit" class="btn btn-primary">
+				<input type="submit" value="submit" ng-click="addHouse()" ng-disabled="disabled" lass="btn btn-primary">
 			</div>
 		</form>
 	</div>

@@ -1,12 +1,53 @@
-app.controller('AddHouseCtrl', ['$scope', 'AuthService', function($scope, AuthService){
+app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', function($scope, AuthService, $http, HouseService, $location){
 	console.log(AuthService.getUserToken(), AuthService.getUserEmail());
+
+	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
+		$scope.districts = response.data.districts;
+		console.log($scope.districts);
+	});
+	var url2 = AuthService.hostName + '/api/wards';
+	// console.log(url2);
+	$http.get(url2).then(function success(response){
+		$scope.wards = response.data.wards;
+	});
+
 	$scope.addHouse = function(){
-		console.log(AuthService.getUserToken(), AuthService.getUserEmail());
-
-	};
+		$scope.disabled = true;
+		HouseService.addHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description)
+		.then(function(){
+			console.log("Them nha thành công");
+			$location.path('/houses');
+		})
+		.catch(function(){
+			console.log("Thêm nhà không thành công");
+		});
+	}
 }]);
-app.controller('EditHouseCtrl', ['$scope', function($scope){
 
+app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', function($scope, AuthService, $http, HouseService, $location, $routeParams ){
+	console.log(AuthService.getUserToken(), AuthService.getUserEmail());
+
+	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
+		$scope.districts = response.data.districts;
+		console.log($scope.districts);
+	});
+	var url2 = AuthService.hostName + '/api/wards';
+	// console.log(url2);
+	$http.get(url2).then(function success(response){
+		$scope.wards = response.data.wards;
+	});
+
+	$scope.addHouse = function($routeParams){
+		$scope.disabled = true;
+		HouseService.addHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams)
+		.then(function(){
+			console.log("Them nha thành công");
+			$location.path('/houses');
+		})
+		.catch(function(){
+			console.log("Thêm nhà không thành công");
+		});
+	}
 }]);
 app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams' , function($scope, AuthService, $routeParams){
 	$scope.deletaHouse = function(){

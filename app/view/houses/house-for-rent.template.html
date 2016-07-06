@@ -52,7 +52,9 @@
 							</div>
 						</div>
 						<div class="row">
+
 							<ul class="houses">
+							<center><h2>Thông tin nhà đất cho thuê</h2></center>
 							<li ng-repeat="house in ctrl.houses | startFrom : ctrl.currentPage*ctrl.pageSize | limitTo: ctrl.pageSize" class="thumbnail row">
 								<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 									<a href="#!/houses/{{::house.id}}" class="thumb">

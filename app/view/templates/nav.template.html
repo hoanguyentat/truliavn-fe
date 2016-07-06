@@ -19,6 +19,9 @@
 				<li><a href="">Cần mua - Cần thuê</a></li>
 				<li><a href="">Tin tức</a></li>
 				<li><a href="">Tư vấn - Hỏi đáp</a></li>
+				<li ng-show="userStatus" ng-controller="LogoutControler">
+					<a id="logout" href="#!/addhouse">Thêm bài đăng</a>					
+				</li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -33,7 +36,7 @@
 					<!-- </div> -->
 				</li>
 				<li ng-show="userStatus" ng-controller="LogoutControler">
-					<a id="logout" ng-click="logout()">Logout</a>					
+					<a id="logout" ng-click="logout()" href="">Logout</a>					
 				</li>
 				<li>
 					<!-- <a ng-if="user" href="http://localhost:8080/#!/login">Login</a> -->
