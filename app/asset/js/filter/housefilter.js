@@ -9,7 +9,7 @@ app.filter('startFrom', function(){
 //select the house by the district, wards
 app.filter('customDistrict', function() {
   return function(input, search) {
-  	// console.log(input);
+  	console.dir(input);
     if (!input) return input;
     // console.log("Da qua buoc nay");
     if (!search) return input;
@@ -22,7 +22,8 @@ app.filter('customDistrict', function() {
         result[key] = input[key];
       }
     });
-    console.log(result);
+    // console.log(result);
     return result;
   }
 });
+

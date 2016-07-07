@@ -1,5 +1,5 @@
 app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', function($scope, AuthService, $http, HouseService, $location){
-	console.log(AuthService.getUserToken(), AuthService.getUserEmail());
+	// console.log(AuthService.getUserToken(), AuthService.getUserEmail());
 
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
@@ -25,11 +25,11 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 }]);
 
 app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', function($scope, AuthService, $http, HouseService, $location, $routeParams ){
-	console.log(AuthService.getUserToken(), AuthService.getUserEmail());
+	// console.log(AuthService.getUserToken(), AuthService.getUserEmail());
 
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
-		console.log($scope.districts);
+		// console.log($scope.districts);
 	});
 	var url2 = AuthService.hostName + '/api/wards';
 	// console.log(url2);
@@ -50,14 +50,13 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 	}
 }]);
 app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams' , function($scope, AuthService, $routeParams){
-	$scope.deletaHouse = function(){
+	$scope.deletaHouse = function(id){
 		
 	};
 }]);
 
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
-	console.log(rentUrl);
 	var listRent = this;
 	listRent.currentPage = 0;
 	listRent.pageSize = 20;
@@ -72,7 +71,6 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 			val.description = val.description.slice(0, 150) + '....';
 		});
 	});
-	console.log(listRent.currentPage, listRent.pageSize);
 }]);
 
 app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
@@ -85,7 +83,7 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 		};
 	$http.get(sellUrl).then(function(response){
 		listSell.houses = response.data.houses;
-		console.log(listSell.houses);
+		// console.log(listSell.houses);
 		angular.forEach(listSell.houses, function(val, key){
 				// console.log(val.description);
 			val.description = val.description.slice(0, 150) + '....';
