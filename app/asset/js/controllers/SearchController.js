@@ -1,7 +1,7 @@
 app.controller('SearchController', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService){
 
 	$scope.search = function(){
-		$http.post('http://ngocdon.me:3000/api/search', {search: $scope.searchContent})
+		$http.post('http://ngocdon.me:3000/api/search', {search: $scope.SearchForm.searchContent, housefor: $scope.SearchForm.houseFor})
 		.then(function(res){
 			console.log(res);
 		});
