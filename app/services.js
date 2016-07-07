@@ -2,12 +2,13 @@
 //Handling user authentication service
 app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies', function($q, $timeout, $rootScope, $http, $cookies){
 	var user = null;
-	var emailUser;
-	var token;
+	var userName;
 	var userId = "";
+	var host = 'http://ngocdon.me:3000';
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
+		getUserName: getUserName,
 		getUserToken: getUserToken,
 		getUserEmail: getUserEmail,
 		login: login,
@@ -27,20 +28,21 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 // return status user to check user logged in
 
 
-	function getUserInfo(id){
-
+	function getUserName(){
+		userName = $cookies.get('userName');
+		return userName;
 	}
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
 		if (userId == null) {
-			return $http.get('http://localhost:3000/api/user').success(function(){
+			return $http.get(host +'/api/user').success(function(){
 				user = false;
 			})
 			.error(function(){
 				user = false;
 			});
 		} else{
-			return $http.get('http://localhost:3000/api/user/' + userId)
+			return $http.get(host +'/api/user/' + userId)
 			.success(function(data){
 
 				if (data.user.status) {
@@ -67,19 +69,17 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		//creat a new instance of deferred
 		var deferred = $q.defer();
 
-		$http.post('http://localhost:3000/api/register',{email: email, password: password, repeatPassword: repeatPassword, address: address, phone: phone, fullname: fullname})
+		$http.post(host +'/api/register',{email: email, password: password, repeatPassword: repeatPassword, address: address, phone: phone, fullname: fullname})
 		//handle success
 		.success(function(data, status){
 			if (status == 200 && data.status == 'success') {
 				deferred.resolve();
-				console.log(data, status);
 			} else{
 				deferred.reject();
 			}
 		})
 		//handle error
 		.error(function(data){
-			console.log(data);
 			deferred.reject();
 		});
 		return deferred.promise;
@@ -88,7 +88,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	function update(id,fullname, phone, address, oldPassword, newPassword, repeatPassword){
 		var deferred = $q.defer();
 
-		$http.post('http://localhost:3000/api/user/edit', {id : id,
+		$http.post(host +'/api/user/edit', {id : id,
 													fullname : fullname, 
 													phone : phone, 
 													address : address,
@@ -110,14 +110,12 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	}
 	function login(email, password){
 		var deferred = $q.defer();
-		$http.post('http://localhost:3000/api/login',{email: email, password: password}).success(function(data, status){
-			console.log(data);
+		$http.post(host +'/api/login',{email: email, password: password}).success(function(data, status){
 			if (status == 200 && data.status =="success") {
-				$http.get('http://localhost:3000/api/user/' + data.user.id).then(function(response){
-					console.log(response);
-				});
 
 				//put userId to cookies
+				console.log(data.user);
+				$cookies.put('userName', data.user.fullname);
 				$cookies.put('user.id', data.user.id);
 				$cookies.put('user.email', data.user.email);
 				$cookies.put('user.token', data.user.token);
@@ -141,7 +139,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		var deferred = $q.defer();
 
 		//sent request logout
-		$http.post('http://localhost:3000/api/logout', {email: emailUser, token: token})
+		$http.post(host +'/api/logout', {email: $cookies.get('user.email'), token: $cookies.get('user.token')})
 		.success(function(data){
 			console.log("Logout thanh cong");
 			user = false;
@@ -162,17 +160,19 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 //House feature service
 app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $timeout){
+	var host = 'http://ngocdon.me:3000';
 	return ({
 		addHouse: addHouse,
 		editHouse: editHouse,
 		deleteHouse: deleteHouse,
 	});
 
-	function addHouse(email, token, type, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description){
+	function addHouse(email, token, type, title, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description){
 		var houseData = {
 			email: email,
 			token: token,
 			type: type,
+			title: title,
 			address: address,
 			area: area,
 			houseFor: houseFor,
@@ -191,7 +191,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 		var deferred = $q.defer();
 
 		//sent request add house
-		$http.post('http://localhost:3000/api/house', houseData)
+		$http.post(host +'/api/house', houseData)
 		.success(function(data){
 			console.log("Them nha thanh cong");
 			deferred.resolve();
@@ -204,11 +204,12 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 		return deferred.promise;
 	}
 
-	function editHouse(email, token, type, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description, houseId){
+	function editHouse(email, token, type, title, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description, houseId){
 		var houseData = {
 			email: email,
 			token: token,
 			type: type,
+			title: title,
 			address: address,
 			area: area,
 			houseFor: houseFor,
@@ -228,7 +229,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 		var deferred = $q.defer();
 
 		//sent request add house
-		$http.post('http://localhost:3000/api/house/edit', houseData)
+		$http.post(host +'/api/house/edit', houseData)
 		.success(function(data){
 			console.log("Sua nha thanh cong");
 			deferred.resolve();
@@ -244,7 +245,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 	function deleteHouse(email, houseId, token){
 		var deferred = $q.defer();
 
-		$http.post('http://localhost:3000/api/house/delete', {email: email, token: token, houseId: houseId})
+		$http.post(host +'/api/house/delete', {email: email, token: token, houseId: houseId})
 		.success(function(response){
 			console.log("Xoa nha thanh cong");
 			deferred.resolve();
@@ -285,11 +286,11 @@ app.factory('API', ['AuthService',function(AuthService){
 	}
 
 	function getHousesForRent(){
-		return AuthService.hostName + '/api/houses?housefor=rent';
+		return AuthService.hostName + '/api/houses?housefor=rent&raw=1&specific=1';
 	}
 
 	function getHousesForSell(){
-		return AuthService.hostName + '/api/houses?housefor=sell';
+		return AuthService.hostName + '/api/houses?housefor=sell&raw=1&specific=1';
 	}
 
 	function getServicesNearBy(){

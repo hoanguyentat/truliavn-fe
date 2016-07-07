@@ -10,7 +10,7 @@
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="row filter-houses">
+						<div class="row filter-houses" ng-controller="SearchController">
 							<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 								<select name="district" id="input" class="form-control" required="required">
 									<option value="">Chọn tỉnh/thành phố</option>
@@ -20,13 +20,13 @@
 							<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 								<select name="ward" id="input" class="form-control" ng-model="districtSelected" required="required">
 									<option value="">Chọn quận/huyện</option>
-									<option ng-repeat="(id, district) in ctrl.districts" value="{{id}}">{{district.districtName}}</option>
+									<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 								<select name="ward" id="input" class="form-control" ng-model="wardSelected" required="required">
 									<option value="">Chọn phường/xã</option>
-									<option ng-repeat="(key, ward) in ctrl.wards | custom: districtSelected" value="{{key}}">{{ward.wardName}}</option>
+									<option ng-repeat="(key, ward) in wards | customDistrict: districtSelected" value="{{key}}">{{ward.wardName}}</option>
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -52,22 +52,22 @@
 							</div>
 						</div>
 						<div class="row">
+							<center><h2>Thông tin nhà đất</h2></center>
 							<ul class="houses">
-							<li ng-repeat="house in ctrl.houses | startFrom : ctrl.currentPage*ctrl.pageSize | limitTo: ctrl.pageSize" class="thumbnail row">
-								<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
-									<a href="#!/houses/{{::house.id}}" class="thumb">
-									<img ng-if="house.images[0]" ng-src="{{'http://localhost:3000/' + house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
-									<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
-									
-									</a>
-								</div>
-								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-									
-									<a href="#!/houses/{{house.id}}">{{::house.address}}</a>
-									<p ng-bind="house.description"></p>
+								<li ng-repeat="house in ctrl.houses | startFrom : ctrl.currentPage*ctrl.pageSize | limitTo: ctrl.pageSize" class="thumbnail row">
+									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+										<a href="#!/houses/{{::house.id}}" class="thumb">
+										<img ng-if="house.images[0]" ng-src="{{'http://localhost:3000/' + house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
+										<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
+										
+										</a>
+									</div>
+									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
+										<p ng-bind="house.description"></p>
+										<p style="margin-top: 70px; margin-left: 70%;"><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</p>
 									</div>
 								</li>
-								
 							</ul>
 						</div>
 						   <button class= "btn btn-primary" ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
@@ -86,7 +86,7 @@
 <div ng-if="!ctrl.houses">
 	<div class="container house-for">
 		<div class="row">
-			<center><h2>Không có dữ liệu</h2></center>
+			<center><h2>Đang tải dữ liệu...</h2></center>
 		</div>
 	</div>
 </div>

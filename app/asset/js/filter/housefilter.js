@@ -7,7 +7,7 @@ app.filter('startFrom', function(){
 
 
 //select the house by the district, wards
-app.filter('custom', function() {
+app.filter('customDistrict', function() {
   return function(input, search) {
   	// console.log(input);
     if (!input) return input;
