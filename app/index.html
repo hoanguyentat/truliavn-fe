@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{title}}</title>
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<!-- <script src="http://maps.googleapis.com/maps/api/js"></script> -->
 	<link rel="stylesheet" type="text/css" href="asset/css/bootstrap/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="asset/css/main.css">
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
@@ -15,17 +15,16 @@
 	<!-- Use this file for map route -->
 	<script type="text/javascript" src="asset/js/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="asset/js/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+	<script type="text/javascript" src='asset/js/angular-ui-bootstrap/dist/ui-bootstrap-tpls-1.3.3.min.js'></script>
 	<script type="text/javascript" src="asset/js/angular-animate/angular-animate.min.js"></script>
 	<!-- Use this file for pagination -->
-	<script type="text/javascript" src="asset/js/ui-bootstrap-tpls-1.3.3.min.js"></script>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
 
 	<!-- Angular Google Map -->
-	<script type="text/javascript" src="asset/js/angular-map/angular-google-maps.min.js"></script>
-	<script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script>
+	<script src='https://maps.googleapis.com/maps/api/js'></script>
 	<script type="text/javascript" src="asset/js/angular-map/lodash.min.js"></script>
 	<script type="text/javascript" src="asset/js/angular-map/angular-simple-logger.min.js"></script>
-
+	<script type="text/javascript" src="asset/js/angular-map/angular-google-maps.min.js"></script>
 	
 	<!-- Display in screens -->
 	<script type="text/javascript" src="app.module.js"></script>
@@ -48,3 +47,5 @@
 	<ng-include src="'view/templates/footer.template.html'" scope="" onload=""></ng-include>
 </body>
 </html>
+
+

@@ -1,1 +1,4 @@
-angular.module('houseDetail', []);
+angular.module('houseDetail', [
+	'uiGmapgoogle-maps',
+	'ui.bootstrap'
+]);

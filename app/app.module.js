@@ -7,4 +7,5 @@ var app = angular.module('truliavnApp', [
 	'uiGmapgoogle-maps',
 	'ui.bootstrap',
 	'ngAnimate'
+
 ]);
