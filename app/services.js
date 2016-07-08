@@ -4,7 +4,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	var user = null;
 	var userName;
 	var userId = "";
-	var host = 'http://ngocdon.me:3000';
+	var host = 'http://li1.sunkhoai.com:3000';
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
@@ -15,7 +15,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		logout: logout,
 		register: register,
 		update : update,
-		hostName: 'http://ngocdon.me:3000'
+		hostName: 'http://li1.sunkhoai.com:3000'
 	});
 
 	function isLoggedIn(){
@@ -167,7 +167,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 		deleteHouse: deleteHouse,
 	});
 
-	function addHouse(email, token, type, title, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description){
+	function addHouse(email, token, type, title, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, images, description){
 		var houseData = {
 			email: email,
 			token: token,
@@ -186,6 +186,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 			city: city,
 			district: district,
 			ward: ward,
+			images: images,
 			description: description
 		};
 		var deferred = $q.defer();

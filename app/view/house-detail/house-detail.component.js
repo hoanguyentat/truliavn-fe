@@ -109,7 +109,7 @@ angular.module('houseDetail')
 					    	latitude: latitude,
 					        longitude: longitude
 					    },
-					    zoom: 16,
+					    zoom: 8,
 					    // primaryBounds: coor_primary_marker,
 					    neighborBounds: coor_neighbor_marker
 					};

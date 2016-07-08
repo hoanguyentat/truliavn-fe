@@ -1,18 +1,26 @@
 app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API', function($scope, $rootScope, $http, API){
 	// console.log("Hehe");
 	var urlHouses = API.getHouses();
-	var urlHouseCity = API.getHousesIn('district', 12)
-	var list = this;
+	var urlHouseHaiBaTrung = API.getHousesIn('district', 11)
+	var urlHouseBaDinh = API.getHousesIn('district', 11)
+	// var $scope = this;
 	//get some new house
 	$http.get(urlHouses).then(function success(response){
-		list.allHouses = response.data.houses;
-		// console.dir(list.allHouses);
+		$scope.allHouses = response.data.houses;
+		// console.dir($scope.allHouses);
 	}, function error(response){
 		console.log(response);
 	});
-	$http.get(urlHouseCity).then(function success(response){
-		list.cityHouses = response.data.houses;
-		// console.dir(list.newPost[0]);
+	$http.get(urlHouseHaiBaTrung).then(function success(response){
+		$scope.HaiBaTrung = response.data.houses;
+		// console.dir($scope.newPost[0]);
+	}, function error(response){
+		console.log(response);
+	});
+
+	$http.get(urlHouseBaDinh).then(function success(response){
+		$scope.BaDinh = response.data.houses;
+		// console.dir($scope.newPost[0]);
 	}, function error(response){
 		console.log(response);
 	});

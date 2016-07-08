@@ -57,17 +57,28 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams' , fun
 
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
-	var listRent = this;
-	listRent.currentPage = 0;
-	listRent.pageSize = 20;
-	listRent.numberOfPages = function(){
-		// console.log(listRent.houses.length);
-		return Math.ceil(listRent.houses.length/listRent.pageSize);
-	};
-	$http.get(rentUrl).then(function(response){
-		listRent.houses = response.data.houses;
+	
+	$scope.currentPage = 0;
+	$scope.pageSize = 20;
+	$scope.maxSize = 5; //Number of pager buttons to show
 
-		angular.forEach(listRent.houses, function(val, key){
+	$scope.setPage = function (pageNo) {
+	$scope.currentPage = pageNo;
+	};
+
+	$scope.pageChanged = function() {
+	console.log('Page changed to: ' + $scope.currentPage);
+	};
+
+	$scope.setItemsPerPage = function(num) {
+	  $scope.pageSize = num;
+	  $scope.currentPage = 1; //reset to first page
+	}
+	$http.get(rentUrl).then(function(response){
+		$scope.houses = response.data.houses;
+		$scope.noOfPages = $scope.houses.length;
+
+		angular.forEach($scope.houses, function(val, key){
 			val.description = val.description.slice(0, 150) + '....';
 		});
 	});
@@ -75,16 +86,30 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 
 app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var sellUrl  = API.getHousesForSell();
-	var listSell = this;
-	listSell.currentPage = 0;
-	listSell.pageSize = 20;
-	listSell.numberOfPages = function(){
-			return Math.ceil(listSell.houses.length/listSell.pageSize);
-		};
+	//pagination for search result
+	$scope.currentPage = 0;
+	$scope.pageSize = 20;
+	$scope.maxSize = 5; //Number of pager buttons to show
+
+	$scope.setPage = function (pageNo) {
+	$scope.currentPage = pageNo;
+	};
+
+	$scope.pageChanged = function() {
+	console.log('Page changed to: ' + $scope.currentPage);
+	};
+
+	$scope.setItemsPerPage = function(num) {
+	  $scope.pageSize = num;
+	  $scope.currentPage = 1; //reset to first page
+	}
+
 	$http.get(sellUrl).then(function(response){
-		listSell.houses = response.data.houses;
-		// console.log(listSell.houses);
-		angular.forEach(listSell.houses, function(val, key){
+		$scope.houses = response.data.houses;
+
+		$scope.noOfPages = $scope.houses.length;
+		// console.log($scope.houses);
+		angular.forEach($scope.houses, function(val, key){
 				// console.log(val.description);
 			val.description = val.description.slice(0, 150) + '....';
 			// console.log(val.description);

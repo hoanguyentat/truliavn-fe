@@ -95,8 +95,7 @@ module('truliavnApp')
 	.when('/search/:searchContent', {
 		templateUrl: 'view/user/search-result.template.html',
 		controller: 'SearchController',
-		access: {restricted: false}, 
-		controllerAs: 'ctrl'
+		access: {restricted: false}
 	})	
 	.otherwise('/');
 }]);

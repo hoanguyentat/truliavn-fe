@@ -1,4 +1,4 @@
-<div ng-if="ctrl.houses">
+<div ng-if="houses">
 	<div class="container house-for">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
@@ -11,7 +11,7 @@
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
 					</div> -->
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="row filter-houses" ng-controller="SearchController">
+						<div class="row filter-houses" ng-controller="HousesFilterCtrl">
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 								<select name="district" id="input" class="form-control" required="required">
 									<option value="">Chọn tỉnh/thành phố</option>
@@ -54,7 +54,7 @@
 						</div>
 						<div class="row">
 							<ul class="houses">
-								<li ng-repeat="house in ctrl.houses | startFrom : ctrl.currentPage*ctrl.pageSize | limitTo: ctrl.pageSize" class="thumbnail row">
+								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
 									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 										<a href="#!/houses/{{::house.id}}" class="thumb">
 										<img ng-if="house.images[0]" ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
@@ -70,20 +70,22 @@
 								</li>
 							</ul>
 						</div>
-						   <button class= "btn btn-primary" ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
+<!-- 						   <button class= "btn btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
 						        Previous
 						    </button>
-						    <span class="btn btn-default"> Page {{ctrl.currentPage+1}} of {{ctrl.numberOfPages()}}</span>
-						    <button class= "btn btn-primary" ng-disabled="ctrl.currentPage >= ctrl.houses.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
+						    <span class="btn btn-default"> Page {{currentPage+1}} of {{numberOfPages()}}</span>
+						    <button class= "btn btn-primary" ng-disabled="currentPage >= houses.length/pageSize - 1" ng-click="currentPage=currentPage+1">
 						        Next
-						    </button>
+						    </button> -->
+						     <uib-pagination total-items="noOfPages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="pageSize"></uib-pagination>
+						    <!-- <uib-pagination total-items="numberOfPages()" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-link-numbers="true"></uib-pagination> -->
 					</div>		
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div ng-if="!ctrl.houses">
+<div ng-if="!houses">
 	<div class="container house-for">
 		<div class="row">
 			<center><h2>Đang tải dữ liệu...</h2></center>
