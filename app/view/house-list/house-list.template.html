@@ -11,7 +11,7 @@
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
 					</div> -->
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="row filter-houses" ng-controller="HousesFilterCtrl">
+						<div class="row filter-houses">
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 								<select name="district" id="input" class="form-control" required="required">
 									<option value="">Chọn tỉnh/thành phố</option>
@@ -19,16 +19,18 @@
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="ward" id="input" class="form-control" ng-model="districtSelected" required="required">
+								<select name="ward" id="input" class="form-control" ng-change="filterDistrictHouse()" ng-model="$parent.districtSelected" required="required">
 									<option value="">Chọn quận/huyện</option>
 									<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
 								</select>
+								{{districtSelected}}
 							</div>
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="ward" id="input" class="form-control" ng-model="wardSelected" required="required">
+								<select name="ward" id="input" class="form-control" ng-change="filterWardHouse()" ng-model="$parent.wardSelected">
 									<option value="">Chọn phường/xã</option>
-									<option ng-repeat="(key, ward) in wards | customDistrict: districtSelected" value="{{key}}">{{ward.wardName}}</option>
+									<option ng-repeat="(key, ward) in wards | customDistrict: $parent.districtSelected" value="{{key}}">{{ward.wardName}}</option>
 								</select>
+								{{wardSelected}}
 							</div>
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 								<select name="area" id="input" class="form-control" ng-model="area" required="required">
@@ -54,16 +56,19 @@
 						</div>
 						<div class="row">
 							<ul class="houses">
+								<!-- When ngModel directive is used on an element that represents a component (implemented via a directive with isolate scope), ngModel is locked into this isolate scope and in order to get out and make ngModel useful the ngModel expression has to be prefixed with $parent. -->
+								<!-- ng-change must  be placed before ng-model -->
+								<input type="text" ng-model="$parent.search" placeholder="Search here" >
 								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
 									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
-										<a href="#!/houses/{{::house.id}}" class="thumb">
-										<img ng-if="house.images[0]" ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
+										<a href="#!/houses/{{house.id}}" class="thumb">
+										<img ng-if="house.images[0]" ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" class="img img-responsive" alt="{{house.address}}" />
 										<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
 										
 										</a>
 									</div>
 									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
+										<a href="#!/houses/{{house.id}}">{{house.title}}</a>
 										<p ng-bind="house.description"></p>
 										<p style="margin-top: 70px; margin-left: 70%;"><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</p>
 									</div>

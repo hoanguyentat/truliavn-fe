@@ -74,6 +74,11 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 	  $scope.pageSize = num;
 	  $scope.currentPage = 1; //reset to first page
 	}
+
+	$scope.filterHouse = function(){
+			console.log($scope.search);
+	};
+
 	$http.get(rentUrl).then(function(response){
 		$scope.houses = response.data.houses;
 		$scope.noOfPages = $scope.houses.length;

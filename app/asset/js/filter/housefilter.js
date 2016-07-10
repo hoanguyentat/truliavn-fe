@@ -23,23 +23,40 @@ app.filter('customDistrict', function() {
   }
 });
 
+//filter houses by district, wards
 app.filter('houseDistrict', function() {
-  return function(houses, district) {
-    // console.dir(houses);
-    // console.log(district);
-    if (!houses) return houses;
-    if (!district) return houses;
-    var result = {};
-    var count = 0;
-    angular.forEach(houses, function(value, key) {
-      if (houses[key].district == district) {
-        // console.log(houses[key]);
-        result[key] = houses[key];
-        ++count;
+  return function(houses, district, ward) {
+   console.log('---------------------filter');
+   console.dir(houses);
+   console.log(district);
+   console.log('---------------------filter');
+   var result = [];
+   if (!houses) return houses;
+   if (!district) return houses;
+   else{
+      if (!ward) {
+         console.log("Khong co quan");
+         angular.forEach(houses, function(value, key) {
+            // console.log(value);
+            if (value.district == district) {
+              // console.log(houses[key]);
+               result.push(value);
+            }
+         });
+      } else {
+         console.log("Khong co quan");
+         angular.forEach(houses, function(value, key) {
+            if (value.district == district && value.ward == ward) {
+              // console.log(houses[key]);
+               result.push(value);
+            }
+         });
       }
-    });
-    // console.log(count);
-    return result;
+   }
+
+   console.log(result)
+   // console.log(count);
+   return result;
   }
 });
 
