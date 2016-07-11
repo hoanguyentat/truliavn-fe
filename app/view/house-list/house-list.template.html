@@ -4,12 +4,6 @@
 			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
 				<div class="row">
 					<center><h2>Thông tin nhà đất</h2></center>
-					<!-- <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-						<input type="search" name="" id="input" class="form-control" value="" required="required" title="" placeholder="Nhập nội dung tìm kiếm">
-					</div>
-					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>Tìm kiếm</button>
-					</div> -->
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div class="row filter-houses">
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
@@ -23,19 +17,16 @@
 									<option value="">Chọn quận/huyện</option>
 									<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
 								</select>
-								{{districtSelected}}
 							</div>
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
 								<select name="ward" id="input" class="form-control" ng-change="filterWardHouse()" ng-model="$parent.wardSelected">
 									<option value="">Chọn phường/xã</option>
 									<option ng-repeat="(key, ward) in wards | customDistrict: $parent.districtSelected" value="{{key}}">{{ward.wardName}}</option>
 								</select>
-								{{wardSelected}}
 							</div>
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="area" id="input" class="form-control" ng-model="area" required="required">
-		                    		<option value="">Chọn diện tích</option>
-		                            <option value="0">Chưa xác định</option>	                        
+								<select name="area" id="input" class="form-control" ng-change="filterAreaHouse()" ng-model="$parent.area">
+		                    		<option value="">Chọn diện tích</option>	                        
 		                            <option value="1">&lt;= 30 m2</option>	                        
 		                            <option value="2">30 - 50 m2</option>	                        
 		                            <option value="3">50 - 80 m2</option>	                        
@@ -49,8 +40,16 @@
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="price" id="input" class="form-control" required="required">
+								<select name="price" id="input" class="form-control" ng-change="filterPriceHouse()" ng-model="$parent.price">
 									<option value="">Chọn mứa giá</option>
+									<option value="1"> < 1 triệu</option>
+									<option value="2">1 - 3 triệu</option>	                        
+		                            <option value="3">3 - 5 triệu</option>	                        
+		                            <option value="4">5 - 10 triệu</option>	                        
+		                            <option value="5">10 - 40 triệu</option>	                        
+		                            <option value="6">40 - 70 triệu</option>	                        
+		                            <option value="7">70 - 100 triệu</option>
+		                            <option value="8">> 100 triệu</option>
 								</select>
 							</div>
 						</div>
@@ -58,11 +57,10 @@
 							<ul class="houses">
 								<!-- When ngModel directive is used on an element that represents a component (implemented via a directive with isolate scope), ngModel is locked into this isolate scope and in order to get out and make ngModel useful the ngModel expression has to be prefixed with $parent. -->
 								<!-- ng-change must  be placed before ng-model -->
-								<input type="text" ng-model="$parent.search" placeholder="Search here" >
 								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
 									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 										<a href="#!/houses/{{house.id}}" class="thumb">
-										<img ng-if="house.images[0]" ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" class="img img-responsive" alt="{{house.address}}" />
+										<img ng-if="house.images[0]" ng-src="{{'http://truliavn.sunkhoai.com:3000/' + house.images[0]}}" class="img img-responsive" alt="{{house.address}}" />
 										<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
 										
 										</a>
