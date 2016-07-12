@@ -1,18 +1,29 @@
-app.controller('SearchController', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService){
-
+app.controller('SearchContent', ['$scope', '$http', 'AuthService', '$rootScope', '$location', '$cookies', function($scope, $http, AuthService, $rootScope, $location, $cookies){
+	// var searchContent = $scope.SearchForm.searchContent;
 	$scope.search = function(){
-		$http.post('http://ngocdon.me:3000/api/search', {search: $scope.searchContent})
-		.then(function(res){
-			console.log(res);
-		});
+		$cookies.remove('search.content');
+		$cookies.remove('search.housefor');
+		$cookies.put('search.content', $scope.SearchForm.searchContent);
+		$cookies.put('search.housefor', $scope.SearchForm.houseFor);
+		$location.path('/search/' + $scope.SearchForm.searchContent);
 	};
+}]);
 
-	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
-			$scope.districts = response.data.districts;
+app.controller('SearchController', ['$scope', '$http', 'AuthService', '$rootScope', '$location', '$cookies', function($scope, $http, AuthService, $rootScope, $location, $cookies){
+	// var list = this
+	$scope.currentPage = 0;
+	$scope.pageSize = 20;
+	$http.post(AuthService.hostName + '/api/search', {search: $cookies.get('search.content'), housefor: $cookies.get('search.housefor')})
+	.then(function(res){
+		$scope.houses = res.data.houses;
+		// console.log(res);
+		$scope.numberOfPages = function(){
+			return Math.ceil($scope.houses.length/$scope.pageSize); 
+		};
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
 		});
-	var url2 = AuthService.hostName + '/api/wards';
-	// console.log(url2);
-	$http.get(url2).then(function success(response){
-		$scope.wards = response.data.wards;
+		$cookies.remove('search.content');
+		$cookies.remove('search.housefor');
 	});
 }]);

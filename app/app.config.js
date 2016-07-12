@@ -38,6 +38,13 @@ module('truliavnApp')
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
+	.when('/manage-post', {
+		templateUrl: 'view/user/manage-post.template.html',
+		controller: 'ManagePostCtrl',
+		controllerAs: 'ctrl',
+		access: {restricted: true}
+	})
+	
 	// house feature
 	.when('/houses', {
 		template: '<house-list></house-list>',
@@ -85,6 +92,11 @@ module('truliavnApp')
 		template: 'Trang chỉnh sửa thông tin cá nhân',
 		access: {restricted: true}
 	})
+	.when('/search/:searchContent', {
+		templateUrl: 'view/user/search-result.template.html',
+		controller: 'SearchController',
+		access: {restricted: false}
+	})	
 	.otherwise('/');
 }]);
 

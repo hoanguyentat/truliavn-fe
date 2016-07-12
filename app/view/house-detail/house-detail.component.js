@@ -36,8 +36,8 @@ angular.module('houseDetail')
 			$http.get(API.getHousesNearby(self.house.city, self.house.district,self.house.ward)).then(
 				function (near){
 					neighbor = near.data.houses;
-					console.log('near.data.house');
-					console.log(near.data.houses);
+					// console.log('near.data.house');
+					// console.log(near.data.houses);
 					var log =[];
 					for(var i in neighbor){
 						if(neighbor[i].id == $routeParams.houseId){
@@ -54,7 +54,6 @@ angular.module('houseDetail')
 				 		+ position 
 				 		+ "&destinations="+ coor_neighbor
 				 		+ "&key=AIzaSyDLV4DIm4y3o6Bd7GRR725pmocPgzE3zwE"
-					console.log(url);
 
 					coor_neighbor = coor_neighbor.substring(1);
 					$http.post(API.getDistanceNearBy(), {origin : position, 
@@ -69,7 +68,7 @@ angular.module('houseDetail')
 								console.log('i = ' + i);
 								neighbor[i].distance = res[i].distance.text;
 							}
-
+							console.log(self.neighbor);
 							self.neighbor = neighbor;
 						}
 					})
@@ -111,7 +110,7 @@ angular.module('houseDetail')
 					    	latitude: latitude,
 					        longitude: longitude
 					    },
-					    zoom: 12,
+					    zoom: 8,
 					    // primaryBounds: coor_primary_marker,
 					    neighborBounds: coor_neighbor_marker
 					};
@@ -172,13 +171,14 @@ angular.module('houseDetail')
 		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_hos.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
+								console.log(data.results);
 								var res = data.results.rows[0].elements;
 								for(var i in res){
 									hos[i].distance = res[i].distance.text;
 								}
 								hos.type = "hospital";
 								hos.title = "Bệnh viện";
-								console.log(hos);
+								// console.log(hos);
 								self.hospital = hos;
 							}
 						})
@@ -261,9 +261,9 @@ angular.module('houseDetail')
 					school_list.push(seniors);
 					self.school_list = school_list;
 
-					console.log('primary');
-					console.log(primaries);
-					console.log('primary');
+					// console.log('primary');
+					// console.log(primaries);
+					// console.log('primary');
 					var coor_primary_marker = [];
 					for(var i in primaries){
 						var lat = primaries[i].geometry.location.lat;
@@ -419,16 +419,7 @@ angular.module('houseDetail')
 			        };
 
 				}
-			})
-			
-
-			// console.log('primary');
-			// console.log(primaries);
-			// console.log('primary');
-
-
-
-
+			});
 		});
 	},
 	templateUrl: 'view/house-detail/house-detail.template.html',

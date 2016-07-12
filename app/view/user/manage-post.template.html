@@ -1,0 +1,49 @@
+<div ng-if="ctrl.houses">
+	<div class="container house-for">
+		<div class="row">
+			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+				<div class="row">
+					<center><h2>Các bài đã đăng</h2></center>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="row">
+							<ul class="houses">
+								<li ng-repeat="house in ctrl.houses | startFrom : ctrl.currentPage*ctrl.pageSize | limitTo: ctrl.pageSize" class="thumbnail row">
+									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+										<a href="#!/houses/{{::house.id}}" class="thumb">
+										<img ng-if="house.images[0]" ng-src="{{house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
+										<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
+										
+										</a>
+									</div>
+									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+										<div>
+											<a class="btn btn-info" href="#!/{{::house.id}}/edit" role="button">Chỉnh sửa bài đăng</a>
+											<a class="btn btn-danger" href="" ng-click="deleteHouse(::house.id)" role="button">Xóa bài đăng</a>
+										</div>
+										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
+										<p ng-bind="house.description"></p>
+										<p style="margin-top: 70px; margin-left: 70%;"><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+						   <button class= "btn btn-primary" ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
+						        Previous
+						    </button>
+						    <span class="btn btn-default"> Page {{ctrl.currentPage+1}} of {{ctrl.numberOfPages()}}</span>
+						    <button class= "btn btn-primary" ng-disabled="ctrl.currentPage >= ctrl.houses.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
+						        Next
+						    </button>
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-if="!ctrl.houses">
+	<div class="container house-for">
+		<div class="row">
+			<center><h2>Đang tải dữ liệu...</h2></center>
+		</div>
+	</div>
+</div>

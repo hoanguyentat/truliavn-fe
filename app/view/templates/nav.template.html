@@ -22,11 +22,11 @@
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
-				<li ng-controller="SearchController">
+				<li ng-controller="SearchContent">
 					<!-- <div ng-controller="SearchController"/> -->
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Search" ng-model="searchContent">
+								<input type="text" class="form-control" placeholder="Search" ng-model="SearchForm.searchContent">
 							</div>
 							<button type="submit" class="btn btn-default" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
 						</form>
@@ -36,8 +36,8 @@
 					<div class="dropdown">
 					  <p class="dropbtn">{{userName}}<b class="caret"></b></p>
 					  <div class="dropdown-content">
-					    <a href="#">Thông tin cá nhân</a>
-					    <a href="#">Các bài đã đăng</a>
+					    <a href="#!/update">Thông tin cá nhân</a>
+					    <a href="#!/manage-post">Các bài đã đăng</a>
 					    <a href="#!/addhouse">Thêm bài đăng</a>
 					    <a id="logout" ng-click="logout()" href="">Logout</a>
 					  </div>
