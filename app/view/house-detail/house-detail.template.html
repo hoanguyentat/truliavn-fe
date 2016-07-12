@@ -2,30 +2,43 @@
 	<div class="container house-for">
 		<div class="row" style="padding-bottom: 20px;">
 			<center  style="padding-bottom: 20px;">
-				<h2><strong>Thông tin chi tiết căn hộ</strong></h2>
+				<h2 class="title"><strong>Thông tin chi tiết căn hộ</strong></h2>
 			</center>
-			<div class="col-xs-12 col-sm-4">
-					<!-- <h3>Liên hệ để biết thêm thông tin</h3> -->
+			<div class="col-xs-12 col-sm-4" style="padding-right : 0px;">
+				<h3 class="title">Liên hệ để biết thêm thông tin</h3>
 				<center>
 					<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail" alt="">
 				</center>
 				<ul class="list-group">
-					<li class="list-group-item">Tên chủ nhà: {{ctrl.house.ownerInfo.fullname}}</li>
-					<li class="list-group-item">SDT: {{ctrl.house.ownerInfo.phone}}
+					<li class="list-group-item list-group-item-info">Tên chủ nhà: {{ctrl.house.ownerInfo.fullname}}</li>
+					<li class="list-group-item list-group-item-info">SDT: {{ctrl.house.ownerInfo.phone}}
 						<span>
-							<a href="tel:{{ctrl.house.ownerInfo.phone}}" class="right-span">
-								<button class="btn btn-danger">Gọi điện</button>
-							</a>
+
+						</span>
+
+					</li>
+					<li class="list-group-item list-group-item-info">Email: {{ctrl.house.ownerInfo.email}}
+						<span>
+	
 						</span>
 					</li>
-					<li class="list-group-item">Email: {{ctrl.house.ownerInfo.email}}
-						<span>
-							<a href="mailto:{{ctrl.house.ownerInfo.email}}" target="_blank" class="right-span">
-								<button class="btn btn-danger">Gửi Mail</button>
-							</a>
-						</span>
+					<li class="list-group-item list-group-item-info">Địa chỉ: {{ctrl.house.ownerInfo.address}}</li>
+					<li class="list-group-item list-group-item-info">
+						<div class="row">
+							<div class="col-sm-6">
+								<a href="tel:{{ctrl.house.ownerInfo.phone}}" target="_blank" class=" text-center"> 
+									<button class="btn btn-danger btn-contact">Gọi điện</button>
+								</a>
+							</div>
+							<div class="col-sm-6">
+								<center>
+									<a href="mailto:{{ctrl.house.ownerInfo.email}}" target="_blank" class="text-center">
+										<button class="btn btn-danger btn-contact">Gửi Mail</button>
+									</a>
+								</center>
+							</div>
+						</div>
 					</li>
-					<li class="list-group-item">Địa chỉ: {{ctrl.house.ownerInfo.address}}</li>
 				</ul>
 			</div>
 <!-- 				<h3>Liên hệ mô giới</h3>
@@ -78,29 +91,29 @@
 		</div>
 	</div>
 
-	<div>
-		<div ng-show="choosen == 'primary'">
-			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.primaryBounds">
-			    <ui-gmap-markers fit="true" models="primaryMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
-			    </ui-gmap-markers>
-			</ui-gmap-google-map>
-		</div>
-		<div ng-show="choosen == 'junior'">
-			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.juniorBounds">
-				<ui-gmap-markers fit="true" models="juniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
-				</ui-gmap-markers>
-			</ui-gmap-google-map>
-		</div>
-		<div ng-show="choosen == 'senior'">
-			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.seniorBounds">
-				<ui-gmap-markers fit="true" models="seniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
-				</ui-gmap-markers>
-			</ui-gmap-google-map>
-		</div>
+<!-- 	<div>
+	<div ng-show="choosen == 'primary'">
+		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.primaryBounds">
+		    <ui-gmap-markers fit="true" models="primaryMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
+		    </ui-gmap-markers>
+		</ui-gmap-google-map>
 	</div>
+	<div ng-show="choosen == 'junior'">
+		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.juniorBounds">
+			<ui-gmap-markers fit="true" models="juniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
+			</ui-gmap-markers>
+		</ui-gmap-google-map>
+	</div>
+	<div ng-show="choosen == 'senior'">
+		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.seniorBounds">
+			<ui-gmap-markers fit="true" models="seniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
+			</ui-gmap-markers>
+		</ui-gmap-google-map>
+	</div>
+</div> -->
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 		<div class="container homeDetail" >
-			<div class="row"><center><h1>Mô tả ngôi nhà</h1></center></div>
+			<div class="row"><center><h1 class="title">Mô tả ngôi nhà</h1></center></div>
 			<div class="row">
 				<div class="col-sm-4 col-md-3 col-xs-12">
 					<h3>Chi tiết ngôi nhà</h3>

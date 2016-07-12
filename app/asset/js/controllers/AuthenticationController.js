@@ -56,7 +56,7 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 		console.log(res.data.user);
 	})
 	$scope.update = function(){
-		console.log(userID + "hehe");
+		console.log('userid : ' + userID);
 		AuthService.update( userID,
 							$scope.updateForm.fullName, 
 							$scope.updateForm.phone, 
@@ -67,12 +67,13 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 		.then(function(){
 			$location.path("#!/");
 			$scope.updateForm = {};
-			console.log("dk roi");
+			console.log("update success");
 		})
 		.catch(function(){
-			$scope.errorMessage = "Wrong password";
+			$scope.error = true;
+			$scope.errorMessage = "Bạn đã nhập sai mật khẩu. Yêu cầu nhập lại";
 			$scope.updateForm = {};
-			console.log("eo dk");
+			console.log("update fail");
 		})
 	}
 }]);
