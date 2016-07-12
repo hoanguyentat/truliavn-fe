@@ -27,13 +27,13 @@ module('truliavnApp')
 		access: {restricted: false}
 	})
 	.when('/for-rent', {
-		templateUrl: 'view/house-list/house-list.template.html',
+		templateUrl: 'view/houses/house-for-rent.template.html',
 		controller: 'HouseForRentCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
 	.when('/for-sell', {
-		templateUrl: 'view/house-list/house-list.template.html',
+		templateUrl: 'view/houses/house-for-sell.template.html',
 		controller: 'HouseForSellCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
