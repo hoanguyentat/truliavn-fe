@@ -52,7 +52,7 @@ angular.module('houseDetail')
 					}
 					var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins="
 				 		+ position 
-				 		+ "&destinations="+ coor_neighbor;
+				 		+ "&destinations="+ coor_neighbor
 				 		+ "&key=AIzaSyDLV4DIm4y3o6Bd7GRR725pmocPgzE3zwE"
 					console.log(url);
 
@@ -61,11 +61,12 @@ angular.module('houseDetail')
 														destination : coor_neighbor})
 					.success(function(data, status){
 						if(status == 200 && data.status == 'success'){
-							var res = data.results;
+							var res = data.results.rows[0].elements;
 							console.log('res');
 							console.log(res);
 							console.log('res');
 							for(var i in res){
+								console.log('i = ' + i);
 								neighbor[i].distance = res[i].distance.text;
 							}
 
@@ -77,8 +78,8 @@ angular.module('houseDetail')
 					})
 
 					var coor_neighbor_marker = [];
-					console.log('neighbor');
-					console.log(neighbor);
+					// console.log('neighbor');
+					// console.log(neighbor);
 					for(var i in neighbor){
 							var lat = neighbor[i].lat;
 							var lon = neighbor[i].lon;
@@ -101,8 +102,8 @@ angular.module('houseDetail')
 							coor_neighbor_marker.push(ret);
 					}
 
-					console.log('marker');
-					console.log(coor_neighbor_marker);
+					// console.log('marker');
+					// console.log(coor_neighbor_marker);
 
 					//marker all your neighborhood 
 					$scope.map = {
@@ -125,7 +126,7 @@ angular.module('houseDetail')
 				    }, function() {
 				        var neighborMarkers = [];
 				        for (var i = 0; i < $scope.map.neighborBounds.length; i++) {
-				          console.log('i = ' + i);
+				          // console.log('i = ' + i);
 				        	neighborMarkers.push($scope.map.neighborBounds[i])
 				        }
 

@@ -101,7 +101,7 @@
 					<div ng-repeat='i in ctrl.school_list'>
 						<div class="col-xs-12">
 							<h3>{{i.title}}
-								<span class="btn_collapse glyphicon glyphicon-menu-hamburger span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-click="choosen = 'i.type'">		
+								<span class="btn_collapse glyphicon glyphicon-menu-hamburger span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-click="choosen = '{{i.type}}'">		
 								</span>
 							</h3>
 							<div id={{i.type}} class="collapse">
@@ -126,13 +126,10 @@
 	</div>
 	<div class="container">
 		<div class="col-xs-12">
-		  	<div >
 		  	  	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.neighborBounds">
   				    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
   				    </ui-gmap-markers>
   				</ui-gmap-google-map>
-
-		  	</div>
 		    <table class="table table-hover">
 				<thead>
 					<tr class='header'>
