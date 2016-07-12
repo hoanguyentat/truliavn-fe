@@ -16,8 +16,7 @@ angular.module('houseDetail')
 			var longitude = self.house.lon;
 			var position = latitude + ',' + longitude;
 
-			var neighbor = []
-				,coor_neighbor = "";
+
 			var primaries = []
 				,juniors = []
 				,seniors = [],
@@ -35,9 +34,11 @@ angular.module('houseDetail')
 		    //find the neighborhood near your house
 			$http.get(API.getHousesNearby(self.house.city, self.house.district,self.house.ward)).then(
 				function (near){
+					var neighbor = []
+						,coor_neighbor = "";
 					neighbor = near.data.houses;
-					// console.log('near.data.house');
-					// console.log(near.data.houses);
+					console.log('near.data.house');
+					console.log(near.data.houses);
 					var log =[];
 					for(var i in neighbor){
 						if(neighbor[i].id == $routeParams.houseId){
@@ -65,10 +66,10 @@ angular.module('houseDetail')
 							console.log(res);
 							console.log('res');
 							for(var i in res){
-								console.log('i = ' + i);
+								// console.log('i = ' + i);
 								neighbor[i].distance = res[i].distance.text;
 							}
-							console.log(self.neighbor);
+							console.log(neighbor);
 							self.neighbor = neighbor;
 						}
 					})
@@ -86,10 +87,9 @@ angular.module('houseDetail')
 							var content = '<div><table class="table table-map"><tr><td>Địa chỉ</td>'
 											+'<td>' + neighbor[i].address+'</td>'
 											+'</tr><tr><td>Giá</td>'
-											+'<td>' + neighbor[i].price+' tỉ đô'+'</td>'
+											+'<td>' + neighbor[i].price+' triệu đồng'+'</td>'
 											+'</tr></table></div>';
 							var ret = {
-								id : parseInt(i),
 								latitude : lat,
 								longitude : lon,
 								title : neighbor[i].address,
@@ -97,12 +97,18 @@ angular.module('houseDetail')
 								content : content,
 								options : {labelClass : 'marker_labels', labelContent : ''},
 								icon : "http://maps.google.com/mapfiles/kml/paddle/grn-stars.png"
+								// id : parseInt(i)
 							}
+							if(!ret["idKey"]){
+								ret['id'] = parseInt(i);
+							}
+							// ret["idKey"] = parseInt(i);
 							coor_neighbor_marker.push(ret);
+							ret = {};
 					}
 
-					// console.log('marker');
-					// console.log(coor_neighbor_marker);
+					console.log('marker');
+					console.log(coor_neighbor_marker);
 
 					//marker all your neighborhood 
 					$scope.map = {
@@ -112,7 +118,7 @@ angular.module('houseDetail')
 					    },
 					    zoom: 8,
 					    // primaryBounds: coor_primary_marker,
-					    neighborBounds: coor_neighbor_marker
+					    bounds: coor_neighbor_marker
 					};
 				    $scope.options = {
 				    	scrollwheel: false
@@ -121,12 +127,12 @@ angular.module('houseDetail')
 				    $scope.neighborMarkers = [];
 				    // Get the bounds from the map once it's loaded
 				    $scope.$watch(function() {
-				    	return $scope.map.neighborBounds;
+				    	return $scope.map.bounds;
 				    }, function() {
 				        var neighborMarkers = [];
-				        for (var i = 0; i < $scope.map.neighborBounds.length; i++) {
+				        for (var i = 0; i < $scope.map.bounds.length; i++) {
 				          // console.log('i = ' + i);
-				        	neighborMarkers.push($scope.map.neighborBounds[i])
+				        	neighborMarkers.push($scope.map.bounds[i])
 				        }
 
 				        $scope.neighborMarkers = neighborMarkers;
@@ -216,7 +222,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_primary.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
-								var res = data.results.rows.elements;
+								var res = data.results.rows[0].elements;
 								for(var i in res){
 									primaries[i].distance = res[i].distance.text;
 								}
@@ -230,7 +236,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_junior.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
-								var res = data.results.rows.elements;
+								var res = data.results.rows[0].elements;
 								for(var i in res){
 									juniors[i].distance = res[i].distance.text;
 								}
@@ -245,7 +251,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_senior.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
-								var res = data.results.rows.elements;
+								var res = data.results.rows[0].elements;
 								for(var i in res){
 									seniors[i].distance = res[i].distance.text;
 								}
@@ -260,11 +266,13 @@ angular.module('houseDetail')
 					school_list.push(juniors);
 					school_list.push(seniors);
 					self.school_list = school_list;
+					console.log('school_list');
+					console.log(school_list);
 
 					// console.log('primary');
 					// console.log(primaries);
 					// console.log('primary');
-					var coor_primary_marker = [];
+					/*var coor_primary_marker = [];
 					for(var i in primaries){
 						var lat = primaries[i].geometry.location.lat;
 						var lon = primaries[i].geometry.location.lng;
@@ -417,7 +425,7 @@ angular.module('houseDetail')
 			               $scope.$apply();
 			            }
 			        };
-
+*/
 				}
 			});
 		});

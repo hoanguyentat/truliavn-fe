@@ -1,20 +1,34 @@
 <div ng-if="ctrl.status == 'success'">
 	<div class="container house-for">
 		<div class="row" style="padding-bottom: 20px;">
-		<center  style="padding-bottom: 20px;"><h2><strong>Thông tin chi tiết căn hộ</strong></h2></center>
+			<center  style="padding-bottom: 20px;">
+				<h2><strong>Thông tin chi tiết căn hộ</strong></h2>
+			</center>
 			<div class="col-xs-12 col-sm-4">
 					<!-- <h3>Liên hệ để biết thêm thông tin</h3> -->
-				<div>
-					<div class="row">
-						<center><img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail" alt=""></center>
-					</div>
-					<ul class="list-group">
-						<li class="list-group-item">Tên chủ nhà: {{ctrl.house.ownerInfo.fullname}}</li>
-						<li class="list-group-item">SDT: {{ctrl.house.ownerInfo.phone}}</li>
-						<li class="list-group-item">Địa chỉ: {{ctrl.house.ownerInfo.address}}</li>
-					</ul>
-				</div>
-				<h3>Liên hệ mô giới</h3>
+				<center>
+					<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail" alt="">
+				</center>
+				<ul class="list-group">
+					<li class="list-group-item">Tên chủ nhà: {{ctrl.house.ownerInfo.fullname}}</li>
+					<li class="list-group-item">SDT: {{ctrl.house.ownerInfo.phone}}
+						<span>
+							<a href="tel:{{ctrl.house.ownerInfo.phone}}" class="right-span">
+								<button class="btn btn-danger">Gọi điện</button>
+							</a>
+						</span>
+					</li>
+					<li class="list-group-item">Email: {{ctrl.house.ownerInfo.email}}
+						<span>
+							<a href="mailto:{{ctrl.house.ownerInfo.email}}" target="_blank" class="right-span">
+								<button class="btn btn-danger">Gửi Mail</button>
+							</a>
+						</span>
+					</li>
+					<li class="list-group-item">Địa chỉ: {{ctrl.house.ownerInfo.address}}</li>
+				</ul>
+			</div>
+<!-- 				<h3>Liên hệ mô giới</h3>
 		        <form class="form" name="contactForm" ng-submit='sendEmail()'>
 		            <div class="form-group">
 		                <input type="text" class="form-control" name="name" placeholder="Your Name" ng-model="contactName" ng-required>
@@ -29,11 +43,9 @@
 		            <div>
 		                <button type="submit" class="btn btn-primary">Gửi</button>
 		            </div>
-		    	</form>
-
-			</div>
+		    	</form> -->
 				
-			<div class=" col-xs-12 col-sm-8">
+			<div class="col-xs-12 col-sm-8">
 
 				<div ng-if="ctrl.house.images[0]" >
 				    <uib-carousel active="active" interval="3000" no-wrap="false">
@@ -46,7 +58,7 @@
 				<img ng-if="!ctrl.house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img-unknown">
 			</div>
 
-			<div class="col-xs-12 col-sm-8">
+			<div class="col-xs-12 col-sm-offset-4 col-sm-8">
 
 				<div class="col-xs-12">
 					<div class="general_info"> 
@@ -126,10 +138,10 @@
 	</div>
 	<div class="container">
 		<div class="col-xs-12">
-		  	  	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.neighborBounds">
-  				    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
-  				    </ui-gmap-markers>
-  				</ui-gmap-google-map>
+	  	  	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+				    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
+				    </ui-gmap-markers>
+				</ui-gmap-google-map>
 		    <table class="table table-hover">
 				<thead>
 					<tr class='header'>
