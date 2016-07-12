@@ -25,14 +25,11 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 }]);
 
 app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', function($scope, AuthService, $http, HouseService, $location, $routeParams ){
-	// console.log(AuthService.getUserToken(), AuthService.getUserEmail());
 
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
-		// console.log($scope.districts);
 	});
 	var url2 = AuthService.hostName + '/api/wards';
-	// console.log(url2);
 	$http.get(url2).then(function success(response){
 		$scope.wards = response.data.wards;
 	});
@@ -41,7 +38,7 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 		$scope.disabled = true;
 		HouseService.addHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams)
 		.then(function(){
-			console.log("Them nha thành công");
+			console.log("Thêm nhà thành công");
 			$location.path('/houses');
 		})
 		.catch(function(){
@@ -49,10 +46,18 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 		});
 	}
 }]);
-app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams' , function($scope, AuthService, $routeParams){
-	$scope.deletaHouse = function(id){
-		
-	};
+app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$http', '$cookies', '$location' , function($scope, AuthService, $routeParams, $http, $cookies, $location){
+	var email = $cookies.get('user.email');
+	var token = $cookies.get('user.token');
+	var houseId = $routeParams;
+	$http.post(AuthService.hostName +'/api/house/delete', {email: email, token: token, houseId: houseId})
+		.then(function(response){
+			console.log("Xoa nha thanh cong");
+			$location.path('#!/manage-post');
+		}, function(){
+			console.log('xóa nhà không thành công');
+			$location.path('#!/manage-post');
+		});
 }]);
 
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){

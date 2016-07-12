@@ -1,14 +1,22 @@
-app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http', function($scope, API, $cookies, $http){
+app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http','HouseService','$location', function($scope, API, $cookies, $http, HouseService, $location){
 	var urlPost = API.getUserPost($cookies.get('user.id'));
-	var listPost = this;
-	listPost.currentPage = 0;
-	listPost.pageSize = 20;
+	$scope.currentPage = 0;
+	$scope.pageSize = 20;
 	console.log(urlPost);
 	$http.get(urlPost).then(function(res){
-		listPost.houses = res.data.houses;
-		console.log(listPost.houses);
-		listPost.numberOfPages = function(){
-			return Math.ceil(listPost.houses.length/listPost.pageSize); 
+		$scope.houses = res.data.houses;
+		console.log($scope.houses);
+		$scope.numberOfPages = function(){
+			return Math.ceil($scope.houses.length/$scope.pageSize); 
 		};
 	});
+
+	$scope.deleteHouse = function(id){
+		HouseService.deleteHouse($cookies.get('user.email'), $cookies.get('user.token'), id)
+		.then(function(){
+			$location.path('/manage-post');
+		}, function(){
+			$location.path('/manage-post');
+		});
+	};
 }]);

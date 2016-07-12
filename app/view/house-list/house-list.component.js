@@ -4,7 +4,7 @@ angular.module('houseList')
 	controller:['$http', 'AuthService', 'API', '$scope', '$filter', function($http, AuthService, API, $scope, $filter){
 
 		var url = API.getHouses();
-		$scope.noOfPages = 10;
+		// $scope.noOfPages = 10;
 		$scope.search = "";
 		$scope.currentPage = 0;
 		$scope.pageSize = 20;

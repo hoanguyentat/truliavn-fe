@@ -4,7 +4,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	var user = null;
 	var userName;
 	var userId = "";
-	var host = 'http://localhost:3000';
+	var host = 'http://ngocdon.me:3000';
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
@@ -15,7 +15,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		logout: logout,
 		register: register,
 		update : update,
-		hostName: 'http://localhost:3000'
+		hostName: 'http://ngocdon.me:3000'
 	});
 
 	function isLoggedIn(){
@@ -243,7 +243,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 		return deferred.promise;
 	}
 
-	function deleteHouse(email, houseId, token){
+	function deleteHouse(email, token, houseId){
 		var deferred = $q.defer();
 
 		$http.post(host +'/api/house/delete', {email: email, token: token, houseId: houseId})
@@ -251,6 +251,12 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 			console.log("Xoa nha thanh cong");
 			deferred.resolve();
 		})
+		.error(function(data){
+			console.log("Xoa nha khong thanh cong");
+			deferred.reject();
+		});
+
+		return deferred.promise;
 	}
 }]);
 
