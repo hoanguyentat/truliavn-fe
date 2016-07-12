@@ -92,7 +92,7 @@ module('truliavnApp')
 		controller: 'SearchController',
 		access: {restricted: false}
 	})
-	.when('/:content', {
+	.when('/filter/:content', {
 		templateUrl:'view/user/house-filter.template.html'
 	})
 	.otherwise('/');

@@ -16,6 +16,6 @@ app.controller('HousesFilterCtrl', ['$scope', '$http', 'AuthService', '$cookies'
 		$cookies.put('filter.districtSelected', $scope.districtSelected);
 		$cookies.put('filter.area', $scope.area);
 		$cookies.put('filter.price', $scope.price);
-		$location.path('/houses-in-' + $scope.districtSelected);
+		$location.path('/filter/houses-in-' + $scope.districtSelected);
 	};
 }]);
