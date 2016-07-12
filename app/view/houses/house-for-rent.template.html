@@ -41,8 +41,16 @@
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="price" id="input" class="form-control" required="required">
+								<select name="price" id="input" class="form-control" ng-change="filterPriceHouse()" ng-model="$parent.price">
 									<option value="">Chọn mứa giá</option>
+									<option value="1"> < 1 triệu</option>
+									<option value="2">1 - 3 triệu</option>	                        
+		                            <option value="3">3 - 5 triệu</option>	                        
+		                            <option value="4">5 - 10 triệu</option>	                        
+		                            <option value="5">10 - 40 triệu</option>	                        
+		                            <option value="6">40 - 70 triệu</option>	                        
+		                            <option value="7">70 - 100 triệu</option>
+		                            <option value="8">> 100 triệu</option>
 								</select>
 							</div>
 						</div>

@@ -1,4 +1,4 @@
-<div ng-if="ctrl.houses">
+<div ng-if="houses">
 	<div class="container house-for">
 		<div class="row">
 			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
@@ -7,7 +7,7 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div class="row">
 							<ul class="houses">
-								<li ng-repeat="house in ctrl.houses | startFrom : ctrl.currentPage*ctrl.pageSize | limitTo: ctrl.pageSize" class="thumbnail row">
+								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
 									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 										<a href="#!/houses/{{::house.id}}" class="thumb">
 										<img ng-if="house.images[0]" ng-src="{{house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
@@ -18,7 +18,7 @@
 									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 										<div>
 											<a class="btn btn-info" href="#!/{{::house.id}}/edit" role="button">Chỉnh sửa bài đăng</a>
-											<a class="btn btn-danger" href="" ng-click="deleteHouse(::house.id)" role="button">Xóa bài đăng</a>
+											<a class="btn btn-danger" href="#!/{{::house.id}}/delete" ng-click="deleteHouse(house.id)" role="button">Xóa bài đăng</a>
 										</div>
 										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
 										<p ng-bind="house.description"></p>
@@ -27,11 +27,11 @@
 								</li>
 							</ul>
 						</div>
-						   <button class= "btn btn-primary" ng-disabled="ctrl.currentPage == 0" ng-click="ctrl.currentPage=ctrl.currentPage-1">
+						   <button class= "btn btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
 						        Previous
 						    </button>
-						    <span class="btn btn-default"> Page {{ctrl.currentPage+1}} of {{ctrl.numberOfPages()}}</span>
-						    <button class= "btn btn-primary" ng-disabled="ctrl.currentPage >= ctrl.houses.length/ctrl.pageSize - 1" ng-click="ctrl.currentPage=ctrl.currentPage+1">
+						    <span class="btn btn-default"> Page {{currentPage+1}} of {{numberOfPages()}}</span>
+						    <button class= "btn btn-primary" ng-disabled="currentPage >= houses.length/pageSize - 1" ng-click="currentPage=currentPage+1">
 						        Next
 						    </button>
 					</div>		
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 </div>
-<div ng-if="!ctrl.houses">
+<div ng-if="!houses">
 	<div class="container house-for">
 		<div class="row">
 			<center><h2>Đang tải dữ liệu...</h2></center>

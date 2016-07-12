@@ -91,7 +91,9 @@ app.filter('houseDistrict', function() {
       } else {
          angular.forEach(houses, function(value, key) {
             if (value.district == district && value.ward == ward) {
-              // console.log(houses[key]);
+               console.log("------ward------");
+              console.log(houses[key]);
+              console.log("------ward------");
                result.push(value);
             }
          });

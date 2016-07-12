@@ -18,14 +18,6 @@ module('truliavnApp')
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
-	.when('/houses', {
-		template: '<house-list></house-list>',
-		access: {restricted: false}
-	})
-	.when('/houses/:houseId', {
-		template: '<house-detail></house-detail>',
-		access: {restricted: false}
-	})
 	.when('/for-rent', {
 		templateUrl: 'view/houses/house-for-rent.template.html',
 		controller: 'HouseForRentCtrl',
@@ -41,13 +33,16 @@ module('truliavnApp')
 	.when('/manage-post', {
 		templateUrl: 'view/user/manage-post.template.html',
 		controller: 'ManagePostCtrl',
-		controllerAs: 'ctrl',
 		access: {restricted: true}
 	})
 	
 	// house feature
 	.when('/houses', {
 		template: '<house-list></house-list>',
+		access: {restricted: false}
+	})
+	.when('/houses/:houseId', {
+		template: '<house-detail></house-detail>',
 		access: {restricted: false}
 	})
 	.when('/addhouse', {
@@ -96,7 +91,10 @@ module('truliavnApp')
 		templateUrl: 'view/user/search-result.template.html',
 		controller: 'SearchController',
 		access: {restricted: false}
-	})	
+	})
+	.when('/filter/:content', {
+		templateUrl:'view/user/house-filter.template.html'
+	})
 	.otherwise('/');
 }]);
 
