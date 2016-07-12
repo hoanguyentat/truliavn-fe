@@ -127,6 +127,7 @@ angular.module('matchPassword', [])
         var firstPassword = '#' + attrs.pwCheck;
         elem.add(firstPassword).on('keyup', function () {
           scope.$apply(function () {
+          	console.log($(firstPassword).val());
             var v = elem.val()===$(firstPassword).val();
             console.log(v);
             ctrl.$setValidity('pwmatch', v);

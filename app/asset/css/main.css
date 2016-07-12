@@ -17,7 +17,12 @@ body{
 	border-radius: 10px;
 	padding: 10px;
 }
-
+.btn-contact{
+	width: 100%;
+}
+.list-group-item{
+	font-size: 18px;
+}
 html, body {
 	padding: 0;
 	margin: 0;
@@ -71,12 +76,6 @@ ul.seller{
 	float: left;
 }
 
-.contact{
-	position: absolute;
-	background: #ccf;
-	min-height:700px;
-}
-
 .filter-houses{
 	padding-top: 20px;
 }
@@ -125,7 +124,9 @@ tr.header{
 .homeDetail{
 	color: #002699;
 }
-
+.title {
+	color : green;
+}
 
 .angular-google-map-container { height: 500px; }
 
@@ -136,7 +137,7 @@ tr.header{
 
 .carousel-inner > .item > .img-carousel,
 .img-unknown{
-	width: 100%;
+	/*width: 100%;*/
 	height: 500px;
 }
 

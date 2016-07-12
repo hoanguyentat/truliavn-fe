@@ -87,26 +87,52 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 	function update(id,fullname, phone, address, oldPassword, newPassword, repeatPassword){
 		var deferred = $q.defer();
+		console.log('newpass : ' + newPassword);
+		console.log('repeatpass : ' + repeatPassword);
 
-		$http.post(host +'/api/user/edit', {id : id,
-													fullname : fullname, 
-													phone : phone, 
-													address : address,
-													oldPassword : oldPassword,
-													newPassword : newPassword,
-													repeatPassword : repeatPassword})
-		.success(function(data, status){
-			if(status == 200 && data.status == 'success'){
-				deferred.resolve();
-			}
-			else {
+		if(typeof(repeatPassword) == undefined || typeof(newPassword) == undefined){
+			$http.post(host +'/api/user/edit', {userId : id,
+											fullname : fullname, 
+											phone : phone, 
+											address : address,
+											oldPassword : oldPassword})
+			.success(function(data, status){
+				if(status == 200 && data.status == 'success'){
+					deferred.resolve();
+				}
+				else {
+					deferred.reject();
+				}
+			})
+			.error(function(data){
 				deferred.reject();
-			}
-		})
-		.error(function(data){
-			deferred.reject();
-		});
-		return deferred.promise;
+			});
+			console.log('promise');
+			console.log(deferred.promise);
+			return deferred.promise;
+		}
+		else {
+
+			$http.post(host +'/api/user/edit', {userId : id,
+												fullname : fullname, 
+												phone : phone, 
+												address : address,
+												oldPassword : oldPassword,
+												newPassword : newPassword,
+												repeatPassword : repeatPassword})
+			.success(function(data, status){
+				if(status == 200 && data.status == 'success'){
+					deferred.resolve();
+				}
+				else {
+					deferred.reject();
+				}
+			})
+			.error(function(data){
+				deferred.reject();
+			});
+			return deferred.promise;
+		}
 	}
 	function login(email, password){
 		var deferred = $q.defer();
