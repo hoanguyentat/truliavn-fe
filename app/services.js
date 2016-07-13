@@ -35,7 +35,12 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
 		if (userId == null) {
-			return;
+			return $http.get(host +'/api/user/hola').success(function(){
+				user = false;
+			})
+			.error(function(){
+				user = false;
+			});
 		} else{
 			return $http.get(host +'/api/user/' + userId)
 			.success(function(data){

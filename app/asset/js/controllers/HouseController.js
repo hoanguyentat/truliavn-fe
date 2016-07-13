@@ -3,7 +3,7 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
-		console.log($scope.districts);
+		// console.log($scope.districts);
 	});
 	var url2 = AuthService.hostName + '/api/wards';
 	// console.log(url2);

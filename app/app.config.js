@@ -6,9 +6,7 @@ app.config(
         });
 	}
 ]);
-angular.
-module('truliavnApp')
-.config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
+app.config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
 
 	$routeProvider
@@ -100,8 +98,7 @@ module('truliavnApp')
 	.otherwise('/');
 }]);
 
-angular.module('truliavnApp')
-.run(function($rootScope, $location, $route, AuthService){
+app.run(function($rootScope, $location, $route, AuthService){
 
 	// console.log($rootScope.userStatus);
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
@@ -109,6 +106,7 @@ angular.module('truliavnApp')
 
 		AuthService.getUserStatus()
 		.then(function success(){
+			console.log(AuthService.isLoggedIn());
 				$rootScope.userStatus = AuthService.isLoggedIn();
 				$rootScope.userName = AuthService.getUserName();
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
