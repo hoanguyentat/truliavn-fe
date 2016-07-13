@@ -17,13 +17,13 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		access: {restricted: false}
 	})
 	.when('/for-rent', {
-		templateUrl: 'view/houses/house-for-rent.template.html',
+		templateUrl: 'view/house-list/house-list.template.html',
 		controller: 'HouseForRentCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
 	.when('/for-sell', {
-		templateUrl: 'view/houses/house-for-sell.template.html',
+		templateUrl: 'view/house-list/house-list.template.html',
 		controller: 'HouseForSellCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
@@ -99,14 +99,12 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 }]);
 
 app.run(function($rootScope, $location, $route, AuthService){
-
-	// console.log($rootScope.userStatus);
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
 		//user must login to access the route
 
 		AuthService.getUserStatus()
 		.then(function success(){
-			console.log(AuthService.isLoggedIn());
+			// console.log(AuthService.isLoggedIn());
 				$rootScope.userStatus = AuthService.isLoggedIn();
 				$rootScope.userName = AuthService.getUserName();
 			if (next.access.restricted && !AuthService.isLoggedIn()) {

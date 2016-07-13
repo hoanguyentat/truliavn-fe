@@ -92,18 +92,28 @@ img.seller,
 ul.seller{
 	float: left;
 }
-
+/*-----------HOUSES-LIST-----------*/
 .filter-houses{
 	padding-top: 20px;
 }
 
 .houses{
-	padding-top: 50px;
+	padding-top: 30px;
+}
+
+.sortHouse{
+	margin-left: 40%
 }
 
 strong{
 	color: #0095da;
 }
+
+.thumbnail{
+	border-radius: 0px;
+}
+
+/*-----------HOUSES-LIST-----------*/
 .msg-block {
     margin-top:5px;
 }

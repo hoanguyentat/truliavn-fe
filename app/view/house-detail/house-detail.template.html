@@ -73,11 +73,11 @@
 							<h2>{{house.title}}</h2>
 							<div>
 								<span style="font-size: 16px;">Thông tin mô tả</span>
-								<span style="display: flex;  justify-content: flex-end; align-content: flex-end;"><b>Ngày đăng:</b> {{house.created_at | date: "yyyy-MM-dd"}}</span>
+								<span style="display: flex;  justify-content: flex-end; align-content: flex-end;"><b>Ngày đăng:</b>  {{house.created_at | date: "yyyy-MM-dd"}}</span>
 							</div>
 							<div class="detail-description" ng-bind="house.description"></div>
 							<div class="col-xs-12">
-								<p>Cấu trúc nhà bao gồm:</p>
+								<h4>Cấu trúc nhà bao gồm:</h4>
 								<ul class="list-group">
 									<li class="list-group-item">
 										<span class="badge">{{house.noOfBedrooms}}</span>
@@ -207,14 +207,14 @@
 				</thead>
 				<tbody>
 					<tr class="column_name">
-						<td>Địa điểm</td>
+						<td>Tiêu đề</td>
 						<td>Khoảng cách</td>
 						<td>Giá bán</td>
 						<td>Ngày bán</td>
 						<td>So sánh</td>
 					</tr>
 					<tr ng-repeat="item in ::neighbor" class='neighbor'>
-						<td><a href="#!/houses/{{::item.id}}">{{item.address}}</a></td>
+						<td><a href="#!/houses/{{::item.id}}">{{item.title}}</a></td>
 						<td class="dist">{{item.distance}}</td>
 						<td>{{item.price}}</td>
 						<td></td>

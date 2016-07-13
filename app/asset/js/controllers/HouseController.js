@@ -3,10 +3,8 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
-		// console.log($scope.districts);
 	});
 	var url2 = AuthService.hostName + '/api/wards';
-	// console.log(url2);
 	$http.get(url2).then(function success(response){
 		$scope.wards = response.data.wards;
 	});
@@ -77,26 +75,10 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
 	
-	$scope.currentPage = 0;
+	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show
 
-	$scope.setPage = function (pageNo) {
-	$scope.currentPage = pageNo;
-	};
-
-	$scope.pageChanged = function() {
-	console.log('Page changed to: ' + $scope.currentPage);
-	};
-
-	$scope.setItemsPerPage = function(num) {
-	  $scope.pageSize = num;
-	  $scope.currentPage = 1; //reset to first page
-	}
-
-	$scope.filterHouse = function(){
-			console.log($scope.search);
-	};
 
 	$http.get(rentUrl).then(function(response){
 		$scope.houses = response.data.houses;
@@ -111,22 +93,9 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var sellUrl  = API.getHousesForSell();
 	//pagination for search result
-	$scope.currentPage = 0;
+	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show
-
-	$scope.setPage = function (pageNo) {
-	$scope.currentPage = pageNo;
-	};
-
-	$scope.pageChanged = function() {
-	console.log('Page changed to: ' + $scope.currentPage);
-	};
-
-	$scope.setItemsPerPage = function(num) {
-	  $scope.pageSize = num;
-	  $scope.currentPage = 1; //reset to first page
-	}
 
 	$http.get(sellUrl).then(function(response){
 		$scope.houses = response.data.houses;
