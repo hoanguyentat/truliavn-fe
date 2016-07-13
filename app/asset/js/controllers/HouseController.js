@@ -34,15 +34,15 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 		$scope.wards = response.data.wards;
 	});
 
-	$scope.addHouse = function($routeParams){
+	$scope.editHouse = function(){
 		$scope.disabled = true;
-		HouseService.addHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams)
+		HouseService.editHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams.postId)
 		.then(function(){
-			console.log("Thêm nhà thành công");
-			$location.path('/houses');
+			console.log("Sửa nhà thành công");
+			$location.path('/manage-post');
 		})
 		.catch(function(){
-			console.log("Thêm nhà không thành công");
+			console.log("Sửa nhà không thành công");
 		});
 	}
 }]);

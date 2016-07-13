@@ -253,6 +253,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 			description: description,
 			houseId: houseId
 		};
+		console.log(houseData)
 		var deferred = $q.defer();
 
 		//sent request add house
