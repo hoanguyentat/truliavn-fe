@@ -58,8 +58,11 @@ body{
   	align-items: center;
   	height: 768px;
 }
+.filter-houses{
+	margin-top: 20px;
+ }
 .select-filter{
-	margin: 5px;
+	margin-top: 10px;
 }
 /*----------FILTER & SELECT------------*/
 /*-------------Deatail-form---------*/
@@ -93,9 +96,6 @@ ul.seller{
 	float: left;
 }
 /*-----------HOUSES-LIST-----------*/
-.filter-houses{
-	padding-top: 20px;
-}
 
 .houses{
 	padding-top: 30px;
