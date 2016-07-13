@@ -41,7 +41,7 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 		// catch error when user register not success
 		.catch(function(){
 			$scope.error = true;
-			$scope.errorMessage = "Some thing went wrong";
+			$scope.errorMessage = "Đã có lỗi xảy ra";
 			$scope.registerForm = {};
 		});
 	};

@@ -93,7 +93,9 @@ module('truliavnApp')
 		access: {restricted: false}
 	})
 	.when('/filter/:content', {
-		templateUrl:'view/user/house-filter.template.html'
+		templateUrl:'view/user/house-filter.template.html', 
+		controller: 'FilterHousesCtrl',
+		access: {restricted: false}
 	})
 	.otherwise('/');
 }]);

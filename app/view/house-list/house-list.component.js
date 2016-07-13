@@ -5,29 +5,18 @@ angular.module('houseList')
 
 		var url = API.getHouses();
 		// $scope.noOfPages = 10;
-		$scope.search = "";
 		$scope.currentPage = 0;
 		$scope.pageSize = 20;
 		$scope.maxSize = 5; //Number of pager buttons to show
 
-		$scope.setPage = function (pageNo) {
-		$scope.currentPage = pageNo;
-		};
-
-		$scope.pageChanged = function() {
-		console.log('Page changed to: ' + $scope.currentPage);
-		};
-
-		$scope.setItemsPerPage = function(num) {
-		  $scope.pageSize = num;
-		  $scope.currentPage = 1; //reset to first page
-		}
 
 		$http.get(url).then(function success(response){
 			$scope.houses = response.data.houses;
+			console.log(response.data.houses);
 			$scope.homes = $scope.houses;
 
 			$scope.noOfPages = $scope.houses.length;
+			console.log("So trang: " + $scope.noOfPages);
 			angular.forEach($scope.houses, function(val, key){
 				val.description = val.description.slice(0, 150) + '....';
 			});
