@@ -24,8 +24,20 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 	}
 }]);
 
-app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', function($scope, AuthService, $http, HouseService, $location, $routeParams ){
+app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', 'API', function($scope, AuthService, $http, HouseService, $location, $routeParams, API){
 
+	//return old infomation of house
+	var url = API.getHouseInfo($routeParams.postId);
+	console.log(url);
+	$http.get(url).then(function(res){
+		// console.log(res);
+		$scope.addHouseForm = res.data.houses[0];
+		console.log($scope.addHouseForm);
+	}, function(res){
+		console.log("Lay du lieu khong thanh cong");
+	})
+
+	//get infomation about district, ward
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
 	});
@@ -33,10 +45,10 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 	$http.get(url2).then(function success(response){
 		$scope.wards = response.data.wards;
 	});
-
+	//sent request to server
 	$scope.editHouse = function(){
 		$scope.disabled = true;
-		HouseService.editHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams.postId)
+		HouseService.editHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.noOfBedrooms, $scope.addHouseForm.noOfBathrooms, $scope.addHouseForm.noOfFloors, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams.postId)
 		.then(function(){
 			console.log("Sửa nhà thành công");
 			$location.path('/manage-post');
@@ -46,6 +58,8 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 		});
 	}
 }]);
+
+
 app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$http', '$cookies', '$location' , function($scope, AuthService, $routeParams, $http, $cookies, $location){
 	var email = $cookies.get('user.email');
 	var token = $cookies.get('user.token');

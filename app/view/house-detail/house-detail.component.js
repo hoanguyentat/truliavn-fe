@@ -3,17 +3,16 @@ angular.module('houseDetail')
 
 	controller: function HouseDetailController($scope, $http, $log, $routeParams, API){
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
-		var self = this;
 
 		$scope.choosen = " ";
 		
 		$http.get(urlHouseDetail).then(function successCallback(response){
 			var data = response.data;
-			self.status = data.status;
-			self.house = data.houses[0];
+			$scope.status = data.status;
+			$scope.house = data.houses[0];
 
-			var latitude = self.house.lat;
-			var longitude = self.house.lon;
+			var latitude = $scope.house.lat;
+			var longitude = $scope.house.lon;
 			var position = latitude + ',' + longitude;
 
 
@@ -32,7 +31,7 @@ angular.module('houseDetail')
 		    // end location
 
 		    //find the neighborhood near your house
-			$http.get(API.getHousesNearby(self.house.city, self.house.district,self.house.ward)).then(
+			$http.get(API.getHousesNearby($scope.house.city, $scope.house.district,$scope.house.ward)).then(
 				function (near){
 					var neighbor = []
 						,coor_neighbor = "";
@@ -72,7 +71,7 @@ angular.module('houseDetail')
 								neighbor[i].distance = res[i].distance.text;
 							}
 							console.log(neighbor);
-							self.neighbor = neighbor;
+							$scope.neighbor = neighbor;
 						}
 					})
 					.error(function(){
@@ -187,7 +186,7 @@ angular.module('houseDetail')
 								hos.type = "hospital";
 								hos.title = "Bệnh viện";
 								// console.log(hos);
-								self.hospital = hos;
+								$scope.hospital = hos;
 							}
 						})
 		    	}
@@ -230,7 +229,7 @@ angular.module('houseDetail')
 								}
 								primaries.type = "primary";
 								primaries.title = "Trường cấp I";
-								self.primaries = primaries;
+								$scope.primaries = primaries;
 							}
 						})
 
@@ -267,7 +266,7 @@ angular.module('houseDetail')
 					school_list.push(primaries);
 					school_list.push(juniors);
 					school_list.push(seniors);
-					self.school_list = school_list;
+					$scope.school_list = school_list;
 					console.log('school_list');
 					console.log(school_list);
 
@@ -432,6 +431,5 @@ angular.module('houseDetail')
 			});
 		});
 	},
-	templateUrl: 'view/house-detail/house-detail.template.html',
-	controllerAs: 'ctrl'
+	templateUrl: 'view/house-detail/house-detail.template.html'
 });	

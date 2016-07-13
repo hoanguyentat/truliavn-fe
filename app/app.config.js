@@ -111,7 +111,6 @@ angular.module('truliavnApp')
 		.then(function success(){
 				$rootScope.userStatus = AuthService.isLoggedIn();
 				$rootScope.userName = AuthService.getUserName();
-				// console.log($rootScope.userStatus);
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
 				$location.path('/login');
 				$route.reload();
@@ -125,7 +124,6 @@ angular.module('matchPassword', [])
     return {
       require: 'ngModel',
       link: function (scope, elem, attrs, ctrl) {
-      	console.log(attrs.pwCheck);
         var firstPassword = '#' + attrs.pwCheck;
         elem.add(firstPassword).on('keyup', function () {
           scope.$apply(function () {
