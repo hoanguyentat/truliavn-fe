@@ -1,2 +1,2 @@
 # truliavn-fe
-## This is font-end of a webpage
+## This is front-end of a webpage
