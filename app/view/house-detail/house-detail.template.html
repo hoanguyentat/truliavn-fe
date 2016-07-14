@@ -91,26 +91,7 @@
 		</div>
 	</div>
 
-<!-- 	<div>
-	<div ng-show="choosen == 'primary'">
-		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.primaryBounds">
-		    <ui-gmap-markers fit="true" models="primaryMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
-		    </ui-gmap-markers>
-		</ui-gmap-google-map>
-	</div>
-	<div ng-show="choosen == 'junior'">
-		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.juniorBounds">
-			<ui-gmap-markers fit="true" models="juniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
-			</ui-gmap-markers>
-		</ui-gmap-google-map>
-	</div>
-	<div ng-show="choosen == 'senior'">
-		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.seniorBounds">
-			<ui-gmap-markers fit="true" models="seniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
-			</ui-gmap-markers>
-		</ui-gmap-google-map>
-	</div>
-</div> -->
+
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 		<div class="container homeDetail" >
 			<div class="row"><center><h1 class="title">Mô tả ngôi nhà</h1></center></div>
@@ -125,11 +106,11 @@
 					<h3>Trường học gần đây</h3>
 					<div ng-repeat='i in ctrl.school_list'>
 						<div class="col-xs-12">
-							<h3>{{i.title}}
-								<span class="btn_collapse glyphicon glyphicon-menu-hamburger span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-click="choosen = '{{i.type}}'">		
-								</span>
+							<h3>{{i.title}}	
+								<button><span class="btn_collapse glyphicon glyphicon-menu-hamburger span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-click='choose(i.type)'>		
+									</span></button>
 							</h3>
-							<div id={{i.type}} class="collapse">
+							<div id="{{i.type}}" class="collapse">
 								<table class="table table-condensed">
 									<thead></thead>
 									<tbody>
@@ -149,12 +130,69 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="container">
+		<p>{{map.zoom}}</p>
+		<button class="btn btn-primary" ng-click='choose("primary")'>Primary</button>
+		<button class="btn btn-primary" ng-click='choose("junior")'>Junior</button>
+		<button class="btn btn-primary" ng-click='choose("senior")'>Senior</button>
+		<button class="btn btn-primary" ng-click='choose("hospital")'>hospital</button>
+		<button class="btn btn-primary" ng-click='choose("restaurant")'>restaurant</button>
+		<button class="btn btn-primary" ng-click='choose("cafe")'>cafe</button>
+	</div>
+
+
+	<div class="container">
+		<div class="col-xs-12 col-sm-offset-4 col-sm-8" ng-if='select == "primary"'>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+			    <ui-gmap-markers models="primaryMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
+			    </ui-gmap-markers>
+			</ui-gmap-google-map>
+		</div>
+		<hr style="border : solid 2px">
+		<div class="col-xs-12 col-sm-offset-4 col-sm-8" ng-if='select == "junior"'>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+			    <ui-gmap-markers models="juniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
+			    </ui-gmap-markers>
+			</ui-gmap-google-map> 
+		</div>
+		<hr style="border : solid 2px">
+		<div class="col-xs-12 col-sm-offset-4 col-sm-8" ng-if='select == "senior"'>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+			    <ui-gmap-markers models="seniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
+			    </ui-gmap-markers>
+			</ui-gmap-google-map>
+		</div>
+		<hr style="border : solid 2px">
+		<div class="col-xs-12 col-sm-offset-4 col-sm-8" ng-if='select == "hospital"'>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+			    <ui-gmap-markers models="hospitalMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.hospitalMarkersEvents">
+			    </ui-gmap-markers>
+			</ui-gmap-google-map>
+		</div>
+				<hr style="border : solid 2px">
+		<div class="col-xs-12 col-sm-offset-4 col-sm-8" ng-if='select == "restaurant"'>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+			    <ui-gmap-markers models="restaurantMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.restaurantMarkersEvents">
+			    </ui-gmap-markers>
+			</ui-gmap-google-map>
+		</div>
+				<hr style="border : solid 2px">
+		<div class="col-xs-12 col-sm-offset-4 col-sm-8" ng-if='select == "cafe"'>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+			    <ui-gmap-markers models="cafeMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.cafeMarkersEvents">
+			    </ui-gmap-markers>
+			</ui-gmap-google-map>
+		</div>
+	</div>
+
+	<hr style="border : solid 2px">
 	<div class="container">
 		<div class="col-xs-12">
 	  	  	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-				    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
-				    </ui-gmap-markers>
-				</ui-gmap-google-map>
+			    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
+			    </ui-gmap-markers>
+			</ui-gmap-google-map>
 		    <table class="table table-hover">
 				<thead>
 					<tr class='header'>
