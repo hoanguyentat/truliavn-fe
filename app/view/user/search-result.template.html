@@ -21,6 +21,8 @@
 									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
 										<p ng-bind="house.description"></p>
+										<div>Giá: <strong>{{house.price}} triệu</strong></div>
+										<span>Diện tích: <strong>{{house.area}} m<sup>2</sup></strong></span>
 										<p style="margin-top: 70px; margin-left: 70%;"><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</p>
 									</div>
 								</li>

@@ -28,7 +28,6 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 	var url = API.getHouseInfo($routeParams.postId);
 	console.log(url);
 	$http.get(url).then(function(res){
-		// console.log(res);
 		$scope.addHouseForm = res.data.houses[0];
 		console.log($scope.addHouseForm);
 	}, function(res){
@@ -78,7 +77,7 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show
-
+	$scope.titlePage = "Nhà đất cho thuê tại Việt Nam";
 
 	$http.get(rentUrl).then(function(response){
 		$scope.houses = response.data.houses;
@@ -96,16 +95,14 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show
+	$scope.titlePage = "Nhà đất bán tại Việt Nam";
 
 	$http.get(sellUrl).then(function(response){
 		$scope.houses = response.data.houses;
 
 		$scope.noOfPages = $scope.houses.length;
-		// console.log($scope.houses);
 		angular.forEach($scope.houses, function(val, key){
-				// console.log(val.description);
 			val.description = val.description.slice(0, 150) + '....';
-			// console.log(val.description);
 		});
 	});
 }]);

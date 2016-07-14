@@ -42,18 +42,23 @@
 				</ul>
 			</div>
 
-			<div class="col-xs-12 col-sm-8">
-				<div ng-if="house.images[0]" >
-				    <uib-carousel active="active" interval="3000" no-wrap="false">
-				      	<uib-slide ng-repeat="(key, slide) in house.images track by key" index="key">
-				        	<img ng-src="{{'http://truliavn.sunkhoai.com:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail img-carousel">
-				      	</uib-slide>
-				    </uib-carousel>
+			<div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 col-sm-8">
+				<div class="row">
+					<div ng-if="house.images[0]" >
+					    <uib-carousel active="active" interval="3000" no-wrap="false">
+					      	<uib-slide ng-repeat="(key, slide) in house.images track by key" index="key">
+					        	<img ng-src="{{'http://truliavn.sunkhoai.com:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail img-carousel">
+					      	</uib-slide>
+					    </uib-carousel>
+					</div>
+
+					<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img-unknown">
 				</div>
-
-				<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img-unknown">
+			
+				<div class="row">
+					<span class=""><b>Ngày đăng:</b>  {{house.created_at | date: "yyyy-MM-dd"}}</span>
+				</div>
 			</div>
-
 			<div class="col-xs-12 col-sm-offset-4 col-sm-8">
 
 			</div>
@@ -67,13 +72,13 @@
 						<span><b>Khu vực: </b> <strong>{{house.address}}</strong></span>
 						<span style="padding-left: 30px;"><b>Giá: </b> <strong> {{house.price}} triệu vnđ </strong> </span>
 						<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
+
 					</div>
 					<div class="row">
 						<article>
 							<h2>{{house.title}}</h2>
 							<div>
-								<span style="font-size: 16px;">Thông tin mô tả</span>
-								<span style="display: flex;  justify-content: flex-end; align-content: flex-end;"><b>Ngày đăng:</b>  {{house.created_at | date: "yyyy-MM-dd"}}</span>
+								<h3>Thông tin mô tả</h3>
 							</div>
 							<div class="detail-description" ng-bind="house.description"></div>
 							<div class="col-xs-12">
@@ -97,70 +102,67 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-
-				<div class="panel panel-default">
-					<div class="panel-heading" style="color: #fff; background-color: #2f89e6">
-						Tìm kiếm bất động sản
-					</div>
-					<div class="panel-body">
-						<div class="row" ng-controller="HousesFilterContentCtrl">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<select name="district" ng-model="houseFor" class="select-filter form-control">
-									<option value="">Nhà đất để</option>
-									<option value="rent">Nhà đất cho thuê</option>
-									<option value="sell">Nhà đất bán</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<select name="district" class="form-control select-filter" ng-model='city'>
-									<option value="">Chọn tỉnh/thành phố</option>
-									<option value="1">Hà Nội</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<select name="ward" class="form-control select-filter" ng-model="districtSelected" required="required">
-									<option value="">Chọn quận/huyện</option>
-									<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<select name="area" class="form-control select-filter" ng-model="area">
-		                    		<option value="">Chọn diện tích</option>                     
-		                            <option value="1">&lt;= 30 m2</option>	                        
-		                            <option value="2">30 - 50 m2</option>	                        
-		                            <option value="3">50 - 80 m2</option>	                        
-		                            <option value="4">80 - 100 m2</option>	                        
-		                            <option value="5">100 - 150 m2</option>	                        
-		                            <option value="6">150 - 200 m2</option>	                        
-		                            <option value="7">200 - 250 m2</option>	                        
-		                            <option value="8">250 - 300 m2</option>	                        
-		                            <option value="9">300 - 500 m2</option>	                        
-		                            <option value="10">&gt;= 500 m2</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<select name="price" class="form-control select-filter" ng-model="price">
-									<option value="">Chọn mứa giá</option>
-									<option value="1"> < 1 triệu</option>
-									<option value="2">1 - 3 triệu</option>	                        
-		                            <option value="3">3 - 5 triệu</option>	                        
-		                            <option value="4">5 - 10 triệu</option>	                        
-		                            <option value="5">10 - 40 triệu</option>	                        
-		                            <option value="6">40 - 70 triệu</option>	                        
-		                            <option value="7">70 - 100 triệu</option>
-		                            <option value="8">> 100 triệu</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<button type="submit" ng-click="search()" class="btn btn-info" style="margin-top: 10px;">
-									<span class="glyphicon glyphicon-search"></span>Tìm kiếm
-								</button>
-							</div>
-						</div>	
-					</div>
-				</div>
-
-								
+					<div class="panel panel-default">
+						<div class="panel-heading" style="color: #fff; background-color: #2f89e6">
+							Tìm kiếm bất động sản
+						</div>
+						<div class="panel-body">
+							<div class="row" ng-controller="HousesFilterContentCtrl">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<select name="district" ng-model="houseFor" class="select-filter form-control">
+										<option value="">Nhà đất để</option>
+										<option value="rent">Nhà đất cho thuê</option>
+										<option value="sell">Nhà đất bán</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<select name="district" class="form-control select-filter" ng-model='city'>
+										<option value="">Chọn tỉnh/thành phố</option>
+										<option value="1">Hà Nội</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<select name="ward" class="form-control select-filter" ng-model="districtSelected" required="required">
+										<option value="">Chọn quận/huyện</option>
+										<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<select name="area" class="form-control select-filter" ng-model="area">
+			                    		<option value="">Chọn diện tích</option>                     
+			                            <option value="1">&lt;= 30 m2</option>	                        
+			                            <option value="2">30 - 50 m2</option>	                        
+			                            <option value="3">50 - 80 m2</option>	                        
+			                            <option value="4">80 - 100 m2</option>	                        
+			                            <option value="5">100 - 150 m2</option>	                        
+			                            <option value="6">150 - 200 m2</option>	                        
+			                            <option value="7">200 - 250 m2</option>	                        
+			                            <option value="8">250 - 300 m2</option>	                        
+			                            <option value="9">300 - 500 m2</option>	                        
+			                            <option value="10">&gt;= 500 m2</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<select name="price" class="form-control select-filter" ng-model="price">
+										<option value="">Chọn mứa giá</option>
+										<option value="1"> < 1 triệu</option>
+										<option value="2">1 - 3 triệu</option>	                        
+			                            <option value="3">3 - 5 triệu</option>	                        
+			                            <option value="4">5 - 10 triệu</option>	                        
+			                            <option value="5">10 - 40 triệu</option>	                        
+			                            <option value="6">40 - 70 triệu</option>	                        
+			                            <option value="7">70 - 100 triệu</option>
+			                            <option value="8">> 100 triệu</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<button type="submit" ng-click="search()" class="btn btn-info" style="margin-top: 10px;">
+										<span class="glyphicon glyphicon-search"></span>Tìm kiếm
+									</button>
+								</div>
+							</div>	
+						</div>
+					</div>						
 				</div>			
 			</div>
 			<div class="row"><center><h1 class="title">Tiện ích quanh ngôi nhà</h1></center></div>

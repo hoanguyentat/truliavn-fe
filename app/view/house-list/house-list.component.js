@@ -4,7 +4,7 @@ angular.module('houseList')
 	controller:['$http', 'AuthService', 'API', '$scope', function($http, AuthService, API, $scope){
 
 		var url = API.getHouses();
-		// $scope.noOfPages = 10;
+		$scope.titlePage = "Thông tin nhà đất Việt Nam";
 		$scope.currentPage = 1;
 		$scope.pageSize = 20;
 		$scope.maxSize = 5; //Number of pager buttons to show
