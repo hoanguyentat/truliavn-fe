@@ -17,12 +17,14 @@
 									</div>
 									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 										<div>
-											<a class="btn btn-info" href="#!/{{::house.id}}/edit" role="button">Chỉnh sửa bài đăng</a>
-											<a class="btn btn-danger" href="#!/{{::house.id}}/delete" ng-click="deleteHouse(house.id)" role="button">Xóa bài đăng</a>
+											<a class="btn btn-info" href="#!/{{::house.id}}/edit" role="button"><span class="glyphicon glyphicon-pencil"> </span> Sửa bài đăng</a>
+											<a class="btn btn-danger" href="#!/{{::house.id}}/delete" ng-click="deleteHouse(house.id)" role="button"><span class="glyphicon glyphicon-trash"> </span> Xóa bài đăng</a>
 										</div>
 										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
 										<p ng-bind="house.description"></p>
-										<p style="margin-top: 70px; margin-left: 70%;"><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</p>
+										<div>Giá: <strong>{{house.price}} triệu</strong></div>
+										<span>Diện tích: <strong>{{house.area}} m<sup>2</sup></strong></span>
+										<p><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</p>
 									</div>
 								</li>
 							</ul>

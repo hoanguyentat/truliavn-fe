@@ -3,24 +3,22 @@ angular.module('houseDetail')
 
 	controller: function HouseDetailController($rootScope,$scope, $http, $log, $routeParams, API){
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
-		var self = this;
-		
-		$scope.choose = function(str){
-      		$scope.select = str;
-    	}
+
     	
 		$http.get(urlHouseDetail).then(function successCallback(response){
 			var data = response.data;
-			self.status = data.status;
-			// console.log(data);
-			self.house = data.houses[0];
+
+			$scope.select = "myHouse";
 			$scope.choose = function(str){
 				$scope.select = str;
 				console.log('click at ' + str);
 			}
 
-			var latitude = self.house.lat;
-			var longitude = self.house.lon;
+			$scope.status = data.status;
+			$scope.house = data.houses[0];
+
+			var latitude = $scope.house.lat;
+			var longitude = $scope.house.lon;
 			var position = latitude + ',' + longitude;
 
 
@@ -42,6 +40,7 @@ angular.module('houseDetail')
 				,coor_junior = ""
 				,coor_senior = "";
 			var school_list = [];
+			var utilities = [];
 
 
 			// marker position of the house 
@@ -49,11 +48,11 @@ angular.module('houseDetail')
 		    // end location
 
 		    //find the neighborhood near your house
-			$http.get(API.getHousesNearby(self.house.city, self.house.district,self.house.ward)).then(
+			$http.get(API.getHousesNearby($scope.house.city, $scope.house.district,$scope.house.ward)).then(
 				function (near){
 					neighbor = near.data.houses;
 /*					console.log('near.data.house');
-					console.log(near.data.houses);*/
+					console.log(neighbor);*/
 					var log =[];
 					for(var i in neighbor){
 						if(neighbor[i].id == $routeParams.houseId){
@@ -76,14 +75,16 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, 
 														destination : coor_neighbor})
 					.success(function(data, status){
+						console.log(data);
 						if(status == 200 && data.status == 'success'){
+
 							var res = data.results.rows[0];
 							if(res){
 								for(var i in res.elements){
 									neighbor[i].distance = res.elements[i].distance.text;
 								}
 							}
-							self.neighbor = neighbor;
+							$scope.neighbor = neighbor;
 						}
 					})
 					.error(function(){
@@ -103,8 +104,10 @@ angular.module('houseDetail')
 		    	if(status == 200 && data.status == 'success'){
 		    		var res = data.results.results;
 		    		for (var i in res){
-		    			hos.push(res[i]);
-		    			coor_hos += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
+		    			if(res[i].name.includes('Bệnh viện') || res[i].name.includes('Hospital') || res[i].name.includes('Phòng khám')){
+		    				hos.push(res[i]);
+		    				coor_hos += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
+		    			}
 		    		}
 		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_hos.substring(1)})
 						.success(function(data, status){
@@ -117,8 +120,8 @@ angular.module('houseDetail')
 								}
 								hos.type = "hospital";
 								hos.title = "Bệnh viện";
-								// console.log(hos);
-								self.hospital = hos;
+
+								$scope.hospital = hos;
 							}
 						})
 		    	}
@@ -138,6 +141,7 @@ angular.module('houseDetail')
 		    		}
 		    		restaurant.type = "restaurant";
 					restaurant.title = "Nhà hàng";
+					$scope.restaurant = restaurant;
 		    	}
 		    });
 
@@ -156,7 +160,7 @@ angular.module('houseDetail')
 		    		}
 					cafe.type = "cafe";
 					cafe.title = "Cafe";
-					self.cafe = cafe;
+					$scope.cafe = cafe;
 		    	}
 		    });
 		    //find park near by
@@ -167,12 +171,16 @@ angular.module('houseDetail')
 		    .success(function(data, status){
 		    	if(status == 200 && data.status == 'success'){
 		    		var res = data.results.results;
+		    		console.log('park near');
+		    		console.log(res);
 		    		for (var i in res){
-		    			if(res[i].name.includes("Công Viên")  || res[i].name.includes('Park')){
+		    			if(res[i].name.includes("Công viên") || res[i].name.includes("Vườn hoa") || res[i].name.includes("Park")){
+
 							park.push(res[i]);
 							coor_park += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
 						}
 		    		}
+		    		console.log(park);
 		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_park.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
@@ -185,7 +193,7 @@ angular.module('houseDetail')
 								}
 								park.type = "park";
 								park.title = "Công viên";
-								self.park = park;
+								$scope.park = park;
 							}
 						})
 
@@ -222,6 +230,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_primary.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
+
 								var res = data.results.rows[0];
 								if(res){
 									for(var i in res.elements){
@@ -231,6 +240,8 @@ angular.module('houseDetail')
 								}
 								primaries.type = "primary";
 								primaries.title = "Trường cấp I";
+								$scope.primaries = primaries;
+
 							}
 						})
 					console.log(primaries.length);
@@ -239,6 +250,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_junior.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
+
 								var res = data.results.rows[0];
 								if(res){
 									for(var i in res.elements){
@@ -255,11 +267,13 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_senior.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
+
 								var res = data.results.rows[0];
 								if(res){
 									for(var i in res.elements){
 										seniors[i].distance = res.elements[i].distance.text;
 									}
+
 								}
 								seniors.type = "senior";
 								seniors.title = "Trường cấp III";
@@ -270,15 +284,32 @@ angular.module('houseDetail')
 					school_list.push(primaries);
 					school_list.push(juniors);
 					school_list.push(seniors);
-					self.school_list = school_list;
-/*					console.log('school_list');
-					console.log(school_list);*/
+
+					$scope.school_list = school_list;
+					console.log('school_list');
+					console.log(school_list);
 
 				}
 			});
 
+
+
 			setTimeout(function(){
-			
+				
+				utilities.push({title:'Bệnh viện', type : 'hospital', quantity : hos.length});
+				utilities.push({title:'Công viên', type : 'park', quantity : park.length});
+				utilities.push({title:'Nhà hàng', type : 'restaurant', quantity : restaurant.length});
+				utilities.push({title:'Cafe', type : 'cafe', quantity : cafe.length});
+				$scope.utilities = utilities;
+				 $scope.markers = [{
+			      	id: 0,
+			      	coords: {
+			        	latitude: latitude,
+			        	longitude: longitude
+			      	},
+			      	options: { draggable: true },
+			      	icon : 'http://maps.google.com/mapfiles/kml/shapes/ranger_station.png'
+			    }];
 				var coor_neighbor_marker = [];
 				for(var i in neighbor){
 					var lat = neighbor[i].lat;
@@ -297,10 +328,32 @@ angular.module('houseDetail')
 						price : neighbor[i].price,
 						content : content,
 						options : {labelClass : 'marker_labels', labelContent : ''},
-						icon : "http://maps.google.com/mapfiles/kml/paddle/grn-stars.png"
+						icon : "http://maps.google.com/mapfiles/kml/paddle/H.png"
 					}
 					coor_neighbor_marker.push(ret);
 				}
+
+				console.log(coor_neighbor_marker);
+
+					
+				var coor_primary_marker = [];
+				for(var i = 0; i < primaries.length; i++){
+					var lat = primaries[i].geometry.location.lat;
+					var lon = primaries[i].geometry.location.lng;
+					var content = '<p class="p-map">'+ primaries[i].name + '</p>';
+					var ret = {
+						id : parseInt(i),
+						latitude : lat,
+						longitude : lon,
+						title : "title",
+						price : "price",
+						content : content,
+						options : {labelClass : 'marker_labels', labelContent : ''},
+						icon : "http://maps.google.com/mapfiles/kml/shapes/schools.png"
+					}
+					coor_primary_marker.push(ret);
+				}
+	
 				var coor_hos_marker = [];
 				for(var i = 0; i < hos.length; i++){
 					var lat = hos[i].geometry.location.lat;
@@ -312,9 +365,24 @@ angular.module('houseDetail')
 						longitude : lon,
 						content : content,
 						options : {labelClass : 'marker_labels', labelContent : ''},
-						icon : "http://maps.google.com/mapfiles/kml/pal2/icon28.png"
+						icon : "http://maps.google.com/mapfiles/kml/pal3/icon38.png"
 					}
 					coor_hos_marker.push(ret);
+				}
+				var coor_park_marker = [];
+				for(var i = 0; i < park.length; i++){
+					var lat = park[i].geometry.location.lat;
+					var lon = park[i].geometry.location.lng;
+					var content = '<p class="p-map">'+ park[i].name + '</p>';
+					var ret = {
+						id : parseInt(i),
+						latitude : lat,
+						longitude : lon,
+						content : content,
+						options : {labelClass : 'marker_labels', labelContent : ''},
+						icon : "http://maps.google.com/mapfiles/kml/pal2/icon4.png"
+					}
+					coor_park_marker.push(ret);
 				}
 
 				var coor_restaurant_marker = [];
@@ -405,7 +473,7 @@ angular.module('houseDetail')
 
 				$scope.map = {
 					center: {latitude: latitude, longitude: longitude }, 
-					zoom: 16, 
+					zoom: 14, 
 					bounds : {},
 					neighborMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
@@ -423,6 +491,7 @@ angular.module('houseDetail')
 			               $scope.$digest() 
 			            }
 			        },
+
 			        hospitalMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
 			            	// console.log('you have mouseover');
@@ -439,6 +508,24 @@ angular.module('houseDetail')
 			               $scope.$digest() 
 			            }
 			        },
+
+			        parkMarkersEvents : {
+			            mouseover: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseover');
+			              	model.options.labelContent = model.content;
+			              	marker.showWindow = true;
+			              	$scope.$apply();
+			              	$scope.$digest() 
+			            },
+			            mouseout: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseout');
+			               model.options.labelContent = ' ';
+			               marker.showWindow = false;
+			               $scope.$apply();
+			               $scope.$digest() 
+			            }
+			        },
+
 			        restaurantMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
 			            	// console.log('you have mouseover');
@@ -455,6 +542,7 @@ angular.module('houseDetail')
 			               $scope.$digest() 
 			            }
 			        },
+
 			        cafeMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
 			            	// console.log('you have mouseover');
@@ -471,6 +559,7 @@ angular.module('houseDetail')
 			               $scope.$digest() 
 			            }
 			        },
+
 					primaryMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
 			            	// console.log('you have mouseover');
@@ -485,6 +574,7 @@ angular.module('houseDetail')
 			               $scope.$apply();
 			            }
 			        },
+
 			        juniorMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
 			            	// console.log('you have mouseover');
@@ -524,10 +614,11 @@ angular.module('houseDetail')
 			    	return $scope.map.bounds;
 			    }, function() {
 			    	$scope.hospitalMarkers = coor_hos_marker;
-			    	$scope.primaryMarkers = coor_primary_marker;
+			    	$scope.parkMarkers = coor_park_marker;
 			    	$scope.restaurantMarkers = coor_restaurant_marker;
 			    	$scope.cafeMarkers = coor_cafe_marker;
 			    	$scope.neighborMarkers = coor_neighbor_marker;
+			    	$scope.primaryMarkers = coor_primary_marker;
 			        $scope.juniorMarkers = coor_junior_marker;
 			        $scope.seniorMarkers = coor_senior_marker;
 			    }, true);
@@ -536,11 +627,7 @@ angular.module('houseDetail')
 
 			}, 3000);
 
-/*					console.log('marker');
-					console.log(coor_neighbor_marker);*/
-
 		});
 	},
-	templateUrl: 'view/house-detail/house-detail.template.html',
-	controllerAs: 'ctrl'
+	templateUrl: 'view/house-detail/house-detail.template.html'
 });	

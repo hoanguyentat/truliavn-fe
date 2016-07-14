@@ -41,7 +41,7 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 		// catch error when user register not success
 		.catch(function(){
 			$scope.error = true;
-			$scope.errorMessage = "Some thing went wrong";
+			$scope.errorMessage = "Đã có lỗi xảy ra";
 			$scope.registerForm = {};
 		});
 	};
@@ -53,10 +53,8 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 	$http.get(API.getUserInfo(userID))
 	.then(function (res){
 		$scope.userInfo = res.data.user;
-		console.log(res.data.user);
 	})
 	$scope.update = function(){
-		console.log('userid : ' + userID);
 		AuthService.update( userID,
 							$scope.updateForm.fullName, 
 							$scope.updateForm.phone, 
@@ -65,15 +63,13 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 							$scope.updateForm.newpass,
 							$scope.updateForm.confirmpass)
 		.then(function(){
-			$location.path("#!/");
+			$location.path("/");
 			$scope.updateForm = {};
-			console.log("update success");
 		})
 		.catch(function(){
 			$scope.error = true;
 			$scope.errorMessage = "Bạn đã nhập sai mật khẩu. Yêu cầu nhập lại";
 			$scope.updateForm = {};
-			console.log("update fail");
 		})
 	}
 }]);
@@ -82,7 +78,7 @@ app.controller('LogoutControler', ['$scope', '$location', 'AuthService', '$route
 		AuthService.logout()
 		.then(function(){
 			$location.path('/');
-			$route.reload();	
+			$route.reload();
 		});
 	};
 }]);

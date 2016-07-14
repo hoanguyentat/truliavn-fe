@@ -35,7 +35,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	function getUserStatus(){
 		userId = $cookies.get('user.id');
 		if (userId == null) {
-			return $http.get(host +'/api/user').success(function(){
+			return $http.get(host +'/api/user/hola').success(function(){
 				user = false;
 			})
 			.error(function(){
@@ -87,10 +87,8 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 	function update(id,fullname, phone, address, oldPassword, newPassword, repeatPassword){
 		var deferred = $q.defer();
-		console.log('newpass : ' + newPassword);
-		console.log('repeatpass : ' + repeatPassword);
 
-		if(typeof(repeatPassword) == undefined || typeof(newPassword) == undefined){
+		if(typeof(repeatPassword) == 'undefined' || typeof(newPassword) == 'undefined'){
 			$http.post(host +'/api/user/edit', {userId : id,
 											fullname : fullname, 
 											phone : phone, 
@@ -98,17 +96,19 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 											oldPassword : oldPassword})
 			.success(function(data, status){
 				if(status == 200 && data.status == 'success'){
+					console.log(data);
+					$cookies.remove('user.token');
+					$cookies.put('user.token', data.user.token);
 					deferred.resolve();
 				}
 				else {
+					console.log("Cap nhat khong thanh cong");
 					deferred.reject();
 				}
 			})
 			.error(function(data){
 				deferred.reject();
 			});
-			console.log('promise');
-			console.log(deferred.promise);
 			return deferred.promise;
 		}
 		else {
@@ -121,6 +121,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 												newPassword : newPassword,
 												repeatPassword : repeatPassword})
 			.success(function(data, status){
+				console.log(data);
 				if(status == 200 && data.status == 'success'){
 					deferred.resolve();
 				}
@@ -253,6 +254,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 			description: description,
 			houseId: houseId
 		};
+		console.log(houseData)
 		var deferred = $q.defer();
 
 		//sent request add house
@@ -289,6 +291,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 app.factory('API', ['AuthService',function(AuthService){
 	return ({
 		getHouses: getHouses,
+		getHouseInfo: getHouseInfo,
 		getUserInfo: getUserInfo,
 		getHouseDetail: getHouseDetail,
 		getHousesNearby: getHousesNearby,
@@ -305,6 +308,10 @@ app.factory('API', ['AuthService',function(AuthService){
 	}
 	function getHouses(){
 		return AuthService.hostName + '/api/houses?specific=1&raw=1';
+	}
+
+	function getHouseInfo(id){
+		return AuthService.hostName + '/api/house/' + id + '?specific=1&raw=1';
 	}
 	function getHouseDetail(id){
 		return AuthService.hostName + '/api/house/' + id + '?raw=1';

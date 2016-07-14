@@ -7,9 +7,7 @@ angular.module('truliavnApp')
         });
 	}
 ]);
-angular.
-module('truliavnApp')
-.config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
+app.config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
 
 	$routeProvider
@@ -20,13 +18,13 @@ module('truliavnApp')
 		access: {restricted: false}
 	})
 	.when('/for-rent', {
-		templateUrl: 'view/houses/house-for-rent.template.html',
+		templateUrl: 'view/house-list/house-list.template.html',
 		controller: 'HouseForRentCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
 	.when('/for-sell', {
-		templateUrl: 'view/houses/house-for-sell.template.html',
+		templateUrl: 'view/house-list/house-list.template.html',
 		controller: 'HouseForSellCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
@@ -94,23 +92,22 @@ module('truliavnApp')
 		access: {restricted: false}
 	})
 	.when('/filter/:content', {
-		templateUrl:'view/user/house-filter.template.html'
+		templateUrl:'view/user/house-filter.template.html', 
+		controller: 'FilterHousesCtrl',
+		access: {restricted: false}
 	})
 	.otherwise('/');
 }]);
 
-angular.module('truliavnApp')
-.run(function($rootScope, $location, $route, AuthService){
-
-	// console.log($rootScope.userStatus);
+app.run(function($rootScope, $location, $route, AuthService){
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
 		//user must login to access the route
 
 		AuthService.getUserStatus()
 		.then(function success(){
+			// console.log(AuthService.isLoggedIn());
 				$rootScope.userStatus = AuthService.isLoggedIn();
 				$rootScope.userName = AuthService.getUserName();
-				// console.log($rootScope.userStatus);
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
 				$location.path('/login');
 				$route.reload();
@@ -124,7 +121,6 @@ angular.module('matchPassword', [])
     return {
       require: 'ngModel',
       link: function (scope, elem, attrs, ctrl) {
-      	console.log(attrs.pwCheck);
         var firstPassword = '#' + attrs.pwCheck;
         elem.add(firstPassword).on('keyup', function () {
           scope.$apply(function () {

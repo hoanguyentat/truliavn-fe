@@ -3,10 +3,8 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
-		console.log($scope.districts);
 	});
 	var url2 = AuthService.hostName + '/api/wards';
-	// console.log(url2);
 	$http.get(url2).then(function success(response){
 		$scope.wards = response.data.wards;
 	});
@@ -24,8 +22,19 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 	}
 }]);
 
-app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', function($scope, AuthService, $http, HouseService, $location, $routeParams ){
+app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', 'API', function($scope, AuthService, $http, HouseService, $location, $routeParams, API){
 
+	//return old infomation of house
+	var url = API.getHouseInfo($routeParams.postId);
+	console.log(url);
+	$http.get(url).then(function(res){
+		$scope.addHouseForm = res.data.houses[0];
+		console.log($scope.addHouseForm);
+	}, function(res){
+		console.log("Lay du lieu khong thanh cong");
+	})
+
+	//get infomation about district, ward
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
 	});
@@ -33,19 +42,21 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 	$http.get(url2).then(function success(response){
 		$scope.wards = response.data.wards;
 	});
-
-	$scope.addHouse = function($routeParams){
+	//sent request to server
+	$scope.editHouse = function(){
 		$scope.disabled = true;
-		HouseService.addHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams)
+		HouseService.editHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.noOfBedrooms, $scope.addHouseForm.noOfBathrooms, $scope.addHouseForm.noOfFloors, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams.postId)
 		.then(function(){
-			console.log("Thêm nhà thành công");
-			$location.path('/houses');
+			console.log("Sửa nhà thành công");
+			$location.path('/manage-post');
 		})
 		.catch(function(){
-			console.log("Thêm nhà không thành công");
+			console.log("Sửa nhà không thành công");
 		});
 	}
 }]);
+
+
 app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$http', '$cookies', '$location' , function($scope, AuthService, $routeParams, $http, $cookies, $location){
 	var email = $cookies.get('user.email');
 	var token = $cookies.get('user.token');
@@ -63,26 +74,10 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
 	
-	$scope.currentPage = 0;
+	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show
-
-	$scope.setPage = function (pageNo) {
-	$scope.currentPage = pageNo;
-	};
-
-	$scope.pageChanged = function() {
-	console.log('Page changed to: ' + $scope.currentPage);
-	};
-
-	$scope.setItemsPerPage = function(num) {
-	  $scope.pageSize = num;
-	  $scope.currentPage = 1; //reset to first page
-	}
-
-	$scope.filterHouse = function(){
-			console.log($scope.search);
-	};
+	$scope.titlePage = "Nhà đất cho thuê tại Việt Nam";
 
 	$http.get(rentUrl).then(function(response){
 		$scope.houses = response.data.houses;
@@ -97,32 +92,17 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var sellUrl  = API.getHousesForSell();
 	//pagination for search result
-	$scope.currentPage = 0;
+	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show
-
-	$scope.setPage = function (pageNo) {
-	$scope.currentPage = pageNo;
-	};
-
-	$scope.pageChanged = function() {
-	console.log('Page changed to: ' + $scope.currentPage);
-	};
-
-	$scope.setItemsPerPage = function(num) {
-	  $scope.pageSize = num;
-	  $scope.currentPage = 1; //reset to first page
-	}
+	$scope.titlePage = "Nhà đất bán tại Việt Nam";
 
 	$http.get(sellUrl).then(function(response){
 		$scope.houses = response.data.houses;
 
 		$scope.noOfPages = $scope.houses.length;
-		// console.log($scope.houses);
 		angular.forEach($scope.houses, function(val, key){
-				// console.log(val.description);
 			val.description = val.description.slice(0, 150) + '....';
-			// console.log(val.description);
 		});
 	});
 }]);

@@ -5,55 +5,7 @@
 				<div class="row">
 					<center><h2>Thông tin nhà đất để bán</h2></center>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="row filter-houses" ng-controller="HousesFilterCtrl">
-							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="district" id="input" class="form-control" required="required">
-									<option value="">Chọn tỉnh/thành phố</option>
-									<option value="">Hà Nội</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="ward" id="input" class="form-control" ng-model="districtSelected" required="required">
-									<option value="">Chọn quận/huyện</option>
-									<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="ward" id="input" class="form-control" ng-model="wardSelected" required="required">
-									<option value="">Chọn phường/xã</option>
-									<option ng-repeat="(key, ward) in wards | customDistrict: districtSelected" value="{{key}}">{{ward.wardName}}</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="area" id="input" class="form-control" ng-model="area" required="required">
-		                    		<option value="">Chọn diện tích</option>
-		                            <option value="0">Chưa xác định</option>	                        
-		                            <option value="1">&lt;= 30 m2</option>	                        
-		                            <option value="2">30 - 50 m2</option>	                        
-		                            <option value="3">50 - 80 m2</option>	                        
-		                            <option value="4">80 - 100 m2</option>	                        
-		                            <option value="5">100 - 150 m2</option>	                        
-		                            <option value="6">150 - 200 m2</option>	                        
-		                            <option value="7">200 - 250 m2</option>	                        
-		                            <option value="8">250 - 300 m2</option>	                        
-		                            <option value="9">300 - 500 m2</option>	                        
-		                            <option value="10">&gt;= 500 m2</option>
-								</select>
-							</div>
-							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
-								<select name="price" id="input" class="form-control" ng-change="filterPriceHouse()" ng-model="$parent.price">
-									<option value="">Chọn mứa giá</option>
-									<option value="1"> < 1 triệu</option>
-									<option value="2">1 - 3 triệu</option>	                        
-		                            <option value="3">3 - 5 triệu</option>	                        
-		                            <option value="4">5 - 10 triệu</option>	                        
-		                            <option value="5">10 - 40 triệu</option>	                        
-		                            <option value="6">40 - 70 triệu</option>	                        
-		                            <option value="7">70 - 100 triệu</option>
-		                            <option value="8">> 100 triệu</option>
-								</select>
-							</div>
-						</div>
+						<ng-include src="'../view/templates/filter.template.html'" scope="" onload=""></ng-include>
 						<div class="row">
 							<ul class="houses">
 								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
