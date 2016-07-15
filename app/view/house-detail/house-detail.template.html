@@ -75,21 +75,28 @@
 							</div>
 							<div class="detail-description" ng-bind="house.description"></div>
 							<div class="col-xs-12">
-								<h4>Cấu trúc ngôi nhà:</h4>
-								<ul class="list-group">
-									<li class="list-group-item">
-										<span class="badge">{{house.noOfBedrooms}}</span>
-										 Số phòng ngủ: {{house.noOfBedrooms}}
-									</li>
-									<li class="list-group-item">
-										<span class="badge">{{house.noOfBathrooms}} </span>
-										Số phòng tắm: {{house.noOfBathrooms}}
-									</li>
-									<li class="list-group-item">
-										<span class="badge">{{house.noOfFloors}} </span>
-										Số tầng: {{house.noOfFloors}}
-									</li>
-								</ul>
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>Cấu trúc</th>
+											<th>Số lượng</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Số phòng ngủ</td>
+											<td>{{house.noOfBedrooms}}</td>
+										</tr>
+										<tr>
+											<td>Số phòng tắm</td>
+											<td>{{house.noOfBathrooms}}</td>
+										</tr>
+										<tr>
+											<td>Số tầng</td>
+											<td>{{house.noOfFloors}}</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</article>
 					</div>
@@ -191,7 +198,7 @@
 				</div>
 				<div class="col-sm-8 col-md-8 col-xs-12">
 					<hr style="border : solid 2px">
-					<hr style="border : solid 2px">0.
+					<hr style="border : solid 2px">
 					<div ng-if='select == "myHouse"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
@@ -333,8 +340,3 @@
 		</div>
 	</div>
 </span>
-
-
-
-
-

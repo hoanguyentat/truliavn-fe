@@ -6,9 +6,9 @@ html, body {
 	overflow: auto;
 }
 
-body{
+/*body{
 	background: #f5f6f7;
-}
+}*/
 
 .marker_labels{
 	font-size: 18px;

@@ -41,7 +41,6 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 
 app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', 'API', function($scope, AuthService, $http, HouseService, $location, $routeParams, API){
 	// $scope.addHouseForm = {};
-	
 	//return old infomation of house
 	var url = API.getHouseInfo($routeParams.postId);
 	console.log(url);
@@ -105,7 +104,6 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
-	
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show

@@ -7,16 +7,16 @@
 						<ng-include src="'../view/templates/search.template.html'" scope="" onload=""></ng-include>
 						<div class="panel panel-success filter-houses" style="border-right-width: 0px; border-left-width: 0px;">
 							<div class="panel-heading">
-								<span>Có <strong>{{numberOfPages()}}</strong> bài đăng được tìm thấy.</span>
+								<div>Có {{noOfPages}} bài đăng được tìm thấy.</div>
 								<span class="col-xs-offset-3 col-md-offset-4 col-sm-offset-4 col-lg-offset-4">
-									<span><b>Sắp xếp:</b></span>
-									<select name="" ng-model="sortHouse" required="required">
+									<span>Sắp xếp:</span>
+									<select ng-change="sortHouses()" ng-model="$parent.selected" >
 										<option value="">Thông thường</option>
-										<option value="creat_at">Bài đăng mới nhất</option>
-										<option value="price">Giá từ thấp đến cao</option>
-										<option value="price">Giá từ cao đến thấp</option>
-										<option value="area">Diện tích từ thấp đến cao</option>
-										<option value="area">Diện tích từ thấp đến cao</option>
+										<option value="0">Bài đăng mới nhất</option>
+										<option value="1">Giá từ thấp đến cao</option>
+										<option value="2">Giá từ cao đến thấp</option>
+										<option value="3">Diện tích từ thấp đến cao</option>
+										<option value="4">Diện tích từ cao đến thấp</option>
 									</select>
 								</span>
 							</div>
@@ -24,7 +24,7 @@
 								<ul style="padding-left: 0px;">
 								<!-- When ngModel directive is used on an element that represents a component (implemented via a directive with isolate scope), ngModel is locked into this isolate scope and in order to get out and make ngModel useful the ngModel expression has to be prefixed with $parent. -->
 								<!-- ng-change must  be placed before ng-model -->
-									<li ng-repeat="house in houses  | orderBy: sortHouse | startFrom : (currentPage-1)*pageSize | limitTo: pageSize" class="thumbnail row" style="margin-bottom: 0px;">
+									<li ng-repeat="house in houses  | orderBy: attr: reserve | startFrom : (currentPage-1)*pageSize | limitTo: pageSize" class="thumbnail row" style="margin-bottom: 0px;">
 										<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
 											<a href="#!/houses/{{house.id}}" class="thumb">
 											<img ng-if="house.images[0]" ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" class="img img-responsive" alt="{{house.address}}" />

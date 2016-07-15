@@ -5,8 +5,10 @@
 				<div class="row">
 					<center><h2>Các bài đã đăng</h2></center>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<span>Bạn đã đăng {{noOfPost}} bài</span>
 						<div class="row">
 							<ul class="houses">
+
 								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
 									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 										<a href="#!/houses/{{::house.id}}" class="thumb">
