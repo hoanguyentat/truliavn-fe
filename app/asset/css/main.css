@@ -151,15 +151,19 @@ tr.header{
 } 	
 .span-extend {
 	float: right;
+	padding-left: 25px;
+	cursor: pointer;
 }
 .homeDetail{
-	color: #002699;
+	color: #39f;
 }
 .title {
 	color : green;
 }
 
-.angular-google-map-container { height: 500px; }
+.angular-google-map-container { 
+	width: 100%;
+	height: 500px; }
 
 .house-for{
 	padding-top: 60px;

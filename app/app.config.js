@@ -1,4 +1,5 @@
-app.config(
+angular.module('truliavnApp')
+.config(
     ['uiGmapGoogleMapApiProvider', function(GoogleMapApiProviders) {
         GoogleMapApiProviders.configure({
             v: '3.20', //defaults to latest 3.X anyhow
