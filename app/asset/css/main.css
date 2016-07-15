@@ -11,21 +11,24 @@ html, body {
 }*/
 
 .marker_labels{
-	font-size: 18px;
+	font-size: 17px;
 	font-weight: bold;
+	font-style: italic;
 	color: #00f;
 	/*background-color: #6f9;*/
 	border-radius: 10px;
 	padding : 10px;
 
 }
-
+.div-map{
+	background-color: #093;
+	border-radius: 10px;
+}
 .table-map,
 .p-map{
-	background-color: #093;
 	color: #fff;
-	border-radius: 10px;
-	padding: 10px;
+	padding: 5px 10px;
+	margin-bottom : 0px;
 }
 .btn-contact{
 	width: 100%;
