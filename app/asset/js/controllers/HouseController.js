@@ -13,7 +13,7 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 		$scope.disabled = true;
 		HouseService.addHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description)
 		.then(function(){
-			console.log("Them nha thành công");
+			console.log("Thêm nhà thành công");
 			$location.path('/houses');
 		})
 		.catch(function(){
@@ -87,6 +87,37 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 			val.description = val.description.slice(0, 150) + '....';
 		});
 	});
+
+	$scope.sortHouses = function(){
+		// console.log(typeof($scope.selected));
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+		// console.log($scope.attr, $scope.reserve);
+	};
+
 }]);
 
 app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
@@ -105,4 +136,33 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 			val.description = val.description.slice(0, 150) + '....';
 		});
 	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+		// console.log($scope.attr, $scope.reserve);
+	};
 }]);
