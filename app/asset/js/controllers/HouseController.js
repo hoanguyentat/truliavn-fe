@@ -1,39 +1,62 @@
 app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', function($scope, AuthService, $http, HouseService, $location){
-	// console.log(AuthService.getUserToken(), AuthService.getUserEmail());
+	$scope.addHouseForm = {};
+	$scope.addHouseForm.email =  AuthService.getUserEmail();
+	$scope.addHouseForm.token =  AuthService.getUserToken();
+	console.log($scope.addHouseForm.token);
+
+	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
+		console.log(response)
+		$scope.cities = response.data.cities;
+	});
 
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
 	});
-	var url2 = AuthService.hostName + '/api/wards';
-	$http.get(url2).then(function success(response){
+
+	$http.get(AuthService.hostName + '/api/wards').then(function success(response){
 		$scope.wards = response.data.wards;
 	});
-
 	$scope.addHouse = function(){
-		$scope.disabled = true;
-		HouseService.addHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.bedroom, $scope.addHouseForm.bathroom, $scope.addHouseForm.floor, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description)
-		.then(function(){
-			console.log("Them nha thành công");
-			$location.path('/houses');
-		})
-		.catch(function(){
-			console.log("Thêm nhà không thành công");
+		console.log($scope.addHouseForm);
+		var fd = new FormData(document.getElementById('form-add'));
+		console.log(fd);
+		// HouseService.addHouse(fd);
+		$.ajax({
+			url: AuthService.hostName + '/api/house',
+			method: 'POST',
+			contentType: false,
+			processData: false,
+			data: fd,
+			success: function (data) {
+				// console.log(data);
+				window.location.href = "http://localhost:8080/#!/manage-post";
+				$location.path('/manage-post');
+			},
+			error: function (err) {
+				console.log(err);
+			}
 		});
 	}
 }]);
 
 app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', 'API', function($scope, AuthService, $http, HouseService, $location, $routeParams, API){
-
+	// $scope.addHouseForm = {};
 	//return old infomation of house
 	var url = API.getHouseInfo($routeParams.postId);
 	console.log(url);
 	$http.get(url).then(function(res){
 		$scope.addHouseForm = res.data.houses[0];
+		$scope.addHouseForm.email =  AuthService.getUserEmail();
+		$scope.addHouseForm.token =  AuthService.getUserToken();
+		$scope.addHouseForm.houseId = $routeParams.postId;
 		console.log($scope.addHouseForm);
 	}, function(res){
 		console.log("Lay du lieu khong thanh cong");
 	})
 
+	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
+		$scope.cities = response.data.cities;
+	});
 	//get infomation about district, ward
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
 		$scope.districts = response.data.districts;
@@ -44,14 +67,22 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 	});
 	//sent request to server
 	$scope.editHouse = function(){
+		console.log($scope.addHouseForm);
 		$scope.disabled = true;
-		HouseService.editHouse(AuthService.getUserEmail(), AuthService.getUserToken(), $scope.addHouseForm.type,$scope.addHouseForm.title,  $scope.addHouseForm.address,  $scope.addHouseForm.area,  $scope.addHouseForm.houseFor,  $scope.addHouseForm.noOfBedrooms, $scope.addHouseForm.noOfBathrooms, $scope.addHouseForm.noOfFloors, $scope.addHouseForm.interior, $scope.addHouseForm.buildIn, $scope.addHouseForm.price, $scope.addHouseForm.feePeriod, $scope.addHouseForm.city, $scope.addHouseForm.district, $scope.addHouseForm.ward, $scope.addHouseForm.description, $routeParams.postId)
-		.then(function(){
-			console.log("Sửa nhà thành công");
-			$location.path('/manage-post');
-		})
-		.catch(function(){
-			console.log("Sửa nhà không thành công");
+		var fd = new FormData(document.getElementById('form-edit'));
+		$.ajax({
+			url: AuthService.hostName + '/api/house/edit',
+			method: 'POST',
+			contentType: false,
+			processData: false,
+			data: fd,
+			success: function (data) {
+				// console.log(data);
+				window.location.href = "http://localhost:8080/#!/manage-post";
+			},
+			error: function (err) {
+				console.log(err);
+			}
 		});
 	}
 }]);
@@ -73,7 +104,6 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
-	
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5; //Number of pager buttons to show
@@ -87,6 +117,37 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 			val.description = val.description.slice(0, 150) + '....';
 		});
 	});
+
+	$scope.sortHouses = function(){
+		// console.log(typeof($scope.selected));
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+		// console.log($scope.attr, $scope.reserve);
+	};
+
 }]);
 
 app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
@@ -105,4 +166,33 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 			val.description = val.description.slice(0, 150) + '....';
 		});
 	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+		// console.log($scope.attr, $scope.reserve);
+	};
 }]);

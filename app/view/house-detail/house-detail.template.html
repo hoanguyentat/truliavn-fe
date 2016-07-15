@@ -4,7 +4,7 @@
 			<center  style="padding-bottom: 20px;">
 				<h2 class="title"><strong>Thông tin chi tiết căn hộ</strong></h2>
 			</center>
-			<div class="col-xs-12 col-sm-4" style="padding-right : 0px;">
+			<div class="col-xs-12 col-sm-4">
 				<h3 class="title">Thông tin người đăng</h3>
 				<center>
 					<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail" alt="">
@@ -12,15 +12,8 @@
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-info">Tên chủ nhà: {{house.ownerInfo.fullname}}</li>
 					<li class="list-group-item list-group-item-info">SDT: {{house.ownerInfo.phone}}
-						<span>
-
-						</span>
-
 					</li>
 					<li class="list-group-item list-group-item-info">Email: {{house.ownerInfo.email}}
-						<span>
-	
-						</span>
 					</li>
 					<li class="list-group-item list-group-item-info">Địa chỉ: {{house.ownerInfo.address}}</li>
 					<li class="list-group-item list-group-item-info">
@@ -47,7 +40,7 @@
 					<div ng-if="house.images[0]" >
 					    <uib-carousel active="active" interval="3000" no-wrap="false">
 					      	<uib-slide ng-repeat="(key, slide) in house.images track by key" index="key">
-					        	<img ng-src="{{'http://truliavn.sunkhoai.com:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail img-carousel">
+					        	<img ng-src="{{'http://ngocdon.me:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail img-carousel">
 					      	</uib-slide>
 					    </uib-carousel>
 					</div>
@@ -56,7 +49,7 @@
 				</div>
 			
 				<div class="row">
-					<span class=""><b>Ngày đăng:</b>  {{house.created_at | date: "yyyy-MM-dd"}}</span>
+					<center><span class=""><b>Ngày đăng:</b>  {{house.created_at | date: "yyyy-MM-dd"}}</span></center>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-offset-4 col-sm-8">
@@ -73,7 +66,6 @@
 						<span><b>Khu vực: </b> <strong>{{house.address}}</strong></span>
 						<span style="padding-left: 30px;"><b>Giá: </b> <strong> {{house.price}} triệu vnđ </strong> </span>
 						<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
-
 					</div>
 					<div class="row">
 						<article>
@@ -83,21 +75,28 @@
 							</div>
 							<div class="detail-description" ng-bind="house.description"></div>
 							<div class="col-xs-12">
-								<h4>Cấu trúc nhà bao gồm:</h4>
-								<ul class="list-group">
-									<li class="list-group-item">
-										<span class="badge">{{house.noOfBedrooms}}</span>
-										 Số phòng ngủ: {{house.noOfBedrooms}}
-									</li>
-									<li class="list-group-item">
-										<span class="badge">{{house.noOfBathrooms}} </span>
-										Số phòng tắm: {{house.noOfBathrooms}}
-									</li>
-									<li class="list-group-item">
-										<span class="badge">{{house.noOfFloors}} </span>
-										Số tầng: {{house.noOfFloors}}
-									</li>
-								</ul>
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>Cấu trúc</th>
+											<th>Số lượng</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Phòng ngủ</td>
+											<td>{{house.noOfBedrooms}}</td>
+										</tr>
+										<tr>
+											<td>Phòng tắm</td>
+											<td>{{house.noOfBathrooms}}</td>
+										</tr>
+										<tr>
+											<td>Tầng</td>
+											<td>{{house.noOfFloors}}</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</article>
 					</div>
@@ -362,8 +361,3 @@
 		</div>
 	</div>
 </span>
-
-
-
-
-

@@ -9,6 +9,36 @@ angular.module('houseList')
 		$scope.pageSize = 20;
 		$scope.maxSize = 5; //Number of pager buttons to show
 
+		//sort the house by the price, area, time;
+		$scope.sortHouses = function(){
+			// console.log(typeof($scope.selected));
+			switch($scope.selected){
+				case "0":
+					$scope.attr = 'create_at';
+					$scope.reserve = false;
+					break;
+				case "1":
+					$scope.attr = 'price';
+					$scope.reserve = false;
+					break;
+				case "2":
+					$scope.attr = 'price';
+					$scope.reserve = true;
+					break;
+				case "3":
+					$scope.attr = 'area';
+					$scope.reserve = false;
+					break;
+				case "4":
+					$scope.attr = 'area';
+					$scope.reserve = true;
+					break;
+				default:
+					$scope.attr = 'create_at';
+					$scope.reserve = false;
+			}
+			// console.log($scope.attr, $scope.reserve);
+		};
 
 		$http.get(url).then(function success(response){
 			$scope.houses = response.data.houses;

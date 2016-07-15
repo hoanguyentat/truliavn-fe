@@ -5,7 +5,7 @@ app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http','HouseSer
 	console.log(urlPost);
 	$http.get(urlPost).then(function(res){
 		$scope.houses = res.data.houses;
-		console.log($scope.houses);
+		$scope.noOfPost = $scope.houses.length;
 		$scope.numberOfPages = function(){
 			return Math.ceil($scope.houses.length/$scope.pageSize); 
 		};

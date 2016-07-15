@@ -194,42 +194,22 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 		deleteHouse: deleteHouse,
 	});
 
-	function addHouse(email, token, type, title, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, images, description){
-		var houseData = {
-			email: email,
-			token: token,
-			type: type,
-			title: title,
-			address: address,
-			area: area,
-			houseFor: houseFor,
-			noOfBathrooms: noOfBathrooms,
-			noOfBedrooms: noOfBedrooms,
-			noOfFloors: noOfFloors,
-			interior: interior,
-			buildIn: buildIn,
-			price: price,
-			feePeriod: feePeriod,
-			city: city,
-			district: district,
-			ward: ward,
-			images: images,
-			description: description
-		};
-		var deferred = $q.defer();
-
-		//sent request add house
-		$http.post(host +'/api/house', houseData)
-		.success(function(data){
-			console.log("Them nha thanh cong");
-			deferred.resolve();
-		})
-		.error(function(data){
-			console.log("Them nha khong thanh cong");
-			deferred.reject();
+	function addHouse(houseData){
+		//sent request add house use AJAX
+		console.log(houseData);
+		$.ajax({
+			url: host + '/api/house',
+			method: 'POST',
+			contentType: false,
+			processData: false,
+			data: houseData,
+			success: function (data) {
+				console.log(data);
+			},
+			error: function (err) {
+				console.log(err);
+			}
 		});
-
-		return deferred.promise;
 	}
 
 	function editHouse(email, token, type, title, address, area, houseFor, noOfBedrooms, noOfBathrooms, noOfFloors, interior, buildIn, price, feePeriod, city, district, ward, description, houseId){
