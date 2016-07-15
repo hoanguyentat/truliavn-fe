@@ -33,6 +33,12 @@ angular.module('houseDetail')
 		   		,coor_cafe = "";
 		   	var park = []
 		   		,coor_park = "";
+		   	var bus = []
+		   		,coor_bus = "";
+		   	var salon = []
+		   		,coor_salon = "";
+		   	var market = []
+		   		,coor_market = "";
 
 			var primaries = []
 				,juniors = []
@@ -45,7 +51,7 @@ angular.module('houseDetail')
 
 
 			// marker position of the house 
-			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 16};
+			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 15};
 		    // end location
 
 		    //find the neighborhood near your house
@@ -76,7 +82,7 @@ angular.module('houseDetail')
 					$http.post(API.getDistanceNearBy(), {origin : position, 
 														destination : coor_neighbor})
 					.success(function(data, status){
-						console.log(data);
+						// console.log(data);
 						if(status == 200 && data.status == 'success'){
 
 							var res = data.results.rows[0];
@@ -105,7 +111,7 @@ angular.module('houseDetail')
 		    	if(status == 200 && data.status == 'success'){
 		    		var res = data.results.results;
 		    		for (var i in res){
-		    			if(res[i].name.includes('Bệnh viện') || res[i].name.includes('Hospital') || res[i].name.includes('Phòng khám')){
+		    			if(res[i].name.match(/BỆNH VIỆN|HOSPITAL|PHÒNG KHÁM|KHOA/gi)){
 		    				hos.push(res[i]);
 		    				coor_hos += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
 		    			}
@@ -123,6 +129,7 @@ angular.module('houseDetail')
 								hos.title = "Bệnh viện";
 
 								$scope.hospital = hos;
+								
 							}
 						})
 		    	}
@@ -172,16 +179,16 @@ angular.module('houseDetail')
 		    .success(function(data, status){
 		    	if(status == 200 && data.status == 'success'){
 		    		var res = data.results.results;
-		    		console.log('park near');
-		    		console.log(res);
+		    		// console.log('park near');
+		    		// console.log(res);
 		    		for (var i in res){
-		    			if(res[i].name.includes("Công viên") || res[i].name.includes("Vườn hoa") || res[i].name.includes("Park")){
+		    			if(res[i].name.match(/CÔNG VIÊN|VƯỜN HOA|PARK/gi)){
 
 							park.push(res[i]);
 							coor_park += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
 						}
 		    		}
-		    		console.log(park);
+		    		// console.log(park);
 		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_park.substring(1)})
 						.success(function(data, status){
 							if(status == 200 && data.status == 'success'){
@@ -195,6 +202,112 @@ angular.module('houseDetail')
 								park.type = "park";
 								park.title = "Công viên";
 								$scope.park = park;
+							}
+						})
+
+		    	}
+		    });
+
+		    //find bus near by
+		    $http.post(API.getServicesNearBy(),{lat : latitude, 
+												lon : longitude, 
+												radius : 3000, 
+												type : 'bus_station'})
+		    .success(function(data, status){
+		    	if(status == 200 && data.status == 'success'){
+		    		var res = data.results.results;
+		    		for (var i in res){
+		    			var c =res[i].name.charAt(0);
+		    			if(c >= "0" && c <= "9"){
+							bus.push(res[i]);
+							coor_bus += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
+						}
+		    		}
+		  
+		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_bus.substring(1)})
+						.success(function(data, status){
+							if(status == 200 && data.status == 'success'){
+								var res = data.results.rows[0];
+								if(res){
+									for(var i in res.elements){
+										bus[i].distance = res.elements[i].distance.text;
+									}
+									
+								}
+								bus.type = "bus";
+								bus.title = "Bến xe bus";
+								$scope.bus = bus;
+							}
+						})
+
+		    	}
+		    });
+
+		    //find beauty salon near by
+		    $http.post(API.getServicesNearBy(),{lat : latitude, 
+												lon : longitude, 
+												radius : 3000, 
+												type : 'beauty_salon'})
+		    .success(function(data, status){
+		    	if(status == 200 && data.status == 'success'){
+		    		var res = data.results.results;
+		    		for (var i in res){
+		    			var str = res[i].name;
+		    			if(str.match(/MỸ VIỆN|BEAUTY|SALON/gi)){
+		    				// console.log(str);
+							salon.push(res[i]);
+							coor_salon += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
+						}
+		    		}
+		    		// console.log(salon);
+		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_salon.substring(1)})
+						.success(function(data, status){
+							if(status == 200 && data.status == 'success'){
+								var res = data.results.rows[0];
+								if(res){
+									for(var i in res.elements){
+										salon[i].distance = res.elements[i].distance.text;
+									}
+									
+								}
+								salon.type = "salon";
+								salon.title = "Làm đẹp";
+								$scope.salon = salon;
+							}
+						})
+
+		    	}
+		    });
+		    //find the market near by
+		    $http.post(API.getServicesNearBy(),{lat : latitude, 
+												lon : longitude, 
+												radius : 3000, 
+												type : 'grocery_or_supermarket'})
+		    .success(function(data, status){
+		    	if(status == 200 && data.status == 'success'){
+		    		var res = data.results.results;
+		    		for (var i in res){
+		    			var str = res[i].name;
+		    			if(str.match(/SIÊU THỊ|MART/gi)){
+		    				// console.log(str);
+							market.push(res[i]);
+							coor_market += '|' + res[i].geometry.location.lat + ',' + res[i].geometry.location.lng ;
+						}
+		    		}
+		    		// console.log(market);
+		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_market.substring(1)})
+						.success(function(data, status){
+							if(status == 200 && data.status == 'success'){
+								var res = data.results.rows[0];
+								if(res){
+									for(var i in res.elements){
+										market[i].distance = res.elements[i].distance.text;
+									}
+									
+								}
+								market.type = "market";
+								market.title = "Trung tâm thương mại - Siêu thị";
+								$scope.market = market;
 							}
 						})
 
@@ -226,6 +339,8 @@ angular.module('houseDetail')
 						}
 					}
 
+					// console.log('primary');
+					// console.log(primaries);
 
 					//filter primary school
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_primary.substring(1)})
@@ -245,7 +360,7 @@ angular.module('houseDetail')
 
 							}
 						})
-					console.log(primaries.length);
+					// console.log(primaries.length);
 
 					//filter junior school
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_junior.substring(1)})
@@ -287,8 +402,8 @@ angular.module('houseDetail')
 					school_list.push(seniors);
 
 					$scope.school_list = school_list;
-					console.log('school_list');
-					console.log(school_list);
+					// console.log('primary');
+					// console.log(primaries);
 
 				}
 			});
@@ -299,8 +414,12 @@ angular.module('houseDetail')
 				
 				utilities.push({title:'Bệnh viện', type : 'hospital', quantity : hos.length});
 				utilities.push({title:'Công viên', type : 'park', quantity : park.length});
+				utilities.push({title:'Bến xe bus', type : 'bus', quantity : bus.length});
+				utilities.push({title:'Trung tâm thương mại', type : 'market', quantity : market.length});
+				utilities.push({title:'Salon - Làm đẹp', type : 'salon', quantity : salon.length});
 				utilities.push({title:'Nhà hàng', type : 'restaurant', quantity : restaurant.length});
 				utilities.push({title:'Cafe', type : 'cafe', quantity : cafe.length});
+
 				$scope.utilities = utilities;
 				 $scope.markers = [{
 			      	id: 0,
@@ -311,12 +430,13 @@ angular.module('houseDetail')
 			      	options: { draggable: true },
 			      	icon : 'http://maps.google.com/mapfiles/kml/shapes/ranger_station.png'
 			    }];
+
 				var coor_neighbor_marker = [];
 				for(var i in neighbor){
 					var lat = neighbor[i].lat;
 					var lon = neighbor[i].lon;
 					coor_neighbor += '|' + lat + ',' + lon;
-					var content = '<div><table class="table table-map"><tr><td>Địa chỉ</td>'
+					var content = '<div class="div-map"><table class="table table-map"><tr><td>Địa chỉ</td>'
 									+'<td>' + neighbor[i].address+'</td>'
 									+'</tr><tr><td>Giá</td>'
 									+'<td>' + neighbor[i].price+' triệu đồng'+'</td>'
@@ -334,32 +454,20 @@ angular.module('houseDetail')
 					coor_neighbor_marker.push(ret);
 				}
 
-				console.log(coor_neighbor_marker);
+				// console.log(coor_neighbor_marker);
 
-					
-				var coor_primary_marker = [];
-				for(var i = 0; i < primaries.length; i++){
-					var lat = primaries[i].geometry.location.lat;
-					var lon = primaries[i].geometry.location.lng;
-					var content = '<p class="p-map">'+ primaries[i].name + '</p>';
-					var ret = {
-						id : parseInt(i),
-						latitude : lat,
-						longitude : lon,
-						title : "title",
-						price : "price",
-						content : content,
-						options : {labelClass : 'marker_labels', labelContent : ''},
-						icon : "http://maps.google.com/mapfiles/kml/shapes/schools.png"
-					}
-					coor_primary_marker.push(ret);
-				}
+				
+
+				// console.log(coor_primary_marker);					
+				// coor_primary_marker.push(ret);
+
 	
 				var coor_hos_marker = [];
 				for(var i = 0; i < hos.length; i++){
 					var lat = hos[i].geometry.location.lat;
 					var lon = hos[i].geometry.location.lng;
-					var content = '<p class="p-map">'+ hos[i].name + '</p>';
+					var content = '<div class="div-map"><p class="p-map">'+ hos[i].name + '</p>'
+								+ '<p class="p-map">'+ hos[i].vicinity + '</p></div>';
 					var ret = {
 						id : parseInt(i),
 						latitude : lat,
@@ -374,7 +482,8 @@ angular.module('houseDetail')
 				for(var i = 0; i < park.length; i++){
 					var lat = park[i].geometry.location.lat;
 					var lon = park[i].geometry.location.lng;
-					var content = '<p class="p-map">'+ park[i].name + '</p>';
+					var content = '<div class="div-map"><p class="p-map">'+ park[i].name + '</p>'
+								+ '<p class="p-map">'+ park[i].vicinity + '</p></div>';
 					var ret = {
 						id : parseInt(i),
 						latitude : lat,
@@ -390,7 +499,8 @@ angular.module('houseDetail')
 				for(var i = 0; i < restaurant.length; i++){
 					var lat = restaurant[i].geometry.location.lat;
 					var lon = restaurant[i].geometry.location.lng;
-					var content = '<p class="p-map">'+ restaurant[i].name + '</p>';
+					var content = '<div class="div-map"><p class="p-map">'+ restaurant[i].name + '</p>'
+							+ '<p class="p-map">'+ restaurant[i].vicinity + '</p></div>';
 					var ret = {
 						id : parseInt(i),
 						latitude : lat,
@@ -406,24 +516,76 @@ angular.module('houseDetail')
 				for(var i = 0; i < cafe.length; i++){
 					var lat = cafe[i].geometry.location.lat;
 					var lon = cafe[i].geometry.location.lng;
-					var content = '<p class="p-map">'+ cafe[i].name + '</p>';
+					var content = '<div class="div-map"><p class="p-map">'+ cafe[i].name + '</p>'
+								+ '<p class="p-map">'+ cafe[i].vicinity + '</p></div>';
 					var ret = {
 						id : parseInt(i),
 						latitude : lat,
 						longitude : lon,
 						content : content,
 						options : {labelClass : 'marker_labels', labelContent : ''},
-						icon : "http://maps.google.com/mapfiles/kml/pal2/icon19.png"
+						icon : "http://maps.google.com/mapfiles/kml/pal2/icon54.png"
 					}
 					coor_cafe_marker.push(ret);
 				}
 
+				var coor_bus_marker = [];
+				for(var i = 0; i < bus.length; i++){
+					var lat = bus[i].geometry.location.lat;
+					var lon = bus[i].geometry.location.lng;
+					var content = '<div class="div-map"><p class="p-map">'+ bus[i].name + '</p>'
+								+ '<p class="p-map">'+ bus[i].vicinity + '</p></div>';
+					var ret = {
+						id : parseInt(i),
+						latitude : lat,
+						longitude : lon,
+						content : content,
+						options : {labelClass : 'marker_labels', labelContent : ''},
+						icon : "http://maps.google.com/mapfiles/kml/paddle/blu-stars-lv.png"
+					}
+					coor_bus_marker.push(ret);
+				}
+				
+				var coor_salon_marker = [];
+				for(var i = 0; i < salon.length; i++){
+					var lat = salon[i].geometry.location.lat;
+					var lon = salon[i].geometry.location.lng;
+					var content = '<div class="div-map"><p class="p-map">'+ salon[i].name + '</p>'
+								+ '<p class="p-map">'+ salon[i].vicinity + '</p></div>';
+					var ret = {
+						id : parseInt(i),
+						latitude : lat,
+						longitude : lon,
+						content : content,
+						options : {labelClass : 'marker_labels', labelContent : ''},
+						icon : "http://maps.google.com/mapfiles/kml/paddle/grn-stars-lv.png"
+					}
+					coor_salon_marker.push(ret);
+				}
+
+				var coor_market_marker = [];
+				for(var i = 0; i < market.length; i++){
+					var lat = market[i].geometry.location.lat;
+					var lon = market[i].geometry.location.lng;
+					var content = '<div class="div-map"><p class="p-map">'+ market[i].name + '</p>'
+								+ '<p class="p-map">'+ market[i].vicinity + '</p></div>';
+					var ret = {
+						id : parseInt(i),
+						latitude : lat,
+						longitude : lon,
+						content : content,
+						options : {labelClass : 'marker_labels', labelContent : ''},
+						icon : "http://maps.google.com/mapfiles/kml/paddle/purple-stars-lv.png"
+					}
+					coor_market_marker.push(ret);
+				}
 
 				var coor_primary_marker = [];
 				for(var i = 0; i < primaries.length; i++){
 					var lat = primaries[i].geometry.location.lat;
 					var lon = primaries[i].geometry.location.lng;
-					var content = '<p class="p-map">'+ primaries[i].name + '</p>';
+					var content = '<div class="div-map"><p class="p-map">'+ primaries[i].name + '</p>'
+								+ '<p class="p-map">'+ primaries[i].vicinity + '</p></div>';
 					var ret = {
 						id : parseInt(i),
 						latitude : lat,
@@ -434,12 +596,14 @@ angular.module('houseDetail')
 					}
 					coor_primary_marker.push(ret);
 				}
-				console.log(coor_primary_marker);
+				// console.log(coor_primary_marker);
+
 				var coor_junior_marker = [];
 				for(var i = 0; i < juniors.length; i++){
 					var lat = juniors[i].geometry.location.lat;
 					var lon = juniors[i].geometry.location.lng;
-					var content = "<p class='p-map'>"+ juniors[i].name + "</p>";
+					var content = '<div class="div-map"><p class="p-map">'+ juniors[i].name + '</p>'
+								+ '<p class="p-map">'+ juniors[i].vicinity + '</p></div>';
 					var ret = {
 						id : parseInt(i),
 						latitude : lat,
@@ -451,13 +615,14 @@ angular.module('houseDetail')
 					coor_junior_marker.push(ret);
 
 				}
-				console.log(coor_junior_marker)
+				// console.log(coor_junior_marker)
 
 				var coor_senior_marker = [];
 				for(var i = 0; i < seniors.length; i++){
 					var lat = seniors[i].geometry.location.lat;
 					var lon = seniors[i].geometry.location.lng;
-					var content = "<p class='p-map'>"+ seniors[i].name + "</p>";
+					var content = '<div class="div-map"><p class="p-map">'+ seniors[i].name + '</p>'
+								+ '<p class="p-map">'+ seniors[i].vicinity + '</p></div>';
 					var ret = {
 						id : parseInt(i),
 						latitude : lat,
@@ -474,13 +639,14 @@ angular.module('houseDetail')
 
 				$scope.map = {
 					center: {latitude: latitude, longitude: longitude }, 
-					zoom: 14, 
+					zoom: 15, 
 					bounds : {},
 					neighborMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
 			            	// console.log('you have mouseover');
 			              	model.options.labelContent = model.content;
-			              	marker.showWindow = true;
+			              	// marker.showWindow = true;
+			              	model.show =  true;
 			              	$scope.$apply();
 			              	$scope.$digest() 
 			            },
@@ -560,6 +726,56 @@ angular.module('houseDetail')
 			               $scope.$digest() 
 			            }
 			        },
+			       	busMarkersEvents : {
+			            mouseover: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseover');
+			              	model.options.labelContent = model.content;
+			              	marker.showWindow = true;
+			              	$scope.$apply();
+			              	$scope.$digest() 
+			            },
+			            mouseout: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseout');
+			               model.options.labelContent = ' ';
+			               marker.showWindow = false;
+			               $scope.$apply();
+			               $scope.$digest() 
+			            }
+			        },
+			        salonMarkersEvents : {
+			            mouseover: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseover');
+			              	model.options.labelContent = model.content;
+			              	marker.showWindow = true;
+			              	$scope.$apply();
+			              	$scope.$digest() 
+			            },
+			            mouseout: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseout');
+			               model.options.labelContent = ' ';
+			               marker.showWindow = false;
+			               $scope.$apply();
+			               $scope.$digest() 
+			            }
+			        },
+
+			        marketMarkersEvents : {
+			            mouseover: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseover');
+			              	model.options.labelContent = model.content;
+			              	marker.showWindow = true;
+			              	$scope.$apply();
+			              	$scope.$digest() 
+			            },
+			            mouseout: function (marker, eventName, model, args) {
+			            	// console.log('you have mouseout');
+			               model.options.labelContent = ' ';
+			               marker.showWindow = false;
+			               $scope.$apply();
+			               $scope.$digest() 
+			            }
+			        },
+
 
 					primaryMarkersEvents : {
 			            mouseover: function (marker, eventName, model, args) {
@@ -618,6 +834,9 @@ angular.module('houseDetail')
 			    	$scope.parkMarkers = coor_park_marker;
 			    	$scope.restaurantMarkers = coor_restaurant_marker;
 			    	$scope.cafeMarkers = coor_cafe_marker;
+			    	$scope.busMarkers = coor_bus_marker;
+			    	$scope.salonMarkers = coor_salon_marker;
+			    	$scope.marketMarkers = coor_market_marker;
 			    	$scope.neighborMarkers = coor_neighbor_marker;
 			    	$scope.primaryMarkers = coor_primary_marker;
 			        $scope.juniorMarkers = coor_junior_marker;
@@ -626,7 +845,7 @@ angular.module('houseDetail')
 
 
 
-			}, 3000);
+			}, 1500);
 
 		});
 	},
