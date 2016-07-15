@@ -84,15 +84,15 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>Số phòng ngủ</td>
+											<td>Phòng ngủ</td>
 											<td>{{house.noOfBedrooms}}</td>
 										</tr>
 										<tr>
-											<td>Số phòng tắm</td>
+											<td>Phòng tắm</td>
 											<td>{{house.noOfBathrooms}}</td>
 										</tr>
 										<tr>
-											<td>Số tầng</td>
+											<td>Tầng</td>
 											<td>{{house.noOfFloors}}</td>
 										</tr>
 									</tbody>
@@ -189,7 +189,6 @@
 					</div>
 					<h3 class="title">Tiện ích khác</h3>
 					<div ng-repeat='utility in utilities'>
-						<hr style="border : solid 1px">
 						<h3 >{{utility.title}}
 							<span class="glyphicon glyphicon-arrow-right span-extend" ng-click='choose(utility.type)'></span>
 							<span class="span-extend">{{utility.quantity}}</span>
@@ -197,8 +196,6 @@
 					</div>
 				</div>
 				<div class="col-sm-8 col-md-8 col-xs-12">
-					<hr style="border : solid 2px">
-					<hr style="border : solid 2px">
 					<div ng-if='select == "myHouse"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
@@ -277,10 +274,6 @@
 		</ui-gmap-markers>
 	 	
 	</ui-gmap-google-map> -->
-
-
-					<hr style="border : solid 2px">
-					<hr style="border : solid 2px">
 				</div>
 			</div>
 		</div>
