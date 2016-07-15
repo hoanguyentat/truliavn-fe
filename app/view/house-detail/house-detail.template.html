@@ -40,7 +40,7 @@
 					<div ng-if="house.images[0]" >
 					    <uib-carousel active="active" interval="3000" no-wrap="false">
 					      	<uib-slide ng-repeat="(key, slide) in house.images track by key" index="key">
-					        	<img ng-src="{{'http://truliavn.sunkhoai.com:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail img-carousel">
+					        	<img ng-src="{{'http://ngocdon.me:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail img-carousel">
 					      	</uib-slide>
 					    </uib-carousel>
 					</div>
@@ -66,7 +66,6 @@
 						<span><b>Khu vực: </b> <strong>{{house.address}}</strong></span>
 						<span style="padding-left: 30px;"><b>Giá: </b> <strong> {{house.price}} triệu vnđ </strong> </span>
 						<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
-
 					</div>
 					<div class="row">
 						<article>
@@ -76,7 +75,7 @@
 							</div>
 							<div class="detail-description" ng-bind="house.description"></div>
 							<div class="col-xs-12">
-								<h4>Cấu trúc nhà bao gồm:</h4>
+								<h4>Cấu trúc ngôi nhà:</h4>
 								<ul class="list-group">
 									<li class="list-group-item">
 										<span class="badge">{{house.noOfBedrooms}}</span>

@@ -10,7 +10,7 @@
 								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
 									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
 										<a href="#!/houses/{{::house.id}}" class="thumb">
-										<img ng-if="house.images[0]" ng-src="{{house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
+										<img ng-if="house.images[0]" ng-src="{{'http://ngocdon.me:3000/'+house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
 										<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
 										
 										</a>
