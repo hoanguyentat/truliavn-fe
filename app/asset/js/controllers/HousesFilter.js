@@ -1,8 +1,13 @@
 app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$cookies','$location', function($scope, $http, AuthService, $cookies, $location ){
+	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
+		$scope.cities = response.data.cities;
+		// console.log($rootScope.cities);
+	});
+
 	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
-			$scope.districts = response.data.districts;
-			// console.log($rootScope.districts);
-		});
+		$scope.districts = response.data.districts;
+		// console.log($rootScope.districts);
+	});
 
 	$scope.search = function(){
 		$cookies.remove('filter.houseFor');
@@ -16,7 +21,6 @@ app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$c
 		if ($scope.houseFor == undefined ) {$scope.houseFor = 0};
 		if ($scope.city == undefined ) {$scope.city = 0};
 		if ( $scope.districtSelected == undefined) {$scope.districtSelected=0};
-		console.log($scope.houseFor, $scope.city, $scope.districtSelected, $scope.area, $scope.price);
 		$cookies.put('filter.houseFor', $scope.houseFor);
 		$cookies.put('filter.city', $scope.city);		
 		$cookies.put('filter.districtSelected', $scope.districtSelected);
@@ -58,10 +62,8 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
 	var district = $cookies.get('filter.districtSelected');
 	var area = $cookies.get('filter.area');
 	var price = $cookies.get('filter.price');
-	console.log($cookies.get('filter.city'), $cookies.get('filter.districtSelected'), $cookies.get('filter.area'), $cookies.get('filter.price'));
 	var url = AuthService.hostName + '/api/houses?district=' + district + '&city=' + city+ '&houseFor='+ houseFor + '&minArea=' + areaArr[area][0] + '&maxArea=' + areaArr[area][1] + '&minPrice=' + priceArr[price][0] + '&maxPrice='+ priceArr[price][1];
-	console.log(url);
-	$scope.currentPage = 0;
+	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5;
 
@@ -76,4 +78,33 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
 			console.log('Lỗi rỗi');
 		}
 	);
+	$scope.sortHouses = function(){
+		// console.log(typeof($scope.selected));
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+		// console.log($scope.attr, $scope.reserve);
+	};
 }]);

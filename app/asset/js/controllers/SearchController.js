@@ -10,22 +10,15 @@ app.controller('SearchContent', ['$scope', '$http', 'AuthService', '$rootScope',
 	};
 }]);
 
-app.controller('SearchController', ['$scope', '$http', 'AuthService', '$rootScope', '$location', '$cookies', function($scope, $http, AuthService, $rootScope, $location, $cookies){
+app.controller('SearchController', ['$scope', '$http', 'AuthService', '$rootScope', '$location', '$cookies', '$sce', function($scope, $http, AuthService, $rootScope, $location, $cookies, $sce){
 	// var list = this
-	$scope.currentPage = 0;
+	$scope.currentPage = 1;
 	$scope.pageSize = 20;
+	$scope.maxSize = 5
 	$http.post(AuthService.hostName + '/api/search', {search: $cookies.get('search.content'), housefor: $cookies.get('search.housefor')})
 	.then(function(res){
 		$scope.houses = res.data.houses;
-		console.log(res.data.houses);
-		$scope.noOfPost = $scope.houses.length;
-		console.log("Do dai quang: " + $scope.noOfPost);
-		$scope.numberOfPages = function(){
-			return Math.ceil($scope.houses.length/$scope.pageSize); 
-		};
-		angular.forEach($scope.houses, function(val, key){
-			val.description = val.description.slice(0, 150) + '....';
-		});
+		$scope.noOfPages = $scope.houses.length;
 		$cookies.remove('search.content');
 		$cookies.remove('search.housefor');
 	});

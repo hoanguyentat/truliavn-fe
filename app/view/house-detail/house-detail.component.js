@@ -1,7 +1,7 @@
 angular.module('houseDetail')
 .component('houseDetail', {
 
-	controller: function HouseDetailController($rootScope,$scope, $http, $log, $routeParams, API){
+	controller: function HouseDetailController($rootScope,$scope, $http, $log, $routeParams, API, $sce){
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
 
     	
@@ -16,6 +16,7 @@ angular.module('houseDetail')
 
 			$scope.status = data.status;
 			$scope.house = data.houses[0];
+			$scope.house.description = $sce.trustAsHtml($scope.house.description);
 
 			var latitude = $scope.house.lat;
 			var longitude = $scope.house.lon;

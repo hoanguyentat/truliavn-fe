@@ -7,7 +7,7 @@
 						<ng-include src="'../view/templates/search.template.html'" scope="" onload=""></ng-include>
 						<div class="panel panel-success filter-houses" style="border-right-width: 0px; border-left-width: 0px;">
 							<div class="panel-heading">
-								<div>Có {{noOfPages}} bài đăng được tìm thấy.</div>
+								<span>Có {{noOfPages}} bài đăng được tìm thấy.</span>
 								<span class="col-xs-offset-3 col-md-offset-4 col-sm-offset-4 col-lg-offset-4">
 									<span>Sắp xếp:</span>
 									<select ng-change="sortHouses()" ng-model="$parent.selected" >
@@ -43,13 +43,7 @@
 								</ul>
 							</div>
 						</div>
-					   <button class= "btn btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-					        Previous
-					    </button>
-					    <span class="btn btn-default"> Page {{currentPage+1}} of {{numberOfPages()}}</span>
-					    <button class= "btn btn-primary" ng-disabled="currentPage >= houses.length/pageSize - 1" ng-click="currentPage=currentPage+1">
-					        Next
-					    </button>
+					 <uib-pagination total-items="noOfPages" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" items-per-page="pageSize"></uib-pagination>
 						
 				</div>
 			</div>

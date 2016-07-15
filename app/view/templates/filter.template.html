@@ -12,15 +12,15 @@
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="district" class="form-control select-filter" ng-model='city'>
-					<option value="">Chọn tỉnh/thành phố</option>
-					<option value="1">Hà Nội</option>
+				<select name="city" class="form-control select-filter" ng-model="citySelected" required="required">
+					<option value="">Chọn tinh/thanh pho</option>
+					<option ng-repeat="(id, city) in cities" value="{{id}}">{{city.cityName}}</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="ward" class="form-control select-filter" ng-model="districtSelected" required="required">
+				<select name="district" class="form-control select-filter" ng-model="districtSelected" required="required">
 					<option value="">Chọn quận/huyện</option>
-					<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
+					<option ng-repeat="(id, district) in districts | customCity: citySelected" value="{{id}}">{{district.districtName}}</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
