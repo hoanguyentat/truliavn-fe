@@ -166,7 +166,8 @@
 					</div>						
 				</div>			
 			</div>
-			<div class="row"><center><h1 class="title">Tiện ích xung quanh ngôi nhà</h1></center></div>
+
+			<div class="row"><center><h1 class="title">Tiện ích xung quanh ngôi nhà {{map.zoom}}</h1></center></div>
 			<div class="row">
 				<div class="col-sm-4 col-md-4 col-xs-12 school">
 					<h3 class="title">Trường học gần đây</h3>
@@ -190,16 +191,15 @@
 					</div>
 					<h3 class="title">Tiện ích khác</h3>
 					<div ng-repeat='utility in utilities'>
-						<hr style="border : solid 1px">
-						<h3 >{{utility.title}}
-							<span class="glyphicon glyphicon-arrow-right span-extend" ng-click='choose(utility.type)'></span>
-							<span class="span-extend">{{utility.quantity}}</span>
-						</h3>
+						<div class="col-xs-12">
+							<h3 >{{utility.title}}
+								<span class="glyphicon glyphicon-arrow-right span-extend" ng-click='choose(utility.type)'></span>
+								<span class="span-extend">{{utility.quantity}}</span>
+							</h3>
+						</div>
 					</div>
 				</div>
 				<div class="col-sm-8 col-md-8 col-xs-12">
-					<hr style="border : solid 2px">
-					<hr style="border : solid 2px">0.
 					<div ng-if='select == "myHouse"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
@@ -266,6 +266,30 @@
             				</ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
+					<div ng-if='select == "bus"'>
+						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+						    <ui-gmap-markers models="busMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.busMarkersEvents">
+						    </ui-gmap-markers>
+						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
+            				</ui-gmap-markers>
+						</ui-gmap-google-map>
+					</div>
+					<div ng-if='select == "salon"'>
+						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+						    <ui-gmap-markers models="salonMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.salonMarkersEvents">
+						    </ui-gmap-markers>
+						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
+            				</ui-gmap-markers>
+						</ui-gmap-google-map>
+					</div>
+					<div ng-if='select == "market"'>
+						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+						    <ui-gmap-markers models="marketMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.marketMarkersEvents">
+						    </ui-gmap-markers>
+						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
+            				</ui-gmap-markers>
+						</ui-gmap-google-map>
+					</div>
 
 <!-- 					
 	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
@@ -279,9 +303,6 @@
 	 	
 	</ui-gmap-google-map> -->
 
-
-					<hr style="border : solid 2px">
-					<hr style="border : solid 2px">
 				</div>
 			</div>
 		</div>
@@ -301,8 +322,8 @@
 	<div class="container">
 		<div class="col-xs-12">
 			<h1 class="title text-center">Hàng xóm và các khu vực lân cận</h1>
-	  	  	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-			    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
+	  	  	<ui-gmap-google-map center="map.center" zoom="13" draggable="true" options="options" bounds="map.bounds">
+			    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents" modelsbyref="false">
 			    </ui-gmap-markers>
 			    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
             	</ui-gmap-markers>
