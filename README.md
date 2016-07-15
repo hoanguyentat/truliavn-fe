@@ -9,7 +9,7 @@
 	$ npm install http-server -g 	
 
 ## 2.Run
-  - In the /app directory cmd type:
+  - In the / directory cmd type:
   
 	$ http-server.
   - The Appliction run in http://localhost:8080
