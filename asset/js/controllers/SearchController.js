@@ -2,25 +2,25 @@ app.controller('SearchContent', ['$scope', '$http', 'AuthService', '$rootScope',
 	// var searchContent = $scope.SearchForm.searchContent;
 	$scope.title = "Tìm kiếm nhà đất";
 	$scope.search = function(){
-		$cookies.remove('search.content');
 		$cookies.remove('search.housefor');
-		$cookies.put('search.content', $scope.SearchForm.searchContent);
 		$cookies.put('search.housefor', $scope.SearchForm.houseFor);
 		$location.path('/search/' + $scope.SearchForm.searchContent);
 	};
 }]);
 
-app.controller('SearchController', ['$scope', '$http', 'AuthService', '$rootScope', '$location', '$cookies', '$sce', function($scope, $http, AuthService, $rootScope, $location, $cookies, $sce){
+app.controller('SearchController', ['$scope', '$http', 'AuthService', '$rootScope', '$location', '$cookies', '$sce','$routeParams', function($scope, $http, AuthService, $rootScope, $location, $cookies, $sce, $routeParams){
 	// var list = this
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5
-	$http.post(AuthService.hostName + '/api/search', {search: $cookies.get('search.content'), housefor: $cookies.get('search.housefor')})
+	$http.post(AuthService.hostName + '/api/search', {search: $routeParams.searchContent, housefor: $cookies.get('search.housefor')})
 	.then(function(res){
 		$scope.houses = res.data.houses;
 		$scope.noOfPages = $scope.houses.length;
-		$cookies.remove('search.content');
 		$cookies.remove('search.housefor');
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
 	});
 
 	$scope.sortHouses = function(){
