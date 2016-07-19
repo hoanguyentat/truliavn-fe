@@ -106,22 +106,22 @@
 				</div>			
 			</div>
 
-			<div class="row"><center><h1 class="title">Tiện ích xung quanh ngôi nhà {{map.zoom}}</h1></center></div>
+			<div class="row"><center><h1 class="title">Tiện ích xung quanh ngôi nhà {{mapHospital.zoom}}</h1></center></div>
 			<div class="row">
 				<div class="col-sm-4 col-md-4 col-xs-12 school">
 					<h3 class="title">Trường học gần đây</h3>
-					<div ng-repeat='i in school_list'>
+					<div ng-repeat='i in ::school_list'>
 						<div class="col-xs-12">
-							<h3>{{i.title}}	
-								<span class="glyphicon glyphicon-menu-hamburger span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-click='choose(i.type)'></span>
+							<h3>{{::i.title}}	
+								<span class="glyphicon glyphicon-menu-hamburger span-extend" data-toggle="collapse" data-target='#{{::i.type}}' ng-click='choose(i.type)'></span>
 							</h3>
-							<div id="{{i.type}}" class="collapse">
+							<div ng-if='select == i.type' id="{{::i.type}}">
 								<table class="table table-condensed">
 									<thead></thead>
 									<tbody>
-										<tr ng-repeat="item in i">
-											<td class="school_name">{{item.name}}</td>
-											<td class="distance">{{item.distance}}</td>
+										<tr ng-repeat="item in ::i">
+											<td class="school_name">{{::item.name}}</td>
+											<td class="distance">{{::item.distance}}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -138,134 +138,113 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-8 col-md-8 col-xs-12">
+
+				<div class="col-sm-8 col-md-8 col-xs-12 map-marker">
 					<div ng-if='select == "myHouse"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+							<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
+							</ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
 
 					<div ng-if='select == "primary"'>
-						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="primaryMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
+						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
+						    <ui-gmap-markers models="primaryMarkers" idKey="primaryMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
 						    </ui-gmap-markers>
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
-
+					
 					<div ng-if='select == "junior"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="juniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
+						    <ui-gmap-markers models="juniorMarkers" idKey="juniorMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
 						    </ui-gmap-markers>
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map> 
 					</div>
 					<div ng-if='select == "senior"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="seniorMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
+						    <ui-gmap-markers models="seniorMarkers" idKey="seniorMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
 						    </ui-gmap-markers>
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
-
+					
 					<div ng-if='select == "hospital"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="hospitalMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.hospitalMarkersEvents">
+						    <ui-gmap-markers models="hospitalMarkers" idKey="hospitalMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.hospitalMarkersEvents">
 						    </ui-gmap-markers>
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
-
+					
 					<div ng-if='select == "park"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="parkMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.parkMarkersEvents">
+						    <ui-gmap-markers models="parkMarkers" idKey="parkMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.parkMarkersEvents">
 						    </ui-gmap-markers>
 						    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
 					<div ng-if='select == "restaurant"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="restaurantMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.restaurantMarkersEvents">
+						    <ui-gmap-markers models="restaurantMarkers" idKey="restaurantMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.restaurantMarkersEvents">
 						    </ui-gmap-markers>
 						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
 					<div ng-if='select == "cafe"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="cafeMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.cafeMarkersEvents">
+						    <ui-gmap-markers models="cafeMarkers" idKey="cafeMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.cafeMarkersEvents">
 						    </ui-gmap-markers>
 						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
 					<div ng-if='select == "bus"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="busMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.busMarkersEvents">
+						    <ui-gmap-markers models="busMarkers" idKey="busMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.busMarkersEvents">
 						    </ui-gmap-markers>
 						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
 					<div ng-if='select == "salon"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="salonMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.salonMarkersEvents">
+						    <ui-gmap-markers models="salonMarkers" idKey="salonMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.salonMarkersEvents">
 						    </ui-gmap-markers>
 						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
 					<div ng-if='select == "market"'>
 						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-						    <ui-gmap-markers models="marketMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.marketMarkersEvents">
+						    <ui-gmap-markers models="marketMarkers" idKey="marketMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.marketMarkersEvents">
 						    </ui-gmap-markers>
 						     <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-            				</ui-gmap-markers>
+					        </ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>
-
-<!-- 					
-	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-	 
-	 	   <ui-gmap-markers models="restaurantMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.restaurantMarkersEvents" ng-if='select == "restaurant"'>
-	 	</ui-gmap-markers>
-	 
-				
-		<ui-gmap-markers models="cafeMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.cafeMarkersEvents" ng-if='select == "cafe"'>
-		</ui-gmap-markers>
-	 	
-	</ui-gmap-google-map> -->
 
 				</div>
 			</div>
 		</div>
 	</div>
 
-<!-- 	<div class="container">
-	<p>{{map.zoom}}</p>
-	<button class="btn btn-primary" ng-click='choose("primary")'>Primary</button>
-	<button class="btn btn-primary" ng-click='choose("junior")'>Junior</button>
-	<button class="btn btn-primary" ng-click='choose("senior")'>Senior</button>
-	<button class="btn btn-primary" ng-click='choose("hospital")'>hospital</button>
-	<button class="btn btn-primary" ng-click='choose("restaurant")'>restaurant</button>
-	<button class="btn btn-primary" ng-click='choose("cafe")'>cafe</button>
-	<button class="btn btn-primary" ng-click='choose("park")'>park</button>
-
-</div> -->
 	<div class="container">
 		<div class="col-xs-12">
 			<h1 class="title text-center">Hàng xóm và các khu vực lân cận</h1>
-	  	  	<ui-gmap-google-map center="map.center" zoom="13" draggable="true" options="options" bounds="map.bounds">
-			    <ui-gmap-markers fit="true" models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents" modelsbyref="false">
-			    </ui-gmap-markers>
-			    <ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
+	  	  	<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+	  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
             	</ui-gmap-markers>
+			    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
+				</ui-gmap-markers>
+
 			</ui-gmap-google-map>
 		    <table class="table table-hover">
 				<thead>
@@ -282,9 +261,9 @@
 						<td>So sánh</td>
 					</tr>
 					<tr ng-repeat="item in ::neighbor" class='neighbor'>
-						<td><a href="#!/houses/{{::item.id}}">{{item.title}}</a></td>
-						<td class="dist">{{item.distance}}</td>
-						<td>{{item.price}}</td>
+						<td><a href="#!/houses/{{::item.id}}">{{::item.title}}</a></td>
+						<td class="dist">{{::item.distance}}</td>
+						<td>{{::item.price}}</td>
 						<td></td>
 						<td></td>
 
