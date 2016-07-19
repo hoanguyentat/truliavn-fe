@@ -600,6 +600,7 @@ angular.module('houseDetail')
 				utilities.push({title:'Nhà hàng', type : 'restaurant', quantity : restaurant.length});
 				utilities.push({title:'Cafe', type : 'cafe', quantity : cafe.length});
 				// console.log($scope.utilities);*/
+				$scope.selected = $scope.utilities[0];
 
 				console.log(coor_neighbor_marker);
 				console.log(longitude +'-'+ latitude);
@@ -795,7 +796,7 @@ angular.module('houseDetail')
 		    		if (!ov.southwest && nv.southwest) {
 				        console.log($scope.map.bounds);
 				    }
-				    
+
 			       	$scope.neighborMarkers = coor_neighbor_marker;
 			    	$scope.hospitalMarkers = coor_hospital_marker;
 			    	$scope.parkMarkers = coor_park_marker;
