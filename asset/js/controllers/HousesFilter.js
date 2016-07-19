@@ -1,14 +1,12 @@
 app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$cookies','$location', function($scope, $http, AuthService, $cookies, $location ){
 	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
 		$scope.cities = response.data.cities;
-		// console.log($rootScope.cities);
 	});
-
-	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
-		$scope.districts = response.data.districts;
-		// console.log($rootScope.districts);
-	});
-
+	$scope.cityChange = function(){
+		$http.get(AuthService.hostName + '/api/districts?city=' + $scope.citySelected).then(function success(response){
+			$scope.districts = response.data.districts;
+		});
+	}
 	$scope.search = function(){
 		$cookies.remove('filter.houseFor');
 		$cookies.remove('filter.city');
