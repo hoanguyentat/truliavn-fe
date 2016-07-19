@@ -2,7 +2,6 @@ app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http','HouseSer
 	var urlPost = API.getUserPost($cookies.get('user.id'));
 	$scope.currentPage = 0;
 	$scope.pageSize = 20;
-	console.log(urlPost);
 	$http.get(urlPost).then(function(res){
 		$scope.houses = res.data.houses;
 		$scope.noOfPost = $scope.houses.length;

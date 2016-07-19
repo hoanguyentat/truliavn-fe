@@ -2,40 +2,47 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 	$scope.addHouseForm = {};
 	$scope.addHouseForm.email =  AuthService.getUserEmail();
 	$scope.addHouseForm.token =  AuthService.getUserToken();
-	console.log($scope.addHouseForm.token);
 
 	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
-		console.log(response)
 		$scope.cities = response.data.cities;
 	});
-
-	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
-		$scope.districts = response.data.districts;
-	});
-
-	$http.get(AuthService.hostName + '/api/wards').then(function success(response){
-		$scope.wards = response.data.wards;
-	});
-	$scope.addHouse = function(){
-		console.log($scope.addHouseForm);
-		var fd = new FormData(document.getElementById('form-add'));
-		console.log(fd);
-		// HouseService.addHouse(fd);
-		$.ajax({
-			url: AuthService.hostName + '/api/house',
-			method: 'POST',
-			contentType: false,
-			processData: false,
-			data: fd,
-			success: function (data) {
-				// console.log(data);
-				window.location.href = "http://localhost:8080/#!/manage-post";
-				$location.path('/manage-post');
-			},
-			error: function (err) {
-				console.log(err);
-			}
+	$scope.cityChange = function(){
+		$http.get(AuthService.hostName + '/api/districts?city='+$scope.addHouseForm.city).then(function success(response){
+			$scope.districts = response.data.districts;
 		});
+	}
+
+	$scope.districtChange = function(){
+		$http.get(AuthService.hostName + '/api/wards?district='+$scope.addHouseForm.district).then(function success(response){
+			$scope.wards = response.data.wards;
+		});
+		$http.get(AuthService.hostName + '/api/streets?district='+$scope.addHouseForm.district).then(function success(response){
+			$scope.streets = response.data.streets;
+		});
+	}
+	$scope.addHouse = function(){
+		if (Object.keys($scope.addHouseForm).length < 10) {
+			$scope.err = true;
+			$scope.errMessage = "Xin hãy điền đầy đủ thông tin";
+		}
+		else{
+			var fd = new FormData(document.getElementById('form-add'));
+			$.ajax({
+				url: AuthService.hostName + '/api/house',
+				method: 'POST',
+				contentType: false,
+				processData: false,
+				data: fd,
+				success: function (data) {
+					console.log(data);
+					window.location.href = "http://localhost:8080/#!/manage-post";
+					$location.path('/manage-post');
+				},
+				error: function (err) {
+					console.log(err);
+				}
+			});
+		}
 	}
 }]);
 
@@ -43,13 +50,11 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 	// $scope.addHouseForm = {};
 	//return old infomation of house
 	var url = API.getHouseInfo($routeParams.postId);
-	console.log(url);
 	$http.get(url).then(function(res){
 		$scope.addHouseForm = res.data.houses[0];
 		$scope.addHouseForm.email =  AuthService.getUserEmail();
 		$scope.addHouseForm.token =  AuthService.getUserToken();
 		$scope.addHouseForm.houseId = $routeParams.postId;
-		console.log($scope.addHouseForm);
 	}, function(res){
 		console.log("Lay du lieu khong thanh cong");
 	})
@@ -58,32 +63,45 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 		$scope.cities = response.data.cities;
 	});
 	//get infomation about district, ward
-	$http.get(AuthService.hostName + '/api/districts').then(function success(response){
-		$scope.districts = response.data.districts;
-	});
-	var url2 = AuthService.hostName + '/api/wards';
-	$http.get(url2).then(function success(response){
-		$scope.wards = response.data.wards;
-	});
+	$scope.cityChange = function(){
+		$http.get(AuthService.hostName + '/api/districts?city='+$scope.addHouseForm.city).then(function success(response){
+			$scope.districts = response.data.districts;
+		});
+	}
+
+	$scope.districtChange = function(){
+		$http.get(AuthService.hostName + '/api/wards?district='+$scope.addHouseForm.district).then(function success(response){
+			$scope.wards = response.data.wards;
+		});
+		$http.get(AuthService.hostName + '/api/streets?district='+$scope.addHouseForm.district).then(function success(response){
+			$scope.streets = response.data.streets;
+		});
+	}
 	//sent request to server
 	$scope.editHouse = function(){
-		console.log($scope.addHouseForm);
-		$scope.disabled = true;
-		var fd = new FormData(document.getElementById('form-edit'));
-		$.ajax({
-			url: AuthService.hostName + '/api/house/edit',
-			method: 'POST',
-			contentType: false,
-			processData: false,
-			data: fd,
-			success: function (data) {
-				// console.log(data);
-				window.location.href = "http://localhost:8080/#!/manage-post";
-			},
-			error: function (err) {
-				console.log(err);
-			}
-		});
+		if (Object.keys($scope.addHouseForm).length < 10) {
+			console.log("Van nho hon 10");
+			$scope.err = true;
+			$scope.errMessage = "Xin hãy điền đầy đủ thông tin";
+		}
+		else{
+			$scope.disabled = true;
+			var fd = new FormData(document.getElementById('form-edit'));
+			$.ajax({
+				url: AuthService.hostName + '/api/house/edit',
+				method: 'POST',
+				contentType: false,
+				processData: false,
+				data: fd,
+				success: function (data) {
+					// console.log(data);
+					window.location.href = "http://localhost:8080/#!/manage-post";
+				},
+				error: function (err) {
+					console.log(err);
+				}
+			});
+		}
 	}
 }]);
 

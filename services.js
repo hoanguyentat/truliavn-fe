@@ -141,7 +141,6 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			if (status == 200 && data.status =="success") {
 
 				//put userId to cookies
-				console.log(data.user);
 				$cookies.put('userName', data.user.fullname);
 				$cookies.put('user.id', data.user.id);
 				$cookies.put('user.email', data.user.email);
@@ -253,13 +252,12 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 
 	function deleteHouse(email, token, houseId){
 		var deferred = $q.defer();
-
 		$http.post(host +'/api/house/delete', {email: email, token: token, houseId: houseId})
 		.success(function(response){
 			console.log("Xoa nha thanh cong");
 			deferred.resolve();
 		})
-		.error(function(data){
+		.error(function(err){
 			console.log("Xoa nha khong thanh cong");
 			deferred.reject();
 		});
