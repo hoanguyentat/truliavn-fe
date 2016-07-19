@@ -128,7 +128,7 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
 	$scope.currentPage = 1;
-	$scope.pageSize = 20;
+	$scope.pageSize = 10;
 	$scope.maxSize = 5; //Number of pager buttons to show
 	$scope.titlePage = "Nhà đất cho thuê tại Việt Nam";
 
@@ -177,7 +177,7 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 	var sellUrl  = API.getHousesForSell();
 	//pagination for search result
 	$scope.currentPage = 1;
-	$scope.pageSize = 20;
+	$scope.pageSize = 10;
 	$scope.maxSize = 5; //Number of pager buttons to show
 	$scope.titlePage = "Nhà đất bán tại Việt Nam";
 

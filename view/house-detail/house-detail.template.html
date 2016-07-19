@@ -83,19 +83,19 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
+										<tr ng-show="house.noOfBedrooms">
 											<td>Phòng ngủ</td>
 											<td>{{house.noOfBedrooms}}</td>
 										</tr>
-										<tr>
+										<tr ng-show="house.noOfBathrooms">
 											<td>Phòng tắm</td>
 											<td>{{house.noOfBathrooms}}</td>
 										</tr>
-										<tr>
+										<tr ng-show="house.noOfFloors">
 											<td>Tầng</td>
 											<td>{{house.noOfFloors}}</td>
 										</tr>
-										<tr>
+										<tr ng-show="house.buildIn">
 											<td>Nhà xây năm</td>
 											<td>{{house.buildIn}}</td>
 										</tr>
