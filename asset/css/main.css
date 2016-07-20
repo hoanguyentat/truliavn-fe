@@ -10,27 +10,7 @@ html, body {
 	background: #f5f6f7;
 }*/
 
-.marker_labels{
-	font-size: 17px;
-	font-weight: bold;
-	font-style: italic;
-	color: #00f;
-	/*background-color: #6f9;*/
-	border-radius: 10px;
-	padding : 10px;
 
-}
-.div-map{
-	background-color: #093;
-	border-radius: 10px;
-}
-.table-map,
-.p-map{
-	overflow: initial;
-	color: #fff;
-	padding: 5px 10px;
-	margin-bottom : 0px;
-}
 .btn-contact{
 	width: 100%;
 }
@@ -72,7 +52,7 @@ html, body {
 /*-------------Deatail-form---------*/
 .detail-description{
 	color: #000;
-	font-size: 15px;
+	font-size: 18px;
 }
 
 .detail-article{
@@ -139,7 +119,30 @@ tr.header{
 	font-size: 25px;
 	color: gray;
 }
-
+tr.houseInfo{
+	font-size: 18px;
+}
+.house-detail{
+	margin-top: 15px;
+}
+.ownerInfo{
+	font-size: 18px;
+	color: #091a2e;
+}
+.img-agent{
+	margin-bottom: 15px;
+}
+.panel{
+	background: #f7f9ff;
+	border-color:#2ecc71; 
+}
+.panel-heading{
+	background: #2ecc71;
+	color: #fff;
+	font-weight: bold;
+	font-size: 20px;
+}
+/* ---------UTITLITIES NEAR THE HOUSE--------- */
 #description, 
 #school{
 	color: #f06;
@@ -158,9 +161,7 @@ tr.header{
 	padding-left: 25px;
 	cursor: pointer;
 }
-/*.homeDetail{
-	color: #39f;
-}*/
+
 .title {
 	color : green;
 }
@@ -171,8 +172,43 @@ tr.header{
 
 }
 .map-marker{
-	padding: 25px 0px; 
+	padding-top: 25px;
+	padding-bottom : 25px; 
 }
+
+.utilitySelect{
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	padding : 10px;
+	border-radius: 5px;
+	border : solid 2px green;
+}
+
+.marker_labels{
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
+	color: #00f;
+	/*background-color: #6f9;*/
+	border-radius: 10px;
+	padding : 10px;
+
+}
+.div-map{
+	background-color: #093;
+	border-radius: 10px;
+}
+.table-map,
+.p-map{
+	overflow: initial;
+	color: #fff;
+	padding: 5px 10px;
+	margin-bottom : 0px;
+}
+/* ---------END OF UTITLITIES NEAR THE HOUSE--------- */
+
+
 .house-for{
 	padding-top: 60px;
 }
@@ -180,8 +216,8 @@ tr.header{
 
 .carousel-inner > .item > .img-carousel,
 .img-unknown{
-	/*width: 100%;*/
-	height: 400px;
+	height: 450px;
+	width: 100%;
 }
 
 /*------------------NAVBAR---------------------*/
