@@ -6,44 +6,42 @@
 					<div class="panel-heading">
 						Thông tin người đăng
 					</div>
-					<div class="panel-body">
+					<div class="">
 						<center>
-							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail img-agent" alt="">
+							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-agent" alt="">
 						</center>
-						<table class="table table-hover table-response ownerInfo">
-							<tbody>
+						<table class="table table-hover table-response" style="margin-bottom: 0px;">
 								<tr>
 									<td>Chủ nhà</td>
 									<td>{{house.ownerInfo.fullname}}</td>
 								</tr>
-								<tr>
-									<td ng-show="house.ownerInfo.phone">SĐT</td>
+								<tr ng-show="house.ownerInfo.phone">
+									<td>SĐT</td>
 									<td>{{house.ownerInfo.phone}}</td>
 								</tr>
-								<tr>
-									<td ng-show="house.ownerInfo.email">Email</td>
-									<td>{{house.ownerInfo.email}}					
+								<tr ng-show="house.ownerInfo.email">
+									<td >Email</td>
+									<td>{{house.ownerInfo.email}}	</td>				
 								</tr>
-								<tr>
-									<td ng-show="house.ownerInfo.address">Địa chỉ</td>
+								<tr ng-show="house.ownerInfo.address">
+									<td>Địa chỉ</td>
 									<td>{{house.ownerInfo.address}}</td>
 								</tr>
-							</tbody>
 						</table>
-						<div class="row">
-							<div class="col-sm-6" ng-show="house.ownerInfo.phone">
-								<a href="tel:{{house.ownerInfo.phone}}" target="_blank" class=" text-center"> 
-									<button class="btn btn-danger btn-contact">Gọi điện</button>
-								</a>
-							</div>
-							<div class="col-sm-6" ng-show="house.ownerInfo.email">
-								<center>
-								<a href="mailto:{{house.ownerInfo.email}}" target="_blank" class="text-center">
-									<button class="btn btn-danger btn-contact">Gửi Mail</button>
-								</a>
-								</center>
-							</div>
-						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6" ng-show="house.ownerInfo.phone">
+						<a href="tel:{{house.ownerInfo.phone}}" target="_blank" class=" text-center"> 
+							<button class="btn btn-danger btn-contact" style="margin-bottom: 5px;">Gọi điện</button>
+						</a>
+					</div>
+					<div class="col-sm-6" ng-show="house.ownerInfo.email">
+						<center>
+						<a href="mailto:{{house.ownerInfo.email}}" target="_blank" class="text-center">
+							<button class="btn btn-danger btn-contact" style="margin-bottom: 5px;">Gửi Mail</button>
+						</a>
+						</center>
 					</div>
 				</div>
 			</div>
@@ -80,9 +78,9 @@
 		<div class="container homeDetail">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-					<div class="panel-body">
-						<h2>{{house.title}}</h2>
-						<span><b>Giá: </b> <strong> {{house.price}} triệu vnđ </strong> </span>
+					<div class="" >
+						<h2 style="margin-top: 0px;">{{house.title}}</h2>
+						<span><b>Giá: </b> <strong ng-if="house.price"> {{house.price}} triệu vnđ </strong><strong ng-if="!house.price"> Thỏa thuận</strong> </span>
 						<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
 						<article>
 							
@@ -244,7 +242,7 @@
 					<tr ng-repeat="item in ::neighbor" class='neighbor'>
 						<td><a href="#!/houses/{{::item.id}}">{{::item.title}}</a></td>
 						<td class="dist">{{::item.distance}}</td>
-						<td>{{::item.price}}</td>
+						<td>{{::item.price}} triệu vnđ</td>
 						<td></td>
 						<td></td>
 

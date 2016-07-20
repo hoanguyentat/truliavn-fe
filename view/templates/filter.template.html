@@ -52,10 +52,19 @@
                     <option value="8">> 100 triệu</option>
 				</select>
 			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="advancedSearch">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<span>Số phòng: </span><input type="range" name="" value="" placeholder="">
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<span>Số phòng tắm: </span><input type="range" name="" value="" placeholder="">
+				</div>
+			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<button type="submit" ng-click="search()" class="btn btn-success" style="margin-top: 10px;">
 					<span class="glyphicon glyphicon-search"></span>Tìm kiếm
 				</button>
+				<span type="button"><strong>Tìm kiếm nâng cao</strong></span>
 			</div>
 		</div>	
 	</div>

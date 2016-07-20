@@ -102,6 +102,9 @@ angular.module('houseDetail')
 									neighbor[i].distance = res.elements[i].distance.text;
 								}
 							}
+							angular.forEach(neighbor, function(val, key){
+								val.title = val.title.slice(0, 40) + '....';
+							});
 							$scope.neighbor = neighbor;
 						}
 					})
@@ -456,7 +459,6 @@ angular.module('houseDetail')
 			.success(function(data, status){
 				if(status == 200 && data.status == 'success'){
 					var res = data.results.results;
-					console.log(data.results);
 
 					for(var i in res){
 						if(res[i].name.includes("Tiểu học")){

@@ -43,7 +43,7 @@
 					<h2 style="font-family: 'Open Sans', sans-serif;">Hoài Đức</h2>
 					<ul class="list-group" style="list-style: none;">
 						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
-							<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="HoaiDuc in ::HoaiDuc | limitTo: 4">
+							<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="HoaiDuc in ::HoaiDuc | limitTo: 2">
 								<a ng-if="HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + HoaiDuc.images[0]}}" alt="" class="home-img img img-responsive"></a>
 								<a ng-if="!HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 							</li>
@@ -55,7 +55,7 @@
 					<div class="row">
 					<ul class="list-group" style="list-style: none;">
 						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
-							<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="BaDinh in ::BaDinh | limitTo: 4">
+							<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="BaDinh in ::BaDinh | limitTo: 2">
 								<a ng-if="BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + BaDinh.images[0]}}" alt="" class="home-img img img-responsive"></a>
 								<a ng-if="!BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 								</li>
