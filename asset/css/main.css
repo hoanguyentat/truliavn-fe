@@ -9,35 +9,8 @@ html, body {
 /*body{
 	background: #f5f6f7;
 }*/
-.utilitySelect{
-	width: 100%;
-	font-size: 20px;
-	font-weight: bold;
-	padding : 10px;
-	border-radius: 5px;
-}
 
-.marker_labels{
-	font-size: 17px;
-	font-weight: bold;
-	font-style: italic;
-	color: #00f;
-	/*background-color: #6f9;*/
-	border-radius: 10px;
-	padding : 10px;
 
-}
-.div-map{
-	background-color: #093;
-	border-radius: 10px;
-}
-.table-map,
-.p-map{
-	overflow: initial;
-	color: #fff;
-	padding: 5px 10px;
-	margin-bottom : 0px;
-}
 .btn-contact{
 	width: 100%;
 }
@@ -169,7 +142,7 @@ tr.houseInfo{
 	font-weight: bold;
 	font-size: 20px;
 }
-
+/* ---------UTITLITIES NEAR THE HOUSE--------- */
 #description, 
 #school{
 	color: #f06;
@@ -188,9 +161,7 @@ tr.houseInfo{
 	padding-left: 25px;
 	cursor: pointer;
 }
-/*.homeDetail{
-	color: #39f;
-}*/
+
 .title {
 	color : green;
 }
@@ -204,6 +175,40 @@ tr.houseInfo{
 	padding-top: 25px;
 	padding-bottom : 25px; 
 }
+
+.utilitySelect{
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	padding : 10px;
+	border-radius: 5px;
+	border : solid 2px green;
+}
+
+.marker_labels{
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
+	color: #00f;
+	/*background-color: #6f9;*/
+	border-radius: 10px;
+	padding : 10px;
+
+}
+.div-map{
+	background-color: #093;
+	border-radius: 10px;
+}
+.table-map,
+.p-map{
+	overflow: initial;
+	color: #fff;
+	padding: 5px 10px;
+	margin-bottom : 0px;
+}
+/* ---------END OF UTITLITIES NEAR THE HOUSE--------- */
+
+
 .house-for{
 	padding-top: 60px;
 }
@@ -212,6 +217,7 @@ tr.houseInfo{
 .carousel-inner > .item > .img-carousel,
 .img-unknown{
 	height: 450px;
+	width: 100%;
 }
 
 /*------------------NAVBAR---------------------*/
