@@ -11,11 +11,11 @@ angular.module('houseDetail')
 			$scope.select = "myHouse";
 			$scope.choose = function(str){
 				$scope.select = str;
-				console.log('click at ' + str);
 			}
 
 			$scope.status = data.status;
 			$scope.house = data.houses[0];
+			console.log($scope.house);
 			$scope.house.description = $sce.trustAsHtml($scope.house.description);
 
 			var latitude = $scope.house.lat;
@@ -216,7 +216,7 @@ angular.module('houseDetail')
 					}
 
 					$scope.utilities.push({title:'Nhà hàng', type : 'restaurant', quantity : restaurant.length});
-					console.log($scope.utilities);
+					// console.log($scope.utilities);
 
 		    	}
 		    });
@@ -391,7 +391,7 @@ angular.module('houseDetail')
 						coor_salon_marker.push(ret);
 					}
 
-					$scope.utilities.push({title:'Salon - Làm đẹp', type : 'salon', quantity : salon.length});
+					$scope.utilities.push({title:'Thẩm mỹ viện - Salon - Spa', type : 'salon', quantity : salon.length});
 
 		    	}
 		    });
@@ -436,7 +436,7 @@ angular.module('houseDetail')
 									}
 									coor_market_marker.push(ret);
 								}
-								$scope.utilities.push({title:'Trung tâm thương mại', type : 'market', quantity : market.length});
+								$scope.utilities.push({title:'Trung tâm thương mại - Siêu thị', type : 'market', quantity : market.length});
 								// console.log($scope.utilities);
 								// $scope.market = market;
 							}
@@ -456,6 +456,7 @@ angular.module('houseDetail')
 			.success(function(data, status){
 				if(status == 200 && data.status == 'success'){
 					var res = data.results.results;
+					console.log(data.results);
 
 					for(var i in res){
 						if(res[i].name.includes("Tiểu học")){
@@ -591,18 +592,9 @@ angular.module('houseDetail')
 			});
 
 			setTimeout(function(){
-				
-/*				utilities.push({title:'Bệnh viện', type : 'hospital', quantity : hos.length});
-				utilities.push({title:'Công viên', type : 'park', quantity : park.length});
-				utilities.push({title:'Bến xe bus', type : 'bus', quantity : bus.length});
-				utilities.push({title:'Trung tâm thương mại', type : 'market', quantity : market.length});
-				utilities.push({title:'Salon - Làm đẹp', type : 'salon', quantity : salon.length});
-				utilities.push({title:'Nhà hàng', type : 'restaurant', quantity : restaurant.length});
-				utilities.push({title:'Cafe', type : 'cafe', quantity : cafe.length});
-				// console.log($scope.utilities);*/
-
-				console.log(coor_neighbor_marker);
-				console.log(longitude +'-'+ latitude);
+				$scope.selected = $scope.utilities[0];
+/*				console.log(coor_neighbor_marker);
+				console.log(longitude +'-'+ latitude);*/
 
 				$scope.markers = [{
 			      	id: 0,
@@ -795,7 +787,7 @@ angular.module('houseDetail')
 		    		if (!ov.southwest && nv.southwest) {
 				        console.log($scope.map.bounds);
 				    }
-				    
+
 			       	$scope.neighborMarkers = coor_neighbor_marker;
 			    	$scope.hospitalMarkers = coor_hospital_marker;
 			    	$scope.parkMarkers = coor_park_marker;

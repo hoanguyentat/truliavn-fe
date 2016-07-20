@@ -274,8 +274,12 @@ app.factory('API', ['AuthService',function(AuthService){
 		getHouseDetail: getHouseDetail,
 		getHousesNearby: getHousesNearby,
 		getDistanceNearBy : getDistanceNearBy,
+		getForRent: getForRent,
+		getForSell: getForSell,
 		getHousesForRent: getHousesForRent,
 		getHousesForSell: getHousesForSell,
+		getApartmentsForRent: getApartmentsForRent,
+		getApartmentsForSell: getApartmentsForSell,
 		getServicesNearBy: getServicesNearBy,
 		getHousesIn: getHousesIn,
 		getUserPost: getUserPost
@@ -304,12 +308,25 @@ app.factory('API', ['AuthService',function(AuthService){
 		return AuthService.hostName + '/api/distance';
 	}
 
-	function getHousesForRent(){
+	function getForRent(){
 		return AuthService.hostName + '/api/houses?housefor=rent&raw=1&specific=1';
 	}
 
-	function getHousesForSell(){
+	function getForSell(){
 		return AuthService.hostName + '/api/houses?housefor=sell&raw=1&specific=1';
+	}
+
+	function getHousesForRent(){
+		return AuthService.hostName + '/api/houses?housefor=rent&raw=1&specific=1&type=house';
+	}
+	function getHousesForSell(){
+		return AuthService.hostName + '/api/houses?housefor=sell&raw=1&specific=1&type=house';
+	}
+	function getApartmentsForRent(){
+		return AuthService.hostName + '/api/houses?housefor=rent&raw=1&specific=1&type=apartment';
+	}
+	function getApartmentsForSell(){
+		return AuthService.hostName + '/api/houses?housefor=sell&raw=1&specific=1&type=apartment';
 	}
 
 	function getServicesNearBy(){

@@ -130,8 +130,8 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 		});
 }]);
 
-app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
-	var rentUrl = API.getHousesForRent();
+app.controller('ForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+	var rentUrl = API.getForRent();
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
 	$scope.maxSize = 5; //Number of pager buttons to show
@@ -178,7 +178,53 @@ app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $
 
 }]);
 
-app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+app.controller('ForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+	var sellUrl  = API.getForSell();
+	//pagination for search result
+	$scope.currentPage = 1;
+	$scope.pageSize = 15;
+	$scope.maxSize = 5; //Number of pager buttons to show
+	$scope.titlePage = "Nhà đất bán tại Việt Nam";
+
+	$http.get(sellUrl).then(function(response){
+		$scope.houses = response.data.houses;
+
+		$scope.noOfPages = $scope.houses.length;
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
+	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+	};
+}]);
+
+app.controller('HousesForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var sellUrl  = API.getHousesForSell();
 	//pagination for search result
 	$scope.currentPage = 1;
@@ -221,6 +267,144 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 				$scope.attr = 'create_at';
 				$scope.reserve = false;
 		}
-		// console.log($scope.attr, $scope.reserve);
 	};
 }]);
+
+app.controller('HousesForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+	var sellUrl  = API.getHousesForRent();
+	//pagination for search result
+	$scope.currentPage = 1;
+	$scope.pageSize = 15;
+	$scope.maxSize = 5; //Number of pager buttons to show
+	$scope.titlePage = "Nhà đất bán tại Việt Nam";
+
+	$http.get(sellUrl).then(function(response){
+		$scope.houses = response.data.houses;
+
+		$scope.noOfPages = $scope.houses.length;
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
+	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+	};
+}]);
+
+app.controller('ApartmentsForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+	var sellUrl  = API.getApartmentsForSell();
+	//pagination for search result
+	$scope.currentPage = 1;
+	$scope.pageSize = 15;
+	$scope.maxSize = 5; //Number of pager buttons to show
+	$scope.titlePage = "Nhà đất bán tại Việt Nam";
+
+	$http.get(sellUrl).then(function(response){
+		$scope.houses = response.data.houses;
+
+		$scope.noOfPages = $scope.houses.length;
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
+	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+	};
+}]);
+
+app.controller('ApartmentsForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
+	var sellUrl  = API.getApartmentsForRent();
+	//pagination for search result
+	$scope.currentPage = 1;
+	$scope.pageSize = 15;
+	$scope.maxSize = 5; //Number of pager buttons to show
+	$scope.titlePage = "Nhà đất bán tại Việt Nam";
+
+	$http.get(sellUrl).then(function(response){
+		$scope.houses = response.data.houses;
+
+		$scope.noOfPages = $scope.houses.length;
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
+	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+	};
+}]);
+

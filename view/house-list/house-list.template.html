@@ -34,8 +34,14 @@
 										<a href="#!/houses/{{house.id}}" style="text-decoration: none;"><h4>{{house.title}}</h4></a>
 										<p ng-bind="house.description"></p>
 										<div>Giá: <strong>{{house.price}} triệu</strong></div>
-										<span>Diện tích: <strong>{{house.area}} m<sup>2</sup></strong></span>
-										<span class="col-xs-12 col-md-offset-6 col-sm-offset-6 col-lg-offset-6"><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</span>
+										<div class="row">
+											<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+												<span>Diện tích: <strong>{{house.area}} m<sup>2</sup></strong></span>
+											</div>
+											<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+												<span class="col-xs-12 col-md-offset-6 col-sm-offset-6 col-lg-offset-6"><b>Ngày đăng</b>: {{house.created_at | date: "yyyy-MM-dd"}}</span>
+											</div>
+										</div>				
 									</div>
 								</li>
 							</ul>

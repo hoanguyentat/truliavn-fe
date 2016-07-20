@@ -20,14 +20,34 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 	})
 	.when('/for-rent', {
 		templateUrl: 'view/house-list/house-list.template.html',
-		controller: 'HouseForRentCtrl',
+		controller: 'ForRentCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
 	.when('/for-sell', {
 		templateUrl: 'view/house-list/house-list.template.html',
-		controller: 'HouseForSellCtrl',
+		controller: 'ForSellCtrl',
 		controllerAs: 'ctrl',
+		access: {restricted: false}
+	})
+	.when('/for-rent/apartments',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'ApartmentsForRentCtrl',
+		access: {restricted: false}
+	})
+	.when('/for-sell/apartments',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'ApartmentsForSellCtrl',
+		access: {restricted: false}
+	})
+	.when('/for-rent/houses',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'HousesForRentCtrl',
+		access: {restricted: false}
+	})
+	.when('/for-sell/houses',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'HousesForSellCtrl',
 		access: {restricted: false}
 	})
 	.when('/manage-post', {

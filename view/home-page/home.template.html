@@ -30,9 +30,9 @@
 					<h2 style="font-family: 'Open Sans', sans-serif;">Danh sách nhà mới</h2>
 					<h5>Một số ngôi nhà mới đăng trên trang:</h5>
 					<div class="row">
-						<ul class="list-group">
-								<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="house in ::allHouses | limitTo: 2">
-									<a style="height: 50px;" ng-if="house.images[0]" href="#!/houses/{{::house.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" alt="" class="img-responsive img"></a>
+						<ul class="list-group" style="list-style: none;">
+								<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="house in ::allHouses | limitTo: 2">
+									<a ng-if="house.images[0]" href="#!/houses/{{::house.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" alt="" class="home-img img-responsive img"></a>
 									<a ng-if="!house.images[0]" href="#!/houses/{{::house.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 								</li>							
 							<!-- </div> -->
@@ -40,11 +40,11 @@
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<!-- <h2 style="font-family: 'Open Sans', sans-serif;">Hoài Đức</h2> -->
-					<ul class="list-group" >
+					<h2 style="font-family: 'Open Sans', sans-serif;">Hoài Đức</h2>
+					<ul class="list-group" style="list-style: none;">
 						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
-							<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="HoaiDuc in ::HoaiDuc | limitTo: 4">
-								<a style="height: 50px;" ng-if="HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + HoaiDuc.images[0]}}" alt="" class="img-responsive"></a>
+							<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="HoaiDuc in ::HoaiDuc | limitTo: 4">
+								<a ng-if="HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + HoaiDuc.images[0]}}" alt="" class="home-img img img-responsive"></a>
 								<a ng-if="!HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 							</li>
 						<!-- </div> -->
@@ -53,10 +53,10 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h2 style="font-family: 'Open Sans', sans-serif;">Ba Đình</h2>
 					<div class="row">
-					<ul class="list-group">
+					<ul class="list-group" style="list-style: none;">
 						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
-							<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="BaDinh in ::BaDinh | limitTo: 4">
-								<a style="height: 50px;" ng-if="BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + BaDinh.images[0]}}" alt="" class="img-responsive"></a>
+							<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="BaDinh in ::BaDinh | limitTo: 4">
+								<a ng-if="BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + BaDinh.images[0]}}" alt="" class="home-img img img-responsive"></a>
 								<a ng-if="!BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 								</li>
 						<!-- </div> -->
@@ -66,10 +66,10 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h2 style="font-family: 'Open Sans', sans-serif;">Hai Bà Trưng</h2>
 					<div class="row">
-					<ul class="list-group">
+					<ul class="list-group" style="list-style: none;">
 						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
-							<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="HaiBaTrung in ::HaiBaTrung | limitTo: 4">
-							<a style="height: 50px;" ng-if="HaiBaTrung.images[0]" href="#!/houses/{{::HaiBaTrung.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + HaiBaTrung.images[0]}}" alt="" class="img-responsive"></a>
+							<li style="padding: 5px;" class="col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="HaiBaTrung in ::HaiBaTrung | limitTo: 4">
+							<a ng-if="HaiBaTrung.images[0]" href="#!/houses/{{::HaiBaTrung.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + HaiBaTrung.images[0]}}" alt="" class="home-img img img-responsive"></a>
 							<a ng-if="!HaiBaTrung.images[0]" href="#!/houses/{{::HaiBaTrung.id}}" ><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 							</li>
 						<!-- </div> -->

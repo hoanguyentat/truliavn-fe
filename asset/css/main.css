@@ -2,37 +2,18 @@ html, body {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	font-family: 'Source Sans Pro', sans-serif;
+	/*font-family: 'Source Sans Pro', sans-serif;*/
 	overflow: auto;
 }
-.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img{
-	height: 150px;
+a.home-img{
+	height: 200px;
+	width: 400px;
 }
 /*body{
 	background: #f5f6f7;
 }*/
 
-.marker_labels{
-	font-size: 17px;
-	font-weight: bold;
-	font-style: italic;
-	color: #00f;
-	/*background-color: #6f9;*/
-	border-radius: 10px;
-	padding : 10px;
 
-}
-.div-map{
-	background-color: #093;
-	border-radius: 10px;
-}
-.table-map,
-.p-map{
-	overflow: initial;
-	color: #fff;
-	padding: 5px 10px;
-	margin-bottom : 0px;
-}
 .btn-contact{
 	width: 100%;
 }
@@ -41,12 +22,11 @@ html, body {
 }
 
 .home{
-	padding-top: 40px;
+	padding-top: 30px;
 }
 
 .sidebar-left{
 	background: url('http://cdn.optimizely.com/img/698392373/f87390e7df0a42ed956e890441c5a652.jpg') no-repeat center center;
-	/*position: fixed;*/
 }
  /*---------------Scrollbar-------------------*/
 .sidebar-right{
@@ -74,7 +54,7 @@ html, body {
 /*-------------Deatail-form---------*/
 .detail-description{
 	color: #000;
-	font-size: 15px;
+	font-size: 18px;
 }
 
 .detail-article{
@@ -141,7 +121,21 @@ tr.header{
 	font-size: 25px;
 	color: gray;
 }
+tr.houseInfo{
+	font-size: 18px;
+}
+.house-detail{
+	margin-top: 15px;
+}
+.ownerInfo{
+	font-size: 18px;
+	color: #091a2e;
+}
+.img-agent{
+	margin-bottom: 15px;
+}
 
+/* ---------UTITLITIES NEAR THE HOUSE--------- */
 #description, 
 #school{
 	color: #f06;
@@ -160,12 +154,6 @@ tr.header{
 	padding-left: 25px;
 	cursor: pointer;
 }
-/*.homeDetail{
-	color: #39f;
-}*/
-.title {
-	color : green;
-}
 
 .angular-google-map-container {
 	width: 100%;
@@ -173,8 +161,43 @@ tr.header{
 
 }
 .map-marker{
-	padding: 25px 0px; 
+	padding-top: 25px;
+	padding-bottom : 25px; 
 }
+
+.utilitySelect{
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	padding : 10px;
+	border-radius: 5px;
+	border : solid 2px green;
+}
+
+.marker_labels{
+	font-size: 17px;
+	font-weight: bold;
+	font-style: italic;
+	color: #00f;
+	/*background-color: #6f9;*/
+	border-radius: 10px;
+	padding : 10px;
+
+}
+.div-map{
+	background-color: #093;
+	border-radius: 10px;
+}
+.table-map,
+.p-map{
+	overflow: initial;
+	color: #fff;
+	padding: 5px 10px;
+	margin-bottom : 0px;
+}
+/* ---------END OF UTITLITIES NEAR THE HOUSE--------- */
+
+
 .house-for{
 	padding-top: 60px;
 }
@@ -182,8 +205,8 @@ tr.header{
 
 .carousel-inner > .item > .img-carousel,
 .img-unknown{
-	/*width: 100%;*/
-	height: 400px;
+	height: 450px;
+	width: 100%;
 }
 
 /*------------------NAVBAR---------------------*/
@@ -205,7 +228,7 @@ tr.header{
     cursor: pointer;
     color: white;
     /*padding-top: 13px;*/
-    padding: 13px;
+    padding: 15px;
 }
 
 .dropdown {
@@ -230,8 +253,16 @@ tr.header{
 }
 
 .dropdown-content a:hover {
-
 	background-color:  #2ecc71;
+}
+
+a.nav{
+	text-decoration: none;
+	color: #fff;
+}
+
+a.nav:hover{
+	color: #000;
 }
 
 .dropdown:hover .dropdown-content {
