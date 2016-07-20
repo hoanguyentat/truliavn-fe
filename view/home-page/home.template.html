@@ -15,7 +15,7 @@
 				       	<div class="col-sm-4 col-md-4 col-lg-4">	
 				       	<input type="Search" placeholder="Hà Nội" ng-model="SearchForm.searchContent" class="form-control" style="display: inline;" />
 				       	</div>
-				       	<div class="col-sm-2 col-md-2 col-lg-2">				       <!-- <div class="input-group-btn"> -->
+				       	<div class="col-sm-2 col-md-2 col-lg-2">
 				           	<button class="btn btn-info" ng-click="search()">
 				           		<span class="glyphicon glyphicon-search" ></span> Search
 				           	</button>
@@ -29,47 +29,52 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h2 style="font-family: 'Open Sans', sans-serif;">Danh sách nhà mới</h2>
 					<h5>Một số ngôi nhà mới đăng trên trang:</h5>
-					<ul class="list-group" ng-repeat="house in ::allHouses | limitTo: 2">
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<li class="list-group-item">
-								<a ng-if="house.images[0]" href="#!/houses/{{::house.id}}" class="thumb"><img ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" alt="" class="img-responsive home_image"></a>
-								<a ng-if="!house.images[0]" href="#!/houses/{{::house.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
-							</li>							
-						</div>
-					</ul>
+					<div class="row">
+						<ul class="list-group">
+								<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="house in ::allHouses | limitTo: 2">
+									<a style="height: 50px;" ng-if="house.images[0]" href="#!/houses/{{::house.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + house.images[0]}}" alt="" class="img-responsive img"></a>
+									<a ng-if="!house.images[0]" href="#!/houses/{{::house.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
+								</li>							
+							<!-- </div> -->
+						</ul>
+					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h2 style="font-family: 'Open Sans', sans-serif;">Hoài Đức</h2>
-					<ul class="list-group" ng-repeat="HoaiDuc in ::HoaiDuc | limitTo: 4">
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<li class="list-group-item">
-								<a ng-if="HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}" class="thumb"><img ng-src="{{'http://ngocdon.me:3000/' + HoaiDuc.images[0]}}" alt="" class="img-responsive home_image"></a>
+					<!-- <h2 style="font-family: 'Open Sans', sans-serif;">Hoài Đức</h2> -->
+					<ul class="list-group" >
+						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+							<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-repeat="HoaiDuc in ::HoaiDuc | limitTo: 4">
+								<a style="height: 50px;" ng-if="HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + HoaiDuc.images[0]}}" alt="" class="img-responsive"></a>
 								<a ng-if="!HoaiDuc.images[0]" href="#!/houses/{{::HoaiDuc.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 							</li>
-						</div>
+						<!-- </div> -->
 					</ul>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h2 style="font-family: 'Open Sans', sans-serif;">Ba Đình</h2>
-					<ul class="list-group" ng-repeat="BaDinh in ::BaDinh | limitTo: 4">
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<li class="list-group-item">
-								<a ng-if="BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}" class="thumb"><img ng-src="{{'http://ngocdon.me:3000/' + BaDinh.images[0]}}" alt="" class="img-responsive home_image"></a>
+					<div class="row">
+					<ul class="list-group">
+						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+							<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="BaDinh in ::BaDinh | limitTo: 4">
+								<a style="height: 50px;" ng-if="BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + BaDinh.images[0]}}" alt="" class="img-responsive"></a>
 								<a ng-if="!BaDinh.images[0]" href="#!/houses/{{::BaDinh.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 								</li>
-						</div>
+						<!-- </div> -->
 					</ul>
+					</div>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h2 style="font-family: 'Open Sans', sans-serif;">Hai Bà Trưng</h2>
-					<ul class="list-group" ng-repeat="HaiBaTrung in ::HaiBaTrung | limitTo: 4">
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<li class="list-group-item">
-							<a ng-if="HaiBaTrung.images[0]" href="#!/houses/{{::HaiBaTrung.id}}" class="thumb"><img ng-src="{{'http://ngocdon.me:3000/' + HaiBaTrung.images[0]}}" alt="" class="img-responsive home_image"></a>
-							<a ng-if="!HaiBaTrung.images[0]" href="#!/houses/{{::HaiBaTrung.id}}" class="thumb"><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
+					<div class="row">
+					<ul class="list-group">
+						<!-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+							<li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-6"  ng-repeat="HaiBaTrung in ::HaiBaTrung | limitTo: 4">
+							<a style="height: 50px;" ng-if="HaiBaTrung.images[0]" href="#!/houses/{{::HaiBaTrung.id}}"><img ng-src="{{'http://ngocdon.me:3000/' + HaiBaTrung.images[0]}}" alt="" class="img-responsive"></a>
+							<a ng-if="!HaiBaTrung.images[0]" href="#!/houses/{{::HaiBaTrung.id}}" ><img src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img img-responsive"></a>
 							</li>
-						</div>
+						<!-- </div> -->
 					</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -79,9 +84,9 @@
 		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			<img src="//static.trulia-cdn.com/images/footer/discovery-ill.svg" width="200" height="125" class="img img-responsive">
 		</div>
-			<div class="h4">Trulia is the best place to start your real estate search.</div>
-			<div>Trulia is an all-in-one real estate site that gives you the local scoop about homes for sale, apartments for rent, <a href="/real_estate/Dix_Hills-New_York/">neighborhood insights</a>, and real estate markets and trends to help you figure out exactly what, where, and when to buy, sell or rent. You can also find a real estate agent, view prices of recently sold homes, and see home values in your community. Get advice and opinions from local real estate agents, brokers, and other local experts on Trulia Voices, Trulia's online real estate community.</div>
-			<div><a href="http://www.trulia.com/about/" class="typeHighlight">Learn more about us</a></div>
+			<div class="h4">Website bất động sản Việt Nam.</div>
+			<div>Là kênh thông tin số 1 Việt Nam trong lĩnh vực nhà đất, bất động sản. Với lượng thông tin lớn, liên tục được cập nhật cùng cách trình bày chuyên nghiệp, website mang đến những thông tin mới nhất, đầy đủ nhất về thị trường nhà đất.</div>
+			<div><a href="http://ngocdon.me" class="typeHighlight">Thêm nhiều thông tin về chúng tôi</a></div>
 		</div>
 	</div>
 </div>

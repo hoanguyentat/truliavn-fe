@@ -40,7 +40,7 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 				data: fd,
 				success: function (data) {
 					console.log(data);
-					window.location.href = "http://localhost:8080/#!/manage-post";
+					// window.location.href = "http://localhost:8080/#!/manage-post";
 					$location.path('/manage-post');
 				},
 				error: function (err) {
@@ -82,10 +82,14 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 			$scope.streets = response.data.streets;
 		});
 	}
+	$scope.streetChange = function(){
+		// console.log($scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName);
+		$scope.address = $scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName;
+		console.log($scope.address);
+	}
 	//sent request to server
 	$scope.editHouse = function(){
 		if (Object.keys($scope.addHouseForm).length < 10) {
-			console.log("Van nho hon 10");
 			$scope.err = true;
 			$scope.errMessage = "Xin hãy điền đầy đủ thông tin";
 		}
@@ -100,7 +104,8 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 				data: fd,
 				success: function (data) {
 					// console.log(data);
-					window.location.href = "http://localhost:8080/#!/manage-post";
+					// window.location.href = "http://ngocdon.me:8080/#!/manage-post";
+					$location.route("/manage-post");
 				},
 				error: function (err) {
 					console.log(err);
@@ -128,7 +133,7 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 app.controller('HouseForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
 	var rentUrl = API.getHousesForRent();
 	$scope.currentPage = 1;
-	$scope.pageSize = 10;
+	$scope.pageSize = 15;
 	$scope.maxSize = 5; //Number of pager buttons to show
 	$scope.titlePage = "Nhà đất cho thuê tại Việt Nam";
 
@@ -177,7 +182,7 @@ app.controller('HouseForSellCtrl', ['$scope', '$http', 'API', function($scope, $
 	var sellUrl  = API.getHousesForSell();
 	//pagination for search result
 	$scope.currentPage = 1;
-	$scope.pageSize = 10;
+	$scope.pageSize = 15;
 	$scope.maxSize = 5; //Number of pager buttons to show
 	$scope.titlePage = "Nhà đất bán tại Việt Nam";
 

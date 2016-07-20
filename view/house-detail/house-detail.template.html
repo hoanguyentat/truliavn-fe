@@ -242,18 +242,10 @@
 
 	<div class="container">
 		<div class="col-xs-12">
-			<h1 class="title text-center">Khu vực lân cận</h1>
-	  	  	<ui-gmap-google-map center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
-	  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
-            	</ui-gmap-markers>
-			    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
-				</ui-gmap-markers>
-
-			</ui-gmap-google-map>
-		    <table class="table table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr class='header'>
-						<th>Giá các nhà lân cận</th>
+						<th colspan="5"><center>Giá các nhà lân cận</center></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -274,6 +266,14 @@
 					</tr>
 				</tbody>
 			</table>
+	  	  	<ui-gmap-google-map center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
+	  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
+            	</ui-gmap-markers>
+			    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
+				</ui-gmap-markers>
+
+			</ui-gmap-google-map>
+
 		</div>
 	</div>
 </div>

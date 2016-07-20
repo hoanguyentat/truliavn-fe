@@ -11,37 +11,32 @@
 					<textarea name="title" id="title" class="form-control" required="required" ng-model="addHouseForm.title"></textarea>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-					<div class="row">
 						<div class="form-group">
 							<label for="type" class="label label-success">Loại(*)</label>
-							<select name="type" id="type" class="form-control" required="required" ng-model="addHouseForm.type" ng-value="addHouseForm.type">
+							<select name="type" id="type" class="form-control" required="required" ng-model="addHouseForm.type">
 							<option value="">---Loại---</option>
 								<option value="0">Nhà riêng</option>
 								<option value="1">Chung cư</option>
 							</select>
 						</div>
-					</div>
-					<div class="row">
-						<select name="city" id="city" class="form-control" ng-change="cityChange()" ng-model="addHouseForm.city" required="required">
-							<option value="">Chọn tỉnh/thành phố(*)</option>
-							<option ng-repeat="(id, city) in cities" value="{{id}}">{{city.cityName}}</option>
-						</select>
-					</div>
-					<div class="row">
-						<select name="ward" id="ward" class="form-control" ng-model="addHouseForm.ward" required="required">
-							<option value="">Chọn phường/xã(*)</option>
-							<option ng-repeat="(key, ward) in wards" value="{{key}}">{{ward.wardName}}</option>
-						</select>
-					</div>
-					<div class="row">
+						<div class="form-group">
+							<select name="city" id="city" class="form-control" ng-change="cityChange()" ng-model="addHouseForm.city" required="required">
+								<option value="">Chọn tỉnh/thành phố(*)</option>
+								<option ng-repeat="(id, city) in cities" value="{{id}}">{{city.cityName}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select name="ward" id="ward" class="form-control" ng-model="addHouseForm.ward" required="required">
+								<option value="">Chọn phường/xã(*)</option>
+								<option ng-repeat="(key, ward) in wards" value="{{key}}">{{ward.wardName}}</option>
+							</select>
+						</div>
 						<div class="form-group">
 							<label for="price" class="control-label">Giá nhà(*)</label>
 							<input name="price" id="price" class="form-control" placeholder="Triệu vnd" required ng-model="addHouseForm.price">
 						</div>
-					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-					<div class="row">
 						<div class="form-group">
 							<span class="label label-default">Hình thức(*)</span>
 							<select name="houseFor" id="houseFor" class="form-control" required="required" ng-model="addHouseForm.houseFor">
@@ -50,29 +45,26 @@
 								<option value="1">Rao bán</option>
 							</select>
 						</div>
-					</div>
-					<div class="row">
-						<select name="district" id="district" class="form-control" ng-change="districtChange()" ng-model="addHouseForm.district" required="required">
-							<option value="">Chọn quận/huyện(*)</option>
-							<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
-						</select>
-					</div>
-					<div class="row">
-						<select name="street" id="street" class="form-control" ng-model="addHouseForm.street" required="required">
-							<option value="">Chọn đường/phố(*)</option>
-							<option ng-repeat="(id, street) in streets | customDistrict: addHouseForm.district" value="{{id}}">{{street.streetName}}</option>
-						</select>
-					</div>
-					<div class="row">
+						<div class="form-group">
+							<select name="district" id="district" class="form-control" ng-change="districtChange()" ng-model="addHouseForm.district" required="required">
+								<option value="">Chọn quận/huyện(*)</option>
+								<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<select name="street" id="street" class="form-control" ng-change="streetChange()" ng-model="addHouseForm.street" required="required">
+								<option value="">Chọn đường/phố(*)</option>
+								<option ng-repeat="(id, street) in streets" value="{{id}}">{{street.streetName}}</option>
+							</select>
+						</div>
 						<div class="form-group">
 							<label for="area">Diện tích(*)</label>
 							<input name="area" id="area" class="form-control" placeholder="mét vuông" ng-model="addHouseForm.area">
 						</div>
-					</div>
 				</div>
 				<div class="form-group">
 					<label for="address" class="control-label">Địa chỉ(*)</label>
-					<input name="address" id="address" class="form-control" required="required" ng-model="addHouseForm.address" ng-value="addHouseForm.street +','+ addHouseForm.district + ',' + addHouseForm.city"></input>
+					<input name="address" id="address" class="form-control" required="required" ng-model="addHouseForm.address" ng-value="address"></input>
 				</div>
 			</div>
 			<div class="row">
@@ -110,7 +102,7 @@
 				</div>
 				<div class="form-group">
 					<label for="buildIn" class="control-label">Nhà xây năm</label>
-					<input name="buildIn" id="buildIn" class="form-control" ng-model="addHouseForm.buildIn">
+					<input name="buildIn" id="buildIn"  class="form-control" ng-model="addHouseForm.buildIn">
 				</div>
 				<div class="form-group">
 					<label for="feePeriod" class="control-label">Thời gian trả tiền </label>
@@ -122,7 +114,7 @@
 				<b>{{errMessage}}</b>
 			</div>
 			<div class="form-group">
-				<button type="submit" value="submit" ng-click="editHouse()" ng-disabled="disabled" class="btn btn-primary">Cập nhật</button>
+				<center><button type="submit" value="submit" ng-click="editHouse()" ng-disabled="disabled" class="btn btn-primary btn-lg">Cập nhật</button></center>
 			</div>
 		</form>
 	</div>

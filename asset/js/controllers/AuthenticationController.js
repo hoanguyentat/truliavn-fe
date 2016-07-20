@@ -16,7 +16,7 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 			})
 			.catch(function(){
 				$scope.error = true;
-				$scope.errorMessage = "Invalid username or password";
+				$scope.errorMessage = "Sai tài khoản hoặc mật khẩu";
 				$scope.disabled = false;
 				$scope.loginForm = {};
 			});
