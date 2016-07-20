@@ -11,7 +11,7 @@ angular.module('houseDetail')
 			$scope.select = "myHouse";
 			$scope.choose = function(str){
 				$scope.select = str;
-				console.log('click at ' + str);
+				// console.log('click at ' + str);
 			}
 
 			$scope.status = data.status;

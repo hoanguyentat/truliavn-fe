@@ -7,21 +7,21 @@
 		<div class="row" ng-controller="HousesFilterContentCtrl">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<select name="district" ng-model="houseFor" class="select-filter form-control">
-					<option value="">Nhà đất để</option>
+					<option value="">--Hình thức--</option>
 					<option value="rent">Nhà đất cho thuê</option>
 					<option value="sell">Nhà đất bán</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="city" class="form-control select-filter" ng-model="citySelected" required="required">
-					<option value="">Chọn tinh/thanh pho</option>
+				<select name="city" class="form-control select-filter" ng-change="cityChange()" ng-model="citySelected">
+					<option value="">Chọn tỉnh/thành phố</option>
 					<option ng-repeat="(id, city) in cities" value="{{id}}">{{city.cityName}}</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="district" class="form-control select-filter" ng-model="districtSelected" required="required">
+				<select name="district" class="form-control select-filter" ng-model="districtSelected">
 					<option value="">Chọn quận/huyện</option>
-					<option ng-repeat="(id, district) in districts | customCity: citySelected" value="{{id}}">{{district.districtName}}</option>
+					<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
