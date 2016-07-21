@@ -6,26 +6,26 @@
 	<div class="panel-body">
 		<div class="row" ng-controller="HousesFilterContentCtrl">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="district" ng-model="houseFor" class="select-filter form-control">
+				<select name="district" ng-model="filter.houseFor" class="select-filter form-control">
 					<option value="">--Hình thức--</option>
 					<option value="rent">Nhà đất cho thuê</option>
 					<option value="sell">Nhà đất bán</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="city" class="form-control select-filter" ng-change="cityChange()" ng-model="citySelected">
+				<select name="city" class="form-control select-filter" ng-change="cityChange()" ng-model="filter.citySelected">
 					<option value="">Chọn tỉnh/thành phố</option>
 					<option ng-repeat="(id, city) in cities" value="{{id}}">{{city.cityName}}</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="district" class="form-control select-filter" ng-model="districtSelected">
+				<select name="district" class="form-control select-filter" ng-model="filter.districtSelected">
 					<option value="">Chọn quận/huyện</option>
 					<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="area" class="form-control select-filter" ng-model="area">
+				<select name="area" class="form-control select-filter" ng-model="filter.area">
             		<option value="">Chọn diện tích</option>                     
                     <option value="1">&lt;= 30 m2</option>	                        
                     <option value="2">30 - 50 m2</option>	                        
@@ -40,7 +40,7 @@
 				</select>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<select name="price" class="form-control select-filter" ng-model="price">
+				<select name="price" class="form-control select-filter" ng-model="filter.price">
 					<option value="">Chọn mứa giá</option>
 					<option value="1"> < 1 triệu</option>
 					<option value="2">1 - 3 triệu</option>	                        
@@ -52,19 +52,34 @@
                     <option value="8">> 100 triệu</option>
 				</select>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="advancedSearch">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<span>Số phòng: </span><input type="range" name="" value="" placeholder="">
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<span>Số phòng tắm: </span><input type="range" name="" value="" placeholder="">
-				</div>
-			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="advanceDisplay = false" ng-show="advanceDisplay">
+				<select name="bedrooms" class="form-control select-filter" ng-model="filter.bedrooms">
+					<option value="">Số phòng ngủ</option>
+					<option value="1">1+</option>
+					<option value="2">2+</option>	                        
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>	  
+               	</select>
+				<select name="bathrooms" class="form-control select-filter" ng-model="filter.bathrooms">
+					<option value="">Số phòng tắm</option>
+					<option value="1">1+</option>
+					<option value="2">2+</option>	                        
+                    <option value="3">3+</option>	   
+                    <option value="4">4+</option>	  
+               	</select>
+				<select name="floors" class="form-control select-filter" ng-model="filter.floors">
+					<option value="">Số tầng</option>
+					<option value="1">1+</option>
+					<option value="2">2+</option>	                        
+                    <option value="3">3+</option>	   
+                    <option value="4">4+</option>	  
+               	</select>
+             </div>	
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<button type="submit" ng-click="search()" class="btn btn-success" style="margin-top: 10px;">
 					<span class="glyphicon glyphicon-search"></span>Tìm kiếm
 				</button>
-				<span type="button"><strong>Tìm kiếm nâng cao</strong></span>
+				<span ng-click="advanceSearch()" id="advanceSearch" type="button"><strong>Tìm kiếm nâng cao</strong></span>
 			</div>
 		</div>	
 	</div>

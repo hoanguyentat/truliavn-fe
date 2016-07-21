@@ -3,29 +3,34 @@ app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$c
 		$scope.cities = response.data.cities;
 	});
 	$scope.cityChange = function(){
-		$http.get(AuthService.hostName + '/api/districts?city=' + $scope.citySelected).then(function success(response){
+		$http.get(AuthService.hostName + '/api/districts?city=' + $scope.filter.citySelected).then(function success(response){
 			$scope.districts = response.data.districts;
 		});
 	}
-	$scope.search = function(){
-		$cookies.remove('filter.houseFor');
-		$cookies.remove('filter.city');
-		$cookies.remove('filter.districtSelected');
-		$cookies.remove('filter.area');
-		$cookies.remove('filter.price');
 
-		if ($scope.area == undefined ) {$scope.area = 0};
-		if ($scope.price == undefined ) {$scope.price = 0};
-		if ($scope.houseFor == undefined ) {$scope.houseFor = 0};
-		if ($scope.city == undefined ) {$scope.city = 0};
-		if ( $scope.districtSelected == undefined) {$scope.districtSelected=0};
-		$cookies.put('filter.houseFor', $scope.houseFor);
-		$cookies.put('filter.city', $scope.city);		
-		$cookies.put('filter.districtSelected', $scope.districtSelected);
-		$cookies.put('filter.area', $scope.area);
-		$cookies.put('filter.price', $scope.price);
-		// console.log($cookies.get('fitler.city'), $cookies.get('fitler.districtSelected'), $cookies.get('fitler.area'));
-		$location.path('/filter/houses?' +$scope.houseFor+ $scope.city+$scope.districtSelected+$scope.area+$scope.price);
+	$scope.advanceSearch = function() {
+		$scope.advanceDisplay = !$scope.advanceDisplay;
+		if (!$scope.advanceDisplay) {
+			$("#advanceSearch").html("<strong>Tìm kiếm nâng cao</strong>");
+		}
+		else {
+			$("#advanceSearch").html("<strong>Bỏ tìm kiếm nâng cao</strong>");
+		}
+	}
+	$scope.search = function(){
+		
+		$cookies.remove('filter');
+
+		if ($scope.filter.area == undefined ) {$scope.filter.area = 0};
+		if ($scope.filter.price == undefined ) {$scope.filter.price = 0};
+		if ($scope.filter.houseFor == undefined ) {$scope.filter.houseFor = 0};
+		if ($scope.filter.city == undefined ) {$scope.filter.city = 0};
+		if ( $scope.filter.districtSelected == undefined) {$scope.filter.districtSelected=0};
+		if ($scope.filter.bedrooms == undefined ) {$scope.filter.bedrooms = 0};
+		if ($scope.filter.bathrooms == undefined ) {$scope.filter.bathrooms = 0};
+		if ($scope.filter.floors == undefined ) {$scope.filter.floors = 0};
+		$cookies.putObject('filter', $scope.filter);
+		$location.path('/filter/houses?' +$scope.filter.houseFor+ $scope.filter.city+$scope.filter.districtSelected+$scope.filter.area+$scope.filter.price);
 	};
 }]);
 
@@ -55,12 +60,9 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
       [70, 100],
       [100, 10000]
    ];
-	var houseFor = $cookies.get('filter.houseFor');
-	var city = $cookies.get('filter.city');
-	var district = $cookies.get('filter.districtSelected');
-	var area = $cookies.get('filter.area');
-	var price = $cookies.get('filter.price');
-	var url = AuthService.hostName + '/api/houses?district=' + district + '&city=' + city+ '&houseFor='+ houseFor + '&minArea=' + areaArr[area][0] + '&maxArea=' + areaArr[area][1] + '&minPrice=' + priceArr[price][0] + '&maxPrice='+ priceArr[price][1];
+	var filter = $cookies.getObject('filter');
+	console.log(filter);
+	var url = AuthService.hostName + '/api/houses?district=' + filter.district + '&city=' + filter.city+ '&houseFor='+ filter.houseFor + '&minArea=' + areaArr[filter.area][0] + '&maxArea=' + areaArr[filter.area][1] + '&minPrice=' + priceArr[filter.price][0] + '&maxPrice='+ priceArr[filter.price][1] + '&bedrooms=' + filter.bedrooms + '&bathrooms=' + filter.bathrooms + '&floors=' + filter.floors;
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5;
@@ -73,7 +75,7 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
 			});
 		// $route.reload();
 		}, function(){
-			console.log('Lỗi rỗi');
+			console.log('Lỗi');
 		}
 	);
 	$scope.sortHouses = function(){
@@ -103,6 +105,5 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
 				$scope.attr = 'create_at';
 				$scope.reserve = false;
 		}
-		// console.log($scope.attr, $scope.reserve);
 	};
 }]);
