@@ -1,4 +1,7 @@
 app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http', '$rootScope', function($scope, $location, AuthService, $http, $rootScope){
+	if (AuthService.isLoggedIn()) {
+		$location.path('/');
+	}
 	$scope.login = function(){
 		$scope.error = false;
 		$scope.disabled = true;
@@ -73,7 +76,8 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 		})
 	}
 }]);
-app.controller('LogoutControler', ['$scope', '$location', 'AuthService', '$route', function($scope, $location, AuthService, $route){
+app.controller('LogoutControler', ['$scope', '$location', 'AuthService', '$route','$cookies', function($scope, $location, AuthService, $route, $cookies){
+	$scope.userId = $cookies.get('user.id');
 	$scope.logout = function(){
 		AuthService.logout()
 		.then(function(){

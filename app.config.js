@@ -90,7 +90,7 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller: 'RegisterController',
 		access: {restricted: false}
 	})
-	.when('/update', {
+	.when('/users/update', {
 		templateUrl : 'view/user/update/update.html',
 		controller : 'UpdateController',
 		access : {restricted : true}
@@ -99,8 +99,9 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller: 'LogoutController',
 		access: {restricted: true}
 	})
-	.when('/:user', {
-		template: 'Trang thông tin cá nhân',
+	.when('/users', {
+		templateUrl: 'view/user/user-info.template.html',
+		controller: 'UserInfoCtrl',
 		access: {restricted: true}
 	})
 	.when('/:user/edit', {

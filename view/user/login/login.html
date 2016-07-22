@@ -1,4 +1,4 @@
-<div class="container house-for">
+<!-- <div class="container house-for">
 	<div class="col-md-4 col-md-offset-4">
 	  <h1>Login</h1>
 	  <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
@@ -16,5 +16,19 @@
 	        <a href="/#!/register">Bạn chưa có tài khoản?</a>
 	      </div>
 	  </form>
+	</div>
+</div>
+ -->
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<div class="logo"></div>
+<div class="login-block" style="margin-top: 70px;">
+    <h1>Đăng nhập</h1>
+    <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
+	 	<form class="form" ng-submit="login()">
+		    <input type="text" value="" placeholder="Username" id="username" name="username" ng-model="loginForm.username" required/>
+		    <input type="password" value="" placeholder="Password" id="password" name="password" ng-model="loginForm.password" required/>
+    		<button>Đăng nhập</button>
+    		<a href="/#!/register">Bạn chưa có tài khoản?</a>
+    	 </form>
 	</div>
 </div>
