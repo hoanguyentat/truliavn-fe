@@ -7,7 +7,7 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 		$scope.disabled = true;
 
 		//call login from service
-		AuthService.login($scope.loginForm.username, $scope.loginForm.password)
+		AuthService.login($scope.loginForm)
 			.then(function(){
 				$scope.token = AuthService.getUserToken();
 				$scope.userEmail = AuthService.getUserEmail();
@@ -33,8 +33,9 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 
 		$scope.error = false;
 		$scope.disabled = true;
+		// $scope.registerForm.birthday = getFullYear($scope.registerForm.birthday);
 
-		AuthService.register($scope.registerForm.email, $scope.registerForm.password, $scope.registerForm.repass, $scope.registerForm.address, $scope.registerForm.phone, $scope.registerForm.fullName)
+		AuthService.register($scope.registerForm)
 		//handle suscess
 		.then(function(){
 			$location.path('#!/login');
@@ -55,16 +56,12 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 	var userID = $cookies.get('user.id');
 	$http.get(API.getUserInfo(userID))
 	.then(function (res){
-		$scope.userInfo = res.data.user;
+		$scope.updateForm = res.data.user;
+		$scope.updateForm.userId = $scope.updateForm.id;
+		delete($scope.updateForm.id);
 	})
 	$scope.update = function(){
-		AuthService.update( userID,
-							$scope.updateForm.fullName, 
-							$scope.updateForm.phone, 
-							$scope.updateForm.address, 
-							$scope.updateForm.oldpass,
-							$scope.updateForm.newpass,
-							$scope.updateForm.confirmpass)
+		AuthService.update($scope.updateForm)
 		.then(function(){
 			$location.path("/");
 			$scope.updateForm = {};

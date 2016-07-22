@@ -90,16 +90,16 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller: 'RegisterController',
 		access: {restricted: false}
 	})
-	.when('/users/update', {
+	.when('/:users/update', {
 		templateUrl : 'view/user/update/update.html',
 		controller : 'UpdateController',
 		access : {restricted : true}
 	})
-	.when('logout', {
+	.when('/logout', {
 		controller: 'LogoutController',
 		access: {restricted: true}
 	})
-	.when('/users', {
+	.when('/:users', {
 		templateUrl: 'view/user/user-info.template.html',
 		controller: 'UserInfoCtrl',
 		access: {restricted: true}
