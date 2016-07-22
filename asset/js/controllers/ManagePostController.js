@@ -1,4 +1,4 @@
-app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http','HouseService','$location', function($scope, API, $cookies, $http, HouseService, $location){
+app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http','HouseService','$location','$uibModal', function($scope, API, $cookies, $http, HouseService, $location, $uibModal){
 	var urlPost = API.getUserPost($cookies.get('user.id'));
 	$scope.currentPage = 0;
 	$scope.pageSize = 20;
@@ -18,4 +18,19 @@ app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http','HouseSer
 			$location.path('/manage-post');
 		});
 	};
+
+	  $scope.animationsEnabled = true;
+
+	  $scope.open = function() {
+
+	    var modalInstance = $uibModal.open({
+	      	animation: $scope.animationsEnabled,
+	      	templateUrl: 'myModalContent.html',
+	      	controller: 'ManagePostCtrl'
+	    });
+	};
+
+  	$scope.cancel = function () {
+    	 $uibModal.dismiss('cancel');
+ 	};
 }]);

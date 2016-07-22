@@ -5,18 +5,18 @@
 				<form action="" class="navbar-form navbar-left" ng-controller="SearchContent">
 					<h1 style="color: white;">Trang chủ bất động sản Việt Nam</h1>
 				   	<div class="row">
-		       			<div class="col-sm-2  col-md-2 col-lg-2">
+		       			<div class="col-sm-2  col-md-2 col-lg-2" style="padding-bottom: 4px;">
 		       				<select name="" id="input" class="form-control" required="required" ng-model="SearchForm.houseFor" style="display: inline;">
 		       					<option value="">--Hình thức--</option>
 	       						<option value="rent">Cho thuê</option>
 		       					<option value="sell">Bán</option>
 		       				</select>
 		       			</div>
-				       	<div class="col-sm-4 col-md-4 col-lg-4">	
-				       	<input type="Search" placeholder="Hà Nội" ng-model="SearchForm.searchContent" class="form-control" style="display: inline;" />
+				       	<div class="col-sm-4 col-md-4 col-lg-4" style="padding-bottom: 4px;=">	
+				       	<input type="Search" placeholder="Hà Nội" ng-model="SearchForm.searchContent" class="form-control" style="display: inline;  border-radius: 0px;" />
 				       	</div>
 				       	<div class="col-sm-2 col-md-2 col-lg-2">
-				           	<button class="btn btn-danger" ng-click="search()">
+				           	<button class="btn btn-danger" ng-click="search()" style="border-radius: 0px;">
 				           		<span class="glyphicon glyphicon-search" ></span> Search
 				           	</button>
 				       	</div>

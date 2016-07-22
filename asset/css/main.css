@@ -4,7 +4,7 @@ html, body {
 	height: 100%;
 	/*font-family: 'Source Sans Pro', sans-serif;*/
 	overflow: auto;
-	font-family: 'Roboto', sans-serif;
+	/*font-family: 'Roboto', sans-serif;*/
 }
 a.home-img{
 	height: 200px;
@@ -206,7 +206,7 @@ tr.houseInfo{
 
 .carousel-inner > .item > .img-carousel,
 .img-unknown{
-	height: 450px;
+	height: 400px;
 	width: 100%;
 }
 

@@ -13,20 +13,20 @@
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 						<div class="form-group">
 							<label for="type" class="label label-success">Loại(*)</label>
-							<select name="type" id="type" class="form-control" required="required" ng-model="addHouseForm.type">
+							<select name="type" id="type" class="form-control" required="required">
 							<option value="">---Loại---</option>
 								<option value="0">Nhà riêng</option>
 								<option value="1">Chung cư</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select name="city" id="city" class="form-control" ng-change="cityChange()" ng-model="addHouseForm.city" required="required">
+							<select name="city" id="city" class="form-control" ng-change="cityChange()" ng-model="city" required="required">
 								<option value="">Chọn tỉnh/thành phố(*)</option>
 								<option ng-repeat="(id, city) in cities" value="{{id}}">{{city.cityName}}</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select name="ward" id="ward" class="form-control" ng-model="addHouseForm.ward" required="required">
+							<select name="ward" id="ward" class="form-control" ng-model="ward" required="required">
 								<option value="">Chọn phường/xã(*)</option>
 								<option ng-repeat="(key, ward) in wards" value="{{key}}">{{ward.wardName}}</option>
 							</select>
@@ -39,20 +39,20 @@
 				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 						<div class="form-group">
 							<span class="label label-default">Hình thức(*)</span>
-							<select name="houseFor" id="houseFor" class="form-control" required="required" ng-model="addHouseForm.houseFor">
+							<select name="houseFor" id="houseFor" class="form-control" required="required" ng-model="houseFor">
 								<option value="">---Hình thức---</option>
 								<option value="0">Cho thuê</option>
 								<option value="1">Rao bán</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select name="district" id="district" class="form-control" ng-change="districtChange()" ng-model="addHouseForm.district" required="required">
+							<select name="district" id="district" class="form-control" ng-change="districtChange()" ng-model="district" required="required">
 								<option value="">Chọn quận/huyện(*)</option>
 								<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select name="street" id="street" class="form-control" ng-change="streetChange()" ng-model="addHouseForm.street" required="required">
+							<select name="street" id="street" class="form-control" ng-change="streetChange()" ng-model="street" required="required">
 								<option value="">Chọn đường/phố(*)</option>
 								<option ng-repeat="(id, street) in streets" value="{{id}}">{{street.streetName}}</option>
 							</select>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="form-group">
 					<label for="address" class="control-label">Địa chỉ(*)</label>
-					<input name="address" id="address" class="form-control" required="required" ng-model="addHouseForm.address" ng-value="address"></input>
+					<input name="address" id="address" class="form-control" required="required" ng-model="addHouseForm.address"></input>
 				</div>
 			</div>
 			<div class="row">
