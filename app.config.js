@@ -8,6 +8,7 @@ angular.module('truliavnApp')
         });
 	}
 ]);
+
 app.config(['$locationProvider', '$routeProvider' ,function config($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
 
@@ -95,6 +96,12 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller : 'UpdateController',
 		access : {restricted : true}
 	})
+	.when('/estimate', {
+		templateUrl : 'view/estimate/estimate.template.html',
+		controller : 'EstimateController',
+		access: {restricted: false}
+	})
+
 	.when('/logout', {
 		controller: 'LogoutController',
 		access: {restricted: true}
@@ -127,7 +134,7 @@ app.run(function($rootScope, $location, $route, AuthService){
 
 		AuthService.getUserStatus()
 		.then(function success(){
-			// console.log(AuthService.isLoggedIn());
+			console.log(AuthService.isLoggedIn());
 				$rootScope.userStatus = AuthService.isLoggedIn();
 				$rootScope.userName = AuthService.getUserName();
 			if (next.access.restricted && !AuthService.isLoggedIn()) {

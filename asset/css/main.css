@@ -193,9 +193,9 @@ tr.houseInfo{
 	font-weight: bold;
 	font-style: italic;
 	color: #00f;
-	/*background-color: #6f9;*/
 	border-radius: 10px;
 	padding : 10px;
+	margin: auto;
 
 }
 .div-map{
@@ -210,6 +210,24 @@ tr.houseInfo{
 	margin-bottom : 0px;
 }
 /* ---------END OF UTITLITIES NEAR THE HOUSE--------- */
+
+/*-------------ESTIMATE THE HOUSE------------*/
+.table-estimate{
+	font-size: 20px;
+}
+.panel-green{
+	background: #2ecc71;
+}
+.panel{
+	border-color: #bcd4d4;
+}
+.a-estimate:hover,
+.a-estimate,
+.span-percent{
+	text-decoration: none;
+	color: green;
+}
+/*-------------END OF ESTIMATE THE HOUSE------------*/
 
 
 .house-for{
