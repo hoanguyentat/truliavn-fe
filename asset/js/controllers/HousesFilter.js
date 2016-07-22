@@ -1,6 +1,7 @@
 app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$cookies','$location', function($scope, $http, AuthService, $cookies, $location ){
 	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
 		$scope.cities = response.data.cities;
+		console.log($scope.cities);
 	});
 	$scope.cityChange = function(){
 		$http.get(AuthService.hostName + '/api/districts?city=' + $scope.citySelected).then(function success(response){

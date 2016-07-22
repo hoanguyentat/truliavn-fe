@@ -1,7 +1,7 @@
 angular.module('houseDetail')
 .component('houseDetail', {
 
-	controller: function HouseDetailController($rootScope,$scope, $http, $log, $routeParams, API, $sce){
+	controller: function HouseDetailController($rootScope,$scope, $http, $log, $routeParams, API, $sce, $cookies){
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
 
     	
@@ -11,11 +11,16 @@ angular.module('houseDetail')
 			$scope.select = "myHouse";
 			$scope.choose = function(str){
 				$scope.select = str;
-				// console.log('click at ' + str);
+				console.log('click at ' + str);
 			}
+
+			$scope.spanClick = "down";
+			$scope.schoolClick = "down";
 
 			$scope.status = data.status;
 			$scope.house = data.houses[0];
+			$cookies.putObject('houseInfo', data.houses[0]);
+			// $scope.addressHouse
 			$scope.house.description = $sce.trustAsHtml($scope.house.description);
 
 			var latitude = $scope.house.lat;
@@ -69,9 +74,10 @@ angular.module('houseDetail')
 			$http.get(API.getHousesNearby($scope.house.city, $scope.house.district,$scope.house.ward)).then(
 				function (near){
 					neighbor = near.data.houses;
-/*					console.log('near.data.house');
-					console.log(neighbor);*/
+					console.log('near.data.house');
+					console.log(neighbor);
 					var log =[];
+					$scope.addressDistrict = neighbor[0].district + ', ' + neighbor[0].city;  
 					for(var i in neighbor){
 						if(neighbor[i].id == $routeParams.houseId){
 							neighbor.splice(i,1);
@@ -111,6 +117,7 @@ angular.module('houseDetail')
 
 					// var coor_neighbor_marker = [];
 					for(var i in neighbor){
+
 						var lat = neighbor[i].lat;
 						var lon = neighbor[i].lon;
 						coor_neighbor += '|' + lat + ',' + lon;
@@ -126,7 +133,7 @@ angular.module('houseDetail')
 							title : neighbor[i].address,
 							price : neighbor[i].price,
 							content : content,
-							options : {labelClass : 'marker_labels', labelContent : ''},
+							options : {labelClass : 'marker_labels',  labelAnchor: '12 60', labelContent : ''},
 							icon : "../../asset/icon/neighbor.png"
 						}
 						coor_neighbor_marker.push(ret);
@@ -506,6 +513,9 @@ angular.module('houseDetail')
 								}
 								primaries.type = "primary";
 								primaries.title = "Trường cấp I";
+								primaries.click = "primaryClick";
+								primaries.up = "primaryUp";
+								primaries.down = "primaryDown";
 								// $scope.primaries = primaries;
 
 							}
@@ -542,6 +552,8 @@ angular.module('houseDetail')
 								}
 								juniors.type = "junior";
 								juniors.title = "Trường cấp II";
+								juniors.up = "juniorUp";
+								juniors.down = "juniorDown";
 								// console.log(juniors);
 							}
 						})
@@ -576,6 +588,8 @@ angular.module('houseDetail')
 								}
 								seniors.type = "senior";
 								seniors.title = "Trường cấp III";
+								seniors.up = "seniorUp";
+								seniors.down = "seniorDown";
 								// console.log(seniors);
 							}
 						})
