@@ -1,38 +1,91 @@
-<div class="container">
-	<div class="row">
-		<div class="col-sm-6 col-xs-12" id="description">
-			<h2>Chi tiết ngôi nhà</h2>
-			<p>
-				Condo #2 is a 2-bedroom unit, It faces a green belt, with a distant view of the pool. The 2nd bedroom has its own entry door. Its on a lower floor of a 2 story 8-plex
-			</p>
+<div class="container house-for">
+	<div>
+		<h1 class="title">Ước lượng giá nhà đất của các khu vực và chi tiết </h1>
+	</div>
+	<div class="panel col-xs-12 col-sm-6" style="padding : 0">
+<!-- 	<div class="panel-heading" style="color: #fff; background-color: #2f89e6"> -->
+		<div class="panel-heading panel-green">
+			Tìm kiếm bất động sản
 		</div>
-		<div class="col-xs-12 col-sm-6" id="map"></div>
-		<div class="col-sm-6 col-xs-12" id="school">
-			<h2>Các trường gần đây</h2>
-			<school info = "primaries"></school>
-			<school info = "juniors"></school>
-			<school info = "seniors"></school>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<select name="city" class="form-control select-filter" ng-change="cityChange()" ng-model="citySelected">
+						<option value="">Chọn tỉnh/thành phố</option>
+						<option ng-repeat="(id, city) in cities" value="{{id}}">{{city.cityName}}</option>
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+					<select name="district" class="form-control select-filter" ng-change="districtChange()" ng-model="districtSelected">
+						<option value="">Chọn quận/huyện</option>
+						<option ng-repeat="(id, district) in districts" value="{{id}}">{{district.districtName}}</option>
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+					<button id="search" type="submit" ng-click="search()" class="btn btn-success" style="margin-top: 10px;">
+						<span class="glyphicon glyphicon-search"></span>Tìm kiếm
+					</button>
+				</div>
+			</div>	
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-12">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Giá các nhà lân cận</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Địa điểm</td>
-					<td>Khoảng cách</td>
-					<td>Giá</td>
-				</tr>
-				<tr ng-repeat="i in data">
-					<td>{{i.address}}</td>
-					<td></td>
-					<td>{{i.price}}</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="col-sm-6">
+		<div class="col-xs-12 panel" style="padding : 0">
+			<div class="panel-heading panel-green">
+				Định giá nhà
+			</div>
+			<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-12">
+					<select name="posHouse" class="form-control select-filter" ng-change="posChange()" ng-model="posSelected">
+						<option value="">--- Vị trí nhà ---</option>
+						<option value="1">Mặt đường</option>
+						<option value="0">Trong ngõ</option>
+					</select>
+				</div>
+				<div class="col-xs-12">
+					<select name="distEst" class="form-control select-filter" ng-change="distEstChange()" ng-model="disEstSelected">
+						<option value="">--- Chọn quận/huyện ---</option>
+						<option ng-repeat = "(id, district) in distEstimate" value={{id}}>{{district[0].districtName}}</option>
+					</select>
+				</div>
+				<div class="col-xs-12">
+					<select name="streetEst" class="form-control select-filter" ng-change="streetEstChange()" ng-model="streetEstSelected">
+						<option value="">--- Chọn đường ---</option>
+						<option ng-repeat="(id, street) in streetEstimate" value="{{street.id}}">{{street.street}}</option>
+					</select>
+				</div>
+				<div class="col-xs-12">
+					<input type="number" class="form-control select-filter" ng-model="$parent.houseWD" placeholder="{{holderStr}}" required>
+				</div>
+				<div class="col-xs-12">
+					<input type="number" class="form-control select-filter" ng-model="houseArea" placeholder="Diện tích nhà tính theo mét vuông" required>
+				</div>
+				<div class="col-xs-12 form-group">
+					<button class="btn btn-success" ng-click="estimate()" style="margin-top : 10px">Định giá</button>
+				</div>
+				<div class="col-xs-12">
+					<h3 class="title">Giá ước lượng ngôi nhà : {{priceEstimate}}</h3>
+				</div>
+			</div> 
+			</div>
+		</div>
+	</div>
+
+	<div class="map-marker col-xs-12" id="map" ng-if="select == 'search'">
+		<h1 class="title">Bản đồ hiển thị giá nhà đất khu vực {{address}}</h1>
+	<!-- <div class="map-marker"> -->
+		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
+		    <ui-gmap-markers models="nearMarkers" idKey="nearMarkers.id" coords="'self'" options="'options'" events="map.nearMarkersEvents">
+		    </ui-gmap-markers>
+		</ui-gmap-google-map>
 	</div>
 </div>
+<script>
+/*	$('#search').click(function(){
+		setTimeout(function(){ 
+      		$("#map").show();
+  		}, 3000);
+	});*/
+
+</script>

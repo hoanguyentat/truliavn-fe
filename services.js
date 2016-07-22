@@ -15,7 +15,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		logout: logout,
 		register: register,
 		update : update,
-		hostName: 'http://ngocdon.me:3000'
+		hostName : 'http://ngocdon.me:3000'
 	});
 
 	function isLoggedIn(){
@@ -252,8 +252,14 @@ app.factory('API', ['AuthService',function(AuthService){
 		getApartmentsForSell: getApartmentsForSell,
 		getServicesNearBy: getServicesNearBy,
 		getHousesIn: getHousesIn,
-		getUserPost: getUserPost
+		getUserPost: getUserPost,
+		getCoordinate : getCoordinate,
+		getPrice : getPrice
 	});
+
+	function getPrice(){
+		return AuthService.hostName + '/api/estimate';
+	}
 
 	function getUserInfo(id){
 		return AuthService.hostName + '/api/user/' + id;
@@ -301,6 +307,10 @@ app.factory('API', ['AuthService',function(AuthService){
 
 	function getServicesNearBy(){
 		return AuthService.hostName + '/api/nearby';
+	}
+
+	function getCoordinate(){
+		return AuthService.hostName + '/api/coordinate';
 	}
 
 	function getHousesIn(place, id){
