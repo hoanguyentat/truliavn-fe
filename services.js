@@ -65,63 +65,35 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		return $cookies.get('user.email');
 	}
 
-	function register(email, password, repeatPassword, address, phone, fullname){
+	function register(userInfo){
 		//creat a new instance of deferred
+		console.log(userInfo);
 		var deferred = $q.defer();
 
-		$http.post(host +'/api/register',{email: email, password: password, repeatPassword: repeatPassword, address: address, phone: phone, fullname: fullname})
+		$http.post(host +'/api/register',userInfo)
 		//handle success
 		.success(function(data, status){
 			if (status == 200 && data.status == 'success') {
 				deferred.resolve();
 			} else{
+
+				console.log(data);
 				deferred.reject();
 			}
 		})
 		//handle error
 		.error(function(data){
+
+			console.log(data);
 			deferred.reject();
 		});
 		return deferred.promise;
 	}
 
-	function update(id,fullname, phone, address, oldPassword, newPassword, repeatPassword){
+	function update(updateForm){
 		var deferred = $q.defer();
-
-		if(typeof(repeatPassword) == 'undefined' || typeof(newPassword) == 'undefined'){
-			$http.post(host +'/api/user/edit', {userId : id,
-											fullname : fullname, 
-											phone : phone, 
-											address : address,
-											oldPassword : oldPassword})
+		$http.post(host +'/api/user/edit', updateForm)
 			.success(function(data, status){
-				if(status == 200 && data.status == 'success'){
-					console.log(data);
-					$cookies.remove('user.token');
-					$cookies.put('user.token', data.user.token);
-					deferred.resolve();
-				}
-				else {
-					console.log("Cap nhat khong thanh cong");
-					deferred.reject();
-				}
-			})
-			.error(function(data){
-				deferred.reject();
-			});
-			return deferred.promise;
-		}
-		else {
-
-			$http.post(host +'/api/user/edit', {userId : id,
-												fullname : fullname, 
-												phone : phone, 
-												address : address,
-												oldPassword : oldPassword,
-												newPassword : newPassword,
-												repeatPassword : repeatPassword})
-			.success(function(data, status){
-				console.log(data);
 				if(status == 200 && data.status == 'success'){
 					deferred.resolve();
 				}
@@ -132,29 +104,28 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			.error(function(data){
 				deferred.reject();
 			});
-			return deferred.promise;
-		}
+		return deferred.promise;
 	}
-	function login(email, password){
+	function login(loginForm){
 		var deferred = $q.defer();
-		$http.post(host +'/api/login',{email: email, password: password}).success(function(data, status){
+		$http.post(host +'/api/login',loginForm).success(function(data, status){
 			if (status == 200 && data.status =="success") {
 
 				//put userId to cookies
-				$cookies.put('userName', data.user.fullname);
+				$cookies.put('userName', data.user.username);
 				$cookies.put('user.id', data.user.id);
 				$cookies.put('user.email', data.user.email);
 				$cookies.put('user.token', data.user.token);
 				user = true;
-				// $cookieStore.put('globals', $rootScope.globals);
-
 				deferred.resolve();
 			} else{
+				console.log(data);
 				user = false;
 				deferred.reject();
 			}
 		})
 		.error(function(data){
+			console.log(data);
 			user = false;
 			deferred.reject();
 		});
@@ -167,7 +138,6 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		//sent request logout
 		$http.post(host +'/api/logout', {email: $cookies.get('user.email'), token: $cookies.get('user.token')})
 		.success(function(data){
-			console.log("Logout thanh cong");
 			user = false;
 			$cookies.remove('user.id');
 			$cookies.remove('user.token');
@@ -274,8 +244,12 @@ app.factory('API', ['AuthService',function(AuthService){
 		getHouseDetail: getHouseDetail,
 		getHousesNearby: getHousesNearby,
 		getDistanceNearBy : getDistanceNearBy,
+		getForRent: getForRent,
+		getForSell: getForSell,
 		getHousesForRent: getHousesForRent,
 		getHousesForSell: getHousesForSell,
+		getApartmentsForRent: getApartmentsForRent,
+		getApartmentsForSell: getApartmentsForSell,
 		getServicesNearBy: getServicesNearBy,
 		getHousesIn: getHousesIn,
 		getUserPost: getUserPost,
@@ -310,12 +284,25 @@ app.factory('API', ['AuthService',function(AuthService){
 		return AuthService.hostName + '/api/distance';
 	}
 
-	function getHousesForRent(){
+	function getForRent(){
 		return AuthService.hostName + '/api/houses?housefor=rent&raw=1&specific=1';
 	}
 
-	function getHousesForSell(){
+	function getForSell(){
 		return AuthService.hostName + '/api/houses?housefor=sell&raw=1&specific=1';
+	}
+
+	function getHousesForRent(){
+		return AuthService.hostName + '/api/houses?housefor=rent&raw=1&specific=1&type=house';
+	}
+	function getHousesForSell(){
+		return AuthService.hostName + '/api/houses?housefor=sell&raw=1&specific=1&type=house';
+	}
+	function getApartmentsForRent(){
+		return AuthService.hostName + '/api/houses?housefor=rent&raw=1&specific=1&type=apartment';
+	}
+	function getApartmentsForSell(){
+		return AuthService.hostName + '/api/houses?housefor=sell&raw=1&specific=1&type=apartment';
 	}
 
 	function getServicesNearBy(){

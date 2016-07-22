@@ -5,19 +5,28 @@
         <form class="form" ng-submit="update()" name="myForm">
             <div class="form-group">
                 <label>Họ và tên</label>
-                <input type="text" class="form-control" name="fullname" ng-model="updateForm.fullName" ng-value = "userInfo.fullname" ng-required>
+                <input type="text" class="form-control" name="fullname" ng-model="updateForm.fullname" ng-required>
             </div>    
             <div class="form-group">
                 <label>Số điện thoại</label>
-                <input type="text" class="form-control" name="phone" ng-model="updateForm.phone" ng-value = "userInfo.phone" ng-required>
+                <input type="text" class="form-control" name="phone" ng-model="updateForm.phone" ng-required>
             </div>
+
+            <div class="form-group">
+                <label>Gioi tinh</label>
+                <select name="gender" id="gender" ng-model="updateForm.gender" class="form-control">
+                    <option value="1">Nam</option>
+                    <option value="0">Nu</option>
+                </select>
+            </div>
+
              <div class="form-group">
                 <label>Địa chỉ</label>
-                <input type="text" class="form-control" name="address" ng-model="updateForm.address" ng-value = "userInfo.address" required>
+                <input type="text" class="form-control" name="address" ng-model="updateForm.address" required>
             </div>
             <div class="form-group">
                 <label>Mật khẩu cũ</label>
-                <input type="password" class="form-control" name="oldpass" ng-model="updateForm.oldpass" ng-required>
+                <input type="password" class="form-control" name="oldpass" ng-model="updateForm.oldPassword" ng-required>
             </div>
             <div class="form-group">
                 <label>Thay đổi mật khẩu </label>
@@ -27,11 +36,11 @@
             <div class="collapse" id="changePass">
                 <div class="form-group">
                     <label for="newpass">Mật khẩu mới</label>
-                    <input type="password" class="form-control" name="newpass" id="newpass" ng-model="updateForm.newpass" ng-required required>
+                    <input type="password" class="form-control" name="newpass" id="newpass" ng-model="updateForm.newPassword" ng-required required>
                 </div>
                 <div class="form-group">
                     <label for="confirmpass">Nhập lại mật khẩu</label>
-                    <input type="password" class="form-control" name="confirmpass" id="confirmpass" ng-model="updateForm.confirmpass" ng-required required pw-check="newpass">
+                    <input type="password" class="form-control" name="confirmpass" id="confirmpass" ng-model="updateForm.repeatPassword" ng-required required pw-check="newpass">
                 </div>
                 <div class="msg-block" ng-show="myForm.$error"> <span class="msg-error" ng-show="myForm.confirmpass.$error.pwmatch">Mật khẩu không khớp</span> 
                 </div>

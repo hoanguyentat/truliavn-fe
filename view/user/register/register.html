@@ -1,43 +1,83 @@
-<div class="home container">
-  <div class="col-sm-4 col-md-4 col-lg-4 col-md-offset-4 col-sm-offset-4 col-lg-offset-4">
-    <h1>Đăng ký tài khoản</h1>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<div class="house-for">
+  <div class="register-block">
+    <center><h1>Đăng ký tài khoản</h1></center>
     <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
-    <form name="myForm" class="form" ng-submit="register()">
-     <div class="form-group">
-        <label>Họ và tên</label>
-        <input type="text" class="form-control" name="fullname" ng-model="registerForm.fullName" required>
-      </div>
-       <div class="form-group">
-        <label>Số điện thoại</label>
-        <input type="number" class="form-control" name="phone" ng-model="registerForm.phone" required>
-      </div>
-       <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" name="email" ng-model="registerForm.email" required>
-      </div>
-      <div class="form-group">
-        <label>Mật khẩu</label>
-        <!-- <input type="password" class="form-control" name="password" ng-model="registerForm.password" required> -->
-        <input type="password" id="password" class="form-control" name="password" ng-model="registerForm.password" required ng-required/>
-      </div>
-      <div class="form-group">
-        <label>Nhắc lại mật khẩu</label>
-        <!-- <input type="password" class="form-control" name="re-pass" ng-model="registerForm.password" required> -->
-        <input type="password" id="repass" class="form-control" name="repass" ng-model="registerForm.repass" ng-required required pw-check="password"/>
-        <div class="msg-block" ng-show="myForm.$error">
-          <span class="msg-error" ng-show="myForm.repass.$error.pwmatch">
-            Mật khẩu không khớp
-          </span>
-        </div>
-      </div>
+    <form name="myForm" class="form-register" ng-submit="register()">
+        <table class="registerTable">
+            <tr>
+                <td>Họ và tên</td>
+                <td>
+                    <input type="text" class="form-control" name="fullname" ng-model="registerForm.fullname" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>
+                    <select name="gender" id="gender" ng-model="registerForm.gender" class="form-control">
+                        <option value="1">Nam</option>
+                        <option value="0">Nu</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Ngày sinh</td>
+                <td>
+                    <input type="date" name="birthday" id="birthday" class="form-control" ng-model="registerForm.birthday">
+                </td>
+            </tr>
 
-      <div class="form-group">
-        <label>Địa chỉ</label>
-          <input type="text" class="form-control" name="address" ng-model="registerForm.address" required>
-        </div>
-        <div>
-          <button type="submit" class="btn btn-default" ng-disabled="myForm.repass.$error.pwmatch">Register</button>
-        </div>
+            <tr>
+                <td>Số điện thoại(*)</td>
+                <td>
+                    <input type="number" class="form-control" name="phone" ng-model="registerForm.phone" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Email(*)</td>
+                <td>
+                    <input type="email" class="form-control" name="email" ng-model="registerForm.email" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Tên đăng nhập(*)</td>
+                <td>
+                    <input type="username" class="form-control" name="username" ng-model="registerForm.username" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Mật khẩu(*)</td>
+                <!-- <input type="password" class="form-control" name="password" ng-model="registerForm.password" required> -->
+                <td>
+                    <input type="password" id="password" class="form-control" name="password" ng-model="registerForm.password" required ng-required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Nhắc lại mật khẩu(*)</td>
+                <!-- <input type="password" class="form-control" name="re-pass" ng-model="registerForm.password" required> -->
+                <td>
+                    <input type="password" id="repass" class="form-control" name="repass" ng-model="registerForm.repeatPassword" ng-required required pw-check="password"/>
+                    <div class="msg-block" ng-show="myForm.$error">
+                        <span class="msg-error" ng-show="myForm.repass.$error.pwmatch">
+                            Mật khẩu không khớp
+                        </span>
+                    </div>      
+                </td>
+            </tr>
+
+            <tr>
+                <td>Địa chỉ</td>
+                <td>
+                    <input type="text" class="form-control" name="address" ng-model="registerForm.address" required>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>Lưu ý: </b><strong class="">Các trường đánh dấu (*) là trường bắt buộc phải điền...</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2"><center><button type="submit" class="btn btn-danger" ng-disabled="myForm.repass.$error.pwmatch">Đăng kí</button></center></td>
+            </tr>
+        </table>
     </form>
-  </div>
+    </div>
 </div>

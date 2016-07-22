@@ -1,54 +1,47 @@
 <div ng-if="status == 'success'">
 	<div class="container house-for">
-		<div class="row" style="padding-bottom: 20px;">
-			<center  style="padding-bottom: 20px;">
-				<h2 class="title"><strong>Thông tin chi tiết căn hộ</strong></h2>
-			</center>
+		<div style="padding-bottom: 20px;">
 			<div class="col-xs-12 col-sm-4">
-				<div class="panel">
+				<div class="panel panel-default">
 					<div class="panel-heading">
-						Thông tin người đăng
+						<center>Thông tin người đăng</center>
 					</div>
-					<div class="panel-body">
+					<div class="">
 						<center>
-							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-thumbnail img-agent" alt="">
+							<img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" style="width: 200px; height: 200px; " class="img img-responsive img-agent" alt="">
 						</center>
-						<table class="table table-hover table-response ownerInfo">
-							<thead>
-							</thead>
-							<tbody>
+						<table class="table table-hover table-response" style="margin-bottom: 0px;">
 								<tr>
 									<td>Chủ nhà</td>
 									<td>{{house.ownerInfo.fullname}}</td>
 								</tr>
-								<tr>
+								<tr ng-show="house.ownerInfo.phone">
 									<td>SĐT</td>
 									<td>{{house.ownerInfo.phone}}</td>
 								</tr>
-								<tr>
-									<td>Email</td>
-									<td>{{house.ownerInfo.email}}					
+								<tr ng-show="house.ownerInfo.email">
+									<td >Email</td>
+									<td>{{house.ownerInfo.email}}	</td>				
 								</tr>
-								<tr>
+								<tr ng-show="house.ownerInfo.address">
 									<td>Địa chỉ</td>
 									<td>{{house.ownerInfo.address}}</td>
 								</tr>
-							</tbody>
 						</table>
-						<div class="row">
-							<div class="col-sm-6">
-								<a href="tel:{{house.ownerInfo.phone}}" target="_blank" class=" text-center"> 
-									<button class="btn btn-danger btn-contact">Gọi điện</button>
-								</a>
-							</div>
-							<div class="col-sm-6">
-								<center>
-								<a href="mailto:{{house.ownerInfo.email}}" target="_blank" class="text-center">
-									<button class="btn btn-danger btn-contact">Gửi Mail</button>
-								</a>
-								</center>
-							</div>
-						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6" ng-show="house.ownerInfo.phone">
+						<a href="tel:{{house.ownerInfo.phone}}" target="_blank" class=" text-center"> 
+							<button class="btn btn-danger btn-contact" style="margin-bottom: 5px;">Gọi điện</button>
+						</a>
+					</div>
+					<div class="col-sm-6" ng-show="house.ownerInfo.email">
+						<center>
+						<a href="mailto:{{house.ownerInfo.email}}" target="_blank" class="text-center">
+							<button class="btn btn-danger btn-contact" style="margin-bottom: 5px;">Gửi Mail</button>
+						</a>
+						</center>
 					</div>
 				</div>
 			</div>
@@ -57,82 +50,86 @@
 				<div ng-if="house.images[0]" >
 				    <uib-carousel active="active" interval="3000" no-wrap="false">
 				      	<uib-slide ng-repeat="(key, slide) in house.images track by key" index="key">
-				        	<img ng-src="{{'http://ngocdon.me:3000/' + slide}}" style="margin:auto;" class="img img-thumbnail img-carousel">
+				        	<img ng-src="{{'http://ngocdon.me:3000/' + slide}}" class="img img-thumbnail img-carousel">
 				      	</uib-slide>
 				    </uib-carousel>
 				</div>
-
 				<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png' class="img-unknown">
-	
-				<center><h3 class=""><b>Ngày đăng:</b>  {{house.created_at | date: "yyyy-MM-dd"}}</h3></center>
+				<h2 ng-hide="house.houseFor">Cho thuê</h2>
+				<h2 ng-show="house.houseFor">Nhà đất bán</h2>
+				<span>Địa chỉ: </span> {{house.address}}
+				<table class="table">
+					<tbody>
+						<tr> 
+							<td ng-show="house.noOfBedrooms">{{house.noOfBedrooms}} phòng ngủ</td>
+							<td ng-show="house.noOfBathrooms">{{house.noOfBathrooms}} phòng tắm</td>
+						</tr>
+						<tr>
+							<td ng-show="house.noOfFloors">{{house.noOfFloors}} tầng</td>
+							<td ng-show="house.buildIn">Nhà được xây năm {{house.buildIn}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-		<div class="container homeDetail">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+					<div class="" >
+						<h2 style="margin-top: 0px;">{{house.title}}</h2>
+						<span><b>Giá: </b> <strong ng-if="house.price"> {{house.price}} triệu vnđ </strong><strong ng-if="!house.price"> Thỏa thuận</strong> </span>
+						<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
+						<article>
+							
+							<div>
+								<h3 class="title">Mô tả</h3>
+							</div>
+							<div ng-bind-html="house.description"></div>
 
-					<div class="panel">
-						<!-- <div class="row detail-article "> -->
-						<div class="panel-heading">
-						Chi tiết ngôi nhà
-						</div>
-						<!-- <div class="row"> -->
-						<div class="panel-body">
-							<span><b>Khu vực: </b> <strong>{{house.address}}</strong></span>
-							<span style="padding-left: 30px;"><b>Giá: </b> <strong> {{house.price}} triệu vnđ </strong> </span>
-							<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
-							<article>
-								<h2>{{house.title}}</h2>
-								<div>
-									<h3 class="title">Thông tin mô tả</h3>
-								</div>
-								<div class="detail-description" ng-bind-html="house.description"></div>
-								<div class="house-detail">
-									<table class="table table-bordered table-hover table-response">
-										<thead>
-											<tr class="active header">
-												<th>Cấu trúc</th>
-												<th>Số lượng</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="info houseInfo"> 
-												<td>Phòng ngủ</td>
-												<td>{{house.noOfBedrooms}}</td>
-											</tr>
-											<tr class="info houseInfo">
-												<td>Phòng tắm</td>
-												<td>{{house.noOfBathrooms}}</td>
-											</tr>
-											<tr class="info houseInfo">
-												<td>Tầng</td>
-												<td>{{house.noOfFloors}}</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</article>
-						</div>
+						</article>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-					<ng-include src="'../view/templates/filter.template.html'" scope="" onload=""></ng-include>						
+					<ng-include src="'../view/templates/filter.template.html'" scope="" onload=""></ng-include>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+					
 				</div>			
 			</div>
 
-			<div class="row utilities">
-				<h1 class="title text-center">Tiện ích xung quanh ngôi nhà</h1>
+<!-- 			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+					<h2>Dac diem</h2>
+					<table class="table">
+						<tbody>
+							<tr> 
+								<td ng-show="house.noOfBedrooms">{{house.noOfBedrooms}} phòng ngủ</td>
+								<td ng-show="house.noOfBathrooms">{{house.noOfBathrooms}} phòng tắm</td>
+							</tr>
+							<tr>
+								<td ng-show="house.noOfFloors">{{house.noOfFloors}} tầng</td>
+								<td ng-show="house.buildIn">Nhà được xây năm {{house.buildIn}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div> -->
+
+			<div class="row">
+				<center><h2 class="title">Tiện ích xung quanh ngôi nhà</h2></center>
 				<div class="col-sm-4 col-md-4 col-xs-12 school">
 					<h3 class="title">Trường học gần đây</h3>
 					<div ng-repeat='i in ::school_list'>
+
 						<div class="col-xs-12" >
 							<h3 class="title" ng-click='choose(i.type)'>{{::i.title}}	
 								<span class="glyphicon  glyphicon-menu-down span-extend" data-toggle="collapse" data-target='#{{::i.type}}' ng-show="schoolClick == 'down'" ng-click="schoolClick = 'up'"></span>
 								<span class="glyphicon  glyphicon-menu-up span-extend" data-toggle="collapse" data-target='#{{::i.type}}' ng-show="schoolClick == 'up'" ng-click="schoolClick = 'down'"></span>
 							</h3>	
+
 							<div ng-if='select == i.type' id="{{::i.type}}">
 								<table class="table table-condensed">
 									<thead></thead>
@@ -260,18 +257,10 @@
 
 	<div class="container">
 		<div class="col-xs-12">
-			<h1 class="title text-center">Khu vực lân cận</h1>
-	  	  	<ui-gmap-google-map center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
-	  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
-            	</ui-gmap-markers>
-			    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
-				</ui-gmap-markers>
-
-			</ui-gmap-google-map>
-		    <table class="table table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr class='header'>
-						<th>Giá các nhà lân cận</th>
+						<th colspan="5"><center>Giá các nhà lân cận</center></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -285,13 +274,23 @@
 					<tr ng-repeat="item in ::neighbor" class='neighbor'>
 						<td><a href="#!/houses/{{::item.id}}">{{::item.title}}</a></td>
 						<td class="dist">{{::item.distance}}</td>
-						<td>{{::item.price}}</td>
+						<td>{{::item.price}} triệu vnđ</td>
 						<td></td>
 						<td></td>
 
 					</tr>
 				</tbody>
 			</table>
+	  	  	<ui-gmap-google-map center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
+	  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
+            	</ui-gmap-markers>
+			    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
+				</ui-gmap-markers>
+
+			</ui-gmap-google-map>
+
+		</div>
+
 	</div>
 </div>
 <span ng-if="status == 'error'">

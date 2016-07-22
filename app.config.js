@@ -21,14 +21,34 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 	})
 	.when('/for-rent', {
 		templateUrl: 'view/house-list/house-list.template.html',
-		controller: 'HouseForRentCtrl',
+		controller: 'ForRentCtrl',
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
 	.when('/for-sell', {
 		templateUrl: 'view/house-list/house-list.template.html',
-		controller: 'HouseForSellCtrl',
+		controller: 'ForSellCtrl',
 		controllerAs: 'ctrl',
+		access: {restricted: false}
+	})
+	.when('/for-rent/apartments',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'ApartmentsForRentCtrl',
+		access: {restricted: false}
+	})
+	.when('/for-sell/apartments',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'ApartmentsForSellCtrl',
+		access: {restricted: false}
+	})
+	.when('/for-rent/houses',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'HousesForRentCtrl',
+		access: {restricted: false}
+	})
+	.when('/for-sell/houses',{
+		templateUrl: 'view/house-list/house-list.template.html',
+		controller: 'HousesForSellCtrl',
 		access: {restricted: false}
 	})
 	.when('/manage-post', {
@@ -71,7 +91,7 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller: 'RegisterController',
 		access: {restricted: false}
 	})
-	.when('/update', {
+	.when('/:users/update', {
 		templateUrl : 'view/user/update/update.html',
 		controller : 'UpdateController',
 		access : {restricted : true}
@@ -81,12 +101,14 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller : 'EstimateController',
 		access: {restricted: false}
 	})
-	.when('logout', {
+
+	.when('/logout', {
 		controller: 'LogoutController',
 		access: {restricted: true}
 	})
-	.when('/:user', {
-		template: 'Trang thông tin cá nhân',
+	.when('/:users', {
+		templateUrl: 'view/user/user-info.template.html',
+		controller: 'UserInfoCtrl',
 		access: {restricted: true}
 	})
 	.when('/:user/edit', {

@@ -1,0 +1,58 @@
+<div class="container house-for">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+          <div class="panel panel-info">
+            <div class="panel-heading">
+               <h3 class="panel-title">Thông tin cá nhân</h3>
+            </div>
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col-md-3 col-lg-3 " align="center"> <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img img-circle img-responsive img-agent" alt="">
+                  <p><strong>{{userInfo.username}}</strong></p>
+                  </div>
+                  <div class=" col-md-9 col-lg-9 "> 
+                     <table class="table table-user-information">
+                     <tbody>
+                        <tr>
+                           <td>Họ và tên:</td>
+                           <td>{{userInfo.fullname}}</td>
+                        </tr>
+                        <tr>
+                           <td>Ngày sinh:</td>
+                           <td>{{userInfo.birthday | date: 'dd-MM-yyyy'}}</td>
+                        </tr>
+                        <tr>
+                           <td>Giới tính</td>
+                           <td ng-show="userInfo.gender">Nam</td>
+                           <td ng-hide="userInfo.gender">Nu</td>
+                        </tr>
+                        <tr>
+                           <td>Địa chỉ</td>
+                           <td>{{userInfo.address}}</td>
+                        </tr>
+                        <tr>
+                           <td>Email</td>
+                           <td><a href="mailto:{{userInfo.email}}">{{userInfo.email}}</a></td>
+                        </tr>
+                           <td>Số điện thoại</td>
+                           <td>{{userInfo.phone}}
+                           </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  
+                  <a href="#!/manage-post" class="btn btn-primary">Các bài đã đăng</a>
+                  <a href="#!/addhouse" class="btn btn-success">Thêm bài đăng</a>
+                </div>
+              </div>
+            </div>
+               <div class="panel-footer">
+                  <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                  <span class="pull-right">
+                      <a href="#!/{{userInfo.username}}/update" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Sửa thông tin</a>
+                  </span>
+               </div>
+         </div>
+      </div>
+   </div>
+</div>
