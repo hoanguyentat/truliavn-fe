@@ -276,8 +276,8 @@ app.factory('API', ['AuthService',function(AuthService){
 	}
 
 
-	function getHousesNearby(city, district, ward){
-		return AuthService.hostName + '/api/houses?city=' + city  + '&district=' + district + '&ward=' + ward +'&specific=1';
+	function getHousesNearby(housefor, city, district, ward){
+		return AuthService.hostName + '/api/houses?housefor='+ housefor + '&city=' + city  + '&district=' + district + (ward ?('&ward=' + ward) : '') +'&specific=1';
 	}
 
 	function getDistanceNearBy(){

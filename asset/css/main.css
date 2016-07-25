@@ -1,3 +1,4 @@
+
 html {
 	padding: 0;
 	margin: 0;
@@ -65,6 +66,7 @@ a.home-img{
 	margin-top: 10px;
 }
 /*----------FILTER & SELECT------------*/
+
 /*-------------Deatail-form---------*/
 .detail-description{
 	color: #000;
@@ -123,12 +125,15 @@ strong{
 }
 .neighbor{
 	color: green;
-	font-size: 18px;
+	font-size: 17px;
 }
+.price{
+	text-align: right;
+}
+
 tr.column_name{
 	font-weight: bold;
-	font-size: 20px;
-	color: gray;
+	font-size: 18px;
 }
 tr.header{
 	font-weight: bold;
@@ -209,23 +214,91 @@ tr.houseInfo{
 	padding: 5px 10px;
 	margin-bottom : 0px;
 }
+label{
+	display: inline;
+}
+.radius-form{
+	font-size: 22px;
+	font-weight: bold;
+    padding-bottom: 15px;
+    color: #19C662;
+}
+input[type='radio'].radius-radio{
+	margin-left: 10px;
+	margin-right: 10px;
+}
 /* ---------END OF UTITLITIES NEAR THE HOUSE--------- */
+
+
 
 /*-------------ESTIMATE THE HOUSE------------*/
 .table-estimate{
-	font-size: 20px;
+	font-size: 18px;
 }
 .panel-green{
-	background: #2ecc71;
+	background: #19C662;
+    color: #fff;
 }
 .panel{
 	border-color: #bcd4d4;
+}
+.table>tbody>tr>th {
+        vertical-align: middle;
 }
 .a-estimate:hover,
 .a-estimate,
 .span-percent{
 	text-decoration: none;
 	color: green;
+}
+
+.home-image{
+    width:100%; 
+    height: 200px; 
+}
+.row-suggest{
+    padding-left : 15px !important;
+    padding-right: 15px !important;
+    padding-top: 30px;
+}
+.title-suggest{
+    padding-left: 8px;
+    color : #19C662;
+}
+.suggest{
+    padding: 8px !important;
+}
+
+.house-suggest { 
+   position: relative; 
+   width: 100%; /* for IE 6 */
+   height: 200px; 
+
+   
+}
+
+.house-detail-suggest{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); 
+    
+}
+
+.house-detail-info-suggest{
+    position: absolute;
+    bottom: 0;
+    left: 25px;
+}
+
+.house-detail-info-suggest > h4, p.h6{
+    color: #fff;
+}
+.price-detail-estimate{
+    background: #fbfbfb;
+    border-radius: 10px;
+    margin-top: 30px;
 }
 /*-------------END OF ESTIMATE THE HOUSE------------*/
 
@@ -243,7 +316,8 @@ tr.houseInfo{
 
 /*------------------NAVBAR---------------------*/
 .navbar-default{
-	background-color: #2ecc71;
+	background-color: #19C662;
+    font-size: 17px;
 }
 .navbar-default .navbar-nav>li>a {
 	color: #fff;
@@ -254,6 +328,10 @@ tr.houseInfo{
 
 .navbar-default .navbar-brand {
     color: #f5f5f5;
+}
+
+.navbar-nav > li > a {
+    line-height: 22px !important;
 }
 
 .dropbtn {
@@ -287,7 +365,7 @@ tr.houseInfo{
 }
 
 .dropdown-content a:hover {
-	background-color:  #2ecc71;
+	background-color:  #19C662;
 }
 
 a.nav{
@@ -312,7 +390,7 @@ a.nav:hover{
 
 /*------------------FOOTER----------------------*/
 .footer{
-	position: absolute;
+	/*position: absolute;*/
 	right: 0;
 	bottom: 0;
 	left: 0;
@@ -482,3 +560,19 @@ a.nav:hover{
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(197,255,233,0.4); 
 }
+
+/* --------------RESPONSIVE LAYOUT----------- */
+
+@media only screen and (max-width: 768px){
+    .angular-google-map-container {
+        width: 100%;
+        height: 430px;
+    }
+    .table-estimate{
+        font-size: 14px;
+    }
+    .radius-form{
+        font-size: 18px;
+    }
+}
+/* --------------RESPONSIVE LAYOUT----------- */

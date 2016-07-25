@@ -1,31 +1,11 @@
-angular.module('houseDetail')
-.component('houseDetail', {
-	controller: function HouseDetailController($scope, $http, $routeParams, AuthService, API, $sce, $cookies){
+app.controller('HouseDetailController', ['$rootScope','$scope', '$http', '$log', '$routeParams', 'API', '$sce','$cookies',
+	function($rootScope,$scope, $http, $log, $routeParams, API, $sce, $cookies){
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
-		var request = {};
 
-		$scope.select = "myHouse";
-		$scope.choose = function(str){
-			$scope.select = str;
-			console.log('click at ' + str);
-		}
+				var request = {};
 
-		$scope.spanClick = "down";
-		$scope.schoolClick = "down";
-	 	reloadMap();
-
-	 	function splitAddress(add){
-			add = add.split(',');
-			var len = add.length - 2;
-			var s = "";
-			for(var i = 0; i < len; i++){
-				s += add[i];
-			}
-			return s;
-		}
-
-	 	function convertPrice(price){
-			price = price * 1000 * 1000;
+		function convertPrice(price){
+			price *= 1000000;
 			var s= '';
 			do {
 	          	var n = price%1000;
@@ -46,6 +26,62 @@ angular.module('houseDetail')
 			return s;
 		}
 
+		$http.get(API.getPrice()).then(function success(response){
+			$scope.distEstimate = response.data.data;
+			console.log(response.data.data);
+		});
+
+		$scope.posChange = function(){
+			console.log($scope.posSelected);
+			if($scope.posSelected > 0){
+				$scope.holderStr = "Mặt tiền của nhà rộng bao nhiêu mét ?";
+			}
+			else if($scope.posSelected == 0){
+				$scope.holderStr = "Nhà cách đường to bao nhiêu mét ?";
+			}
+		}
+
+		$scope.distEstChange = function(){
+			console.log($scope.disEstSelected);
+			$scope.streetEstimate = $scope.distEstimate[$scope.disEstSelected];
+		};
+
+		$scope.streetEstChange = function(){
+		}
+
+
+		$scope.estimate = function(){
+			request.frontend = $scope.posSelected;
+			request.street = $scope.streetEstSelected;
+			if($scope.posSelected > 0){
+				request.wide = $scope.houseWD;
+				request.deep = 0;
+			}
+			else{
+				request.deep = $scope.houseWD;
+				request.wide = 0;
+			}
+
+			request.area = $scope.houseArea;
+			console.log(request);
+			$http.post(API.getPrice(), request)
+			.then(function success(response){
+				$scope.priceEstimate  = convertPrice(response.data.price);
+			},
+			function error(response){
+				console.log(response);
+			});
+		}
+
+		$scope.select = "myHouse";
+		$scope.choose = function(str){
+			$scope.select = str;
+			console.log('click at ' + str);
+		}
+
+		$scope.spanClick = "down";
+		$scope.schoolClick = "down";
+	 	reloadMap();
 		$scope.radius = 1000;
 		$scope.chooseRadius = function(rad){
 			$scope.radius = parseInt(rad);
@@ -53,98 +89,19 @@ angular.module('houseDetail')
 			reloadMap();
 		}
 
-
-
 		function reloadMap() {
 		$http.get(urlHouseDetail).then(function successCallback(response){
 			var data = response.data;
 
+
+
 			$scope.status = data.status;
-
-			var house = data.houses[0];
-			var add = house.address.split(',');
-			var len = add.length;
-
-			$scope.address = add[len-2] + ', '+  add[len-1];
-			$cookies.put('districtAddress', add[len-2] + ', '+  add[len-1]);
-			$cookies.put('districtID', house.district);
-			$cookies.put('cityID', house.city);
-			$cookies.put('price', house.price);
-
-			//HOUSE SUGGEST FUNCTION
-			function HouseSuggest(){
-				var url = AuthService.hostName + '/api/houses?housefor=' + ((house.houseFor == 1) ?'sell' : 'rent')
-												+'&city='+ house.city
-												+ '&district=' + house.district
-												+ '&specific=1';
-				var urlNewest = url + '&offset=0&count=8';
-				var urlBedRooms3 = url + '&bedrooms=3&count=6';
-				var urlMaxPrice = url + '&count=8&maxPrice='+ house.price;
-				var urlFloors4 = url + '&count=6&floors=4';
-				// console.log(urlMaxPrice);
-				$scope.priceSuggest = convertPrice($cookies.get('price'));
-
-				$http.get(urlNewest).then(function success(response){
-					$scope.newest = response.data.houses;
-					for(var i in $scope.newest){
-						if($scope.newest[i].price == 0){
-							$scope.newest[i].price = "Thỏa thuận"
-						}
-						else {
-							$scope.newest[i].price = convertPrice($scope.newest[i].price);
-						}
-						// console.log($scope.newest[i].price);
-						$scope.newest[i].address = splitAddress($scope.newest[i].address);		
-					}
-				});
-
-				$http.get(urlBedRooms3).then(function success(response){
-					$scope.BedRooms3 = response.data.houses;
-					for(var i in $scope.BedRooms3){
-						if($scope.BedRooms3[i].price == 0){
-							$scope.BedRooms3[i].price = "Thỏa thuận"
-						}
-						else {
-							$scope.BedRooms3[i].price = convertPrice($scope.BedRooms3[i].price);
-						}
-						$scope.BedRooms3[i].address = splitAddress($scope.BedRooms3[i].address);		
-					}
-				});
-
-				$http.get(urlMaxPrice).then(function success(response){
-					$scope.MaxPrice = response.data.houses;
-					for(var i in $scope.MaxPrice){
-						if($scope.MaxPrice[i].price == 0){
-							$scope.MaxPrice[i].price = "Thỏa thuận"
-						}
-						else {
-							$scope.MaxPrice[i].price = convertPrice($scope.MaxPrice[i].price);
-						}
-						$scope.MaxPrice[i].address = splitAddress($scope.MaxPrice[i].address);		
-					}
-				});
-
-				$http.get(urlFloors4).then(function success(response){
-					$scope.Floors4 = response.data.houses;
-					for(var i in $scope.Floors4){
-						if($scope.Floors4[i].price == 0){
-							$scope.Floors4[i].price = "Thỏa thuận"
-						}
-						else {
-							$scope.Floors4[i].price = convertPrice($scope.Floors4[i].price);
-						}
-						$scope.Floors4[i].address = splitAddress($scope.Floors4[i].address);		
-					}
-				});
-			}
-
-			// END OF HOUSE SUGGEST
-			HouseSuggest();
-
-			$scope.house = house;
+			$scope.house = data.houses[0];
 			$scope.house.price = convertPrice($scope.house.price);
 
-
+			// console.log(($scope.house.houseFor > 0) ? 'sell' :'rent');
+			
+			$cookies.putObject('houseInfo', data.houses[0]);
 			$scope.house.description = $sce.trustAsHtml($scope.house.description);
 
 			var latitude = $scope.house.lat;
@@ -190,12 +147,13 @@ angular.module('houseDetail')
 			$scope.utilities = [];
 
 
-			/*---------------MARKER POSITION OF THE HOUSE----------- */
+			// marker position of the house 
 
 			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 15};
+		    // end location
 
-		    /*--------FIND THE NEIGHBORHOOD NEAR YOUR HOUSE---------*/
-		    console.log(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward));
+		    //find the neighborhood near your house
+		    // console.log(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward));
 			$http.get(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward)).then(
 				function (near){
 					neighbor = near.data.houses;
@@ -215,11 +173,11 @@ angular.module('houseDetail')
 						coor_neighbor += '|' + lat + ',' + lon;
 						neighbor[i].price = convertPrice(neighbor[i].price);
 					}
-/*					var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins="
+					var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins="
 				 		+ position 
 				 		+ "&destinations="+ coor_neighbor
 				 		+ "&key=AIzaSyDLV4DIm4y3o6Bd7GRR725pmocPgzE3zwE"
-				 	console.log(url);*/
+				 	console.log(url);
 
 					coor_neighbor = coor_neighbor.substring(1);
 					$http.post(API.getDistanceNearBy(), {origin : position, 
@@ -270,7 +228,7 @@ angular.module('houseDetail')
 			)
 
 
-		    /*--------FIND THE HOSPITAL NEAR THE HOUSE-----------*/
+		    //find the hospital near by
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -318,9 +276,7 @@ angular.module('houseDetail')
 						})
 		    	}
 		    });
-		    /*--------END OF FIND THE HOSPITAL NEAR THE HOUSE-----------*/
-
-		    /*----------FIND RESTAURANT NEAR THE HOUSE----------*/
+		    //find restaurant near by
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -356,9 +312,8 @@ angular.module('houseDetail')
 
 		    	}
 		    });
-		    /*----------END OF FIND RESTAURANT NEAR THE HOUSE----------*/
 
-		    /*-----------FIND THE CAFE NEAR THE HOUSE ----------*/
+		    //find the cafe near by
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -391,9 +346,7 @@ angular.module('houseDetail')
 					$scope.utilities.push({title:'Cafe', type : 'cafe', quantity : cafe.length});
 		    	}
 		    });
-		    /*-----------END OF FIND THE CAFE NEAR THE HOUSE----------*/
-
-		    /*---------FIND PARK NEAR THE HOUSE----------*/
+		    //find park near by
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -442,9 +395,8 @@ angular.module('houseDetail')
 						})
 		    	}
 		    });
-		    /*---------END OF FIND PARK NEAR THE HOUSE----------*/
 
-		    /*----------FIND BUS NEAR THE HOUSE------------*/
+		    //find bus near by
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -497,9 +449,8 @@ angular.module('houseDetail')
 
 		    	}
 		    });
-		    /*----------FIND BUS NEAR THE HOUSE------------*/
 
-		    /*---------FIND BEAUTY SALON NEAR THE HOUSE----------*/
+		    //find beauty salon near by
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -536,9 +487,7 @@ angular.module('houseDetail')
 
 		    	}
 		    });
-		    /*---------END OF FIND BEAUTY SALON NEAR THE HOUSE----------*/
-
-		    /*----------FIND THE MARKET NEAR THE HOUSE----------*/
+		    //find the market near by
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -589,10 +538,9 @@ angular.module('houseDetail')
 
 		    	}
 		    });
-		    /*----------END OF FIND THE MARKET NEAR THE HOUSE----------*/
 
 
-		    /*----------FIND THE SCHOOL NEAR THE HOUSE---------*/
+		    // find the school near by
 			$http.post(API.getServicesNearBy(),{lat : latitude, 
 												lon : longitude, 
 												radius : $scope.radius, 
@@ -617,8 +565,8 @@ angular.module('houseDetail')
 						}
 					}
 
-					// console.log('primary');
-					// console.log(primaries);
+					console.log('primary');
+					console.log(primaries);
 
 					//filter primary school
 					$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_primary.substring(1)})
@@ -740,7 +688,6 @@ angular.module('houseDetail')
 					// console.log(primaries);
 
 				}
-				/*----------END OF FIND THE SCHOOL NEAR THE HOUSE---------*/
 			});
 
 			setTimeout(function(){
@@ -908,30 +855,71 @@ angular.module('houseDetail')
 			    	scrollwheel: false
 			    };				    	
 
-			    $scope.$watchCollection(function(){
-			    	return $scope.map.bounds;
-			    }
-		    	,function(ov, nv) {
-		    		// if (!ov.southwest && nv.southwest) {
-			       	$scope.neighborMarkers = coor_neighbor_marker;
-			    	$scope.hospitalMarkers = coor_hospital_marker;
-			    	$scope.parkMarkers = coor_park_marker;
-			    	$scope.restaurantMarkers = coor_restaurant_marker;
-			    	$scope.cafeMarkers = coor_cafe_marker;
-			    	$scope.busMarkers = coor_bus_marker;
-			    	$scope.salonMarkers = coor_salon_marker;
-			    	$scope.marketMarkers = coor_market_marker;
-			    	$scope.primaryMarkers = coor_primary_marker;
-			        $scope.juniorMarkers = coor_junior_marker;
-			        $scope.seniorMarkers = coor_senior_marker;
-		    	} 
-		    	,true);
+			    $scope.neighborMarkers = [];
+		    	$scope.hospitalMarkers = [];
+		    	$scope.parkMarkers =[];
+		    	$scope.restaurantMarkers =[];
+		    	$scope.cafeMarkers =[];
+		    	$scope.busMarkers =[];
+		    	$scope.salonMarkers =[];
+		    	$scope.marketMarkers =[];
+		    	$scope.primaryMarkers =[];
+		        $scope.juniorMarkers =[];
+		        $scope.seniorMarkers =[];
+			    $scope.$watch('bounds'
+			    	,function() {	$scope.neighborMarkers = coor_neighbor_marker;} 
+			    	,true);
+
+		    	$scope.$watch('bounds'
+			    	,function() {$scope.hospitalMarkers = coor_hospital_marker;} 
+			    	,true);
+
+		    	$scope.$watch('bounds'
+		    		,function() {$scope.parkMarkers = coor_park_marker;} 
+		    		,true
+		    	);
+		    	$scope.$watch('bounds'
+		    		,function() {$scope.restaurantMarkers = coor_restaurant_marker;} 
+		    		,true
+		    	);
+
+		    	$scope.$watch('bounds'
+		    		,function() {$scope.cafeMarkers = coor_cafe_marker;} 
+		    		,true
+		    	);
+
+		    	$scope.$watch('bounds'
+		    		,function() {$scope.busMarkers = coor_bus_marker;} 
+		    		,true
+		    	);
+
+		    	$scope.$watch('bounds'
+		    		,function() {$scope.salonMarkers = coor_salon_marker;} 
+		    		,true
+		    	);
+
+		    	$scope.$watch('bounds'
+		    		,function() {$scope.marketMarkers = coor_market_marker;} 
+		    		,true
+		    	);
+
+		    	$scope.$watch('bounds'
+		    		,function() {$scope.primaryMarkers = coor_primary_marker;} 
+		    		,true
+		    	);
+
+		    	$scope.$watch('bounds'
+		    		,function() { $scope.juniorMarkers = coor_junior_marker;} 
+		    		,true
+		    	);
+		    	$scope.$watch('bounds'
+		    		,function() {  $scope.seniorMarkers = coor_senior_marker;} 
+		    		,true
+		    	);
 
 			}, 1500);
 
 		});
-		}
-	
-	},
-	templateUrl: 'view/house-detail/house-detail.template.html'
-});	
+	}
+
+}]);
