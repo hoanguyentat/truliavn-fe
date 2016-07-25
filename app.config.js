@@ -134,7 +134,6 @@ app.run(function($rootScope, $location, $route, AuthService){
 
 		AuthService.getUserStatus()
 		.then(function success(){
-			console.log(AuthService.isLoggedIn());
 				$rootScope.userStatus = AuthService.isLoggedIn();
 				$rootScope.userName = AuthService.getUserName();
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
