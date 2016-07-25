@@ -2,7 +2,7 @@ angular.module('truliavnApp')
 .config(
     ['uiGmapGoogleMapApiProvider', function(GoogleMapApiProviders) {
         GoogleMapApiProviders.configure({
-        	vietnam: true,
+        	china: true,
             v: '3.20', //defaults to latest 3.X anyhow
         	libraries: 'weather,geometry,visualization'
         });
@@ -66,6 +66,11 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		template: '<house-detail></house-detail>',
 		access: {restricted: false}
 	})
+/*	.when('/houses/:houseId', {
+		templateUrl : 'view/house-detail/house-detail.template.html',
+		controller : 'HouseDetailController',
+		access: {restricted: false}
+	})*/
 	.when('/addhouse', {
 		templateUrl: 'view/user/addhouse.template.html',
 		controller: 'AddHouseCtrl',
