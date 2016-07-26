@@ -3,7 +3,7 @@ html {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	/*font-family: 'Source Sans Pro', sans-serif;*/
+	font-family: 'Source Sans Pro', sans-serif;
 	overflow: auto;
 	box-sizing: border-box;
 	/*font-family: 'Roboto', sans-serif;*/
@@ -128,7 +128,7 @@ strong{
 	font-size: 17px;
 }
 .price{
-	text-align: right;
+	/*text-align: right;*/
 }
 
 tr.column_name{
@@ -176,7 +176,7 @@ tr.houseInfo{
 
 .angular-google-map-container {
 	width: 100%;
-	height: 550px;
+	height: 400px;
 
 }
 .map-marker{
@@ -272,9 +272,7 @@ input[type='radio'].radius-radio{
 .house-suggest { 
    position: relative; 
    width: 100%; /* for IE 6 */
-   height: 200px; 
-
-   
+   height: 200px;  
 }
 
 .house-detail-suggest{
@@ -282,7 +280,7 @@ input[type='radio'].radius-radio{
     bottom: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.65); 
+    background: rgba(0, 0, 0, 0.45); 
     
 }
 
@@ -317,7 +315,7 @@ input[type='radio'].radius-radio{
 /*------------------NAVBAR---------------------*/
 .navbar-default{
 	background-color: #19C662;
-    font-size: 17px;
+    /*font-size: 17px;*/
 }
 .navbar-default .navbar-nav>li>a {
 	color: #fff;
@@ -331,7 +329,7 @@ input[type='radio'].radius-radio{
 }
 
 .navbar-nav > li > a {
-    line-height: 22px !important;
+    /*line-height: 22px !important;*/
 }
 
 .dropbtn {
@@ -390,7 +388,7 @@ a.nav:hover{
 
 /*------------------FOOTER----------------------*/
 .footer{
-	/*position: absolute;*/
+	position: absolute;
 	right: 0;
 	bottom: 0;
 	left: 0;
@@ -566,7 +564,7 @@ a.nav:hover{
 @media only screen and (max-width: 768px){
     .angular-google-map-container {
         width: 100%;
-        height: 430px;
+        height: 300px;
     }
     .table-estimate{
         font-size: 14px;
@@ -574,5 +572,31 @@ a.nav:hover{
     .radius-form{
         font-size: 18px;
     }
+    .carousel-inner > .item > .img-carousel, .img-unknown{
+        height: 300px;
+        width: 100%;
+    }
 }
+
+/*  480px hoặc nhỏ hơn */
+@media screen and (max-width: 480px) {
+    .home-image{
+        width:100%; 
+        height: 135px; 
+    }
+    .house-suggest { 
+       position: relative; 
+       width: 100%; /* for IE 6 */
+       height: 135px;  
+    }
+    .carousel-inner > .item > .img-carousel, .img-unknown{
+        height: 250px;
+        width: 100%;
+    }
+     .angular-google-map-container {
+        width: 100%;
+        height: 200px;
+    }
+}
+
 /* --------------RESPONSIVE LAYOUT----------- */
