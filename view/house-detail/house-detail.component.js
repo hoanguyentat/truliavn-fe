@@ -62,6 +62,7 @@ angular.module('houseDetail')
 			$scope.status = data.status;
 
 			var house = data.houses[0];
+			house.priceHouse = house.price;
 			var add = house.address.split(',');
 			var len = add.length;
 
@@ -129,6 +130,7 @@ angular.module('houseDetail')
 				var urlNewest = url + '&offset=0&count=8';
 				var urlBedRooms3 = url + '&bedrooms=3&count=6';
 				var urlMaxPrice = url + '&count=8&maxPrice='+ house.price;
+				console.log(urlMaxPrice);
 				var urlFloors4 = url + '&count=6&floors=4';
 				// console.log(urlMaxPrice);
 				$scope.priceSuggest = convertPrice($cookies.get('price'));
@@ -242,7 +244,7 @@ angular.module('houseDetail')
 			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 15};
 
 		    /*--------FIND THE NEIGHBORHOOD NEAR YOUR HOUSE---------*/
-		    // console.log(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward));
+
 			$http.get(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward)).then(
 				function (near){
 					neighbor = near.data.houses;

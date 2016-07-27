@@ -13,6 +13,7 @@ app.controller('SearchController', ['$scope', '$http', 'AuthService', '$rootScop
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5
+	$scope.searchContent = $routeParams.searchContent;
 	$http.post(AuthService.hostName + '/api/search', {search: $routeParams.searchContent, housefor: $cookies.get('search.housefor')})
 	.then(function(res){
 		$scope.houses = res.data.houses;

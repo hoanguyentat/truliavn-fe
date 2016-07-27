@@ -135,7 +135,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		var urlBedRooms3 = url + '&bedrooms=3&count=6';
 		var urlMaxPrice = url + '&count=8&maxPrice='+ $cookies.get('price');
 		var urlFloors4 = url + '&count=6&floors=4';
-		// console.log(urlMaxPrice);
+
 		$scope.priceSuggest = convertPrice($cookies.get('price'));
 
 		$http.get(urlNewest).then(function success(response){

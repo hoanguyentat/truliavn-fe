@@ -228,6 +228,7 @@ app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $tim
 			deferred.resolve();
 		})
 		.error(function(err){
+			console.log(err);
 			console.log("Xoa nha khong thanh cong");
 			deferred.reject();
 		});

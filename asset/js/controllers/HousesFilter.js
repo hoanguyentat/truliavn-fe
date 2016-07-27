@@ -1,7 +1,6 @@
 app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$cookies','$location', function($scope, $http, AuthService, $cookies, $location ){
 	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
 		$scope.cities = response.data.cities;
-		console.log($scope.cities);
 	});
 	$scope.cityChange = function(){
 		$http.get(AuthService.hostName + '/api/districts?city=' + $scope.filter.citySelected).then(function success(response){
@@ -63,7 +62,8 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
    ];
 	var filter = $cookies.getObject('filter');
 	console.log(filter);
-	var url = AuthService.hostName + '/api/houses?district=' + filter.district + '&city=' + filter.city+ '&houseFor='+ filter.houseFor + '&minArea=' + areaArr[filter.area][0] + '&maxArea=' + areaArr[filter.area][1] + '&minPrice=' + priceArr[filter.price][0] + '&maxPrice='+ priceArr[filter.price][1] + '&bedrooms=' + filter.bedrooms + '&bathrooms=' + filter.bathrooms + '&floors=' + filter.floors;
+	var url = AuthService.hostName + '/api/houses?district=' + filter.districtSelected + '&city=' + filter.citySelected+ '&houseFor='+ filter.houseFor + '&minArea=' + areaArr[filter.area][0] + '&maxArea=' + areaArr[filter.area][1] + '&minPrice=' + priceArr[filter.price][0] + '&maxPrice='+ priceArr[filter.price][1] + '&bedrooms=' + filter.bedrooms + '&bathrooms=' + filter.bathrooms + '&floors=' + filter.floors;
+	console.log(url);
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5;

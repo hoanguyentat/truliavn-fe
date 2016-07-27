@@ -114,7 +114,7 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 	.when('/:users', {
 		templateUrl: 'view/user/user-info.template.html',
 		controller: 'UserInfoCtrl',
-		access: {restricted: true}
+		access: {restricted: false}
 	})
 	.when('/:user/edit', {
 		template: 'Trang chỉnh sửa thông tin cá nhân',
@@ -139,7 +139,6 @@ app.run(function($rootScope, $location, $route, AuthService){
 
 		AuthService.getUserStatus()
 		.then(function success(){
-			// console.log(AuthService.isLoggedIn());
 				$rootScope.userStatus = AuthService.isLoggedIn();
 				$rootScope.userName = AuthService.getUserName();
 			if (next.access.restricted && !AuthService.isLoggedIn()) {
