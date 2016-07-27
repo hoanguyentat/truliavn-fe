@@ -374,6 +374,8 @@ a.nav:hover{
 }
 
 .dropdown:hover .dropdown-content {
+     transition: width 1s;
+    -webkit-transition: width 1s; /* Safari 3.1 to 6.0 */
     display: block;
 }
 
