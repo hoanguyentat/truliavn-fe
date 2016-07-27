@@ -24,20 +24,21 @@
 				</div>
 				<div class="col-xs-12 col-sm-12">
 					<button id="search" type="submit" ng-click="search()" class="btn btn-success" style="margin-top: 10px;">
-						<span class="glyphicon glyphicon-search"></span>Hiển thị bản đồ khu vực {{address}}
+						<span class="glyphicon glyphicon-search"> Hiển thị bản đồ </span>
 					</button>
 				</div>
 			</div>	
 		</div>
 		<div class="col-xs-12 col-sm-12 price-detail-estimate">
-		<div class="row">
+		<div class="row" style="padding-left:20px;">
+			<h2>Khu vực {{address}}</h2>
 			<div class="col-sm-6">
-				<h2>{{districtPriceName}}</h2>
-				<h2>40 triệu / m2</h2>
+				<h4>Giá niêm yết</h4>
+				<h3>{{avgDistrictListPrice}} triệu / m2</h3>
 			</div>
 			<div class="col-sm-6">
-				<h2>{{cityPriceName}}</h2>
-				<h2>50 triệu / m2</h2>
+				<h4>Giá bán trung bình</h4>
+				<h3>{{avgDistrictMedianSale}} triệu / m2</h3>
 			</div>
 		</div>
 	</div>

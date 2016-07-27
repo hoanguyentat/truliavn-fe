@@ -98,6 +98,7 @@
 				<div class="panel panel-body" style="padding: 0px;">
 					<div class="col-sm-5 col-xs-12" style="padding: 0px;">
 						<h3 style="padding:10px; background-color: #5cb85c; border-radius: 3px; color: #fff; margin-top: 0px;" class="">Trường học gần đây</h3>
+
 						<div ng-repeat='i in school_list'>
 							<h4 class="title-suggest" ng-click='choose(i.type)'>{{i.title}}	
 								<span class="glyphicon  glyphicon-menu-down span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'down'" ng-click="schoolClick = 'up'"></span>
@@ -149,7 +150,7 @@
 							</form>
 						</div>			
 						<div>
-							<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
+							<ui-gmap-google-map class="map-utility" center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
 							   <div  ng-if='select == "primary"'>
 							   	 	<ui-gmap-markers models="primaryMarkers" idKey="primaryMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
 							   		</ui-gmap-markers>
@@ -198,13 +199,11 @@
 						</div>
 					</div>				
 				</div>
-			<!-- </div> -->
 		</div>
 		<div class="col-xs-12 col-sm-12" ng-if="house.houseFor" >
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 60px;">
-				<div class="row">
-					<div class="col-xs-12 col-sm-8">
-						<h3>Xu hướng nhà đất ở {{addressDistrict}}</h3>
+			<div class="row" style="margin-top: 60px;">
+				<div class="col-xs-12 col-sm-8">
+						<h3>Xu hướng nhà đất ở {{addressDistrict}} ( triệu VNĐ / m2)</h3>
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -214,26 +213,32 @@
 							<tbody>
 								<tr class="table-estimate">
 									<td>Giá của ngôi nhà</td>
-									<td colspan="2">{{house.price}} VNĐ</td>
+									<td colspan="2">{{priceAverageOfHouse}}</td>
 								</tr>
 								<tr  class="table-estimate">
-									<td>Giá niêm yết trung bình cho các ngôi nhà ở 
+									<td>Giá nhà đất niêm yết trung bình ở 
 										<a href="#!/estimate" target="_blank" class="a-estimate">{{addressDistrict}}</a>
 									</td>
-									<td>x đồng</td>
-									<td>Tăng/Giảm <span class="span-percent">y %</span></td>
+									<td>{{listPrice}}</td>
+									<td>
+										<span ng-if="priceAverageOfHouse < listPrice">Cao hơn giá nhà <span class="green">{{listPricePercent}} %</span></span>
+										<span ng-if="priceAverageOfHouse > listPrice">Thấp hơn giá nhà <span class="red">{{listPricePercent}} %</span></span>
+									</td>
 								</tr>
 								<tr  class="table-estimate">
-									<td>Giá trung bình cho các ngôi nhà ở
+									<td>Giá nhà đất trung bình ở
 										<a href="#!/estimate" target="_blank" class="a-estimate">{{addressDistrict}}</a>
 									</td>
-									<td>x đồng</td>
-									<td>Tăng/Giảm <span class="span-percent">y %</span></td>
+									<td>{{medianSale}}</td>
+									<td>
+										<span ng-if="priceAverageOfHouse < medianSale">Cao hơn giá nhà <span class="green">{{medianSalePercent}} %</span></span>
+										<span ng-if="priceAverageOfHouse > medianSale">Thấp hơn giá nhà <span class="red">{{medianSalePercent}} %</span></span>
+									</td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-					<div class="col-sm-4" ng-controller="EstimateController">
+				</div>
+				<div class="col-sm-4" ng-controller="EstimateController">
 						<div class="col-xs-12 panel" style="padding : 0">
 							<div class="panel-heading panel-green">
 								Định giá nhà
@@ -274,41 +279,39 @@
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="row">
-					<h2 class="text-center">Giá các nhà lân cận</h2>
-			  	  	<ui-gmap-google-map center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
-			  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
-		            	</ui-gmap-markers>
-					    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
-						</ui-gmap-markers>
-					</ui-gmap-google-map>
-					<table class="table table-hover">
-						<thead>
-							<tr class="column_name">
-								<th>Tiêu đề</th>
-								<th>Khoảng cách</th>
-								<th>Giá bán(VNĐ)</th>
-								<th>Ngày bán</th>
-								<th>So sánh</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="item in ::neighbor" class='neighbor'>
-								<td><a href="#!/houses/{{::item.id}}">{{::item.address}}</a></td>
-								<td class="dist">{{::item.distance}}</td>
-								<td class="price"><h4>{{::item.price}}<h4></td>
-								<td></td>
-								<td></td>
+			<div>
+				<h2 class="text-center">Giá các nhà lân cận</h2>
+		  	  	<ui-gmap-google-map class="map-neighbor" center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
+		  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
+	            	</ui-gmap-markers>
+				    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
+					</ui-gmap-markers>
+				</ui-gmap-google-map>
+				<table class="table table-hover">
+					<thead>
+						<tr class="column_name">
+							<th>Tiêu đề</th>
+							<th>Khoảng cách</th>
+							<th>Giá bán(VNĐ)</th>
+							<th>Ngày bán</th>
+							<th>So sánh</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in ::neighbor" class='neighbor'>
+							<td><a href="#!/houses/{{::item.id}}">{{::item.address}}</a></td>
+							<td class="dist">{{::item.distance}}</td>
+							<td class="price"><h4>{{::item.price}}<h4></td>
+							<td></td>
+							<td></td>
 
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>		
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- </div>		 -->
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- <div class="container"> -->
