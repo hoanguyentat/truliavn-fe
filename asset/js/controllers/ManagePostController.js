@@ -21,16 +21,31 @@ app.controller('ManagePostCtrl', ['$scope', 'API', '$cookies', '$http','HouseSer
 
 	  $scope.animationsEnabled = true;
 
-	  $scope.open = function() {
-
+	  $scope.open = function(id) {
+	  	console.log(id);
+	  	$cookies.put('houseManage.id', id);
 	    var modalInstance = $uibModal.open({
 	      	animation: $scope.animationsEnabled,
 	      	templateUrl: 'myModalContent.html',
-	      	controller: 'ManagePostCtrl'
+	      	controller: 'ModalInstanceCtrl'
 	    });
 	};
-
-  	$scope.cancel = function () {
-    	 $uibModal.dismiss('cancel');
- 	};
 }]);
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, $cookies, HouseService, $location) {
+
+  $scope.deleteHouse = function(){
+  	console.log($cookies.get('houseManage.id'));
+		HouseService.deleteHouse($cookies.get('user.email'), $cookies.get('user.token'), $cookies.get('houseManage.id'))
+		.then(function(){
+			$cookies.remove('houseManage.id')
+			$location.path('/manage-post');
+		}, function(){
+			$location.path('/manage-post');
+		});
+	};
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cance');
+  };
+});

@@ -39,7 +39,7 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 				processData: false,
 				data: fd,
 				success: function (data) {
-					window.location.href="/manage-post";
+					window.location.href="#!/manage-post";
 					$location.path('/manage-post');
 				},
 				error: function (err) {

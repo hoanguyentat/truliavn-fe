@@ -4,7 +4,8 @@
 			<center style="padding-bottom: 20px;"><h2>Kết quả tìm kiếm thông tin nhà đất</h2></center>
 			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-md-8 col-lg-8 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
 				<div class="row">
-					<ng-include src="'../view/templates/search.template.html'" scope="" onload=""></ng-include>									
+					<ng-include src="'../view/templates/search.template.html'" scope="" onload=""></ng-include>
+					<span>Kết quả tìm kiếm thông tin cho: </span><span class="label">{{searchContent}}</span>
 					<div class="panel panel-success filter-houses" style="border-right-width: 0px; border-left-width: 0px;">
 						<div class="panel-heading">
 							<span>Có <strong>{{noOfPages}}</strong> bài đăng được tìm thấy.</span>

@@ -20,20 +20,20 @@
 									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
 										<div>
 											<a class="btn btn-info" href="#!/{{::house.id}}/edit" role="button"><span class="glyphicon glyphicon-pencil"> </span> Sửa bài đăng</a>
-											<a class="btn btn-danger" href="#!/{{::house.id}}/delete" ng-click="deleteHouse(house.id)" role="button"><span class="glyphicon glyphicon-trash"> </span> Xóa bài đăng</a>
-<!-- 											<a class="btn btn-danger" ng-click="open()" role="button"><span class="glyphicon glyphicon-trash"> </span> Xóa bài đăng</a>
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Cảnh báo!</h3>
-        </div>
-        <div class="modal-body">
-           Bạn có chắc chắn xóa bài đăng này không?
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="deleteHouse()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script> -->
+											<!-- <a class="btn btn-danger" href="#!/{{::house.id}}/delete" ng-click="deleteHouse(house.id)" role="button"><span class="glyphicon glyphicon-trash"> </span> Xóa bài đăng</a> -->
+											<a class="btn btn-danger" ng-click="open(house.id)" role="button"><span class="glyphicon glyphicon-trash"></span> Xóa bài đăng</a>
+										    <script type="text/ng-template" id="myModalContent.html">
+										        <div class="modal-header">
+										            <h3 class="modal-title">Cảnh báo!</h3>
+										        </div>
+										        <div class="modal-body">
+										           Bạn có chắc chắn xóa bài đăng này không?
+										        </div>
+										        <div class="modal-footer">
+										            <button class="btn btn-primary" type="button" ng-click="deleteHouse()">OK</button>
+										            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+										        </div>
+										    </script>
 										</div>
 										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
 										<p ng-bind="house.description"></p>
