@@ -1,17 +1,33 @@
 app.controller('EstimateController', ['$scope', '$http', '$routeParams', 'AuthService','API', '$cookies', 
 function($scope, $http, $routeParams, AuthService,API, $cookies){
 	// console.log($cookies.get('price'));
-	var address = $cookies.get('districtAddress');
-	$scope.addressCookies = address;
-	var temp  = address.split(',');
-	$scope.districtPriceName =  temp[0];
-	$scope.cityPriceName =  temp[1];
-	console.log(address);
-	// console.log($cookies.get('districtID'));
-	// console.log($cookies.get('cityID'));
+	var address = '';
 	var disName = "";
 	var cityName = "";
 	var request = {};
+	
+	var temp  = $cookies.get('districtAddress').split(',');
+	$scope.districtPriceName =  temp[0];
+	$scope.cityPriceName =  temp[1];
+
+	if(!disName && !cityName){
+		$scope.address = $cookies.get('districtAddress');
+	}
+	console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+
+	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
+		.then(function success(response){
+			var avg = response.data;
+			$scope.avgDistrictMedianSale = (avg.avgPrice).toFixed(2);
+			$scope.avgDistrictListPrice  = ((avg.minAvgListingPrice + avg.maxAvgListingPrice)/2).toFixed(2);
+
+		})
+
+
+	// console.log(address);
+	// console.log($cookies.get('districtID'));
+	// console.log($cookies.get('cityID'));
+
 
 	function splitAddress(add){
 
@@ -119,7 +135,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		var urlBedRooms3 = url + '&bedrooms=3&count=6';
 		var urlMaxPrice = url + '&count=8&maxPrice='+ $cookies.get('price');
 		var urlFloors4 = url + '&count=6&floors=4';
-		console.log(urlMaxPrice);
+		// console.log(urlMaxPrice);
 		$scope.priceSuggest = convertPrice($cookies.get('price'));
 
 		$http.get(urlNewest).then(function success(response){
@@ -194,20 +210,24 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		});
 	}
 	$scope.districtChange = function(){
+			console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+
+	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
+		.then(function success(response){
+			var avg = response.data;
+			$scope.avgDistrictMedianSale = (avg.avgPrice).toFixed(2);
+			$scope.avgDistrictListPrice  = ((avg.minAvgListingPrice + avg.maxAvgListingPrice)/2).toFixed(2);
+
+		})
 		disName = $scope.districts[$scope.districtSelected].districtName;
 		HouseSuggest();
-		if(disName && cityName){
-			address = disName.concat(' ',cityName);
-			urlHouseInDistrict = API.getHousesNearby('sell',$scope.citySelected,$scope.districtSelected);
-			$scope.districtPriceName = disName;
-			$scope.cityPriceName = cityName;
-		}
-		else if(!disName && !cityName){
-			address = $cookies.get('districtAddress');
-			urlHouseInDistrict = API.getHousesNearby('sell',$cookies.get('cityID'),$cookies.get('districtID'));
-		}
 
-		$scope.address = disName.concat(', ',cityName);;
+		address = disName.concat(' ',cityName);
+		urlHouseInDistrict = API.getHousesNearby('sell',$scope.citySelected,$scope.districtSelected);
+		$scope.districtPriceName = disName;
+		$scope.cityPriceName = cityName;
+
+		$scope.address = disName.concat(', ',cityName);
 		// console.log('add : ' + address);
 		address= address.toLowerCase(); 
 		address= address.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a"); 
@@ -231,6 +251,8 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 					longitude : house[i].lon,
 					content : '<div class="div-map"><p class="p-map">'+ house[i].address + '</p>'+
 							'<p class="p-map">'+ convertPrice(house[i].price) + '</p></div>',
+					url : 'http://ngocdon.me/#!/houses/' + house[i].id,
+					icon : '../../icon/house-in-district.png',
 					options : {labelClass : 'marker_labels', labelContent : ""}
 				}
 				coor_marker.push(ret);
@@ -243,8 +265,6 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 					// console.log(coor.lat + ',' + coor.lng);
 					$scope.map = {
 						center: {
-							// latitude: 21.0090571,
-							// longitude: 105.8607507
 							latitude : coor.lat,
 							longitude : coor.lng
 						}, 
@@ -263,6 +283,11 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 				               model.options.labelContent = ' ';
 				               marker.showWindow = false;
 				               $scope.$apply();
+				            },
+				            click : function(marker, eventName, model, args){
+				            	console.log(model.url);
+				          		window.location.href = model.url; 
+				            	$scope.$apply();
 				            }
 				        },
 					};
@@ -280,7 +305,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 			})
 
 			$scope.search = function(){
-				console.log('START SEARCH');
+				// console.log('START SEARCH');
 				$scope.select = true;
 			}
 

@@ -25,7 +25,7 @@ angular.module('houseDetail')
 		}
 
 	 	function convertPrice(price){
-			price = price * 1000 * 1000;
+			price = price * 1000000;
 			var s= '';
 			do {
 	          	var n = price%1000;
@@ -70,6 +70,55 @@ angular.module('houseDetail')
 			$cookies.put('districtID', house.district);
 			$cookies.put('cityID', house.city);
 			$cookies.put('price', house.price);
+
+			$http.get(API.getAveragePrice('district', house.district))
+			.then(function success(response){
+				var avg = response.data;
+				var medianSale = parseFloat((avg.avgPrice).toFixed(2));
+				var listPrice = parseFloat(((avg.maxAvgListingPrice + avg.minAvgListingPrice)/2).toFixed(2));
+
+
+				if(house.price > 0){
+					var priceOfHouse =  parseFloat((house.price / house.area).toFixed(2));
+					console.log(typeof(priceOfHouse));
+					$scope.priceAverageOfHouse = priceOfHouse;
+		
+					/*------------COMPARE HOUSE PRICE WITH LISTING PRICE---------*/
+					if(priceOfHouse < listPrice){
+						$scope.listPricePercent = ((1 - priceOfHouse / listPrice) * 100).toFixed(1); 
+					}
+					else if(priceOfHouse > listPrice){
+						// console.log('giá nhà cao hơn giá niêm yết');
+						$scope.listPricePercent = ((1 - listPrice / priceOfHouse) * 100).toFixed(1);
+					}
+					else {
+						$scope.listPricePercent = 'Bằng giá nhà';
+					}
+					console.log($scope.listPricePercent);
+
+					/*------------COMPARE HOUSE PRICE WITH  MEDIAN SALE---------*/
+
+					if(priceOfHouse < medianSale){
+						$scope.medianSalePercent = ((1- priceOfHouse / medianSale) * 100).toFixed(1); 
+					}
+					else if(priceOfHouse > medianSale){
+						$scope.medianSalePercent = ((1 - medianSale / priceOfHouse) * 100).toFixed(1);
+					}
+					else {
+						$scope.medianSalePercent = 'Bằng giá nhà';
+					}
+					console.log($scope.medianSalePercent);
+
+				}
+
+				$scope.listPrice = listPrice;
+				$scope.medianSale = medianSale;
+
+				$scope.medianSaleConvert = convertPrice(medianSale);
+				$scope.listPriceConvert = convertPrice(listPrice);
+				$scope.avgPriceOfHouse = convertPrice(priceOfHouse);
+			});
+		
 
 			//HOUSE SUGGEST FUNCTION
 			function HouseSuggest(){
@@ -142,8 +191,6 @@ angular.module('houseDetail')
 			HouseSuggest();
 
 			$scope.house = house;
-			$scope.house.price = convertPrice($scope.house.price);
-
 
 			$scope.house.description = $sce.trustAsHtml($scope.house.description);
 
@@ -195,7 +242,7 @@ angular.module('houseDetail')
 			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 15};
 
 		    /*--------FIND THE NEIGHBORHOOD NEAR YOUR HOUSE---------*/
-		    console.log(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward));
+		    // console.log(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward));
 			$http.get(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward)).then(
 				function (near){
 					neighbor = near.data.houses;
@@ -256,10 +303,9 @@ angular.module('houseDetail')
 							id : parseInt(i),
 							latitude : lat,
 							longitude : lon,
-							title : neighbor[i].address,
-							price : neighbor[i].price,
 							content : content,
-							options : {labelClass : 'marker_labels',  labelAnchor: '12 60', labelContent : ''},
+							url : "http://ngocdon.me/#!/houses/" + neighbor[i].id,
+							options : {labelClass : 'marker_labels', labelContent : ''},
 							icon : "../../asset/icon/neighbor.png"
 						}
 						coor_neighbor_marker.push(ret);
@@ -771,7 +817,12 @@ angular.module('houseDetail')
 			               model.options.labelContent = ' ';
 			               model.show = false;
 			               $scope.$apply();
-			            }
+			            },
+			            click : function(marker, eventName, model, args){
+			            	// console.log(model.url);
+				          window.location.href = model.url; 
+				          $scope.$apply();
+				        }
 			        },
 
 			        hospitalMarkersEvents : {
