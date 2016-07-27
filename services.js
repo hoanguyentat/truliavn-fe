@@ -255,7 +255,8 @@ app.factory('API', ['AuthService',function(AuthService){
 		getHousesIn: getHousesIn,
 		getUserPost: getUserPost,
 		getCoordinate : getCoordinate,
-		getPrice : getPrice
+		getPrice : getPrice,
+		getAveragePrice :  getAveragePrice
 	});
 
 	function getPrice(){
@@ -267,6 +268,9 @@ app.factory('API', ['AuthService',function(AuthService){
 	}
 	function getHouses(){
 		return AuthService.hostName + '/api/houses?specific=1&raw=1';
+	}
+	function getAveragePrice(name, nameId){
+		return AuthService.hostName + '/api/average/' +  name + '/' + nameId;
 	}
 
 	function getHouseInfo(id){

@@ -172,6 +172,12 @@ tr.houseInfo{
 	cursor: pointer;
 }
 
+.map-neighbor > .angular-google-map > .angular-google-map-container{
+    height: 300px;
+}
+.map-utility > .angular-google-map > .angular-google-map-container{
+    height: 500px;
+}
 .angular-google-map-container {
 	width: 100%;
 	height: 400px;
@@ -199,8 +205,9 @@ tr.houseInfo{
 	border-radius: 10px;
 	padding : 10px;
 	margin: auto;
-
+    overflow: visible;
 }
+
 .div-map{
 	background-color: #093;
 	border-radius: 10px;
@@ -295,6 +302,13 @@ input[type='radio'].radius-radio{
     background: #fbfbfb;
     border-radius: 10px;
     margin-top: 30px;
+}
+
+.red{
+    color: red;
+}
+.green{
+    color: green;
 }
 /*-------------END OF ESTIMATE THE HOUSE------------*/
 
