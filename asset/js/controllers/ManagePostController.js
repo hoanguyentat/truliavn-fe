@@ -41,6 +41,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, $cookie
 			$cookies.remove('houseManage.id')
 			$location.path('/manage-post');
 		}, function(){
+			alert("Xóa nhà không thành công");
 			$location.path('/manage-post');
 		});
 	};

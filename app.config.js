@@ -114,7 +114,7 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 	.when('/:users', {
 		templateUrl: 'view/user/user-info.template.html',
 		controller: 'UserInfoCtrl',
-		access: {restricted: true}
+		access: {restricted: false}
 	})
 	.when('/:user/edit', {
 		template: 'Trang chỉnh sửa thông tin cá nhân',
