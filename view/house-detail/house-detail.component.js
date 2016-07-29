@@ -81,7 +81,6 @@ angular.module('houseDetail')
 
 				if(house.price > 0){
 					var priceOfHouse =  parseFloat((house.price / house.area).toFixed(2));
-					console.log(typeof(priceOfHouse));
 					$scope.priceAverageOfHouse = priceOfHouse;
 		
 					/*------------COMPARE HOUSE PRICE WITH LISTING PRICE---------*/
@@ -89,13 +88,11 @@ angular.module('houseDetail')
 						$scope.listPricePercent = ((1 - priceOfHouse / listPrice) * 100).toFixed(1); 
 					}
 					else if(priceOfHouse > listPrice){
-						// console.log('giá nhà cao hơn giá niêm yết');
 						$scope.listPricePercent = ((1 - listPrice / priceOfHouse) * 100).toFixed(1);
 					}
 					else {
 						$scope.listPricePercent = 'Bằng giá nhà';
 					}
-					console.log($scope.listPricePercent);
 
 					/*------------COMPARE HOUSE PRICE WITH  MEDIAN SALE---------*/
 
@@ -108,7 +105,6 @@ angular.module('houseDetail')
 					else {
 						$scope.medianSalePercent = 'Bằng giá nhà';
 					}
-					console.log($scope.medianSalePercent);
 
 				}
 
@@ -130,9 +126,7 @@ angular.module('houseDetail')
 				var urlNewest = url + '&offset=0&count=8';
 				var urlBedRooms3 = url + '&bedrooms=3&count=6';
 				var urlMaxPrice = url + '&count=8&maxPrice='+ house.price;
-				console.log(urlMaxPrice);
 				var urlFloors4 = url + '&count=6&floors=4';
-				// console.log(urlMaxPrice);
 				$scope.priceSuggest = convertPrice($cookies.get('price'));
 
 				$http.get(urlNewest).then(function success(response){
@@ -791,7 +785,7 @@ angular.module('houseDetail')
 				/*----------END OF FIND THE SCHOOL NEAR THE HOUSE---------*/
 			});
 
-			setTimeout(function(){
+			// setTimeout(function(){
 				$scope.selected = $scope.utilities[0];
 
 				$scope.markers = [{
@@ -980,7 +974,7 @@ angular.module('houseDetail')
 		    	} 
 		    	,true);
 
-			}, 1500);
+			// }, 1500);
 
 		});
 		}

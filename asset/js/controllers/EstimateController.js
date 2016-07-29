@@ -13,7 +13,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 	if(!disName && !cityName){
 		$scope.address = $cookies.get('districtAddress');
 	}
-	console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+	// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
 
 	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
 		.then(function success(response){
