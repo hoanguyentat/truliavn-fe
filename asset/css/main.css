@@ -173,16 +173,18 @@ tr.houseInfo{
 }
 
 .map-neighbor > .angular-google-map > .angular-google-map-container{
-    height: 300px;
+    height: 396px;
 }
 .map-utility > .angular-google-map > .angular-google-map-container{
     height: 500px;
 }
-.angular-google-map-container {
-	width: 100%;
-	height: 400px;
-
+.map-estimate > .angular-google-map > .angular-google-map-container{
+    height: 550px;
 }
+ .angular-google-map-container {
+    width: 100%;
+    height: 500px;
+} 
 .map-marker{
 	padding-top: 25px;
 	padding-bottom : 25px; 
@@ -223,14 +225,15 @@ label{
 	display: inline;
 }
 .radius-form{
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: bold;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     color: #19C662;
 }
 input[type='radio'].radius-radio{
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 /* ---------END OF UTITLITIES NEAR THE HOUSE--------- */
 
@@ -268,6 +271,7 @@ input[type='radio'].radius-radio{
 }
 .title-suggest{
     padding-left: 8px;
+    padding-right: 15px;
     color : #19C662;
 }
 .suggest{
@@ -608,6 +612,27 @@ a.nav:hover{
      .angular-google-map-container {
         width: 100%;
         height: 200px;
+    }
+}
+
+@media screen and (max-width : 992px){
+    .home-image{
+        height: 150px;
+    }
+    .house-suggest{
+        height: 150px;
+    }
+    h4.title-suggest{
+        font-size: 14px;
+    }
+    .radius-form{
+        font-size: 16px;
+    }
+    .table-estimate{
+        font-size: 16px;
+    }
+    p.h6{
+        font-size: 11px;
     }
 }
 

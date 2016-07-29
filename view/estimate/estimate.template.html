@@ -90,8 +90,8 @@
 	<div class="map-marker col-xs-12" id="map" ng-if="select == true">
 		<h1 class="title">Bản đồ hiển thị giá nhà đất khu vực {{address}}</h1>
 	<!-- <div class="map-marker"> -->
-		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
-		    <ui-gmap-markers models="nearMarkers" idKey="nearMarkers.id" coords="'self'" options="'options'" events="map.nearMarkersEvents">
+		<ui-gmap-google-map class="map-estimate" center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
+		    <ui-gmap-markers models="nearMarkers" idKey="nearMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.nearMarkersEvents">
 		    </ui-gmap-markers>
 		</ui-gmap-google-map>
 	</div>
