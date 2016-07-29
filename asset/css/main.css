@@ -47,7 +47,8 @@ a.home-img{
 }
  /*---------------Scrollbar-------------------*/
 .sidebar-right{
-	margin-left: 20px;
+	/*margin-left: 20px;*/
+    padding-top: 30px;
     overflow-y: scroll;
     /*overflow: hidden;*/
     overflow-x: hidden;
@@ -79,10 +80,7 @@ a.home-img{
 	font-size: 20px;
 }
 /*-------------Deatail-form---------*/
-.home_image{
-	width: 100%;
-	max-height: 300px;
-}
+
 .info{
 	/*background: rgba(0, 0, 0, 0.3);*/
 	color: green;
@@ -213,6 +211,7 @@ tr.houseInfo{
 .div-map{
 	background-color: #093;
 	border-radius: 10px;
+    z-index: 1000;
 }
 .table-map,
 .p-map{
@@ -392,6 +391,8 @@ a.nav:hover{
 }
 
 .dropdown:hover .dropdown-content {
+     transition: width 1s;
+    -webkit-transition: width 1s; /* Safari 3.1 to 6.0 */
     display: block;
 }
 
@@ -592,6 +593,12 @@ a.nav:hover{
         height: 300px;
         width: 100%;
     }
+    .search{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 768px;
+    }
 }
 
 /*  480px hoặc nhỏ hơn */
@@ -612,6 +619,12 @@ a.nav:hover{
      .angular-google-map-container {
         width: 100%;
         height: 200px;
+    }
+    .search{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 400px;
     }
 }
 

@@ -101,8 +101,8 @@
 
 						<div ng-repeat='i in school_list'>
 							<h4 class="title-suggest" ng-click='choose(i.type)'>{{i.title}}	
-								<span class="glyphicon  glyphicon-menu-down span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'down'" ng-click="schoolClick = 'up'"></span>
-								<span class="glyphicon  glyphicon-menu-up span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'up'" ng-click="schoolClick = 'down'"></span>
+								<span class="glyphicon  glyphicon-menu-down span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'down'" ng-click="schoolClick = 'up'" style="margin-right: 15px;"></span>
+								<span class="glyphicon  glyphicon-menu-up span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'up'" ng-click="schoolClick = 'down'" style="margin-right: 15px;"></span>
 							</h4>	
 
 							<div ng-if='select == i.type' id="{{i.type}}">
@@ -141,7 +141,7 @@
 						<div class="radius-form">
 
 							<form name="radiusForm" style="padding-left: 9px;">
-								<label >Bán kính : </label>
+								<label>Bán kính : </label>
 								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="1000" checked  ng-click='chooseRadius(1000)'>1000 m
 								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="2000"  ng-click='chooseRadius(2000)'>2000 m
 								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="3000"  ng-click='chooseRadius(3000)'>3000 m
