@@ -210,7 +210,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		});
 	}
 	$scope.districtChange = function(){
-			console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+			// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
 
 	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
 		.then(function success(response){
@@ -252,7 +252,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 					content : '<div class="div-map"><p class="p-map">'+ house[i].address + '</p>'+
 							'<p class="p-map">'+ convertPrice(house[i].price) + '</p></div>',
 					url : 'http://ngocdon.me/#!/houses/' + house[i].id,
-					icon : '../../icon/house-in-district.png',
+					icon : '../../../asset/icon/estimate.png',
 					options : {labelClass : 'marker_labels', labelContent : ""}
 				}
 				coor_marker.push(ret);
@@ -285,8 +285,8 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 				               $scope.$apply();
 				            },
 				            click : function(marker, eventName, model, args){
-				            	console.log(model.url);
-				          		window.location.href = model.url; 
+				            	// console.log(model.url);
+				          		window.open(model.url, '_blank'); 
 				            	$scope.$apply();
 				            }
 				        },
