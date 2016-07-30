@@ -575,9 +575,12 @@ a.nav:hover{
     z-index: 100000;
     cursor: pointer;
     margin: 10px;
+    margin-bottom: 150px;
     -moz-opacity: 0.6;
     opacity: 0.6;
     color: #fff;
+    display:none;
+    background-color:red
     filter: alpha(opacity = 60);
 }
 
