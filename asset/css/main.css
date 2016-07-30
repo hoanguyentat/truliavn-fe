@@ -566,22 +566,29 @@ a.nav:hover{
 
 /*------------------BACKTOTOP----------------------*/
 .goToTop{
-    position: fix;
-    width: 60px;
-    height: 60px;
-    bottom: 0;
-    right: 0;
+    background-position: 50% 50%;
+    bottom: 50px;
     border-radius: 50%;
-    z-index: 100000;
-    cursor: pointer;
-    margin: 10px;
-    margin-bottom: 150px;
-    -moz-opacity: 0.6;
-    opacity: 0.6;
-    color: #fff;
-    display:none;
-    background-color:red
-    filter: alpha(opacity = 60);
+    box-shadow: rgba(0, 0, 0, 0.0470588) 0px 0px 10px 0px;
+    box-sizing: border-box;
+    color: rgb(232, 98, 86);
+    display: block;
+    height: 60px;
+    position: fixed;
+    right: 20px;
+    text-decoration: none;
+    text-indent: 100%;
+    white-space: nowrap;
+    width: 60px;
+    z-index: 10;
+    perspective-origin: 30px 30px;
+    transform-origin: 30px 30px;
+    background: rgba(232, 98, 86, 0.7) url("https://codyhouse.co/demo/back-to-top/img/cd-top-arrow.svg") no-repeat scroll 50% 50% / auto padding-box border-box;
+    border: 0px none rgb(232, 98, 86);
+    font: normal normal normal normal 16px / 16px Bitter, sans-serif;
+    outline: rgb(232, 98, 86) none 0px;
+    overflow: hidden;
+    transition: opacity 0.3s ease 0s, visibility 0s ease 0s;
 }
 
 /*------------------BACKTOTOP----------------------*/
