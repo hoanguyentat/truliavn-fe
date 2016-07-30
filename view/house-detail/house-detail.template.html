@@ -2,7 +2,7 @@
 	<div class="container house-for">
 		<div style="padding-bottom: 20px;">
 			<div class="col-xs-12 col-sm-4">
-				<div class="panel panel-default">
+				<div class="panel panel-default map-detail">
 					<div class="panel-heading">
 						<center>Thông tin người đăng</center>
 					</div>
@@ -95,7 +95,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- <div class="row"> -->
 				<center><h2>Tiện ích xung quanh ngôi nhà</h2></center>
-				<div class="panel panel-body" style="padding: 0px;">
+				<div class="panel panel-body map-detail">
 					<div class="col-sm-4 col-md-4 col-xs-12" style="padding: 0px;">
 						<h3 style="padding:10px; background-color: #5cb85c; border-radius: 3px; color: #fff; margin-top: 0px;" class="">Trường học gần đây</h3>
 
@@ -239,7 +239,7 @@
 						</table>
 				</div>
 				<div class="col-sm-4" ng-controller="EstimateController">
-						<div class="col-xs-12 panel" style="padding : 0">
+						<div class="col-xs-12 panel map-detail">
 							<div class="panel-heading panel-green">
 								Định giá nhà
 							</div>
@@ -313,10 +313,26 @@
 			</div>
 			<!-- </div>		 -->
 		</div>
+		<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-contact">
+			<form>
+				<center><h2>Liên hệ để biết thêm thông tin</h2></center>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+						<input type="text" name="name" id="inputName" placeholder="Tên của bạn" class="input-contact" value="" required="required" pattern="" title="">
+						<input type="email" name="email" id="input" class="input-contact" placeholder="Địa chỉ Email" value="" required="required" title="">
+						<input type="tel" name="phone" id="inputPhone" class="input-contact" placeholder="Số điện thoại của bạn" value="" required="required" title="">
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+						<textarea name="" id="input" placeholder="Nội dung" class="form-control" rows="3" required="required"></textarea>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<button type="button" class="btn btn-danger">Submit</button>
+				</div>
+			</form>
+		</div> -->
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- <div class="container"> -->
 				<div class="row" style="margin-top: 30px;">
-					<h3 class="title-suggest">Nhà mới đăng gần đây</h3>
+					<h3 class="title-suggest" style = "border-bottom: 1px solid rgba(34,183,149,0.52); margin-left: 8px;line-height: initial;margin-right: 8px;">Nhà mới đăng gần đây</h3>
 					<div class="col-xs-6 col-sm-3 suggest" ng-repeat="new in newest">
 						<a href="#!/houses/{{new.id}}">
 							<div class="house-suggest">
@@ -334,7 +350,7 @@
 					</div>
 				</div>
 				<div class="row" style="margin-top: 30px;">
-					<h3 class="title-suggest">Nhà có từ 3 phòng ngủ</h3>
+					<h3 class="title-suggest" style = "border-bottom: 1px solid rgba(34,183,149,0.52); margin-left: 8px;line-height: initial;margin-right: 8px;">Nhà có từ 3 phòng ngủ</h3>
 					<div class="col-xs-6 col-sm-4 suggest" ng-repeat="bed in BedRooms3">
 						<a href="#!/houses/{{bed.id}}">
 							<div class="house-suggest">
@@ -353,8 +369,8 @@
 					</div>
 				</div>
 				<div class="row" style="margin-top: 30px;">
-					<h3 class="title-suggest" ng-if="house.priceHouse">Nhà có giá dưới {{priceSuggest}}</h3>
-					<h3 class="title-suggest" ng-if="!house.priceHouse">Nhà có giá thoả thuận</h3>
+					<h3 class="title-suggest" ng-if="house.priceHouse" style = "border-bottom: 1px solid rgba(34,183,149,0.52); margin-left: 8px;line-height: initial;margin-right: 8px;">Nhà có giá dưới {{priceSuggest}}</h3>
+					<h3 class="title-suggest" ng-if="!house.priceHouse" style = "border-bottom: 1px solid rgba(34,183,149,0.52); margin-left: 8px;line-height: initial;margin-right: 8px;">Nhà có giá thoả thuận</h3>
 					<div class="col-xs-6 col-sm-3 suggest" ng-repeat="max in MaxPrice">
 						<a href="#!/houses/{{max.id}}">
 							<div class="house-suggest">
@@ -372,7 +388,7 @@
 					</div>
 				</div>
 				<div class="row" style="margin-top: 30px;">
-					<h3 class="title-suggest">Nhà từ 4 tầng trở lên</h3>
+					<h3 class="title-suggest" style = "border-bottom: 1px solid rgba(34,183,149,0.52); margin-left: 8px;line-height: initial;margin-right: 8px;">Nhà từ 4 tầng trở lên</h3>
 					<div class="col-xs-6 col-sm-4 suggest" ng-repeat="floor in Floors4">
 						<a href="#!/houses/{{floor.id}}">
 							<div class="house-suggest">

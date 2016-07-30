@@ -1,54 +1,25 @@
-<div class="panel panel-default">
-	<!-- Default panel contents -->
-	<div class="panel-heading">Top nhà đất cho thuê</div>
-	<div class="panel-body">
-		<p>Text goes here...</p>
-	</div>
+<div ng-controller="SidebarRightCtrl">
+	<span class="label label-success">Top nhà đất cho thuê</span>
+	<div class="panel panel-default">
 
-	<!-- Table -->
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Heading 1</th>
-			</tr>
-			<tr>
-				<th>Heading 2</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Content 1</td>
-			</tr>
-			<tr>
-				<td>Content 2</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<div class="panel panel-default">
-	<!-- Default panel contents -->
-	<div class="panel-heading">Top nhà đất cho bán</div>
-	<div class="panel-body">
-		<p>Text goes here...</p>
+		<!-- Table -->
+		<table class="table">
+			<tbody>
+				<tr ng-repeat="(key, houseRent) in housesRent">
+					<td><a href="#!/houses/{{houseRent.id}}">{{houseRent.title}}</a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-
-	<!-- Table -->
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Heading 1</th>
-			</tr>
-			<tr>
-				<th>Heading 2</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Content 1</td>
-			</tr>
-			<tr>
-				<td>Content 2</td>
-			</tr>
-		</tbody>
-	</table>
+	<span class="label label-danger">Top nhà đất bán</span>
+	<div class="panel panel-default">
+		<!-- Table -->
+		<table class="table">
+			<tbody>
+				<tr ng-repeat="(key, house) in housesSell">
+					<td><a href="#!/houses/{{house.id}}">{{house.title}}</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

@@ -25,6 +25,9 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 		// console.log($scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName);
 		$scope.address = $scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName;
 	}
+	// $scope.noOfHouseChange = function(){
+	// 	$scope.address = $scope.addHouseForm.noOfHouse + ', ' + $scope.address;
+	// };
 	$scope.addHouse = function(){
 		if (Object.keys($scope.addHouseForm).length < 10) {
 			$scope.err = true;
@@ -102,8 +105,8 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 				processData: false,
 				data: fd,
 				success: function (data) {
-					window.location.href="/manage-post";
-					$location.path("/manage-post");
+					window.location.href="#!/manage-post";
+					$location.path("#!/manage-post");
 				},
 				error: function (err) {
 					console.log(err);
