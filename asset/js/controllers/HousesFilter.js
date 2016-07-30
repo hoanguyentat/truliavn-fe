@@ -114,10 +114,8 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
 app.controller('SidebarRightCtrl', ['$scope', '$http','API', function ($scope, $http, API ) {
 	var url = API.getHousesForRent();
 	url += "&count=6";
-	console.log(url);
 	$http.get(url).then(function success(res){
 		$scope.housesRent = res.data.houses;
-		console.log(res);
 	}, function error(err){
 		console.log(err);
 	});
@@ -125,7 +123,6 @@ app.controller('SidebarRightCtrl', ['$scope', '$http','API', function ($scope, $
 	url1 += "&count=6";
 	$http.get(url1).then(function success(res){
 		$scope.housesSell = res.data.houses;
-		console.log($scope.housesRent, $scope.housesSell);
 	}, function error(err){
 		console.log(err);
 	});
