@@ -1,5 +1,5 @@
-angular.module('houseDetail')
-.component('houseDetail', {
+// angular.module('houseDetail')
+app.component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams, AuthService, API, $sce, $cookies){
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
 		var request = {};
@@ -49,6 +49,7 @@ angular.module('houseDetail')
 		$scope.radius = 1000;
 		$scope.chooseRadius = function(rad){
 			$scope.radius = parseInt(rad);
+			$('#distance-radius').text('Bán kính là : ' + $scope.radius);
 			// console.log($scope.radius);
 			reloadMap();
 		}

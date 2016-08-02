@@ -125,7 +125,7 @@ strong{
 }
 .neighbor{
 	color: green;
-	font-size: 17px;
+	font-size: 13px;
 }
 .price{
 	/*text-align: right;*/
@@ -212,6 +212,13 @@ tr.houseInfo{
 	background-color: #093;
 	border-radius: 10px;
     z-index: 1000;
+    display: block;
+    opacity: 1;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
 }
 .table-map,
 .p-map{

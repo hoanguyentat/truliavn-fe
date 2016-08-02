@@ -250,7 +250,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 					latitude : house[i].lat,
 					longitude : house[i].lon,
 					content : '<div class="div-map"><p class="p-map">'+ house[i].address + '</p>'+
-							'<p class="p-map">'+ convertPrice(house[i].price) + '</p></div>',
+							'<p class="p-map">Giá : '+ (house[i].price ? convertPrice(house[i].price) : "Thỏa thuận") + '</p></div>',
 					url : 'http://ngocdon.me/#!/houses/' + house[i].id,
 					icon : '../../../asset/icon/estimate.png',
 					options : {labelClass : 'marker_labels', labelContent : ""}
