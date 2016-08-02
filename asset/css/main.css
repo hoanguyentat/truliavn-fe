@@ -320,8 +320,24 @@ input[type='radio'].radius-radio{
 }
 /*-------------END OF ESTIMATE THE HOUSE------------*/
 
-/*-------------FORM-CONTACT------------*/
+/*-------------FORM-CONTACT, FORM-ADD-POST------------*/
 
+.form-add-post{
+    padding: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
+}
+
+.title-add-post{
+    padding: 15px;
+    /*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;*/
+}
+.title-add-post:hover{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
+    background-color: #f5c952;
+}
+.title-add-post:active{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
+}
 .form-contact{
     box-shadow: 0px 2px 2px 1px green;
     border: 1px solid red;
@@ -346,6 +362,8 @@ input[type='radio'].radius-radio{
 
 .house-for{
 	padding-top: 60px;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 
@@ -567,7 +585,7 @@ a.nav:hover{
 /*------------------BACKTOTOP----------------------*/
 .goToTop{
     background-position: 50% 50%;
-    bottom: 50px;
+    bottom: 30px;
     border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.0470588) 0px 0px 10px 0px;
     box-sizing: border-box;
@@ -637,6 +655,27 @@ a.nav:hover{
 
 /* --------------RESPONSIVE LAYOUT----------- */
 
+@media screen and (max-width : 992px){
+    .home-image{
+        height: 150px;
+    }
+    .house-suggest{
+        height: 150px;
+    }
+    h4.title-suggest{
+        font-size: 14px;
+    }
+    .radius-form{
+        font-size: 16px;
+    }
+    .table-estimate{
+        font-size: 16px;
+    }
+    p.h6{
+        font-size: 11px;
+    }
+}
+
 @media only screen and (max-width: 768px){
     .map-utility > .angular-google-map > .angular-google-map-container{
         height: 300px;
@@ -663,15 +702,20 @@ a.nav:hover{
 @media screen and (max-width: 480px) {
     .home-image{
         width:100%; 
-        height: 135px; 
+        height: 100px; 
+    }
+    .house-detail-info-suggest {
+        position: absolute;
+        bottom: 0;
+        left: 10px;
     }
     .house-suggest { 
        position: relative; 
        width: 100%; /* for IE 6 */
-       height: 135px;  
+       height: 100px;  
     }
     .carousel-inner > .item > .img-carousel, .img-unknown{
-        height: 250px;
+        height: 200px;
         width: 100%;
     }
      .angular-google-map-container {
@@ -683,27 +727,6 @@ a.nav:hover{
         justify-content: center;
         align-items: center;
         height: 400px;
-    }
-}
-
-@media screen and (max-width : 992px){
-    .home-image{
-        height: 150px;
-    }
-    .house-suggest{
-        height: 150px;
-    }
-    h4.title-suggest{
-        font-size: 14px;
-    }
-    .radius-form{
-        font-size: 16px;
-    }
-    .table-estimate{
-        font-size: 16px;
-    }
-    p.h6{
-        font-size: 11px;
     }
 }
 

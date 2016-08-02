@@ -35,6 +35,7 @@
 										        </div>
 										    </script>
 										</div>
+										<span class="label label-warning" ng-if="house.hidden == 1">Bài đăng chưa được kiểm duyệt hoặc vi phạm nội dung, điều khỏan trên trang</span></br>
 										<a href="#!/houses/{{house.id}}">{{::house.title}}</a>
 										<p ng-bind="house.description"></p>
 										<div>Giá: <strong>{{house.price}} triệu</strong></div>
