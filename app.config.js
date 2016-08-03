@@ -19,6 +19,7 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controllerAs: 'ctrl',
 		access: {restricted: false}
 	})
+	// ------------------House--------------------------------
 	.when('/for-rent', {
 		templateUrl: 'view/house-list/house-list.template.html',
 		controller: 'ForRentCtrl',
@@ -51,13 +52,24 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller: 'HousesForSellCtrl',
 		access: {restricted: false}
 	})
+	.when('/need-buy', {
+		templateUrl: 'view/houses/need-buy-rent.template.html',
+		controller: 'HousesNeedBuyCtrl',
+		access: {restricted: false}
+	})
+	.when('/need-rent', {
+		templateUrl: 'view/houses/need-buy-rent.template.html',
+		controller: 'HousesNeedRentCtrl',
+		access: {restricted: false}
+	})
 	.when('/manage-post', {
 		templateUrl: 'view/user/manage-post.template.html',
 		controller: 'ManagePostCtrl',
 		access: {restricted: true}
 	})
+	// ------------------House--------------------------------
 	
-	// house feature
+	// ------------------house feature------------------------
 	.when('/houses', {
 		template: '<house-list></house-list>',
 		access: {restricted: false}
@@ -71,9 +83,14 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller : 'HouseDetailController',
 		access: {restricted: false}
 	})*/
-	.when('/addhouse', {
+	.when('/add-post-for-rent-or-sell', {
 		templateUrl: 'view/user/addhouse.template.html',
-		controller: 'AddHouseCtrl',
+		controller: 'AddPostCtrl',
+		access: {restricted: true}
+	})
+	.when('/add-post-for-need-rent-or-buy', {
+		templateUrl: 'view/user/need-buy-rent.template.html',
+		controller: 'AddPostCtrl',
 		access: {restricted: true}
 	})
 	.when('/:postId/delete', {
@@ -82,9 +99,11 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 	})
 	.when('/:postId/edit', {
 		templateUrl: 'view/user/edithouse.template.html',
-		controller: 'EditHouseCtrl',
+		controller: 'EditPostCtrl',
 		access: {restricted : true}
 	})
+	// ------------------house feature------------------------
+
 	// user feature
 	.when('/login', {
 		templateUrl: 'view/user/login/login.html',

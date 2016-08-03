@@ -1,6 +1,32 @@
-// angular.module('houseDetail')
-app.component('houseDetail', {
+angular.module('houseDetail')
+.directive('neighborRepeat', function(){
+	return function(scope){
+		if (scope.$last){
+			scope.$emit('LastRepeaterElement');
+		}
+	}
+})
+.component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams, AuthService, API, $sce, $cookies){
+		$scope.$on('LastRepeaterElement', function(){
+		// console.log('good to go');
+			$(document).ready(function() {
+			    $('#neighborhood').DataTable({
+			        responsive: {
+			            details: {
+			                type: 'column',
+			                target: -1
+			            }
+			        },
+			        columnDefs: [ {
+			            className: 'control',
+			            orderable: false,
+			            targets: -1
+			        }]
+			    });
+			});
+		});
+	
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
 		var request = {};
 
@@ -49,8 +75,7 @@ app.component('houseDetail', {
 		$scope.radius = 1000;
 		$scope.chooseRadius = function(rad){
 			$scope.radius = parseInt(rad);
-			$('#distance-radius').text('Bán kính là : ' + $scope.radius);
-			// console.log($scope.radius);
+			console.log($scope.radius);
 			reloadMap();
 		}
 
@@ -265,7 +290,8 @@ app.component('houseDetail', {
 						var lon = neighbor[i].lon;
 						coor_neighbor += '|' + lat + ',' + lon;
 						var price = neighbor[i].price;
-						neighbor[i].price =  price ? convertPrice(neighbor[i].price) : 'Thỏa thuận';								
+						neighbor[i].price =  price ? convertPrice(neighbor[i].price) : 'Thỏa thuận';
+						// console.log(neighbor[i].price);								
 					}
 
 					coor_neighbor = coor_neighbor.substring(1);
@@ -978,7 +1004,7 @@ app.component('houseDetail', {
 
 
 		});
-		}
+	}
 	
 	},
 	templateUrl: 'view/house-detail/house-detail.template.html'

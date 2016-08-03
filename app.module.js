@@ -5,7 +5,5 @@ var app = angular.module('truliavnApp', [
 	'ngCookies',
 	'matchPassword',
 	'uiGmapgoogle-maps',
-	'ui.bootstrap',
-	'ngAnimate',
-	'ngMaterial'
+	'ui.bootstrap'
 ]);

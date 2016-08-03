@@ -1,4 +1,4 @@
-app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', function($scope, AuthService, $http, HouseService, $location){
+app.controller('AddPostCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', function($scope, AuthService, $http, HouseService, $location){
 	$scope.addHouseForm = {};
 	$scope.addHouseForm.email =  AuthService.getUserEmail();
 	$scope.addHouseForm.token =  AuthService.getUserToken();
@@ -25,7 +25,10 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 		// console.log($scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName);
 		$scope.address = $scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName;
 	}
-	$scope.addHouse = function(){
+	// $scope.noOfHouseChange = function(){
+	// 	$scope.address = $scope.addHouseForm.noOfHouse + ', ' + $scope.address;
+	// };
+	$scope.addPost = function(){
 		if (Object.keys($scope.addHouseForm).length < 10) {
 			$scope.err = true;
 			$scope.errMessage = "Xin hãy điền đầy đủ thông tin";
@@ -40,7 +43,7 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 				data: fd,
 				success: function (data) {
 					window.location.href="#!/manage-post";
-					$location.path('/manage-post');
+					$location.path('#!/manage-post');
 				},
 				error: function (err) {
 					console.log(err);
@@ -50,15 +53,17 @@ app.controller('AddHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService'
 	}
 }]);
 
-app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', 'API', function($scope, AuthService, $http, HouseService, $location, $routeParams, API){
+app.controller('EditPostCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', 'API', function($scope, AuthService, $http, HouseService, $location, $routeParams, API){
 	// $scope.addHouseForm = {};
 	//return old infomation of house
+	// console.log("hehe");
 	var url = API.getHouseInfo($routeParams.postId);
 	$http.get(url).then(function(res){
 		$scope.addHouseForm = res.data.houses[0];
 		$scope.addHouseForm.email =  AuthService.getUserEmail();
 		$scope.addHouseForm.token =  AuthService.getUserToken();
 		$scope.addHouseForm.houseId = $routeParams.postId;
+		console.log($scope.addHouseForm);
 	}, function(res){
 		console.log("get data fail");
 	})
@@ -87,7 +92,7 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 		// console.log($scope.address);
 	}
 	//sent request to server
-	$scope.editHouse = function(){
+	$scope.editPost = function(){
 		if (Object.keys($scope.addHouseForm).length < 10) {
 			$scope.err = true;
 			$scope.errMessage = "Xin hãy điền đầy đủ thông tin";
@@ -102,8 +107,8 @@ app.controller('EditHouseCtrl', ['$scope', 'AuthService', '$http', 'HouseService
 				processData: false,
 				data: fd,
 				success: function (data) {
-					window.location.href="/manage-post";
-					$location.path("/manage-post");
+					window.location.href="#!/manage-post";
+					$location.path("#!/manage-post");
 				},
 				error: function (err) {
 					console.log(err);
@@ -405,3 +410,94 @@ app.controller('ApartmentsForRentCtrl', ['$scope', '$http', 'API', function($sco
 	};
 }]);
 
+app.controller('HousesNeedBuyCtrl', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService){
+	var buyUrl  = AuthService.hostName + '/api/houses?housefor=needbuy&raw=1&specific=1';
+	//pagination for search result
+	$scope.currentPage = 1;
+	$scope.pageSize = 15;
+	$scope.maxSize = 5; //Number of pager buttons to show
+	$scope.titlePage = "Nhà riêng bán tại Việt Nam";
+
+	$http.get(buyUrl).then(function(response){
+		$scope.houses = response.data.houses;
+
+		$scope.noOfPages = $scope.houses.length;
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
+	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+	};
+}]);
+
+app.controller('HousesNeedRentCtrl', ['$scope', '$http','AuthService', function($scope, $http, AuthService){
+	var sellUrl  = AuthService.hostName + '/api/houses?housefor=needrent&raw=1&specific=1';
+	//pagination for search result
+	$scope.currentPage = 1;
+	$scope.pageSize = 15;
+	$scope.maxSize = 5; //Number of pager buttons to show
+	$scope.titlePage = "Nhà riêng cho thuê tại Việt Nam";
+
+	$http.get(sellUrl).then(function(response){
+		$scope.houses = response.data.houses;
+
+		$scope.noOfPages = $scope.houses.length;
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
+	});
+
+	$scope.sortHouses = function(){
+		switch($scope.selected){
+			case "0":
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+				break;
+			case "1":
+				$scope.attr = 'price';
+				$scope.reserve = false;
+				break;
+			case "2":
+				$scope.attr = 'price';
+				$scope.reserve = true;
+				break;
+			case "3":
+				$scope.attr = 'area';
+				$scope.reserve = false;
+				break;
+			case "4":
+				$scope.attr = 'area';
+				$scope.reserve = true;
+				break;
+			default:
+				$scope.attr = 'create_at';
+				$scope.reserve = false;
+		}
+	};
+}]);

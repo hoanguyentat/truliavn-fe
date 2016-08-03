@@ -21,7 +21,7 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 				$scope.error = true;
 				$scope.errorMessage = "Sai tài khoản hoặc mật khẩu";
 				$scope.disabled = false;
-				$scope.loginForm = {};
+				$scope.loginForm.password = "";
 			});
 	};
 }]);

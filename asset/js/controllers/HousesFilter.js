@@ -1,3 +1,4 @@
+// Push content into cache search
 app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$cookies','$location', function($scope, $http, AuthService, $cookies, $location ){
 	$http.get(AuthService.hostName + '/api/cities').then(function success(response){
 		$scope.cities = response.data.cities;
@@ -18,7 +19,7 @@ app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$c
 		}
 	}
 	$scope.search = function(){
-		
+		// remove old content
 		$cookies.remove('filter');
 
 		if ($scope.filter.area == undefined ) {$scope.filter.area = 0};
@@ -34,6 +35,7 @@ app.controller('HousesFilterContentCtrl', ['$scope', '$http', 'AuthService', '$c
 	};
 }]);
 
+// Fitler house by area, price, city, district,...
 app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService', '$route', function($scope, $http, $cookies, AuthService, $route){
 
 	var areaArr = [
@@ -107,4 +109,21 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
 				$scope.reserve = false;
 		}
 	};
+}]);
+
+app.controller('SidebarRightCtrl', ['$scope', '$http','API', function ($scope, $http, API ) {
+	var url = API.getHousesForRent();
+	url += "&count=6";
+	$http.get(url).then(function success(res){
+		$scope.housesRent = res.data.houses;
+	}, function error(err){
+		console.log(err);
+	});
+	var url1 = API.getHousesForSell();
+	url1 += "&count=6";
+	$http.get(url1).then(function success(res){
+		$scope.housesSell = res.data.houses;
+	}, function error(err){
+		console.log(err);
+	});
 }]);

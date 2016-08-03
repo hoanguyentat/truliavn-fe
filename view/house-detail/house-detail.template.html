@@ -1,4 +1,5 @@
-<div ng-if="status == 'success'">
+<!-- <div ng-if="status == 'success'"> -->
+<div>
 	<div class="container house-for">
 		<div style="padding-bottom: 20px;">
 			<div class="col-xs-12 col-sm-4">
@@ -94,115 +95,109 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- <div class="row"> -->
-				<center><h2>Tiện ích xung quanh ngôi nhà</h2></center>
-				<div class="panel panel-body" style="padding: 0px;">
-					<div class="col-sm-4 col-md-4 col-xs-12" style="padding: 0px;">
-						<h3 style="padding:10px; background-color: #5cb85c; border-radius: 3px; color: #fff; margin-top: 0px;" class="">Trường học gần đây</h3>
+			<center><h2>Tiện ích xung quanh ngôi nhà</h2></center>
+			<div class="panel panel-body" style="padding: 0px;">
+				<div class="col-sm-4 col-md-4 col-xs-12" style="padding: 0px;">
+					<h3 style="padding:10px; background-color: #5cb85c; border-radius: 3px; color: #fff; margin-top: 0px;" class="">Trường học gần đây</h3>
 
-						<div ng-repeat='i in school_list'>
-							<h4 class="title-suggest" ng-click='choose(i.type)'>{{i.title}}	
-								<span class="glyphicon  glyphicon-menu-down span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'down'" ng-click="schoolClick = 'up'" style="margin-right: 15px;"></span>
-								<span class="glyphicon  glyphicon-menu-up span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'up'" ng-click="schoolClick = 'down'" style="margin-right: 15px;"></span>
-							</h4>	
+					<div ng-repeat='i in school_list'>
+						<h4 class="title-suggest" ng-click='choose(i.type)'>{{i.title}}	
+							<span class="glyphicon  glyphicon-menu-down span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'down'" ng-click="schoolClick = 'up'" style="margin-right: 15px;"></span>
+							<span class="glyphicon  glyphicon-menu-up span-extend" data-toggle="collapse" data-target='#{{i.type}}' ng-show="schoolClick == 'up'" ng-click="schoolClick = 'down'" style="margin-right: 15px;"></span>
+						</h4>	
 
-							<div ng-if='select == i.type' id="{{i.type}}">
-								<table class="table table-condensed">
-									<thead></thead>
-									<tbody>
-										<tr ng-repeat="item in i">
-											<td class="school_name">{{item.name}}</td>
-											<td class="distance">{{item.distance}}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						
-						<h3 class="" data-toggle="collapse" data-target="#utility" style="padding:10px; background-color: #5cb85c; border-radius: 3px; color: #fff; ">Tiện ích khác
-							<span class="glyphicon glyphicon-circle-arrow-down span-extend" ng-show="spanClick == 'down'" ng-click="spanClick = 'up'"></span>
-							<span class="glyphicon glyphicon-circle-arrow-up span-extend" ng-show="spanClick == 'up'" ng-click="spanClick = 'down'"></span>
-						</h3>
-
-						<div id="utility" class="collapse">
-							<form name="utilityForm" >
-							<div ng-repeat="utility in utilities" class="col-xs-12" >
-								<h4 class="title-suggest"><label>
-									<input name="myRadioButton" type="radio" ng-value="utility.type" ng-model="utilitySelect" ng-click="choose(utilitySelect)">
-									{{utility.title}}
-									<span class="span-extend">{{utility.quantity}}</span>
-									<br>
-								</label></h4>
-							</div>
-							</form>
+						<div ng-if='select == i.type' id="{{i.type}}">
+							<table class="table table-condensed">
+								<thead></thead>
+								<tbody>
+									<tr ng-repeat="item in i">
+										<td class="school_name">{{item.name}}</td>
+										<td class="distance">{{item.distance}}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
+					
+					<h3 class="" data-toggle="collapse" data-target="#utility" style="padding:10px; background-color: #5cb85c; border-radius: 3px; color: #fff; ">Tiện ích khác
+						<span class="glyphicon glyphicon-circle-arrow-down span-extend" ng-show="spanClick == 'down'" ng-click="spanClick = 'up'"></span>
+						<span class="glyphicon glyphicon-circle-arrow-up span-extend" ng-show="spanClick == 'up'" ng-click="spanClick = 'down'"></span>
+					</h3>
 
-				
-					<div class="col-sm-8 col-md-8 col-xs-12 map-marker" style="padding: 0px;">
-
-						<div class="radius-form">
-
-							<form name="radiusForm" style="padding-left: 9px;">
-								<label>Bán kính : </label>
-								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="1000" checked  ng-click='chooseRadius(1000)'>1000 m
-								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="2000"  ng-click='chooseRadius(2000)'>2000 m
-								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="3000"  ng-click='chooseRadius(3000)'>3000 m
-								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="4000" ng-click='chooseRadius(4000)'>4000 m
-								<input type="radio" class="radius-radio" name="radiusSelect" ng-value="5000" ng-click='chooseRadius(5000)'>5000 m
-							</form>
-						</div>			
-						<div>
-							<ui-gmap-google-map class="map-utility" center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
-							   <div  ng-if='select == "primary"'>
-							   	 	<ui-gmap-markers models="primaryMarkers" idKey="primaryMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
-							   		</ui-gmap-markers>
-							   </div>	
-								<div ng-if='select == "junior"'>
-							   		<ui-gmap-markers models="juniorMarkers" idKey="juniorMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
-							    	</ui-gmap-markers>
-							  	</div>
-							  	<div ng-if='select == "senior"'>
-								    <ui-gmap-markers models="seniorMarkers" idKey="seniorMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
-								    </ui-gmap-markers>
-								</div>
-						
-								<div ng-if='select == "hospital"'>
-							    	<ui-gmap-markers models="hospitalMarkers" idKey="hospitalMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.hospitalMarkersEvents">
-							    	</ui-gmap-markers>
-								</div>					
-								<div ng-if='select == "park"'>
-							    	<ui-gmap-markers models="parkMarkers" idKey="parkMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.parkMarkersEvents">
-							    	</ui-gmap-markers>
-								</div>
-								<div ng-if='select == "restaurant"'>
-								    <ui-gmap-markers models="restaurantMarkers" idKey="restaurantMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.restaurantMarkersEvents">
-								    </ui-gmap-markers>								     
-								</div>
-								<div ng-if='select == "cafe"'>
-								    <ui-gmap-markers models="cafeMarkers" idKey="cafeMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.cafeMarkersEvents">
-								    </ui-gmap-markers>						
-								</div>
-								<div ng-if='select == "bus"'>
-								    <ui-gmap-markers models="busMarkers" idKey="busMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.busMarkersEvents">
-								    </ui-gmap-markers>								     
-								</div>
-								<div ng-if='select == "salon"'>
-								    <ui-gmap-markers models="salonMarkers" idKey="salonMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.salonMarkersEvents">
-								    </ui-gmap-markers>						     
-								</div>
-								<div ng-if='select == "market"'>
-								    <ui-gmap-markers models="marketMarkers" idKey="marketMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.marketMarkersEvents">
-								    </ui-gmap-markers>								     
-								</div>
-
-							   	<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
-						        </ui-gmap-markers>
-							</ui-gmap-google-map>
+					<div id="utility" class="collapse">
+						<form name="utilityForm" >
+						<div ng-repeat="utility in utilities" class="col-xs-12" >
+							<h4 class="title-suggest"><label>
+								<input name="myRadioButton" type="radio" ng-value="utility.type" ng-model="utilitySelect" ng-click="choose(utilitySelect)">
+								{{utility.title}}
+								<span class="span-extend">{{utility.quantity}}</span>
+								<br>
+							</label></h4>
 						</div>
-					</div>				
+						</form>
+					</div>
 				</div>
+			
+				<div class="col-sm-8 col-md-8 col-xs-12 map-marker" style="padding: 0px;">
+					<div class="radius-form">
+						<div style="padding-left: 20px; padding-top:10px">Bán kính : 
+							<md-slider ng-model="slider" aria-label="sliderRadius" ng-change="chooseRadius(slider)" step="1000" min="0" max="5000"></md-slider>
+							{{radius}} m
+						</div>
+					</div>			
+					<div>
+						<ui-gmap-google-map class="map-utility" center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
+						   <div  ng-if='select == "primary"'>
+						   	 	<ui-gmap-markers models="primaryMarkers" idKey="primaryMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.primaryMarkersEvents">
+						   		</ui-gmap-markers>
+						   </div>	
+							<div ng-if='select == "junior"'>
+						   		<ui-gmap-markers models="juniorMarkers" idKey="juniorMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.juniorMarkersEvents">
+						    	</ui-gmap-markers>
+						  	</div>
+						  	<div ng-if='select == "senior"'>
+							    <ui-gmap-markers models="seniorMarkers" idKey="seniorMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.seniorMarkersEvents">
+							    </ui-gmap-markers>
+							</div>
+					
+							<div ng-if='select == "hospital"'>
+						    	<ui-gmap-markers models="hospitalMarkers" idKey="hospitalMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.hospitalMarkersEvents">
+						    	</ui-gmap-markers>
+							</div>					
+							<div ng-if='select == "park"'>
+						    	<ui-gmap-markers models="parkMarkers" idKey="parkMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.parkMarkersEvents">
+						    	</ui-gmap-markers>
+							</div>
+							<div ng-if='select == "restaurant"'>
+							    <ui-gmap-markers models="restaurantMarkers" idKey="restaurantMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.restaurantMarkersEvents">
+							    </ui-gmap-markers>								     
+							</div>
+							<div ng-if='select == "cafe"'>
+							    <ui-gmap-markers models="cafeMarkers" idKey="cafeMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.cafeMarkersEvents">
+							    </ui-gmap-markers>						
+							</div>
+							<div ng-if='select == "bus"'>
+							    <ui-gmap-markers models="busMarkers" idKey="busMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.busMarkersEvents">
+							    </ui-gmap-markers>								     
+							</div>
+							<div ng-if='select == "salon"'>
+							    <ui-gmap-markers models="salonMarkers" idKey="salonMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.salonMarkersEvents">
+							    </ui-gmap-markers>						     
+							</div>
+							<div ng-if='select == "market"'>
+							    <ui-gmap-markers models="marketMarkers" idKey="marketMarkers.id" coords="'self'" icon="'icon'" options="'options'" events="map.marketMarkersEvents">
+							    </ui-gmap-markers>								     
+							</div>
+
+						   	<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" idkey="marker.id" icon="'icon'">
+					        </ui-gmap-markers>
+						</ui-gmap-google-map>
+					</div>
+				</div>				
+			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12" ng-if="house.houseFor" >
+		<!-- <div class="col-xs-12 col-sm-12" ng-if="house.houseFor" > -->
+		<div class="col-xs-12 col-sm-12">
 			<div class="row" style="margin-top: 60px;">
 				<div class="col-xs-12 col-sm-8">
 						<h3>Xu hướng nhà đất ở {{addressDistrict}} ( triệu VNĐ / m2)</h3>
@@ -283,7 +278,7 @@
 						</div>
 				</div>
 			</div>
-			<div class="col-xs-12">
+			<div>
 				<h2 class="text-center">Bản đồ vị trí và giá các nhà lân cận</h2>
 		  	  	<ui-gmap-google-map class="map-neighbor" center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
 		  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
@@ -291,29 +286,40 @@
 				    <ui-gmap-markers models="neighborMarkers" coords="'self'" icon="'icon'" options="'options'" events="map.neighborMarkersEvents">
 					</ui-gmap-markers>
 				</ui-gmap-google-map>
-				<table class="table table-hover col-xs-12">
+			</div>
+			<div>
+				<table id="neighborhood" class="display nowrap" cellspacing="0" width="100%" >
 					<thead>
-						<tr class="column_name">
-							<th>Địa chỉ</th>
+						<tr>
+							<th>Tiêu đề</th>
 							<th>Khoảng cách</th>
 							<th>Giá bán(VNĐ)</th>
 							<th>Ngày bán</th>
+							<th></th>
 						</tr>
 					</thead>
+					<tfoot>
+						<tr>
+							<th>Tiêu đề</th>
+							<th>Khoảng cách</th>
+							<th>Giá bán(VNĐ)</th>
+							<th>Ngày bán</th>
+							<th></th>
+						</tr>
+					</tfoot>
 					<tbody>
-						<tr ng-repeat="item in ::neighbor | limitTo : 10" class="responsive" data-max="18" data-min="7">
-							<td style="width : 60%">
-								<a href="#!/houses/{{::item.id}}" >{{::item.address}}</a>
-								<!-- {{item.address}} -->
-							</td>
-							<td class="dist">{{::item.distance}}</td>
-							<td class="price">{{::item.price}}</td>
+						<tr ng-repeat="item in neighbor" neighbor-repeat>
+							<td><a href="#!/houses/{{item.id}}">{{item.address}}</a></td>
+							<td class="dist">{{item.distance}}</td>
+							<td class="price">{{item.price}}</td>
+							<td>ngay ban</td>
+							<td></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<!-- </div>		 -->
 		</div>
+
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- <div class="container"> -->
 				<div class="row" style="margin-top: 30px;">
@@ -395,6 +401,7 @@
 		</div>
 	</div>
 </div>
+	
 
 <span ng-if="status == 'error'">
 	<div class="container house-for">

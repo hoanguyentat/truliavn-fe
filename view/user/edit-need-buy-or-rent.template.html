@@ -40,15 +40,10 @@
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 							<div class="form-group">
 								<span class="label label-default">Hình thức(*)</span>
-								<select name="houseFor" id="houseFor" class="form-control" required="required" ng-if="addHouseForm.houseFor == 0 || addHouseForm.houseFor == 1" ng-model="houseFor">
+								<select name="houseFor" id="houseFor" class="form-control" required="required" ng-model="houseFor">
 									<option value="">---Hình thức---</option>
 									<option value="0">Cho thuê</option>
 									<option value="1">Rao bán</option>
-								</select>
-								<select name="houseFor" id="houseFor" class="form-control" required="required" ng-if="addHouseForm.houseFor == 2 || addHouseForm.houseFor == 3" ng-model="houseFor">
-									<option value="">---Hình thức---</option>
-									<option value="2">Cần mua</option>
-									<option value="3">Cần thuê</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -80,8 +75,7 @@
 					<label for="description" class="control-label">Mô tả(*)</label>
 					<textarea name="description" id="description" class="form-control" rows="4" required="required" ng-model="addHouseForm.description"></textarea>
 				</div>
-				<article ng-if="addHouseForm.houseFor == 0 || addHouseForm.houseFor == 1">Giới thiệu chung về bất động sản của bạn. Ví dụ: <b>Khu nhà có vị trí thuận lợi: Gần công viên, gần trường học ... Tổng diện tích 52m2, đường đi ô tô vào tận cửa.</b></article>
-				<article ng-if="addHouseForm.houseFor == 2 || addHouseForm.houseFor == 3">Giới thiệu chung về yêu cầu của bạn đối với ngôi nhà. Ví dụ: Tôi cần mua một ngôi nhà 3 tầng bao gồm 3 phòng ngủ hai phòng tắm, 2 nhà vệ sinh, 1 phòng khách, ....</b></article>
+				<article>Giới thiệu chung về bất động sản của bạn. Ví dụ: <b>Khu nhà có vị trí thuận lợi: Gần công viên, gần trường học ... Tổng diện tích 52m2, đường đi ô tô vào tận cửa.</b></article>
 				<div class="form-group">
 					<label for="images" class="label label-info">Hình ảnh: </label>
 					<input type="file" name="images" multiple="" class="btn btn-success" ng-model="addHouseForm.images">
@@ -89,33 +83,6 @@
 			</div>
 			<div class="row">
 				<b>Lưu ý: </b><strong class="">Các trường đánh dấu (*) là trường bắt buộc phải điền..</strong>
-			</div>
-			<div class="row" ng-if="addHouseForm.houseFor == 0 || addHouseForm.houseFor == 1">
-				<h2>Thông tin thêm</h2>
-				<div class="form-group">
-					<label for="noOfBedrooms" class="control-label">Số phòng ngủ</label>
-					<input name="noOfBedrooms" type="number" id="noOfBedrooms" class="form-control" ng-model="addHouseForm.noOfBedrooms">
-				</div>
-				<div class="form-group">
-					<label for="noOfBathrooms" class="control-label">Số phòng tắm</label>
-					<input name="noOfBathrooms" type="number" id="noOfBathrooms" class="form-control" ng-model="addHouseForm.noOfBathrooms">
-				</div>
-				<div class="form-group">
-					<label for="noOfFloors" class="control-label">Số tầng</label>
-					<input name="noOfFloors" id="noOfFloors" type="number" class="form-control" ng-model="addHouseForm.noOfFloors"></input>
-				</div>
-				<div class="form-group">
-					<label for="interior" class="control-label">Nội thất</label>
-					<input name="interior" id="interior" class="form-control" placeholder="Điều hòa, tủ lạnh,..." ng-model="addHouseForm.interior">
-				</div>
-				<div class="form-group">
-					<label for="buildIn" class="control-label">Nhà xây năm</label>
-					<input name="buildIn" id="buildIn"  class="form-control" ng-model="addHouseForm.buildIn">
-				</div>
-				<div class="form-group">
-					<label for="feePeriod" class="control-label">Thời gian trả tiền </label>
-					<input name="feePeriod" id="feePeriod" class="form-control" placeholder="Bao nhiêu tháng một lần" ng-model="addHouseForm.feePeriod">
-				</div>				
 			</div>
 			<div class="alert alert-danger" ng-show = "err">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

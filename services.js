@@ -146,8 +146,10 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		})
 		.error(function(data){
 			user = false;
-			console.log("Logout khong thanh cong");
-			deferred.reject();
+			$cookies.remove('user.id');
+			$cookies.remove('user.token');
+			$cookies.remove('user.email');
+			deferred.resolve();
 		});
 
 		return deferred.promise;
