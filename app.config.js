@@ -78,7 +78,7 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		template: '<house-detail></house-detail>',
 		access: {restricted: false}
 	})
-/*	.when('/houses/:houseId', {
+	/*.when('/houses/:houseId', {
 		templateUrl : 'view/house-detail/house-detail.template.html',
 		controller : 'HouseDetailController',
 		access: {restricted: false}

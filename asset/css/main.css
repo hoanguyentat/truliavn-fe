@@ -126,19 +126,26 @@ strong{
 	color: green;
 	font-size: 13px;
 }
-.price{
-	/*text-align: right;*/
+
+#exam_wrapper{
+    color: #2b2b2b;
+    font-size: 16px;
+}
+table.dataTable>tbody>tr.child span.dtr-title {
+    min-width: 85px !important;
 }
 
-tr.column_name{
-	font-weight: bold;
-	font-size: 18px;
+
+/* tr.column_name{
+    font-weight: bold;
+    font-size: 18px;
 }
 tr.header{
-	font-weight: bold;
-	font-size: 25px;
-	color: gray;
-}
+    font-weight: bold;
+    font-size: 25px;
+    color: gray;
+} */
+
 tr.houseInfo{
 	font-size: 18px;
 }
@@ -379,7 +386,8 @@ input[type='radio'].radius-radio{
 .carousel-inner > .item > .img-carousel,
 .img-unknown{
 	height: 400px;
-	width: 100%;
+	width: auto;
+    margin: 0 auto;
 }
 
 /*------------------NAVBAR---------------------*/

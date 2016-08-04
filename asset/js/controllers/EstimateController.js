@@ -105,10 +105,10 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		// console.log('deep : ' + $scope.houseDeep);
 
 		request.area = $scope.houseArea;
-		console.log(request);
+		// console.log(request);
 		$http.post(API.getPrice(), request)
 		.then(function success(response){
-			console.log(response.data.price);
+			// console.log(response.data.price);
 			$scope.priceEstimate  = convertPrice(response.data.price / 1000);
 		},
 		function error(response){

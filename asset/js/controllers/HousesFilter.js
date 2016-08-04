@@ -63,9 +63,9 @@ app.controller('FilterHousesCtrl', ['$scope', '$http', '$cookies','AuthService',
       [100, 10000]
    ];
 	var filter = $cookies.getObject('filter');
-	console.log(filter);
+	// console.log(filter);
 	var url = AuthService.hostName + '/api/houses?district=' + filter.districtSelected + '&city=' + filter.citySelected+ '&houseFor='+ filter.houseFor + '&minArea=' + areaArr[filter.area][0] + '&maxArea=' + areaArr[filter.area][1] + '&minPrice=' + priceArr[filter.price][0] + '&maxPrice='+ priceArr[filter.price][1] + '&bedrooms=' + filter.bedrooms + '&bathrooms=' + filter.bathrooms + '&floors=' + filter.floors;
-	console.log(url);
+	// console.log(url);
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
 	$scope.maxSize = 5;
