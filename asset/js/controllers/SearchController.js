@@ -12,9 +12,12 @@ app.controller('SearchController', ['$scope', '$http', 'AuthService', '$rootScop
 	// var list = this
 	$scope.currentPage = 1;
 	$scope.pageSize = 20;
-	$scope.maxSize = 5
+	$scope.maxSize = 5;
 
-	$http.post(AuthService.hostName + '/api/search', {search: $routeParams.searchContent, housefor: $cookies.get('search.housefor')})
+	var housefor = $cookies.get('search.housefor');
+	console.log(housefor);
+
+	$http.post(AuthService.hostName + '/api/search', {search: $routeParams.searchContent, housefor: housefor})
 	.then(function(res){
 		$scope.houses = res.data.houses;
 		$scope.noOfPages = $scope.houses.length;

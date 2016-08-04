@@ -311,9 +311,16 @@ angular.module('houseDetail',[])
 						if(status == 200 && data.status == 'success'){
 
 							var res = data.results.rows[0];
+							// console.log(res);
 							if(res){
-								for(var i in res.elements){
-									neighbor[i].distance = res.elements[i].distance.text;
+								var dist = res.elements;
+								for(var i = 0; i < dist.length; i++){
+									if(dist[i].distance){
+										neighbor[i].distance = dist[i].distance.text;
+									}
+									else{
+										neighbor[i].distance = '_';
+									}
 								}
 							}
 							$scope.neighbor = neighbor;

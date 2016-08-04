@@ -1,4 +1,3 @@
-<!-- <div ng-if="status == 'success'"> -->
 <div>
 	<div class="container house-for">
 		<div style="padding-bottom: 20px;">
@@ -292,10 +291,11 @@
 		        <thead>
 		            <tr>
 		            	<th>Loại</th>
-		            	<th>Diện tích</th>
+		            	<!-- <th>Khoảng cách</th> -->
+		            	<th>Diện tích (m2)</th>
 		            	<th>Số tầng</th>
-		                <th>Giá bán</th>
-		                <th>Địa chỉ</th>
+		            	<th>Địa chỉ</th>
+		                <th>Giá bán</th>	                
 		                <th>Phòng ngủ</th>  
 		                <th></th>
 		            </tr>
@@ -303,11 +303,12 @@
 		        <tbody>
 		            <tr ng-repeat="nei in neighbor" neighbor-repeat>
 		            	<td>{{nei.type}}</td>
-		            	<td>{{nei.area}}</td>
-		            	<td>{{nei.noOfFloors}}</td>
+		            	<!-- <td>{{nei.distance}}</td> -->
+		            	<td class="text-center">{{nei.area}}</td>
+		            	<td class="text-center">{{nei.noOfFloors}}</td>
+		                <td><a href="#!/houses/{{nei.id}}">{{nei.address}}</a></td>	
 		                <td>{{nei.price}}</td>
-		                <td><a href="#!/houses/{{nei.id}}">{{nei.address}}</a></td>
-		                <td>{{nei.noOfBedrooms}}</td>
+		                <td class="text-center">{{nei.noOfBedrooms}}</td>
 		                <td></td>
 		            </tr>
 		        </tbody>
@@ -403,3 +404,4 @@
 		</div>
 	</div>
 </span>
+

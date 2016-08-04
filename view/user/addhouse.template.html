@@ -4,12 +4,12 @@
 			<input type="hidden" name="email" id="email" class="form-control" ng-value="addHouseForm.email">
 			<input type="hidden" name="token" id="token" class="form-control" ng-value="addHouseForm.token">
 			<a href="#!/add-post-for-rent-or-sell">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center title-add-post">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center title-add-post titleSelected" id="titlePost1">
 					Cần bán/Cho thuê
 				</div>
 			</a>
 			<a href="#!/add-post-for-need-rent-or-buy">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center title-add-post">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center title-add-post" id="titlePost2">
 					Cần mua/Cần thuê
 				</div>
 			</a>
@@ -127,7 +127,7 @@
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<b>{{errMessage}}</b>
 			</div>
-			<center><button style="margin-top: 20px;" type="submit" ng-click="addHouse()" ng-disabled="disabled" class="btn btn-primary btn-lg">Thêm bài đăng</button></center>
+			<center><button style="margin-top: 20px;" type="submit" ng-click="addPost()" ng-disabled="disabled" class="btn btn-primary btn-lg">Thêm bài đăng</button></center>
 		</form>
 	</div>
 </div>
