@@ -2,7 +2,7 @@
 	<div class="container house-for">
 		<div style="padding-bottom: 20px;">
 			<div class="col-xs-12 col-sm-4">
-				<div class="panel panel-default">
+				<div class="panel panel-default map-detail">
 					<div class="panel-heading">
 						<center>Thông tin người đăng</center>
 					</div>
@@ -95,7 +95,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!-- <div class="row"> -->
 			<center><h2>Tiện ích xung quanh ngôi nhà</h2></center>
-			<div class="panel panel-body" style="padding: 0px;">
+			<div class="panel panel-body map-detail">
 				<div class="col-sm-4 col-md-4 col-xs-12" style="padding: 0px;">
 					<h3 style="padding:10px; background-color: #5cb85c; border-radius: 3px; color: #fff; margin-top: 0px;" class="">Trường học gần đây</h3>
 
@@ -139,9 +139,9 @@
 			
 				<div class="col-sm-8 col-md-8 col-xs-12 map-marker" style="padding: 0px;">
 					<div class="radius-form">
-						<div style="padding-left: 20px; padding-top:10px">Bán kính : 
-							<md-slider md-discrete ng-model="radius" aria-label="sliderRadius" ng-change="chooseRadius(radius)"  step="1000" min="0" max="5000"></md-slider>
-							{{radius}} m
+						<div style="padding-left: 20px">Bán kính : <span>0 m</span>
+							<md-slider md-discrete ng-model="radius" aria-label="sliderRadius" ng-change="chooseRadius(radius)"  step="100" min="0" max="5000"></md-slider><span>5000m</span>
+							<div>Gia tri: <span class="label label-warning">{{radius}} m</span></div>							
 						</div>
 					</div>			
 					<div>
@@ -236,7 +236,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-5 col-md-4" ng-controller="EstimateController">
 				<!-- <div class="col-sm-4"> -->
-						<div class="col-xs-12 panel" style="padding : 0">
+						<div class="col-xs-12 panel map-detail">
 							<div class="panel-heading panel-green">
 								Định giá nhà
 							</div>

@@ -272,6 +272,7 @@ angular.module('houseDetail',[])
 			/*---------------MARKER POSITION OF THE HOUSE----------- */
 
 			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 15};
+			console.log($scope.map);
 
 		    /*--------FIND THE NEIGHBORHOOD NEAR YOUR HOUSE---------*/
 			$http.get(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward)).then(
@@ -995,7 +996,9 @@ angular.module('houseDetail',[])
 			            }
 			        }
 				};
-
+				console.log("_________10000____________");
+				console.log($scope.map);
+				console.log("_________10000____________");
 			    $scope.options = {
 			    	scrollwheel: false
 			    };				    	
