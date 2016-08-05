@@ -1,14 +1,14 @@
 <input type="button"  class="goToTop"/>
 <script type="text/javascript">
-     $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            $('.goToTop').fadeIn();
+     jQuery(window).scroll(function () {
+        if (jQuery(this).scrollTop() > 100) {
+            jQuery('.goToTop').fadeIn();
         } else {
-            $('.goToTop').fadeOut();
+            jQuery('.goToTop').fadeOut();
         }
     });
-    $('.goToTop').click(function () {
-        $("html, body").animate({ scrollTop: 0 }, 1000);
+    jQuery('.goToTop').click(function () {
+        jQuery("html, body").animate({ scrollTop: 0 }, 1000);
         return false;
     });
 </script>

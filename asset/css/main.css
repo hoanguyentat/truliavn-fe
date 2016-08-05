@@ -124,21 +124,28 @@ strong{
 }
 .neighbor{
 	color: green;
-	font-size: 17px;
-}
-.price{
-	/*text-align: right;*/
+	font-size: 13px;
 }
 
-tr.column_name{
-	font-weight: bold;
-	font-size: 18px;
+#exam_wrapper{
+    color: #2b2b2b;
+    font-size: 16px;
+}
+table.dataTable>tbody>tr.child span.dtr-title {
+    min-width: 85px !important;
+}
+
+
+/* tr.column_name{
+    font-weight: bold;
+    font-size: 18px;
 }
 tr.header{
-	font-weight: bold;
-	font-size: 25px;
-	color: gray;
-}
+    font-weight: bold;
+    font-size: 25px;
+    color: gray;
+} */
+
 tr.houseInfo{
 	font-size: 18px;
 }
@@ -167,6 +174,13 @@ tr.houseInfo{
 	float: right;
 	padding-left: 25px;
 	cursor: pointer;
+}
+
+md-slider{
+    display: inline-block;
+    padding-left: 10px;
+    height: 30px;
+    width: 300px;
 }
 
 .map-neighbor > .angular-google-map > .angular-google-map-container{
@@ -211,6 +225,8 @@ tr.houseInfo{
 	background-color: #093;
 	border-radius: 10px;
     z-index: 1000;
+    display: block;
+    opacity: 1;
 }
 .table-map,
 .p-map{
@@ -373,7 +389,8 @@ input[type='radio'].radius-radio{
 .carousel-inner > .item > .img-carousel,
 .img-unknown{
 	height: 400px;
-	width: 100%;
+	width: auto;
+    margin: 0 auto;
 }
 
 /*------------------NAVBAR---------------------*/
@@ -456,7 +473,7 @@ a.nav:hover{
 .footer{
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	/*bottom: 0;*/
 	left: 0;
 	text-align: center;
 }
