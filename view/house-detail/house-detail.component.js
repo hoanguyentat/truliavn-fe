@@ -1,4 +1,4 @@
-angular.module('houseDetail',[])
+angular.module('houseDetail')
 .directive('neighborRepeat', function(){
 	return function(scope) {
 		if (scope.$last){
@@ -23,17 +23,15 @@ angular.module('houseDetail',[])
 		}
 	};
 })
-
 .component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams, AuthService, API, $sce, $cookies){
-
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
 		var request = {};
 
 		$scope.select = "myHouse";
 		$scope.choose = function(str){
 			$scope.select = str;
-/*			console.log('click at ' + str);*/
+			console.log('click at ' + str);
 		}
 
 		$scope.spanClick = "down";
@@ -73,10 +71,9 @@ angular.module('houseDetail',[])
 		}
 
 		$scope.radius = 1000;
-		$scope.radiusDefault = 1000;
 		$scope.chooseRadius = function(rad){
 			$scope.radius = parseInt(rad);
-			console.log($scope.radius);
+			// console.log($scope.radius);
 			reloadMap();
 		}
 
@@ -136,15 +133,8 @@ angular.module('houseDetail',[])
 
 				}
 
-				if(!listPrice){
-					$scope.listPrice = 'Chưa có dữ liệu';
-				}
-				else{
-					$scope.listPrice = listPrice;
-				}
-
+				$scope.listPrice = listPrice;
 				$scope.medianSale = medianSale;
-
 
 				$scope.medianSaleConvert = convertPrice(medianSale);
 				$scope.listPriceConvert = convertPrice(listPrice);
@@ -223,7 +213,7 @@ angular.module('houseDetail',[])
 			HouseSuggest();
 
 			$scope.house = house;
-			$scope.housePriceConvert = convertPrice(house.price);
+
 			$scope.house.description = $sce.trustAsHtml($scope.house.description);
 
 			var latitude = $scope.house.lat;
@@ -272,12 +262,14 @@ angular.module('houseDetail',[])
 			/*---------------MARKER POSITION OF THE HOUSE----------- */
 
 			$scope.map = {center: {latitude: latitude, longitude: longitude }, zoom: 15};
-			console.log($scope.map);
 
 		    /*--------FIND THE NEIGHBORHOOD NEAR YOUR HOUSE---------*/
+
 			$http.get(API.getHousesNearby(($scope.house.houseFor > 0) ? 'sell' :'rent', $scope.house.city, $scope.house.district,$scope.house.ward)).then(
 				function (near){
 					neighbor = near.data.houses;
+					// console.log('near.data.house');
+					// console.log(neighbor);
 					var log =[];
 					$scope.addressDistrict = neighbor[0].district + ', ' + neighbor[0].city;  
 					for(var i in neighbor){
@@ -301,8 +293,12 @@ angular.module('houseDetail',[])
 						if(neighbor[i].noOfBedrooms == 0){
 							neighbor[i].noOfBedrooms = "_";
 						}
-						// console.log(neighbor[i].price);								
 					}
+/*					var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins="
+				 		+ position 
+				 		+ "&destinations="+ coor_neighbor
+				 		+ "&key=AIzaSyDLV4DIm4y3o6Bd7GRR725pmocPgzE3zwE"
+				 	console.log(url);*/
 
 					coor_neighbor = coor_neighbor.substring(1);
 					$http.post(API.getDistanceNearBy(), {origin : position, 
@@ -312,21 +308,13 @@ angular.module('houseDetail',[])
 						if(status == 200 && data.status == 'success'){
 
 							var res = data.results.rows[0];
-							// console.log(res);
 							if(res){
-								var dist = res.elements;
-								for(var i = 0; i < dist.length; i++){
-									if(dist[i].distance){
-										neighbor[i].distance = dist[i].distance.text;
-									}
-									else{
-										neighbor[i].distance = '_';
-									}
+								for(var i in res.elements){
+									neighbor[i].distance = res.elements[i].distance.text;
 								}
 							}
 							$scope.neighbor = neighbor;
 						}
-
 					})
 					.error(function(){
 						console.log("fail");
@@ -357,8 +345,8 @@ angular.module('houseDetail',[])
 					// console.log(coor_neighbor_marker);
 
 				}
-			);
-			
+			)
+
 
 		    /*--------FIND THE HOSPITAL NEAR THE HOUSE-----------*/
 		    $http.post(API.getServicesNearBy(),{lat : latitude, 
@@ -622,7 +610,7 @@ angular.module('houseDetail',[])
 						coor_salon_marker.push(ret);
 					}
 
-					$scope.utilities.push({title:'Thẩm mỹ - Làm đẹp', type : 'salon', quantity : salon.length});
+					$scope.utilities.push({title:'Thẩm mỹ viện - Làm đẹp', type : 'salon', quantity : salon.length});
 
 		    	}
 		    });
@@ -833,6 +821,7 @@ angular.module('houseDetail',[])
 				/*----------END OF FIND THE SCHOOL NEAR THE HOUSE---------*/
 			});
 
+				$scope.selected = $scope.utilities[0];
 
 				$scope.markers = [{
 			      	id: 0,
@@ -996,14 +985,12 @@ angular.module('houseDetail',[])
 			            }
 			        }
 				};
-				console.log("_________10000____________");
-				console.log($scope.map);
-				console.log("_________10000____________");
+
 			    $scope.options = {
 			    	scrollwheel: false
 			    };				    	
 
-			    $scope.$watch(function(){
+			    $scope.$watchCollection(function(){
 			    	return $scope.map.bounds;
 			    }
 		    	,function(ov, nv) {
@@ -1022,11 +1009,8 @@ angular.module('houseDetail',[])
 		    	} 
 		    	,true);
 
-
 		});
-	}
-
-	
+		}
 	
 	},
 	templateUrl: 'view/house-detail/house-detail.template.html'
