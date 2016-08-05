@@ -1,4 +1,28 @@
 angular.module('houseDetail')
+.directive('neighborRepeat', function(){
+	return function(scope) {
+		if (scope.$last){
+			// console.log('success');
+			// scope.$emit('LastRepeaterElement');
+				scope.$watch(function(){
+			    $('#exam').DataTable({
+			    	retrieve : true,
+			        responsive: {
+			            details: {
+			                type: 'column',
+			                target: -1
+			            }
+			        },
+			        columnDefs: [ {
+			            className: 'control',
+			            orderable: false,
+			            targets: -1
+			        }]
+			    });
+			});
+		}
+	};
+})
 .component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams, AuthService, API, $sce, $cookies){
 		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
@@ -81,7 +105,6 @@ angular.module('houseDetail')
 
 				if(house.price > 0){
 					var priceOfHouse =  parseFloat((house.price / house.area).toFixed(2));
-					console.log(typeof(priceOfHouse));
 					$scope.priceAverageOfHouse = priceOfHouse;
 		
 					/*------------COMPARE HOUSE PRICE WITH LISTING PRICE---------*/
@@ -95,7 +118,6 @@ angular.module('houseDetail')
 					else {
 						$scope.listPricePercent = 'Bằng giá nhà';
 					}
-					console.log($scope.listPricePercent);
 
 					/*------------COMPARE HOUSE PRICE WITH  MEDIAN SALE---------*/
 
@@ -108,7 +130,6 @@ angular.module('houseDetail')
 					else {
 						$scope.medianSalePercent = 'Bằng giá nhà';
 					}
-					console.log($scope.medianSalePercent);
 
 				}
 
@@ -130,7 +151,6 @@ angular.module('houseDetail')
 				var urlNewest = url + '&offset=0&count=8';
 				var urlBedRooms3 = url + '&bedrooms=3&count=6';
 				var urlMaxPrice = url + '&count=8&maxPrice='+ house.price;
-				console.log(urlMaxPrice);
 				var urlFloors4 = url + '&count=6&floors=4';
 				// console.log(urlMaxPrice);
 				$scope.priceSuggest = convertPrice($cookies.get('price'));
@@ -262,7 +282,17 @@ angular.module('houseDetail')
 						var lat = neighbor[i].lat;
 						var lon = neighbor[i].lon;
 						coor_neighbor += '|' + lat + ',' + lon;
-						neighbor[i].price = convertPrice(neighbor[i].price);
+						var price = neighbor[i].price;
+						neighbor[i].price =  price ? convertPrice(neighbor[i].price) : 'Thỏa thuận';
+						if(neighbor[i].area == 0){
+							neighbor[i].area = "_";
+						}
+						if(neighbor[i].noOfFloors == 0){
+							neighbor[i].noOfFloors = "_";
+						}
+						if(neighbor[i].noOfBedrooms == 0){
+							neighbor[i].noOfBedrooms = "_";
+						}
 					}
 /*					var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins="
 				 		+ position 
@@ -791,7 +821,6 @@ angular.module('houseDetail')
 				/*----------END OF FIND THE SCHOOL NEAR THE HOUSE---------*/
 			});
 
-			setTimeout(function(){
 				$scope.selected = $scope.utilities[0];
 
 				$scope.markers = [{
@@ -822,7 +851,7 @@ angular.module('houseDetail')
 			            },
 			            click : function(marker, eventName, model, args){
 			            	// console.log(model.url);
-				          window.location.href = model.url; 
+				          window.open(model.url, '_blank'); 
 				          $scope.$apply();
 				        }
 			        },
@@ -979,8 +1008,6 @@ angular.module('houseDetail')
 			        $scope.seniorMarkers = coor_senior_marker;
 		    	} 
 		    	,true);
-
-			}, 1500);
 
 		});
 		}

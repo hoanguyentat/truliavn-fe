@@ -13,7 +13,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 	if(!disName && !cityName){
 		$scope.address = $cookies.get('districtAddress');
 	}
-	console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+	// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
 
 	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
 		.then(function success(response){
@@ -105,10 +105,10 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		// console.log('deep : ' + $scope.houseDeep);
 
 		request.area = $scope.houseArea;
-		console.log(request);
+		// console.log(request);
 		$http.post(API.getPrice(), request)
 		.then(function success(response){
-			console.log(response.data.price);
+			// console.log(response.data.price);
 			$scope.priceEstimate  = convertPrice(response.data.price / 1000);
 		},
 		function error(response){
@@ -210,7 +210,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		});
 	}
 	$scope.districtChange = function(){
-			console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+			// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
 
 	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
 		.then(function success(response){
@@ -250,9 +250,9 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 					latitude : house[i].lat,
 					longitude : house[i].lon,
 					content : '<div class="div-map"><p class="p-map">'+ house[i].address + '</p>'+
-							'<p class="p-map">'+ convertPrice(house[i].price) + '</p></div>',
+							'<p class="p-map">Giá : '+ (house[i].price ? convertPrice(house[i].price) : "Thỏa thuận") + '</p></div>',
 					url : 'http://ngocdon.me/#!/houses/' + house[i].id,
-					icon : '../../icon/house-in-district.png',
+					icon : '../../../asset/icon/house-in-district.png',
 					options : {labelClass : 'marker_labels', labelContent : ""}
 				}
 				coor_marker.push(ret);
@@ -285,8 +285,8 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 				               $scope.$apply();
 				            },
 				            click : function(marker, eventName, model, args){
-				            	console.log(model.url);
-				          		window.location.href = model.url; 
+				            	// console.log(model.url);
+				          		window.open(model.url, '_blank'); 
 				            	$scope.$apply();
 				            }
 				        },

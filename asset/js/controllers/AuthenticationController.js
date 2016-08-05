@@ -21,7 +21,7 @@ app.controller('LoginController', ['$scope', '$location', 'AuthService', '$http'
 				$scope.error = true;
 				$scope.errorMessage = "Sai tài khoản hoặc mật khẩu";
 				$scope.disabled = false;
-				$scope.loginForm = {};
+				$scope.loginForm.password = "";
 			});
 	};
 }]);
@@ -52,7 +52,7 @@ app.controller('RegisterController', ['$scope', '$location', 'AuthService', func
 }]);
 
 
-app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', 'AuthService', 'API', function($scope, $location,$http, $cookies, AuthService, API){
+app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', 'AuthService', 'API', '$routeParams', function($scope, $location,$http, $cookies, AuthService, API, $routeParams){
 	var userID = $cookies.get('user.id');
 	$http.get(API.getUserInfo(userID))
 	.then(function (res){
