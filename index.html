@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="truliavnApp">
 <head>
-  <meta charset="UTF-8">
-  
-  <title>Bất động sản Việt Nam</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="asset/js/angular-material/angular-material.min.css">
-  <!-- use this file for table-responsive -->
-<!--   <link rel="stylesheet" href="asset/js/table-responsive/jquery.dataTables.min.css">
-<link rel="stylesheet" href="asset/js/table-responsive/responsive.dataTables.min.css"> -->
+	<meta charset="UTF-8">
+	
+	<title>Bất động sản Việt Nam</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="asset/js/angular-material/angular-material.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="icon" href="asset/icon/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="asset/css/bootstrap/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="asset/css/main.css">
 
-  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-  <link rel="icon" href="asset/icon/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="asset/css/main.css">
+	<script type="text/javascript" src="asset/js/jquery/jquery/jquery.js"></script>
+	<script type="text/javascript" src="asset/js/jquery/bootstrap.min.js"></script>
 
-  <script type="text/javascript" src="asset/js/jquery/jquery/jquery.js"></script>
-  <script type="text/javascript" src="asset/js/jquery/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="asset/js/angular/angular.js"></script>
+	<!-- Use this file for map route -->
+	<script type="text/javascript" src="asset/js/angular-route/angular-route.js"></script>
+	<script type="text/javascript" src="asset/js/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+	<script type="text/javascript" src='asset/js/angular-ui-bootstrap/dist/ui-bootstrap-tpls-1.3.3.min.js'></script>
+	<script type="text/javascript" src="asset/js/angular-animate/angular-animate.min.js"></script>
 
-  
-  <script type="text/javascript" src="asset/js/angular/angular.js"></script>
-  <!-- Use this file for map route -->
-  <script type="text/javascript" src="asset/js/angular-route/angular-route.js"></script>
-  <script type="text/javascript" src="asset/js/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-  <script type="text/javascript" src='asset/js/angular-ui-bootstrap/dist/ui-bootstrap-tpls-1.3.3.min.js'></script>
-  <script type="text/javascript" src="asset/js/angular-animate/angular-animate.min.js"></script>
-  <script type="text/javascript" src="asset/js/angular/angular-aria.min.js"></script>
-  <script type="text/javascript" src="asset/js/angular/angular-messages.min.js"></script>
-  <script type="text/javascript" src="asset/js/angular-material/angular-material.min.js"></script>
+	<script type="text/javascript" src="asset/js/angular/angular-aria.min.js"></script>
+  	<!-- <script type="text/javascript" src="asset/js/angular/angular-messages.min.js"></script> -->
+	<script type="text/javascript" src="asset/js/angular-material/angular-material.min.js"></script>
 
-  <!-- use this file for table-responsive -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
-  
+  	<!-- use this file for table-responsive -->
+  	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+  	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css">
+  	<script type="text/javascript" src="asset/js/table-responsive/jquery.dataTables.min.js"></script>
+  	<script type="text/javascript" src="asset/js/table-responsive/dataTables.responsive.min.js"></script>
 
-  <!-- Use this file for pagination -->
-  <script type="text/javascript" src="asset/js/angular-cookies/angular-cookies.min.js"></script>
-  <!-- // <script type="text/javascript" src="asset/js/angular"></script> -->
+	<!-- Use this file for pagination -->
+	<script type="text/javascript" src="asset/js/angular-cookies/angular-cookies.min.js"></script>
+	<!-- // <script type="text/javascript" src="asset/js/angular"></script> -->
 
   <!-- Angular Google Map -->
   <!-- <script src='https://maps.googleapis.com/maps/api/js?sensor=false'></script> -->
@@ -65,6 +63,25 @@ s  <script type="text/javascript" src="asset/js/table-responsive/jquery.dataTabl
   <script src="view/house-detail/house-detail.module.js"></script>
   <script src="view/house-detail/house-detail.component.js"></script>
 
+	
+	<!-- Display in screens -->
+	<script type="text/javascript" src="app.module.js"></script>
+	<script type="text/javascript" src="services.js"></script>
+	<script type="text/javascript" src="app.config.js"></script>
+	<script src="asset/js/controllers/AuthenticationController.js"></script>
+	<script type="text/javascript" src="asset/js/controllers/SearchController.js"></script>
+	<script src="asset/js/controllers/HouseController.js"></script>
+	<script type="text/javascript" src="asset/js/controllers/ManagePostController.js"></script>
+	<script type="text/javascript" src="asset/js/controllers/HomeController.js"></script>
+	<script type="text/javascript" src="asset/js/controllers/EstimateController.js"></script>
+	<script src="view/house-detail/house-detail.module.js"></script>
+	<script src="view/house-detail/house-detail.component.js"></script>
+	<!-- <script type="text/javascript" src='asset/js/controllers/HouseDetailController.js'></script> -->
+	<script src="view/house-list/house-list.module.js"></script>
+	<script src="view/house-list/house-list.component.js"></script>
+	<script type="text/javascript" src="asset/js/controllers/HousesFilter.js"></script>
+	<script type="text/javascript" src="asset/js/filter/housefilter.js"></script>
+	<script type="text/javascript" src="asset/js/controllers/UserController.js"></script>
 
   <script src="view/house-list/house-list.module.js"></script>
   <script src="view/house-list/house-list.component.js"></script>

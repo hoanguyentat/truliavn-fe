@@ -215,6 +215,7 @@ angular.module('houseDetail')
 			$scope.house = house;
 
 			$scope.house.description = $sce.trustAsHtml($scope.house.description);
+			$scope.house.priceConvert = convertPrice($scope.house.price);
 
 			var latitude = $scope.house.lat;
 			var longitude = $scope.house.lon;
@@ -829,7 +830,6 @@ angular.module('houseDetail')
 				/*----------END OF FIND THE SCHOOL NEAR THE HOUSE---------*/
 			});
 
-<<<<<<< HEAD
 			console.log(latitude);
 			console.log(longitude);
 
@@ -1021,195 +1021,6 @@ angular.module('houseDetail')
 		        $scope.seniorMarkers = coor_senior_marker;
 	    	} 
 	    	,true);
-=======
-				$scope.selected = $scope.utilities[0];
-
-				$scope.markers = [{
-			      	id: 0,
-			      	coords: {
-			        	latitude: latitude,
-			        	longitude: longitude
-			      	},
-			      	options: { draggable: true },
-			      	icon : '../../asset/icon/house.png'
-			    }];
-
-				$scope.map = {
-					center: {latitude: latitude, longitude: longitude }, 
-					zoom: 16, 
-					bounds : {},
-					neighborMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	// marker.showWindow =  true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            },
-			            click : function(marker, eventName, model, args){
-			            	// console.log(model.url);
-				          window.open(model.url, '_blank'); 
-				          $scope.$apply();
-				        }
-			        },
-
-			        hospitalMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-
-			        parkMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-
-			        restaurantMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-
-			        cafeMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-			       	busMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-			        salonMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-
-			        marketMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-
-
-					primaryMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-
-			        juniorMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        },
-
-			        seniorMarkersEvents : {
-			            mouseover: function (marker, eventName, model, args) {
-			              	model.options.labelContent = model.content;
-			              	model.show = true;
-			              	$scope.$apply();
-			            },
-			            mouseout: function (marker, eventName, model, args) {
-			               model.options.labelContent = ' ';
-			               model.show = false;
-			               $scope.$apply();
-			            }
-			        }
-				};
-
-			    $scope.options = {
-			    	scrollwheel: false
-			    };				    	
-
-			    $scope.$watchCollection(function(){
-			    	return $scope.map.bounds;
-			    }
-		    	,function(ov, nv) {
-		    		// if (!ov.southwest && nv.southwest) {
-			       	$scope.neighborMarkers = coor_neighbor_marker;
-			    	$scope.hospitalMarkers = coor_hospital_marker;
-			    	$scope.parkMarkers = coor_park_marker;
-			    	$scope.restaurantMarkers = coor_restaurant_marker;
-			    	$scope.cafeMarkers = coor_cafe_marker;
-			    	$scope.busMarkers = coor_bus_marker;
-			    	$scope.salonMarkers = coor_salon_marker;
-			    	$scope.marketMarkers = coor_market_marker;
-			    	$scope.primaryMarkers = coor_primary_marker;
-			        $scope.juniorMarkers = coor_junior_marker;
-			        $scope.seniorMarkers = coor_senior_marker;
-		    	} 
-		    	,true);
->>>>>>> c9b42a469e9afa314bf5e246c9f0948f09ffab35
 
 		});
 		}
