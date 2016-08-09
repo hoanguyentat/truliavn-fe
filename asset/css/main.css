@@ -1,12 +1,12 @@
 html {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    /*font-family: 'Source Sans Pro', sans-serif;*/
-    overflow: auto;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    /*background-color: #f5f6f7;*/
+	padding: 0;
+	margin: 0;
+	height: 100%;
+    font-style: 15px;
+	/*font-family: 'Source Sans Pro', sans-serif;*/
+	overflow: auto;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
 }
 *,
 *:before,
@@ -41,7 +41,7 @@ a.home-img{
     width: 100%;
 }
 .list-group-item{
-    font-size: 18px;
+	font-size: 15px;
 }
 
 .home{
@@ -77,12 +77,12 @@ a.home-img{
 
 /*-------------Deatail-form---------*/
 .detail-description{
-    color: #000;
-    font-size: 18px;
+	color: #000;
+	font-size: 15px;
 }
 
 .detail-article{
-    font-size: 20px;
+	font-size: 16px;
 }
 /*-------------Deatail-form---------*/
 
@@ -143,16 +143,15 @@ table.dataTable>tbody>tr.child span.dtr-title {
 }
 
 
-
 tr.houseInfo{
-    font-size: 18px;
+	font-size: 15px;
 }
 .house-detail{
     margin-top: 15px;
 }
 .ownerInfo{
-    font-size: 18px;
-    color: #091a2e;
+	font-size: 13px;
+	color: #091a2e;
 }
 .img-agent{
     margin-bottom: 15px;
@@ -201,22 +200,22 @@ md-slider{
 }
 
 .utilitySelect{
-    width: 100%;
-    font-size: 20px;
-    font-weight: bold;
-    padding : 10px;
-    border-radius: 5px;
-    border : solid 2px green;
+	width: 100%;
+	font-size: 15px;
+	font-weight: bold;
+	padding : 10px;
+	border-radius: 5px;
+	border : solid 2px green;
 }
 
 .marker_labels{
-    font-size: 17px;
-    font-weight: bold;
-    font-style: italic;
-    color: #00f;
-    border-radius: 10px;
-    padding : 10px;
-    margin: auto;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	color: #00f;
+	border-radius: 10px;
+	padding : 10px;
+	margin: auto;
     overflow: visible;
 }
 
@@ -245,6 +244,7 @@ label{
     display: inline;
 }
 .radius-form{
+	font-size: 13px;
 	font-weight: bold;
     padding-bottom: 10px;
     padding-top: 5px;
@@ -259,6 +259,10 @@ input[type='radio'].radius-radio{
 
 
 /*-------------ESTIMATE THE HOUSE------------*/
+
+.table-estimate{
+	font-size: 15px;
+}
 .panel-green{
     background: #19C662;
     color: #fff;
@@ -309,9 +313,10 @@ input[type='radio'].radius-radio{
     
 }
 .icon-heart-suggest{
-    position: absolute;
-    right: 10px;
-    top: 10px;
+    position: absolute; 
+    right: 10px; 
+    top: 10px; 
+    z-index: 1000;
 }
 
 ul.house-detail-info-suggest{
@@ -686,7 +691,14 @@ a.nav:hover{
 }
 
 /* --------------RESPONSIVE LAYOUT----------- */
-
+@media screen and (min-with: 993px, max-width : 1920px){
+    .home-image{
+        height: 300px;
+    }
+    .house-suggest{
+        height: 300px;
+    }
+}
 @media screen and (max-width : 992px){
     .home-image,
     .house-suggest{
@@ -708,7 +720,10 @@ a.nav:hover{
     }
     
     .table-estimate{
-        font-size: 14px;
+        font-size: 13px;
+    }
+    .radius-form{
+        font-size: 15px;
     }
     .carousel-inner > .item > .img-carousel, .img-unknown{
         height: 300px;
