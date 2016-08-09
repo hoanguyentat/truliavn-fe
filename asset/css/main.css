@@ -14,40 +14,45 @@ html {
   box-sizing: inherit;
 }
 body {
-  position: relative;
-  margin: 0;
-  padding-bottom: 6rem;
-  min-height: 100%;
-  font-family: 'Roboto', sans-serif;
+    /*height: 100%;*/
+    /*position: relative;*/
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f6f7;
   /*font-family: "Helvetica Neue", Arial, sans-serif;*/
-  background-color: #f5f6f7;
+
+}
+body{
+    font-size: 15px;
+    line-height: 1.5;
 }
 a.home-img{
-	height: 200px;
-	width: 400px;
+    height: 200px;
+    width: 400px;
 }
 /*body{
-	background: #f5f6f7;
+    background: #f5f6f7;
 }*/
 
 
 .btn-contact{
-	width: 100%;
+    width: 100%;
 }
 .list-group-item{
 	font-size: 15px;
 }
 
 .home{
-	padding-top: 30px;
+    padding-top: 30px;
 }
 
 .sidebar-left{
-	background: url('http://cdn.optimizely.com/img/698392373/f87390e7df0a42ed956e890441c5a652.jpg') no-repeat center center;
+    background: url('http://cdn.optimizely.com/img/698392373/f87390e7df0a42ed956e890441c5a652.jpg') no-repeat center center;
 }
  /*---------------Scrollbar-------------------*/
 .sidebar-right{
-	/*margin-left: 20px;*/
     padding-top: 50px;
     overflow-y: scroll;
     /*overflow: hidden;*/
@@ -57,16 +62,16 @@ a.home-img{
 
 /*----------FILTER & SELECT------------*/
 .search{
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
-  	height: 768px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 768px;
 }
 .filter-houses{
-	margin-top: 20px;
+    margin-top: 20px;
  }
 .select-filter{
-	margin-top: 10px;
+    margin-top: 10px;
 }
 /*----------FILTER & SELECT------------*/
 
@@ -82,37 +87,37 @@ a.home-img{
 /*-------------Deatail-form---------*/
 
 .info{
-	/*background: rgba(0, 0, 0, 0.3);*/
-	color: green;
+    /*background: rgba(0, 0, 0, 0.3);*/
+    color: green;
 }
 img.seller{
-	width: 60px;
-	height: 60px;
+    width: 60px;
+    height: 60px;
 
 }
 ul.seller{
-	width: 120px;
+    width: 120px;
 }
 img.seller,
 ul.seller{
-	float: left;
+    float: left;
 }
 /*-----------HOUSES-LIST-----------*/
 
 .houses{
-	padding-top: 30px;
+    padding-top: 30px;
 }
 
 .sortHouse{
-	margin-left: 40%
+    margin-left: 40%
 }
 
 strong{
-	color: #0095da;
+    color: #0095da;
 }
 
 .thumbnail{
-	border-radius: 0px;
+    border-radius: 0px;
 }
 
 /*-----------HOUSES-LIST-----------*/
@@ -123,17 +128,18 @@ strong{
     color:#F00;
     font-size:14px;
 }
-.neighbor{
-	color: green;
-	font-size: 13px;
-}
+
 
 #exam_wrapper{
+    padding-top: 30px;
     color: #2b2b2b;
-    font-size: 16px;
+    font-size: 13px;
 }
 table.dataTable>tbody>tr.child span.dtr-title {
     min-width: 85px !important;
+}
+.dtr-data{
+    display: inherit;
 }
 
 
@@ -141,38 +147,39 @@ tr.houseInfo{
 	font-size: 15px;
 }
 .house-detail{
-	margin-top: 15px;
+    margin-top: 15px;
 }
 .ownerInfo{
 	font-size: 13px;
 	color: #091a2e;
 }
 .img-agent{
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 /* ---------UTITLITIES NEAR THE HOUSE--------- */
 
 .school_name,
 .distance{
-	color: green;
-	font-weight: bold;
+    color: green;
+    font-weight: bold;
 }
 .distance{
-	padding-left: 10px;
-} 	
+    padding-left: 10px;
+}   
 .span-extend {
-	float: right;
-	padding-left: 25px;
-	cursor: pointer;
+    float: right;
+    padding-left: 25px;
+    cursor: pointer;
 }
 
 md-slider{
     display: inline-block;
     padding-left: 10px;
-    height: 30px;
+    height: 28px;
     width: 300px;
 }
+
 
 .map-neighbor > .angular-google-map > .angular-google-map-container{
     height: 396px;
@@ -188,8 +195,8 @@ md-slider{
     height: 500px;
 } 
 .map-marker{
-	padding-top: 25px;
-	padding-bottom : 25px; 
+    padding-top: 25px;
+    padding-bottom : 25px; 
 }
 
 .utilitySelect{
@@ -221,10 +228,10 @@ md-slider{
 }
 .table-map,
 .p-map{
-	overflow: initial;
-	color: #fff;
-	padding: 5px 10px;
-	margin-bottom : 0px;
+    overflow: initial;
+    color: #fff;
+    padding: 5px 10px;
+    margin-bottom : 0px;
 }
 
 .map-detail{
@@ -232,8 +239,9 @@ md-slider{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
 }
 
+
 label{
-	display: inline;
+    display: inline;
 }
 .radius-form{
 	font-size: 13px;
@@ -251,15 +259,16 @@ input[type='radio'].radius-radio{
 
 
 /*-------------ESTIMATE THE HOUSE------------*/
+
 .table-estimate{
 	font-size: 15px;
 }
 .panel-green{
-	background: #19C662;
+    background: #19C662;
     color: #fff;
 }
 .panel{
-	border-color: #bcd4d4;
+    border-color: #bcd4d4;
 }
 .table>tbody>tr>th {
         vertical-align: middle;
@@ -267,13 +276,13 @@ input[type='radio'].radius-radio{
 .a-estimate:hover,
 .a-estimate,
 .span-percent{
-	text-decoration: none;
-	color: green;
+    text-decoration: none;
+    color: green;
 }
 
 .home-image{
     width:100%; 
-    height: 200px; 
+    height: 180px; 
 }
 .row-suggest{
     padding-left : 15px !important;
@@ -292,7 +301,7 @@ input[type='radio'].radius-radio{
 .house-suggest { 
    position: relative; 
    width: 100%; /* for IE 6 */
-   height: 200px;  
+   height: 180px;  
 }
 
 .house-detail-suggest{
@@ -300,18 +309,31 @@ input[type='radio'].radius-radio{
     bottom: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.45); 
+    background: rgba(0, 0, 0, 0.25); 
     
 }
-
-.house-detail-info-suggest{
-    position: absolute;
-    bottom: 0;
-    left: 25px;
+.icon-heart-suggest{
+    position: absolute; 
+    right: 10px; 
+    top: 10px; 
+    z-index: 1000;
 }
 
-.house-detail-info-suggest > h4, p.h6{
+ul.house-detail-info-suggest{
+    position: absolute;
+    bottom: 0;
+    padding-left: 16px;
+    list-style: none;
+}
+
+.house-detail-info-suggest > li{
     color: #fff;
+}
+.li-price-suggest{
+    font-size: 16px;
+}
+.li-child-suggest{
+    font-size: 12px;
 }
 .price-detail-estimate{
     background: #fbfbfb;
@@ -371,29 +393,33 @@ input[type='radio'].radius-radio{
 /*-------------FORM-CONTACT------------*/
 
 .house-for{
-	padding-top: 60px;
+    padding-top: 60px;
     padding-right: 0px;
     padding-left: 0px;
 }
 
 
-.carousel-inner > .item > .img-carousel,
+.carousel-inner > .item > .img-carousel{
+    height: 400px;
+    width: auto;
+    margin: 0 auto;
+}
 .img-unknown{
 	height: 400px;
-	width: auto;
+	width: 100%;
     margin: 0 auto;
 }
 
 /*------------------NAVBAR---------------------*/
 .navbar-default{
-	background-color: #19C662;
+    background-color: #19C662;
     /*font-size: 17px;*/
 }
 .navbar-default .navbar-nav>li>a {
-	color: #fff;
+    color: #fff;
 }
 .navbar-default .navbar-nav>li>a:hover{
-	background-color: #d3fdaf;
+    background-color: #d3fdaf;
 }
 
 .navbar-default .navbar-brand {
@@ -427,7 +453,7 @@ input[type='radio'].radius-radio{
 }
 
 .dropdown-content a {
-	border-radius: 0px 4px 4px 0px;
+    border-radius: 0px 4px 4px 0px;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -435,16 +461,16 @@ input[type='radio'].radius-radio{
 }
 
 .dropdown-content a:hover {
-	background-color:  #19C662;
+    background-color:  #19C662;
 }
 
 a.nav{
-	text-decoration: none;
-	color: #fff;
+    text-decoration: none;
+    color: #fff;
 }
 
 a.nav:hover{
-	color: #000;
+    color: #000;
 }
 
 .dropdown:hover .dropdown-content {
@@ -462,11 +488,11 @@ a.nav:hover{
 
 /*------------------FOOTER----------------------*/
 .footer{
-	position: absolute;
-	right: 0;
-	/*bottom: 0;*/
-	left: 0;
-	text-align: center;
+    position: absolute;
+    right: 0;
+    /*bottom: 0;*/
+    left: 0;
+    text-align: center;
 }
 /*------------------FOOTER----------------------*/
 
@@ -661,7 +687,7 @@ a.nav:hover{
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(197,255,233,0.4); 
+    background: rgba(197,255,233,0.4); 
 }
 
 /* --------------RESPONSIVE LAYOUT----------- */
@@ -674,23 +700,14 @@ a.nav:hover{
     }
 }
 @media screen and (max-width : 992px){
-    .home-image{
-        height: 150px;
-    }
+    .home-image,
     .house-suggest{
-        height: 150px;
+        width:100%; 
+        height: 150px; 
     }
+    
     h4.title-suggest{
         font-size: 14px;
-    }
-    .radius-form{
-        font-size: 16px;
-    }
-    .table-estimate{
-        font-size: 16px;
-    }
-    p.h6{
-        font-size: 11px;
     }
 }
 
@@ -698,6 +715,10 @@ a.nav:hover{
     .map-utility > .angular-google-map > .angular-google-map-container{
         height: 300px;
     }
+    .map-neighbor > .angular-google-map > .angular-google-map-container{
+        height: 300px;
+    }
+    
     .table-estimate{
         font-size: 13px;
     }
@@ -718,28 +739,30 @@ a.nav:hover{
 
 /*  480px hoặc nhỏ hơn */
 @media screen and (max-width: 480px) {
-    .home-image{
+    .li-price-suggest{
+        font-size: 12px;
+    }
+    .li-child-suggest{
+        font-size: 8px;
+    }
+    .home-image,
+    .house-suggest{
         width:100%; 
-        height: 100px; 
+        height: 130px; 
     }
     .house-detail-info-suggest {
         position: absolute;
         bottom: 0;
-        left: 10px;
+        padding-left: 5px;
     }
-    .house-suggest { 
-       position: relative; 
-       width: 100%; /* for IE 6 */
-       height: 100px;  
+    md-slider{
+        width: 200px;
     }
     .carousel-inner > .item > .img-carousel, .img-unknown{
         height: 200px;
         width: 100%;
     }
-     .angular-google-map-container {
-        width: 100%;
-        height: 200px;
-    }
+    
     .search{
         display: flex;
         justify-content: center;
