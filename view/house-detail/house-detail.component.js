@@ -351,7 +351,7 @@ angular.module('houseDetail')
 						}
 						coor_neighbor_marker.push(ret);
 					}
-					console.log(coor_neighbor_marker);
+					// console.log(coor_neighbor_marker);
 
 				}
 			)
@@ -830,17 +830,17 @@ angular.module('houseDetail')
 				/*----------END OF FIND THE SCHOOL NEAR THE HOUSE---------*/
 			});
 
-			console.log(latitude);
-			console.log(longitude);
+			// console.log(latitude);
+			// console.log(longitude);
 
 
 			$scope.markers = [{
 		      	id: 0,
 		      	center: {latitude: 21.0245, longitude: 105.856 },
-		      	/*coords: {
+		      	coords: {
 		        	latitude: latitude,
 		        	longitude: longitude
-		      	},*/
+		      	},
 		      	zoom:15,
 		      	options: { draggable: true },
 		      	icon : '../../asset/icon/house.png'

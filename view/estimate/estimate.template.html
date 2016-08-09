@@ -105,9 +105,9 @@
 							<div class="house-suggest">
 								<img ng-if="!new.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="new.images[0]" ng-src="http://ngocdon.me:3000/{{new.images[0]}}" alt="{{new.address}}" class="home-image">
-								<div ng-controller="LikeCtrl" ng-click="likeClick($event, house.id, $parent.house.liked)" class="icon-heart-suggest">
-									<span ng-if="!$parent.house.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
-									<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
+								<div ng-controller="LikeCtrl" ng-click="likeClick($event, new.id, $parent.new.liked)" class="icon-heart-suggest">
+									<span ng-if="!$parent.new.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
+									<span ng-if="$parent.new.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
 								</div>
 								<div class="house-detail-suggest">
 									<ul class="house-detail-info-suggest">
@@ -127,9 +127,9 @@
 							<div class="house-suggest">
 								<img ng-if="!bed.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="bed.images[0]" ng-src="http://ngocdon.me:3000/{{bed.images[0]}}" alt="{{bed.address}}" class="home-image">
-								<div ng-controller="LikeCtrl" ng-click="likeClick($event, house.id, $parent.house.liked)" class="icon-heart-suggest">
-									<span ng-if="!$parent.house.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
-									<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
+								<div ng-controller="LikeCtrl" ng-click="likeClick($event, bed.id, $parent.bed.liked)" class="icon-heart-suggest">
+									<span ng-if="!$parent.bed.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
+									<span ng-if="$parent.bed.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
 								</div>
 								<div class="house-detail-suggest">
 									<ul class="house-detail-info-suggest">
@@ -152,9 +152,9 @@
 							<div class="house-suggest">
 								<img ng-if="!max.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="max.images[0]" ng-src="http://ngocdon.me:3000/{{max.images[0]}}" alt="{{max.address}}" class="home-image">
-								<div ng-controller="LikeCtrl" ng-click="likeClick($event, house.id, $parent.house.liked)" class="icon-heart-suggest">
-									<span ng-if="!$parent.house.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
-									<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
+								<div ng-controller="LikeCtrl" ng-click="likeClick($event, max.id, $parent.max.liked)" class="icon-heart-suggest">
+									<span ng-if="!$parent.max.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
+									<span ng-if="$parent.max.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
 								</div>
 								<div class="house-detail-suggest">
 									<ul class="house-detail-info-suggest">
@@ -174,9 +174,9 @@
 							<div class="house-suggest">
 								<img ng-if="!floor.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="floor.images[0]" ng-src="http://ngocdon.me:3000/{{floor.images[0]}}" alt="{{floor.address}}" class="home-image">
-								<div ng-controller="LikeCtrl" ng-click="likeClick($event, house.id, $parent.house.liked)" class="icon-heart-suggest">
-									<span ng-if="!$parent.house.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
-									<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
+								<div ng-controller="LikeCtrl" ng-click="likeClick($event, floor.id, $parent.floor.liked)" class="icon-heart-suggest">
+									<span ng-if="!$parent.floor.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
+									<span ng-if="$parent.floor.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
 								</div>
 								<div class="house-detail-suggest">
 									<ul class="house-detail-info-suggest">

@@ -409,6 +409,11 @@ ul.house-detail-info-suggest{
 	width: 100%;
     margin: 0 auto;
 }
+.number-view{
+    float: right;
+    font-size: 15px;
+    color: #2f89e6;
+}
 
 /*------------------NAVBAR---------------------*/
 .navbar-default{

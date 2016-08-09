@@ -4,9 +4,9 @@ app.controller('LikeCtrl', ['$scope', 'AuthService','$http','$location', 'API', 
 	$scope.likeClick = function(event, id, status){
 		event.preventDefault();
 		$scope.likeStatus = !status;
-		console.log(id);	
+		// console.log(id);	
 		$scope.likeForm.houseId = id;
-		console.log(id);
+		// console.log(id);
 		$scope.likeForm.token = AuthService.getUserToken();
 		$scope.likeForm.email = AuthService.getUserEmail();
 		if ($scope.likeStatus) {
