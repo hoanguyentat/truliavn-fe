@@ -25,7 +25,7 @@ angular.module('houseDetail')
 })
 .component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams, AuthService, API, $sce, $cookies){
-		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
+		var urlHouseDetail = API.getHouseDetail($routeParams.houseId) + '&userId=' + $cookies.get('user.id');
 		var request = {};
 
 		$scope.select = "myHouse";
@@ -148,10 +148,10 @@ angular.module('houseDetail')
 												+'&city='+ house.city
 												+ '&district=' + house.district
 												+ '&specific=1';
-				var urlNewest = url + '&offset=0&count=8';
-				var urlBedRooms3 = url + '&bedrooms=3&count=6';
-				var urlMaxPrice = url + '&count=8&maxPrice='+ house.price;
-				var urlFloors4 = url + '&count=6&floors=4';
+				var urlNewest = url + '&offset=0&count=8&userId=' + $cookies.get('user.id');
+				var urlBedRooms3 = url + '&bedrooms=3&count=6&userId=' + $cookies.get('user.id');
+				var urlMaxPrice = url + '&count=8&maxPrice='+ house.price + '&userId=' + $cookies.get('user.id');
+				var urlFloors4 = url + '&count=6&floors=4&userId=' + $cookies.get('user.id');
 				// console.log(urlMaxPrice);
 				$scope.priceSuggest = convertPrice($cookies.get('price'));
 
@@ -351,8 +351,6 @@ angular.module('houseDetail')
 						}
 						coor_neighbor_marker.push(ret);
 					}
-					// console.log(coor_neighbor_marker);
-
 				}
 			)
 
@@ -829,10 +827,6 @@ angular.module('houseDetail')
 				}
 				/*----------END OF FIND THE SCHOOL NEAR THE HOUSE---------*/
 			});
-
-			// console.log(latitude);
-			// console.log(longitude);
-
 
 			$scope.markers = [{
 		      	id: 0,

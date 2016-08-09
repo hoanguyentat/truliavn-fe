@@ -1,5 +1,6 @@
 app.controller('SearchContent', ['$scope', '$http', 'AuthService', '$rootScope', '$location', '$cookies', function($scope, $http, AuthService, $rootScope, $location, $cookies){
 	// var searchContent = $scope.SearchForm.searchContent;
+	// $scope.SearchForm.houseFor = "rent";
 	$scope.title = "Tìm kiếm nhà đất";
 	$scope.search = function(){
 		$cookies.remove('search.housefor');

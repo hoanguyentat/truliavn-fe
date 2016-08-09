@@ -318,6 +318,9 @@ input[type='radio'].radius-radio{
     top: 10px; 
     z-index: 1000;
 }
+.icon-heart-house-detail{
+    float: right;
+}
 
 ul.house-detail-info-suggest{
     position: absolute;
@@ -695,6 +698,20 @@ a.nav:hover{
     background: rgba(197,255,233,0.4); 
 }
 
+/* --------------crope-images----------- */
+div.center-cropped {
+    width: 400px;
+    height: 200px;
+    overflow:hidden;
+}
+div.center-cropped img {
+    height: 100%;
+    min-width: 100%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}
+/* --------------crope-images----------- */
 /* --------------RESPONSIVE LAYOUT----------- */
 @media screen and (min-with: 993px, max-width : 1920px){
     .home-image{
