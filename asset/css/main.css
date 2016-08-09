@@ -17,7 +17,7 @@ body {
     /*height: 100%;*/
     /*position: relative;*/
     margin: 0;
-    padding-bottom: 6rem;
+    padding-bottom: 4rem;
     min-height: 100%;
     font-family: 'Roboto', sans-serif;
     background-color: #f5f6f7;
@@ -692,8 +692,8 @@ a.nav:hover{
 
 /* --------------crope-images----------- */
 div.center-cropped {
-    width: 400px;
-    height: 200px;
+    width: 180px;
+    height:180px;
     overflow:hidden;
 }
 div.center-cropped img {
@@ -756,6 +756,20 @@ div.center-cropped img {
     .li-price-suggest{
         font-size: 12px;
     }
+    /* --------------crope-images----------- */
+    div.center-cropped {
+        width: 400px;
+        height:250px;
+        overflow:hidden;
+    }
+    div.center-cropped img {
+        height: 100%;
+        min-width: 100%;
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+    }
+    /* --------------crope-images----------- */
     .li-child-suggest{
         font-size: 8px;
     }

@@ -6,8 +6,8 @@
 					<h1 style="color: white;">Bất động sản Việt Nam</h1>
 				   	<div class="row">
 		       			<div class="col-sm-3 col-md-3" style="padding-bottom: 4px;">
-		       				<select name="searchFor" class="form-control" required ng-model="SearchForm.houseFor">
-		       					<option value="">Loại nhà đất<option>
+		       				<select name="" class="form-control" required ng-model="SearchForm.houseFor">
+		       					<option value="">Loại nhà đất</option>
 		       					<option value="rent">Cho thuê</option>
 		       					<option value="sell">Bán</option>
 		       				</select>
@@ -37,7 +37,7 @@
 										<img ng-if="house.images[0]" ng-src="http://ngocdon.me:3000/{{house.images[0]}}" alt="{{house.address}}" class="home-image">									
 									<div class="house-detail-suggest">
 										<ul class="house-detail-info-suggest">
-											<li class="li-price-suggest"><h4>{{house.price}} triệu VNĐ<h4></li>
+											<li class="li-price-suggest"><h4>{{house.price}} VNĐ<h4></li>
 											<li class="li-child-suggest">{{house.noOfFloors}} tầng, {{house.noOfBedrooms}} phòng ngủ</li>
 											<li class="li-child-suggest">{{house.address}}</li>
 											<li class="li-child-suggest">{{address}}</li>
@@ -65,7 +65,7 @@
 											<span ng-if="$parent.DongDa.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
 										</div>
 									<ul class="house-detail-info-suggest">
-										<li class="li-price-suggest"><h4>{{DongDa.price}} triệu VNĐ<h4></li>
+										<li class="li-price-suggest"><h4>{{DongDa.price}} VNĐ<h4></li>
 										<li class="li-child-suggest">{{DongDa.noOfFloors}} tầng, {{DongDa.noOfBedrooms}} phòng ngủ</li>
 										<li class="li-child-suggest">{{DongDa.address}}</li>
 										<li class="li-child-suggest">{{address}}</li>
@@ -88,7 +88,7 @@
 											<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
 										</div>
 										<ul class="house-detail-info-suggest">
-											<li class="li-price-suggest"><h4>{{house.price}} triệu VNĐ<h4></li>
+											<li class="li-price-suggest"><h4>{{house.price}} VNĐ<h4></li>
 											<li class="li-child-suggest">{{house.noOfFloors}} tầng, {{house.noOfBedrooms}} phòng ngủ</li>
 											<li class="li-child-suggest">{{house.address}}</li>
 											<li class="li-child-suggest">{{address}}</li>
@@ -111,7 +111,7 @@
 											<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
 										</div>
 										<ul class="house-detail-info-suggest">
-											<li class="li-price-suggest"><h4>{{house.price}} triệu VNĐ<h4></li>
+											<li class="li-price-suggest"><h4>{{house.price}} VNĐ<h4></li>
 											<li class="li-child-suggest">{{house.noOfFloors}} tầng, {{house.noOfBedrooms}} phòng ngủ</li>
 											<li class="li-child-suggest">{{house.address}}</li>
 											<li class="li-child-suggest">{{address}}</li>

@@ -5,9 +5,9 @@ app.controller('LikeCtrl', ['$scope', 'AuthService','$http','$location', 'API', 
 		console.log(id, status);
 		event.preventDefault();
 		$scope.likeStatus = !status;
-		console.log(id);	
+		// console.log(id);	
 		$scope.likeForm.houseId = id;
-		console.log(id);
+		// console.log(id);
 		$scope.likeForm.token = AuthService.getUserToken();
 		$scope.likeForm.email = AuthService.getUserEmail();
 		if ($scope.likeStatus) {
@@ -16,7 +16,7 @@ app.controller('LikeCtrl', ['$scope', 'AuthService','$http','$location', 'API', 
 		else{
 			$scope.likeForm.action = "dislike";
 		}
-		console.log($scope.likeForm);
+		// console.log($scope.likeForm);
 		$http.post(AuthService.hostName + '/api/like', $scope.likeForm).then(function(res){
 			console.log("thanh cong");
 			$route.reload();
