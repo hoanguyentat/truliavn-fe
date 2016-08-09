@@ -152,7 +152,7 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 	.otherwise('/');
 }]);
 
-app.run(function($rootScope, $location, $route, AuthService){
+app.run(function($rootScope, $location, $route, AuthService, $cookies){
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
 		//user must login to access the route
 

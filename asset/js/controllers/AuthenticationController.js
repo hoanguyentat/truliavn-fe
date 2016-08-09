@@ -74,7 +74,7 @@ app.controller('UpdateController', ['$scope', '$location', '$http','$cookies', '
 	}
 }]);
 app.controller('LogoutControler', ['$scope', '$location', 'AuthService', '$route','$cookies', function($scope, $location, AuthService, $route, $cookies){
-	$scope.userId = $cookies.get('user.id');
+	// $scope.userId = $cookies.get('user.id');
 	$scope.logout = function(){
 		AuthService.logout()
 		.then(function(){

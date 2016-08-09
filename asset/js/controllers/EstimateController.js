@@ -131,10 +131,10 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 										+ '&district=' + $cookies.get('districtID')
 										+ '&specific=1';
 		}
-		var urlNewest = url + '&offset=0&count=8';
-		var urlBedRooms3 = url + '&bedrooms=3&count=6';
-		var urlMaxPrice = url + '&count=8&maxPrice='+ $cookies.get('price');
-		var urlFloors4 = url + '&count=6&floors=4';
+		var urlNewest = url + '&offset=0&count=8&userId=' + $cookies.get('user.id');
+		var urlBedRooms3 = url + '&bedrooms=3&count=6&userId=' + $cookies.get('user.id');
+		var urlMaxPrice = url + '&count=8&maxPrice='+ $cookies.get('price') + '&userId=' + $cookies.get('user.id');
+		var urlFloors4 = url + '&count=6&floors=4&userId=' + $cookies.get('user.id');
 
 		$scope.priceSuggest = convertPrice($cookies.get('price'));
 

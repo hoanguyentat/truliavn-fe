@@ -44,8 +44,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		} else{
 			return $http.get(host +'/api/user/' + userId)
 			.success(function(data){
-
-				if (data.user.status) {
+				if (data.user.status && $cookies.get('user.loggedInAt') == data.user.loggedIn_at) {
 					user = true;
 				} else {
 					user = false;
@@ -112,6 +111,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 			if (status == 200 && data.status =="success") {
 
 				//put userId to cookies
+				$cookies.put('user.loggedInAt', data.user.loggedIn_at);
 				$cookies.put('userName', data.user.username);
 				$cookies.put('user.id', data.user.id);
 				$cookies.put('user.email', data.user.email);
