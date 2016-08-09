@@ -318,6 +318,9 @@ input[type='radio'].radius-radio{
     top: 10px; 
     z-index: 1000;
 }
+.icon-heart-house-detail{
+    float: right;
+}
 
 ul.house-detail-info-suggest{
     position: absolute;
@@ -408,6 +411,11 @@ ul.house-detail-info-suggest{
 	height: 400px;
 	width: 100%;
     margin: 0 auto;
+}
+.number-view{
+    float: right;
+    font-size: 15px;
+    color: #2f89e6;
 }
 
 /*------------------NAVBAR---------------------*/

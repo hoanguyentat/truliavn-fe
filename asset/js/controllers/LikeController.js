@@ -2,7 +2,7 @@ app.controller('LikeCtrl', ['$scope', 'AuthService','$http','$location', 'API', 
 
 	$scope.likeForm = {};
 	$scope.likeClick = function(event, id, status){
-		console.log(id, status);
+		// console.log(id, status);
 		event.preventDefault();
 		$scope.likeStatus = !status;
 		// console.log(id);	
@@ -18,10 +18,10 @@ app.controller('LikeCtrl', ['$scope', 'AuthService','$http','$location', 'API', 
 		}
 		// console.log($scope.likeForm);
 		$http.post(AuthService.hostName + '/api/like', $scope.likeForm).then(function(res){
-			console.log("thanh cong");
+			// console.log("thanh cong");
 			$route.reload();
 		}, function(res){
-			console.log(res);
+			// console.log(res);
 			$location.path("/login");
 		});
 	};
