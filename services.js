@@ -47,6 +47,19 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 				if (data.user.status && $cookies.get('user.loggedInAt') == data.user.loggedIn_at) {
 					user = true;
 				} else {
+					$http.post(host +'/api/logout', {email: $cookies.get('user.email'), token: $cookies.get('user.token')})
+					.success(function(data){
+						user = false;
+						$cookies.remove('user.id');
+						$cookies.remove('user.token');
+						$cookies.remove('user.email');
+					})
+					.error(function(data){
+						user = false;
+						$cookies.remove('user.id');
+						$cookies.remove('user.token');
+						$cookies.remove('user.email');
+					});
 					user = false;
 				}
 			})

@@ -546,40 +546,34 @@ angular.module('houseDetail')
 		    		}
 		  
 		    		$http.post(API.getDistanceNearBy(), {origin : position, destination : coor_bus.substring(1)})
-						.success(function(data, status){
-							if(status == 200 && data.status == 'success'){
-								var res = data.results.rows[0];
-								if(res){
-									for(var i in res.elements){
-										bus[i].distance = res.elements[i].distance.text;
-									}
-									
+					.success(function(data, status){
+						if(status == 200 && data.status == 'success'){
+							var res = data.results.rows[0];
+							if(res){
+								for(var i in res.elements){
+									bus[i].distance = res.elements[i].distance.text;
 								}
-
-								for(var i = 0; i < bus.length; i++){
-									var lat = bus[i].geometry.location.lat;
-									var lon = bus[i].geometry.location.lng;
-									var content = '<div class="div-map"><p class="p-map">'+ bus[i].name + '</p>'
-												+ '<p class="p-map">'+ bus[i].vicinity + '</p></div>';
-									var ret = {
-										id : parseInt(i),
-										latitude : lat,
-										longitude : lon,
-										content : content,
-										options : {labelClass : 'marker_labels', labelContent : ''},
-										icon : "../../asset/icon/bus.png"
-									}
-									coor_bus_marker.push(ret);
-								}
-								$scope.utilities.push({title:'Bến xe bus', type : 'bus', quantity : bus.length});
-
-
+								
 							}
-						})
 
-
-
-
+							for(var i = 0; i < bus.length; i++){
+								var lat = bus[i].geometry.location.lat;
+								var lon = bus[i].geometry.location.lng;
+								var content = '<div class="div-map"><p class="p-map">'+ bus[i].name + '</p>'
+											+ '<p class="p-map">'+ bus[i].vicinity + '</p></div>';
+								var ret = {
+									id : parseInt(i),
+									latitude : lat,
+									longitude : lon,
+									content : content,
+									options : {labelClass : 'marker_labels', labelContent : ''},
+									icon : "../../asset/icon/bus.png"
+								}
+								coor_bus_marker.push(ret);
+							}
+							$scope.utilities.push({title:'Bến xe bus', type : 'bus', quantity : bus.length});
+						}
+					})
 		    	}
 		    });
 		    /*----------FIND BUS NEAR THE HOUSE------------*/
@@ -814,7 +808,7 @@ angular.module('houseDetail')
 								seniors.down = "seniorDown";
 								// console.log(seniors);
 							}
-						})
+						});
 
 					school_list.push(primaries);
 					school_list.push(juniors);
@@ -1017,8 +1011,7 @@ angular.module('houseDetail')
 	    	,true);
 
 		});
-		}
-	
+		}	
 	},
 	templateUrl: 'view/house-detail/house-detail.template.html'
 });	

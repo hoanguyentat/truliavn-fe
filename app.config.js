@@ -154,8 +154,8 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 
 app.run(function($rootScope, $location, $route, AuthService, $cookies){
 	$rootScope.$on('$routeChangeStart', function(event, next, current){
-		//user must login to access the route
 
+		//user must login to access the route
 		AuthService.getUserStatus()
 		.then(function success(){
 				$rootScope.userStatus = AuthService.isLoggedIn();
