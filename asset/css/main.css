@@ -2,6 +2,7 @@ html {
 	padding: 0;
 	margin: 0;
 	height: 100%;
+    font-style: 15px;
 	/*font-family: 'Source Sans Pro', sans-serif;*/
 	overflow: auto;
 	box-sizing: border-box;
@@ -34,7 +35,7 @@ a.home-img{
 	width: 100%;
 }
 .list-group-item{
-	font-size: 18px;
+	font-size: 15px;
 }
 
 .home{
@@ -72,11 +73,11 @@ a.home-img{
 /*-------------Deatail-form---------*/
 .detail-description{
 	color: #000;
-	font-size: 18px;
+	font-size: 15px;
 }
 
 .detail-article{
-	font-size: 20px;
+	font-size: 16px;
 }
 /*-------------Deatail-form---------*/
 
@@ -136,24 +137,14 @@ table.dataTable>tbody>tr.child span.dtr-title {
 }
 
 
-/* tr.column_name{
-    font-weight: bold;
-    font-size: 18px;
-}
-tr.header{
-    font-weight: bold;
-    font-size: 25px;
-    color: gray;
-} */
-
 tr.houseInfo{
-	font-size: 18px;
+	font-size: 15px;
 }
 .house-detail{
 	margin-top: 15px;
 }
 .ownerInfo{
-	font-size: 18px;
+	font-size: 13px;
 	color: #091a2e;
 }
 .img-agent{
@@ -203,7 +194,7 @@ md-slider{
 
 .utilitySelect{
 	width: 100%;
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: bold;
 	padding : 10px;
 	border-radius: 5px;
@@ -211,7 +202,7 @@ md-slider{
 }
 
 .marker_labels{
-	font-size: 17px;
+	font-size: 13px;
 	font-weight: bold;
 	font-style: italic;
 	color: #00f;
@@ -245,7 +236,7 @@ label{
 	display: inline;
 }
 .radius-form{
-	font-size: 16px;
+	font-size: 13px;
 	font-weight: bold;
     padding-bottom: 10px;
     padding-top: 5px;
@@ -261,7 +252,7 @@ input[type='radio'].radius-radio{
 
 /*-------------ESTIMATE THE HOUSE------------*/
 .table-estimate{
-	font-size: 18px;
+	font-size: 15px;
 }
 .panel-green{
 	background: #19C662;
@@ -674,7 +665,14 @@ a.nav:hover{
 }
 
 /* --------------RESPONSIVE LAYOUT----------- */
-
+@media screen and (min-with: 993px, max-width : 1920px){
+    .home-image{
+        height: 300px;
+    }
+    .house-suggest{
+        height: 300px;
+    }
+}
 @media screen and (max-width : 992px){
     .home-image{
         height: 150px;
@@ -701,10 +699,10 @@ a.nav:hover{
         height: 300px;
     }
     .table-estimate{
-        font-size: 14px;
+        font-size: 13px;
     }
     .radius-form{
-        font-size: 18px;
+        font-size: 15px;
     }
     .carousel-inner > .item > .img-carousel, .img-unknown{
         height: 300px;
