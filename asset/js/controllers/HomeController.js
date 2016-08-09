@@ -20,7 +20,7 @@ app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API','$cooki
 
 	$http.get(urlHouseHoaiDuc).then(function success(response){
 		$scope.HoaiDuc = response.data.houses;
-		// console.dir($scope.newPost[0]);
+		console.dir($scope.HoaiDuc);
 		}, function error(response){
 			console.log(response);
 	});

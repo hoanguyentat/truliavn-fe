@@ -321,7 +321,7 @@ app.factory('API', ['AuthService',function(AuthService){
 	}
 
 	function getHousesIn(place, id){
-		return AuthService.hostName + '/api/houses' + '?' + place + '=' + id;
+		return AuthService.hostName + '/api/houses' + '?' + place + '=' + id + "&raw=1&specific=1";
 	}
 
 	function getUserPost(id){
