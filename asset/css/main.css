@@ -6,7 +6,7 @@ html {
     overflow: auto;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    background-color: #f5f6f7;
+    /*background-color: #f5f6f7;*/
 }
 *,
 *:before,
@@ -14,14 +14,19 @@ html {
   box-sizing: inherit;
 }
 body {
-  position: relative;
-  margin: 0;
-  padding-bottom: 6rem;
-  min-height: 100%;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f5f6f7;
+    /*height: 100%;*/
+    /*position: relative;*/
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f6f7;
   /*font-family: "Helvetica Neue", Arial, sans-serif;*/
 
+}
+body{
+    font-size: 15px;
+    line-height: 1.5;
 }
 a.home-img{
     height: 200px;
@@ -48,7 +53,6 @@ a.home-img{
 }
  /*---------------Scrollbar-------------------*/
 .sidebar-right{
-    /*margin-left: 20px;*/
     padding-top: 50px;
     overflow-y: scroll;
     /*overflow: hidden;*/
@@ -124,30 +128,21 @@ strong{
     color:#F00;
     font-size:14px;
 }
-.neighbor{
-    color: green;
-    font-size: 13px;
-}
+
 
 #exam_wrapper{
-    margin-top: 25px; 
+    padding-top: 30px;
     color: #2b2b2b;
-    font-size: 16px;
+    font-size: 13px;
 }
 table.dataTable>tbody>tr.child span.dtr-title {
     min-width: 85px !important;
 }
-
-
-/* tr.column_name{
-    font-weight: bold;
-    font-size: 18px;
+.dtr-data{
+    display: inherit;
 }
-tr.header{
-    font-weight: bold;
-    font-size: 25px;
-    color: gray;
-} */
+
+
 
 tr.houseInfo{
     font-size: 18px;
@@ -182,9 +177,10 @@ tr.houseInfo{
 md-slider{
     display: inline-block;
     padding-left: 10px;
-    height: 30px;
+    height: 28px;
     width: 300px;
 }
+
 
 .map-neighbor > .angular-google-map > .angular-google-map-container{
     height: 396px;
@@ -225,8 +221,8 @@ md-slider{
 }
 
 .div-map{
-    background-color: #093;
-    border-radius: 10px;
+	background-color: #093;
+	border-radius: 10px;
     z-index: 1000;
     display: block;
     opacity: 1;
@@ -244,28 +240,25 @@ md-slider{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
 }
 
+
 label{
     display: inline;
 }
 .radius-form{
-    font-size: 20px;
-    font-weight: bold;
+	font-weight: bold;
     padding-bottom: 10px;
-    padding-top: 10px;
+    padding-top: 5px;
     color: #19C662;
 }
 input[type='radio'].radius-radio{
-    margin-left: 5px;
-    margin-right: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 /* ---------END OF UTITLITIES NEAR THE HOUSE--------- */
 
 
 
 /*-------------ESTIMATE THE HOUSE------------*/
-.table-estimate{
-    font-size: 18px;
-}
 .panel-green{
     background: #19C662;
     color: #fff;
@@ -285,7 +278,7 @@ input[type='radio'].radius-radio{
 
 .home-image{
     width:100%; 
-    height: 200px; 
+    height: 180px; 
 }
 .row-suggest{
     padding-left : 15px !important;
@@ -304,7 +297,7 @@ input[type='radio'].radius-radio{
 .house-suggest { 
    position: relative; 
    width: 100%; /* for IE 6 */
-   height: 200px;  
+   height: 180px;  
 }
 
 .house-detail-suggest{
@@ -312,18 +305,30 @@ input[type='radio'].radius-radio{
     bottom: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.45); 
+    background: rgba(0, 0, 0, 0.25); 
     
 }
-
-.house-detail-info-suggest{
+.icon-heart-suggest{
     position: absolute;
-    bottom: 0;
-    left: 25px;
+    right: 10px;
+    top: 10px;
 }
 
-.house-detail-info-suggest > h4, p.h6{
+ul.house-detail-info-suggest{
+    position: absolute;
+    bottom: 0;
+    padding-left: 16px;
+    list-style: none;
+}
+
+.house-detail-info-suggest > li{
     color: #fff;
+}
+.li-price-suggest{
+    font-size: 16px;
+}
+.li-child-suggest{
+    font-size: 12px;
 }
 .price-detail-estimate{
     background: #fbfbfb;
@@ -395,8 +400,8 @@ input[type='radio'].radius-radio{
     margin: 0 auto;
 }
 .img-unknown{
-    height: 400px;
-    width: 100%;
+	height: 400px;
+	width: 100%;
     margin: 0 auto;
 }
 
@@ -683,23 +688,14 @@ a.nav:hover{
 /* --------------RESPONSIVE LAYOUT----------- */
 
 @media screen and (max-width : 992px){
-    .home-image{
-        height: 150px;
-    }
+    .home-image,
     .house-suggest{
-        height: 150px;
+        width:100%; 
+        height: 150px; 
     }
+    
     h4.title-suggest{
         font-size: 14px;
-    }
-    .radius-form{
-        font-size: 16px;
-    }
-    .table-estimate{
-        font-size: 16px;
-    }
-    p.h6{
-        font-size: 11px;
     }
 }
 
@@ -707,11 +703,12 @@ a.nav:hover{
     .map-utility > .angular-google-map > .angular-google-map-container{
         height: 300px;
     }
+    .map-neighbor > .angular-google-map > .angular-google-map-container{
+        height: 300px;
+    }
+    
     .table-estimate{
         font-size: 14px;
-    }
-    .radius-form{
-        font-size: 18px;
     }
     .carousel-inner > .item > .img-carousel, .img-unknown{
         height: 300px;
@@ -727,28 +724,30 @@ a.nav:hover{
 
 /*  480px hoặc nhỏ hơn */
 @media screen and (max-width: 480px) {
-    .home-image{
+    .li-price-suggest{
+        font-size: 12px;
+    }
+    .li-child-suggest{
+        font-size: 8px;
+    }
+    .home-image,
+    .house-suggest{
         width:100%; 
-        height: 100px; 
+        height: 130px; 
     }
     .house-detail-info-suggest {
         position: absolute;
         bottom: 0;
-        left: 10px;
+        padding-left: 5px;
     }
-    .house-suggest { 
-       position: relative; 
-       width: 100%; /* for IE 6 */
-       height: 100px;  
+    md-slider{
+        width: 200px;
     }
     .carousel-inner > .item > .img-carousel, .img-unknown{
         height: 200px;
         width: 100%;
     }
-     .angular-google-map-container {
-        width: 100%;
-        height: 200px;
-    }
+    
     .search{
         display: flex;
         justify-content: center;

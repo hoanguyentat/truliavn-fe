@@ -77,7 +77,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-7 col-md-8">
 					<h3 style="margin-top: 0px;">{{house.title}}</h3>
-					<span><b>Giá: </b> <strong ng-if="house.priceHouse"> {{house.price}} VNĐ </strong><strong ng-if="!house.priceHouse"> Thỏa thuận</strong> </span>
+					<span><b>Giá: </b> <strong ng-if="house.priceHouse"> {{house.priceConvert}} VNĐ </strong><strong ng-if="!house.priceHouse"> Thỏa thuận</strong> </span>
 					<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
 					<article>
 						
@@ -277,7 +277,7 @@
 				</div>
 			</div>
 			<div>
-				<h2 class="text-center">Giá các nhà lân cận</h2>
+				<h2 class="text-center">Bản đồ và giá các nhà lân cận</h2>
 		  	  	<ui-gmap-google-map class="map-neighbor" center="map.center" zoom="15" draggable="true" options="options" bounds="map.bounds">
 		  	  		<ui-gmap-markers models='markers' coords="'coords'" options="marker.options" icon="'icon'">
 	            	</ui-gmap-markers>
@@ -323,11 +323,11 @@
 								<img ng-if="!new.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="new.images[0]" ng-src="http://ngocdon.me:3000/{{new.images[0]}}" alt="{{new.address}}" class="home-image">
 								<div class="house-detail-suggest">
-									<div class="house-detail-info-suggest">
-										<h4>{{new.price}}</h4>
-										<p class="h6">{{new.address}}</p class="h6">
-										<p class="h6">{{address}}</p class="h6">
-									</div>
+									<ul class="house-detail-info-suggest">
+										<li class="li-price-suggest">{{new.price}}</li>
+										<li class="li-child-suggest">{{new.address}}</li>
+										<li class="li-child-suggest">{{address}}</li>
+									</ul>
 								</div>
 							</div>
 						</a>
@@ -341,12 +341,13 @@
 								<img ng-if="!bed.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="bed.images[0]" ng-src="http://ngocdon.me:3000/{{bed.images[0]}}" alt="{{bed.address}}" class="home-image">
 								<div class="house-detail-suggest">
-									<div class="house-detail-info-suggest">
-										<h4>{{bed.price}}</h4>
-										<p class="h6">{{bed.noOfBedrooms}} phòng ngủ</p>
-										<p class="h6">{{bed.address}}</p class="h6">
-										<p class="h6">{{address}}</p class="h6">
-									</div>
+									<ul class="house-detail-info-suggest">
+										<li class="li-price-suggest">{{bed.price}}
+											<span class="li-child-suggest"> {{bed.noOfBedrooms}} phòng ngủ</span>
+										</li>
+										<li class="li-child-suggest">{{bed.address}}</li>
+										<li class="li-child-suggest">{{address}}</li>
+									</ul>
 								</div>
 							</div>
 						</a>
@@ -361,11 +362,11 @@
 								<img ng-if="!max.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="max.images[0]" ng-src="http://ngocdon.me:3000/{{max.images[0]}}" alt="{{max.address}}" class="home-image">
 								<div class="house-detail-suggest">
-									<div class="house-detail-info-suggest">
-										<h4>{{max.price}}</h4>
-										<p class="h6">{{max.address}}</p class="h6">
-										<p class="h6">{{address}}</p class="h6">
-									</div>
+									<ul class="house-detail-info-suggest">
+										<li class="li-price-suggest">{{max.price}}</li>
+										<li class="li-child-suggest">{{max.address}}</li>
+										<li class="li-child-suggest">{{address}}</li>
+									</ul>
 								</div>
 							</div>
 						</a>
@@ -373,18 +374,19 @@
 				</div>
 				<div class="row" style="margin-top: 30px;">
 					<h3 class="title-suggest">Nhà từ 4 tầng trở lên</h3>
-					<div class="col-xs-6 col-sm-4 suggest" ng-repeat="floor in Floors4">
+					<div class="col-xs-12 col-xs-6 col-sm-4 suggest" ng-repeat="floor in Floors4">
 						<a href="#!/houses/{{floor.id}}">
 							<div class="house-suggest">
 								<img ng-if="!floor.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="floor.images[0]" ng-src="http://ngocdon.me:3000/{{floor.images[0]}}" alt="{{floor.address}}" class="home-image">
 								<div class="house-detail-suggest">
-									<div class="house-detail-info-suggest">
-										<h4>{{floor.price}}</h4>
-										<p class="h6">{{floor.noOfFloors}} tầng</p>
-										<p class="h6">{{floor.address}}</p class="h6">
-										<p class="h6">{{address}}</p class="h6">
-									</div>
+									<ul class="house-detail-info-suggest">
+										<li class="li-price-suggest">{{floor.price}}
+											<span class="li-child-suggest">{{floor.noOfFloors}} tầng</span>
+										</li>
+										<li class="li-child-suggest">{{floor.address}}</li>
+										<li class="li-child-suggest">{{address}}</li>
+									</ul>
 								</div>
 							</div>
 						</a>

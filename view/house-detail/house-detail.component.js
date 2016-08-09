@@ -215,6 +215,7 @@ angular.module('houseDetail')
 			$scope.house = house;
 
 			$scope.house.description = $sce.trustAsHtml($scope.house.description);
+			$scope.house.priceConvert = convertPrice($scope.house.price);
 
 			var latitude = $scope.house.lat;
 			var longitude = $scope.house.lon;

@@ -1,5 +1,6 @@
 angular.module('houseDetail', [
 	'ngMaterial',
 	'uiGmapgoogle-maps',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'ngMaterial'
 ]);

@@ -10,6 +10,7 @@
 	<link rel="icon" href="asset/icon/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="asset/css/bootstrap/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="asset/css/main.css">
+
 	<script type="text/javascript" src="asset/js/jquery/jquery/jquery.js"></script>
 	<script type="text/javascript" src="asset/js/jquery/bootstrap.min.js"></script>
 
@@ -63,12 +64,16 @@
 	<script type="text/javascript" src="asset/js/filter/housefilter.js"></script>
 	<script type="text/javascript" src="asset/js/controllers/UserController.js"></script>
 
+
+
 </head>
 <body>
-	<ng-include src="'view/templates/nav.template.html'" scope="" onload=""></ng-include>
-	<div ng-view style="margin-bottom: 150px;"></div>
-	<ng-include src="'view/templates/footer.template.html'" scope="" onload=""></ng-include>
-</body>
+  <ng-include src="'view/templates/nav.template.html'" scope="" onload=""></ng-include>
+  <div ng-view style="margin-bottom: 100px;"></div>
+  <ng-include src="'view/templates/footer.template.html'" scope="" onload=""></ng-include>
+  <ng-include src="'view/templates/backtotop.template.html'" scope="" onload=""></ng-include>
+</body> 
 </html>
+
 
 
