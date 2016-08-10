@@ -22,7 +22,6 @@ app.controller('AddPostCtrl', ['$scope', 'AuthService', '$http', 'HouseService',
 	}
 
 	$scope.streetChange = function(){
-		// console.log($scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName);
 		$scope.address = $scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName;
 	}
 	// $scope.noOfHouseChange = function(){
@@ -54,9 +53,6 @@ app.controller('AddPostCtrl', ['$scope', 'AuthService', '$http', 'HouseService',
 }]);
 
 app.controller('EditPostCtrl', ['$scope', 'AuthService', '$http', 'HouseService', '$location', '$routeParams', 'API', function($scope, AuthService, $http, HouseService, $location, $routeParams, API){
-	// $scope.addHouseForm = {};
-	//return old infomation of house
-	// console.log("hehe");
 	var url = API.getHouseInfo($routeParams.postId);
 	$http.get(url).then(function(res){
 		$scope.addHouseForm = res.data.houses[0];
@@ -132,8 +128,8 @@ app.controller('DeleteHouseCtrl', ['$scope', 'AuthService', '$routeParams', '$ht
 		});
 }]);
 
-app.controller('ForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
-	var rentUrl = API.getForRent();
+app.controller('ForRentCtrl', ['$scope', '$http', 'API','$cookies', function($scope, $http, API, $cookies){
+	var rentUrl = API.getForRent()+"&userId=" + $cookies.get('user.id');
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
 	$scope.maxSize = 5; //Number of pager buttons to show
@@ -180,8 +176,8 @@ app.controller('ForRentCtrl', ['$scope', '$http', 'API', function($scope, $http,
 
 }]);
 
-app.controller('ForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
-	var sellUrl  = API.getForSell();
+app.controller('ForSellCtrl', ['$scope', '$http', 'API','$cookies', function($scope, $http, API, $cookies){
+	var sellUrl  = API.getForSell()+"&userId=" + $cookies.get('user.id');
 	//pagination for search result
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
@@ -226,8 +222,8 @@ app.controller('ForSellCtrl', ['$scope', '$http', 'API', function($scope, $http,
 	};
 }]);
 
-app.controller('HousesForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
-	var sellUrl  = API.getHousesForSell();
+app.controller('HousesForSellCtrl', ['$scope', '$http', 'API','$cookies', function($scope, $http, API, $cookies){
+	var sellUrl  = API.getHousesForSell()+"&userId=" + $cookies.get('user.id');
 	//pagination for search result
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
@@ -272,8 +268,8 @@ app.controller('HousesForSellCtrl', ['$scope', '$http', 'API', function($scope, 
 	};
 }]);
 
-app.controller('HousesForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
-	var sellUrl  = API.getHousesForRent();
+app.controller('HousesForRentCtrl', ['$scope', '$http', 'API','$cookies', function($scope, $http, API, $cookies){
+	var sellUrl  = API.getHousesForRent()+"&userId=" + $cookies.get('user.id');
 	//pagination for search result
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
@@ -318,8 +314,8 @@ app.controller('HousesForRentCtrl', ['$scope', '$http', 'API', function($scope, 
 	};
 }]);
 
-app.controller('ApartmentsForSellCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
-	var sellUrl  = API.getApartmentsForSell();
+app.controller('ApartmentsForSellCtrl', ['$scope', '$http', 'API','$cookies', function($scope, $http, API, $cookies){
+	var sellUrl  = API.getApartmentsForSell()+"&userId=" + $cookies.get('user.id');
 	//pagination for search result
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
@@ -364,8 +360,8 @@ app.controller('ApartmentsForSellCtrl', ['$scope', '$http', 'API', function($sco
 	};
 }]);
 
-app.controller('ApartmentsForRentCtrl', ['$scope', '$http', 'API', function($scope, $http, API){
-	var sellUrl  = API.getApartmentsForRent();
+app.controller('ApartmentsForRentCtrl', ['$scope', '$http', 'API','$cookies', function($scope, $http, API,$cookies){
+	var sellUrl  = API.getApartmentsForRent()+"&userId=" + $cookies.get('user.id');
 	//pagination for search result
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
@@ -410,8 +406,8 @@ app.controller('ApartmentsForRentCtrl', ['$scope', '$http', 'API', function($sco
 	};
 }]);
 
-app.controller('HousesNeedBuyCtrl', ['$scope', '$http', 'AuthService', function($scope, $http, AuthService){
-	var buyUrl  = AuthService.hostName + '/api/houses?housefor=needbuy&raw=1&specific=1';
+app.controller('HousesNeedBuyCtrl', ['$scope', '$http', 'AuthService','$cookies', function($scope, $http, AuthService, $cookies){
+	var buyUrl  = AuthService.hostName + '/api/houses?housefor=needbuy&raw=1&specific=1'+"&userId=" + $cookies.get('user.id');
 	//pagination for search result
 	$scope.currentPage = 1;
 	$scope.pageSize = 15;
