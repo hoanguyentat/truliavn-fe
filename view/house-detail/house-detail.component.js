@@ -40,9 +40,13 @@ angular.module('houseDetail')
 
 	 	function splitAddress(add){
 			add = add.split(',');
-			var len = add.length - 2;
-			return add[0];
-		}
+			var len = add.length;
+			if(len >= 4){
+				return add[0] + add[1];
+			}
+			else 
+				return add[0];
+			}
 
 	 	function convertPrice(price){
 			price = price * 1000000;
@@ -161,7 +165,7 @@ angular.module('houseDetail')
 							$scope.newest[i].price = convertPrice($scope.newest[i].price);
 						}
 						// console.log($scope.newest[i].price);
-						$scope.newest[i].address = splitAddress($scope.newest[i].formatted_address);		
+						$scope.newest[i].address = splitAddress($scope.newest[i].address);		
 					}
 				});
 
@@ -174,7 +178,7 @@ angular.module('houseDetail')
 						else {
 							$scope.BedRooms3[i].price = convertPrice($scope.BedRooms3[i].price);
 						}
-						$scope.BedRooms3[i].address = splitAddress($scope.BedRooms3[i].formatted_address);		
+						$scope.BedRooms3[i].address = splitAddress($scope.BedRooms3[i].address);		
 					}
 				});
 
@@ -187,7 +191,7 @@ angular.module('houseDetail')
 						else {
 							$scope.MaxPrice[i].price = convertPrice($scope.MaxPrice[i].price);
 						}
-						$scope.MaxPrice[i].address = splitAddress($scope.MaxPrice[i].formatted_address);		
+						$scope.MaxPrice[i].address = splitAddress($scope.MaxPrice[i].address);		
 					}
 				});
 
@@ -200,7 +204,7 @@ angular.module('houseDetail')
 						else {
 							$scope.Floors4[i].price = convertPrice($scope.Floors4[i].price);
 						}
-						$scope.Floors4[i].address = splitAddress($scope.Floors4[i].formatted_address);		
+						$scope.Floors4[i].address = splitAddress($scope.Floors4[i].address);		
 					}
 				});
 			}
