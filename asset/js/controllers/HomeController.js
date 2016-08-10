@@ -1,22 +1,37 @@
 app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API','$cookies', function($scope, $rootScope, $http, API, $cookies){
 	// console.log("Hehe");
-	var urlHouses = API.getHouses() + '&count=2&userId=' + $cookies.get('user.id');
+	var urlHouses = API.getHouses() + '&count=6&sort=view&userId=' + $cookies.get('user.id');
 	
-	var urlHouseDongDa  = API.getHousesIn('district', 8)+'&count=8' +'&userId=' + $cookies.get('user.id');
-	var urlHouseHaiBaTrung = API.getHousesIn('district', 11)+'&count=4' +'&userId=' + $cookies.get('user.id');
-	var  urlHouseLongBien = API.getHousesIn('district', 15)+ '&count=6' +'&userId=' + $cookies.get('user.id');
-	// console.log(urlHouseHaiBaTrung);
+	var urlHouseDongDa  = API.getHousesIn('district', 8)+'&count=8&sort=view' +'&userId=' + $cookies.get('user.id');
+	var urlHouseHaiBaTrung = API.getHousesIn('district', 11)+'&count=4&sort=view' +'&userId=' + $cookies.get('user.id');
+	var  urlHouseLongBien = API.getHousesIn('district', 15)+ '&count=6&sort=view' +'&userId=' + $cookies.get('user.id');
+	console.log(urlHouseHaiBaTrung);
 	// var $scope = this;
 	function splitAddress(add){
 		add = add.split(',');
-		return add[0];
+		var len = add.length;
+		if(len >= 4){
+			return add[0] + add[1];
+		}
+		else 
+			return add[0];
+	}
+	function splitDistAdd(add){
+		add = add.split(',');
+		// console.log(add);
+		var len = add.length;
+		// console.log(len);
+		return add[len-2] + ',' + add[len-1];
 	}
 	//get some new house
 	$http.get(urlHouses).then(function success(response){
 		$scope.allHouses = response.data.houses;
 		angular.forEach($scope.allHouses, function(val){
+			// console.log(val.address);
 			val.price = convertPrice(val.price);
-			val.address = splitAddress(val.formatted_address);
+			val.streetAdd = splitAddress(val.address);
+			console.log(val.streetAdd);
+			val.districtAdd = splitDistAdd(val.address);
 		})
 	}, function error(response){
 		console.log(response);
@@ -26,7 +41,7 @@ app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API','$cooki
 		
 		angular.forEach(HBT, function(val){
 			val.price = convertPrice(val.price);
-			val.address = splitAddress(val.formatted_address);
+			val.address = splitAddress(val.address);
 		});
 		$scope.HaiBaTrung = HBT;
 	}, function error(response){
@@ -37,7 +52,7 @@ app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API','$cooki
 		var DD = response.data.houses;
 		angular.forEach(DD, function(val){
 			val.price = convertPrice(val.price);
-			val.address = splitAddress(val.formatted_address);
+			val.address = splitAddress(val.address);
 		});
 		$scope.DongDa = DD;
 
@@ -50,7 +65,7 @@ app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API','$cooki
 		// console.dir($scope.newPost[0]);
 		angular.forEach($scope.LongBien, function(val){
 			val.price = convertPrice(val.price);
-			val.address = splitAddress(val.formatted_address);
+			val.address = splitAddress(val.address);
 		})
 	}, function error(response){
 		console.log(response);
