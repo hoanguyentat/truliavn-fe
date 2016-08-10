@@ -33,6 +33,9 @@ angular.module('houseList')
 					$scope.attr = 'area';
 					$scope.reserve = true;
 					break;
+				case "5":
+					$scope.attr = 'view',
+					$scope.reserve = 'true';
 				default:
 					$scope.attr = 'create_at';
 					$scope.reserve = false;

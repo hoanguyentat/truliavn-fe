@@ -67,6 +67,11 @@ app.config(['$locationProvider', '$routeProvider' ,function config($locationProv
 		controller: 'ManagePostCtrl',
 		access: {restricted: true}
 	})
+	.when('/manage-post/liked', {
+		templateUrl: 'view/user/manage-liked-post.template.html',
+		controller: 'ManageLikedPostCtrl',
+		access: {restricted: true}
+	})
 	// ------------------House--------------------------------
 	
 	// ------------------house feature------------------------
