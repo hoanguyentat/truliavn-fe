@@ -47,6 +47,27 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, $cookie
 	};
 
   $scope.cancel = function () {
-    $uibModalInstance.dismiss('cance');
+    $uibModalInstance.dismiss('cancel');
   };
 });
+
+app.controller('ManageLikedPostCtrl', ['$scope', 'AuthService', '$http', function ($scope, AuthService, $http) {
+	var likedForm = {};
+	likedForm.email = AuthService.getUserEmail();
+	likedForm.token = AuthService.getUserToken();
+	var urlPost = AuthService.hostName + "/api/liked";
+	$scope.currentPage = 0;
+	$scope.pageSize = 20;
+	$http.post(urlPost, likedForm).then(function(res){
+		$scope.houses = res.data.houses;
+		$scope.noOfPost = $scope.houses.length;
+		$scope.numberOfPages = function(){
+			return Math.ceil($scope.houses.length/$scope.pageSize); 
+		};
+		angular.forEach($scope.houses, function(val, key){
+			val.description = val.description.slice(0, 150) + '....';
+		});
+	}, function(err){
+		console.log(err);
+	});
+}]);

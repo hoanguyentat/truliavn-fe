@@ -1,0 +1,63 @@
+<div ng-if="houses">
+	<div class="container house-for">
+		<div class="row">
+			<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+				<div class="row">
+					<center><h2>Quản lý bài đăng yêu thích</h2></center>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<span>Bạn đã thích {{noOfPost}} bài</span>
+						<div class="row">
+							<ul class="houses">
+
+								<li ng-repeat="house in houses | startFrom : currentPage*pageSize | limitTo: pageSize" class="thumbnail row">
+									<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+										<a href="#!/houses/{{::house.id}}" class="thumb">
+										<img ng-if="house.images[0]" ng-src="{{'http://ngocdon.me:3000/'+house.images[0]}}" class="img img-responsive" alt="{{::house.address}}" />
+										<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
+										
+										</a>
+									</div>
+									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+										<a href="#!/houses/{{house.id}}" style="text-decoration: none;"><h4>{{house.title}}</h4></a>
+										<p ng-bind="house.description"></p>
+										<div>Giá: <strong>{{house.price}} triệu</strong></div>
+										<div class="row">
+											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+												<span>Diện tích: <strong>{{house.area}} m<sup>2</sup></strong></span>
+											</div>
+											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+												<div class="row">
+													<div ng-controller="LikeCtrl" ng-click="likeClick($event, house.id, $parent.house.liked)" class="col-xs-12 col-sm-2">
+														<span ng-if="!$parent.house.liked" style="font-size: 25px; color: #fff;" class="glyphicon glyphicon-heart"></span>
+														<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
+													</div>
+													<span class="col-xs-12 col-sm-10">
+														<b>Ngày đăng</b>: {{house.created_at | date: "dd-MM-yyyy"}}
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						   <button class= "btn btn-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+						        Previous
+						    </button>
+						    <span class="btn btn-default"> Page {{currentPage+1}} of {{numberOfPages()}}</span>
+						    <button class= "btn btn-primary" ng-disabled="currentPage >= houses.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+						        Next
+						    </button>
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-if="!houses">
+	<div class="container house-for">
+		<div class="row">
+			<center><h2>Đang tải dữ liệu...</h2></center>
+		</div>
+	</div>
+</div>
