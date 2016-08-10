@@ -53,17 +53,14 @@
 				        	<img ng-src="{{'http://ngocdon.me:3000/' + slide}}" class="img img-thumbnail img-carousel">
 				      	</uib-slide>				      	
 				    </uib-carousel>
-				    
 				</div>
 				<img ng-if="!house.images[0]" src='../../asset/icon/house-no-image.png' class="img-unknown">
 				<h2 ng-hide="house.houseFor">Cho thuê</h2>
 				<h2 ng-show="house.houseFor">Nhà đất bán</h2>
-				<span>Địa chỉ: </span> {{house.address}}
-				<div ng-controller="LikeCtrl" ng-click="likeClick($event, house.id, $parent.house.liked)" class="icon-heart-house-detail">		
-					<span class=""><strong>{{house.totalLikes}} lượt thích</strong></span>
-					<span ng-if="!$parent.house.liked" style="font-size: 25px; color: #B8A6BC;" class="glyphicon glyphicon-heart"></span>
-					<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;" class="glyphicon glyphicon-heart"></span>
-				</div>
+
+				<!-- <span>Địa chỉ: </span> {{house.address}} -->
+				<div>Địa chỉ : {{house.address}}</div>
+
 				<table class="table">
 					<tbody>
 						<tr> 
@@ -76,6 +73,19 @@
 						</tr>
 					</tbody>
 				</table>
+				<div ng-controller="LikeCtrl" ng-click="likeClick($event, house.id, $parent.house.liked)">
+					<div class="row">
+						<div class="col-xs-6">
+							<strong>{{house.view}} lượt xem </strong>
+						</div>
+						<div class="col-xs-6">
+							<strong>{{house.totalLikes}} lượt thích
+							<span ng-if="!$parent.house.liked" style="font-size: 25px; color: #B8A6BC;top: -5px;position:absolute;" class="glyphicon glyphicon-heart"></span>
+							<span ng-if="$parent.house.liked" style="font-size: 25px; color: #f06;top: -5px;position: absolute;" class="glyphicon glyphicon-heart"></span>
+							</strong>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -85,7 +95,6 @@
 
 					<h3 style="margin-top: 0px;">{{house.title}}</h3>
 					<span><b>Giá: </b> <strong ng-if="house.priceHouse"> {{house.priceConvert}} VNĐ </strong><strong ng-if="!house.priceHouse"> Thỏa thuận</strong> </span>
-					<span class="number-view"><strong>{{house.view}} lượt xem</strong></span>
 					<span style="padding-left: 10px;"><b>Diện tích:  </b><strong> {{house.area}} m<sup>2</sup></strong></span>
 					<article>
 						
@@ -358,7 +367,8 @@
 								</div>
 								<div class="house-detail-suggest">
 									<ul class="house-detail-info-suggest">
-										<li class="li-price-suggest">{{bed.price}}
+										<li>
+											<span class="li-price-suggest">{{bed.price}}</span>
 											<span class="li-child-suggest"> {{bed.noOfBedrooms}} phòng ngủ</span>
 										</li>
 										<li class="li-child-suggest">{{bed.address}}</li>
@@ -405,7 +415,8 @@
 								</div>
 								<div class="house-detail-suggest">
 									<ul class="house-detail-info-suggest">
-										<li class="li-price-suggest">{{floor.price}}
+										<li>
+											<span class="li-price-suggest">{{floor.price}}</span>
 											<span class="li-child-suggest">{{floor.noOfFloors}} tầng</span>
 										</li>
 										<li class="li-child-suggest">{{floor.address}}</li>
