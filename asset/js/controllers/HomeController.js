@@ -1,43 +1,56 @@
 app.controller('HomeController', ['$scope', '$rootScope', '$http', 'API','$cookies', function($scope, $rootScope, $http, API, $cookies){
 	// console.log("Hehe");
 	var urlHouses = API.getHouses() + '&count=2&userId=' + $cookies.get('user.id');
-	var urlHouseHaiBaTrung = API.getHousesIn('district', 15)+'&userId=' + $cookies.get('user.id');
-	var urlHouseBaDinh = API.getHousesIn('district', 11)+'&userId=' + $cookies.get('user.id');
-	var urlHouseHoaiDuc  = API.getHousesIn('district', 8)+'&userId=' + $cookies.get('user.id');
+	
+	var urlHouseDongDa  = API.getHousesIn('district', 8)+'&count=8' +'&userId=' + $cookies.get('user.id');
+	var urlHouseHaiBaTrung = API.getHousesIn('district', 11)+'&count=4' +'&userId=' + $cookies.get('user.id');
+	var  urlHouseLongBien = API.getHousesIn('district', 15)+ '&count=6' +'&userId=' + $cookies.get('user.id');
+	// console.log(urlHouseHaiBaTrung);
 	// var $scope = this;
+	function splitAddress(add){
+		add = add.split(',');
+		return add[0];
+	}
 	//get some new house
 	$http.get(urlHouses).then(function success(response){
 		$scope.allHouses = response.data.houses;
 		angular.forEach($scope.allHouses, function(val){
 			val.price = convertPrice(val.price);
+			val.address = splitAddress(val.formatted_address);
 		})
 	}, function error(response){
 		console.log(response);
 	});
 	$http.get(urlHouseHaiBaTrung).then(function success(response){
-		$scope.HaiBaTrung = response.data.houses;
-		// console.dir($scope.newPost[0]);
-		angular.forEach($scope.HaiBaTrung, function(val){
+		var HBT = response.data.houses;
+		
+		angular.forEach(HBT, function(val){
 			val.price = convertPrice(val.price);
-		})
+			val.address = splitAddress(val.formatted_address);
+		});
+		$scope.HaiBaTrung = HBT;
 	}, function error(response){
 		console.log(response);
 	});
 
-	$http.get(urlHouseHoaiDuc).then(function success(response){
-		$scope.HoaiDuc = response.data.houses;
-		angular.forEach($scope.HoaiDuc, function(val){
+	$http.get(urlHouseDongDa).then(function success(response){
+		var DD = response.data.houses;
+		angular.forEach(DD, function(val){
 			val.price = convertPrice(val.price);
-		})
+			val.address = splitAddress(val.formatted_address);
+		});
+		$scope.DongDa = DD;
+
 		}, function error(response){
 			console.log(response);
 	});
 
-	$http.get(urlHouseBaDinh).then(function success(response){
-		$scope.BaDinh = response.data.houses;
+	$http.get(urlHouseLongBien).then(function success(response){
+		$scope.LongBien = response.data.houses;
 		// console.dir($scope.newPost[0]);
-		angular.forEach($scope.BaDinh, function(val){
+		angular.forEach($scope.LongBien, function(val){
 			val.price = convertPrice(val.price);
+			val.address = splitAddress(val.formatted_address);
 		})
 	}, function error(response){
 		console.log(response);

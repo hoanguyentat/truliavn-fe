@@ -292,7 +292,7 @@ input[type='radio'].radius-radio{
 .title-suggest{
     padding-left: 8px;
     padding-right: 15px;
-    color : #19C662;
+    /*color : #19C662;*/
 }
 .suggest{
     padding: 8px !important;
@@ -333,10 +333,11 @@ ul.house-detail-info-suggest{
     color: #fff;
 }
 .li-price-suggest{
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 700 !important;
 }
 .li-child-suggest{
-    font-size: 12px;
+    font-size: 13px;
 }
 .price-detail-estimate{
     background: #fbfbfb;
@@ -730,7 +731,7 @@ div.center-cropped img {
         height: 150px; 
     }
     
-    h4.title-suggest{
+    .title-suggest{
         font-size: 14px;
     }
 }
@@ -781,12 +782,15 @@ div.center-cropped img {
     }
     /* --------------crope-images----------- */
     .li-child-suggest{
-        font-size: 8px;
+        font-size: 9px;
     }
     .home-image,
     .house-suggest{
         width:100%; 
         height: 130px; 
+    }
+    .title-suggest{
+        font-size: 12px;
     }
     .house-detail-info-suggest {
         position: absolute;

@@ -33,12 +33,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 
 	// function splitAddress(add){
 		add = add.split(',');
-		var len = add.length - 2;
-		var s = "";
-		for(var i = 0; i < len; i++){
-			s += add[i];
-		}
-		return s;
+		return add[0];
 	}
 	
 	convertPrice = function(price){
@@ -147,7 +142,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 				else {
 					$scope.newest[i].price = convertPrice($scope.newest[i].price);
 				}
-				$scope.newest[i].address = splitAddress($scope.newest[i].address);		
+				$scope.newest[i].address = splitAddress($scope.newest[i].formatted_address);		
 			}
 		});
 
@@ -160,7 +155,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 				else {
 					$scope.BedRooms3[i].price = convertPrice($scope.BedRooms3[i].price);
 				}
-				$scope.BedRooms3[i].address = splitAddress($scope.BedRooms3[i].address);		
+				$scope.BedRooms3[i].address = splitAddress($scope.BedRooms3[i].formatted_address);		
 			}
 		});
 
@@ -173,7 +168,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 				else {
 					$scope.MaxPrice[i].price = convertPrice($scope.MaxPrice[i].price);
 				}
-				$scope.MaxPrice[i].address = splitAddress($scope.MaxPrice[i].address);		
+				$scope.MaxPrice[i].address = splitAddress($scope.MaxPrice[i].formatted_address);		
 			}
 		});
 
@@ -186,7 +181,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 				else {
 					$scope.Floors4[i].price = convertPrice($scope.Floors4[i].price);
 				}
-				$scope.Floors4[i].address = splitAddress($scope.Floors4[i].address);		
+				$scope.Floors4[i].address = splitAddress($scope.Floors4[i].formatted_address);		
 			}
 		});
 	}
