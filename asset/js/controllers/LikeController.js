@@ -21,7 +21,7 @@ app.controller('LikeCtrl', ['$scope', 'AuthService','$http','$location', 'API', 
 			// console.log("thanh cong");
 			$route.reload();
 		}, function(res){
-			console.log(res);
+			// console.log(res);
 			$location.path("/login");
 		});
 	};

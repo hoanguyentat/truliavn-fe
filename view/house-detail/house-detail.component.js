@@ -25,7 +25,7 @@ angular.module('houseDetail')
 })
 .component('houseDetail', {
 	controller: function HouseDetailController($scope, $http, $routeParams, AuthService, API, $sce, $cookies){
-		var urlHouseDetail = API.getHouseDetail($routeParams.houseId);
+		var urlHouseDetail = API.getHouseDetail($routeParams.houseId) + '&userId=' + $cookies.get('user.id');
 		var request = {};
 
 		$scope.select = "myHouse";
@@ -825,10 +825,10 @@ angular.module('houseDetail')
 			$scope.markers = [{
 		      	id: 0,
 		      	center: {latitude: 21.0245, longitude: 105.856 },
-		      	/*coords: {
+		      	coords: {
 		        	latitude: latitude,
 		        	longitude: longitude
-		      	},*/
+		      	},
 		      	zoom:15,
 		      	options: { draggable: true },
 		      	icon : '../../asset/icon/house.png'
