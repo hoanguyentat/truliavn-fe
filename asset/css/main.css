@@ -498,6 +498,7 @@ a.nav:hover{
 
 /*------------------FOOTER----------------------*/
 .footer{
+    margin-top: 120px;
     position: absolute;
     right: 0;
     /*bottom: 0;*/

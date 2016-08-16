@@ -10,7 +10,7 @@ app.controller('AddPostCtrl', ['$scope', 'AuthService', '$http', 'HouseService',
 		$http.get(AuthService.hostName + '/api/districts?city='+$scope.addHouseForm.city).then(function success(response){
 			$scope.districts = response.data.districts;
 		});
-	}
+	};
 
 	$scope.districtChange = function(){
 		$http.get(AuthService.hostName + '/api/wards?district='+$scope.addHouseForm.district).then(function success(response){
@@ -19,11 +19,11 @@ app.controller('AddPostCtrl', ['$scope', 'AuthService', '$http', 'HouseService',
 		$http.get(AuthService.hostName + '/api/streets?district='+$scope.addHouseForm.district).then(function success(response){
 			$scope.streets = response.data.streets;
 		});
-	}
+	};
 
 	$scope.streetChange = function(){
 		$scope.address = $scope.streets[$scope.addHouseForm.street].streetName + ', ' + $scope.districts[$scope.addHouseForm.district].districtName + ', ' + $scope.cities[$scope.addHouseForm.city].cityName;
-	}
+	};
 	// $scope.noOfHouseChange = function(){
 	// 	$scope.address = $scope.addHouseForm.noOfHouse + ', ' + $scope.address;
 	// };
