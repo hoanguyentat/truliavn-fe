@@ -68,7 +68,7 @@
 			<div ng-if="house.images[0]" >
 			    <uib-carousel active="active" interval="3000" no-wrap="false">
 			      	<uib-slide ng-repeat="(key, slide) in house.images track by key" index="key">
-			        	<img ng-src="{{'http://ngocdon.me:3000/' + slide}}" class="img img-thumbnail img-carousel">
+			        	<img ng-src="{{'http://trulia.sunkhoai.vn:3000/' + slide}}" class="img img-thumbnail img-carousel">
 			      	</uib-slide>
 			    </uib-carousel>
 			</div>
@@ -90,7 +90,7 @@
 			<a href="#!/houses/{{new.id}}">
 				<div class="house-suggest">
 					<img ng-if="!new.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
-					<img ng-if="new.images[0]" ng-src="http://ngocdon.me:3000/{{new.images[0]}}" alt="{{new.address}}" class="home-image">
+					<img ng-if="new.images[0]" ng-src="http://trulia.sunkhoai.vn:3000/{{new.images[0]}}" alt="{{new.address}}" class="home-image">
 					<div class="house-detail-suggest">
 						<div class="house-detail-info-suggest">
 							<h4>{{new.price}}</h4>
@@ -108,7 +108,7 @@
 			<a href="#!/houses/{{bed.id}}">
 				<div class="house-suggest">
 					<img ng-if="!bed.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
-					<img ng-if="bed.images[0]" ng-src="http://ngocdon.me:3000/{{bed.images[0]}}" alt="{{bed.address}}" class="home-image">
+					<img ng-if="bed.images[0]" ng-src="http://trulia.sunkhoai.vn:3000/{{bed.images[0]}}" alt="{{bed.address}}" class="home-image">
 					<div class="house-detail-suggest">
 						<div class="house-detail-info-suggest">
 							<h4>{{bed.price}}</h4>
@@ -128,7 +128,7 @@
 			<a href="#!/houses/{{max.id}}">
 				<div class="house-suggest">
 					<img ng-if="!max.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
-					<img ng-if="max.images[0]" ng-src="http://ngocdon.me:3000/{{max.images[0]}}" alt="{{max.address}}" class="home-image">
+					<img ng-if="max.images[0]" ng-src="http://trulia.sunkhoai.vn:3000/{{max.images[0]}}" alt="{{max.address}}" class="home-image">
 					<div class="house-detail-suggest">
 						<div class="house-detail-info-suggest">
 							<h4>{{max.price}}</h4>
@@ -146,7 +146,7 @@
 			<a href="#!/houses/{{floor.id}}">
 				<div class="house-suggest">
 					<img ng-if="!floor.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
-					<img ng-if="floor.images[0]" ng-src="http://ngocdon.me:3000/{{floor.images[0]}}" alt="{{floor.address}}" class="home-image">
+					<img ng-if="floor.images[0]" ng-src="http://trulia.sunkhoai.vn:3000/{{floor.images[0]}}" alt="{{floor.address}}" class="home-image">
 					<div class="house-detail-suggest">
 						<div class="house-detail-info-suggest">
 							<h4>{{floor.price}}</h4>

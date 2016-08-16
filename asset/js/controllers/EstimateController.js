@@ -1,34 +1,6 @@
 app.controller('EstimateController', ['$scope', '$http', '$routeParams', 'AuthService','API', '$cookies', 
 function($scope, $http, $routeParams, AuthService,API, $cookies){
 	// console.log($cookies.get('price'));
-	var address = '';
-	var disName = "";
-	var cityName = "";
-	var request = {};
-	
-	var temp  = $cookies.get('districtAddress').split(',');
-	$scope.districtPriceName =  temp[0];
-	$scope.cityPriceName =  temp[1];
-
-	if(!disName && !cityName){
-		$scope.address = $cookies.get('districtAddress');
-	}
-	// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
-
-	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
-		.then(function success(response){
-			var avg = response.data;
-			$scope.avgDistrictMedianSale = (avg.avgPrice).toFixed(2);
-			$scope.avgDistrictListPrice  = ((avg.minAvgListingPrice + avg.maxAvgListingPrice)/2).toFixed(2);
-
-		})
-
-
-	// console.log(address);
-	// console.log($cookies.get('districtID'));
-	// console.log($cookies.get('cityID'));
-
-
 	function splitAddress(add){
 
 	// function splitAddress(add){
@@ -60,9 +32,41 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		  	s = str.concat(s);
 
 		} while(price/1000>0);
-		return s + ' VNĐ';
+		return s;
 
 	}
+	var address = '';
+	var disName = "";
+	var cityName = "";
+	var request = {};
+
+	$scope.priceCookies = $cookies.get('price');
+	$scope.priceCookiesConvert = convertPrice($cookies.get('price'));
+	
+	var temp  = $cookies.get('districtAddress').split(',');
+	$scope.districtPriceName =  temp[0];
+	$scope.cityPriceName =  temp[1];
+
+	if(!disName && !cityName){
+		$scope.address = $cookies.get('districtAddress');
+	}
+	// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+
+	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
+		.then(function success(response){
+			var avg = response.data;
+			$scope.avgDistrictMedianSale = (avg.avgPrice).toFixed(2);
+			$scope.avgDistrictListPrice  = ((avg.minAvgListingPrice + avg.maxAvgListingPrice)/2).toFixed(2);
+
+		})
+
+
+	// console.log(address);
+	// console.log($cookies.get('districtID'));
+	// console.log($cookies.get('cityID'));
+
+
+	
 
 	//EVENTS WHEN CLICK ON ESTIMATE
 
@@ -251,7 +255,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 					longitude : house[i].lon,
 					content : '<div class="div-map"><p class="p-map">'+ house[i].address + '</p>'+
 							'<p class="p-map">Giá : '+ (house[i].price ? convertPrice(house[i].price) : "Thỏa thuận") + '</p></div>',
-					url : 'http://ngocdon.me/#!/houses/' + house[i].id,
+					url : 'http://trulia.sunkhoai.vn/#!/houses/' + house[i].id,
 					icon : '../../../asset/icon/estimate.png',
 					options : {labelClass : 'marker_labels', labelContent : ""}
 				}
