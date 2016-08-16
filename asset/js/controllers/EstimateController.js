@@ -32,7 +32,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		  	s = str.concat(s);
 
 		} while(price/1000>0);
-		return s + ' VNĐ';
+		return s;
 
 	}
 	var address = '';
@@ -255,7 +255,7 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 					longitude : house[i].lon,
 					content : '<div class="div-map"><p class="p-map">'+ house[i].address + '</p>'+
 							'<p class="p-map">Giá : '+ (house[i].price ? convertPrice(house[i].price) : "Thỏa thuận") + '</p></div>',
-					url : 'http://ngocdon.me/#!/houses/' + house[i].id,
+					url : 'http://trulia.sunkhoai.vn/#!/houses/' + house[i].id,
 					icon : '../../../asset/icon/estimate.png',
 					options : {labelClass : 'marker_labels', labelContent : ""}
 				}
