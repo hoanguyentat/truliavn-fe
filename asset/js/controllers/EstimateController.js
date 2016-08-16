@@ -1,34 +1,6 @@
 app.controller('EstimateController', ['$scope', '$http', '$routeParams', 'AuthService','API', '$cookies', 
 function($scope, $http, $routeParams, AuthService,API, $cookies){
 	// console.log($cookies.get('price'));
-	var address = '';
-	var disName = "";
-	var cityName = "";
-	var request = {};
-	
-	var temp  = $cookies.get('districtAddress').split(',');
-	$scope.districtPriceName =  temp[0];
-	$scope.cityPriceName =  temp[1];
-
-	if(!disName && !cityName){
-		$scope.address = $cookies.get('districtAddress');
-	}
-	// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
-
-	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
-		.then(function success(response){
-			var avg = response.data;
-			$scope.avgDistrictMedianSale = (avg.avgPrice).toFixed(2);
-			$scope.avgDistrictListPrice  = ((avg.minAvgListingPrice + avg.maxAvgListingPrice)/2).toFixed(2);
-
-		})
-
-
-	// console.log(address);
-	// console.log($cookies.get('districtID'));
-	// console.log($cookies.get('cityID'));
-
-
 	function splitAddress(add){
 
 	// function splitAddress(add){
@@ -63,6 +35,38 @@ function($scope, $http, $routeParams, AuthService,API, $cookies){
 		return s + ' VNĐ';
 
 	}
+	var address = '';
+	var disName = "";
+	var cityName = "";
+	var request = {};
+
+	$scope.priceCookies = $cookies.get('price');
+	$scope.priceCookiesConvert = convertPrice($cookies.get('price'));
+	
+	var temp  = $cookies.get('districtAddress').split(',');
+	$scope.districtPriceName =  temp[0];
+	$scope.cityPriceName =  temp[1];
+
+	if(!disName && !cityName){
+		$scope.address = $cookies.get('districtAddress');
+	}
+	// console.log(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')));
+
+	$http.get(API.getAveragePrice('district', $scope.districtSelected ? $scope.districtSelected : $cookies.get('districtID')))
+		.then(function success(response){
+			var avg = response.data;
+			$scope.avgDistrictMedianSale = (avg.avgPrice).toFixed(2);
+			$scope.avgDistrictListPrice  = ((avg.minAvgListingPrice + avg.maxAvgListingPrice)/2).toFixed(2);
+
+		})
+
+
+	// console.log(address);
+	// console.log($cookies.get('districtID'));
+	// console.log($cookies.get('cityID'));
+
+
+	
 
 	//EVENTS WHEN CLICK ON ESTIMATE
 

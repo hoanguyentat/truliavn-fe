@@ -1,6 +1,6 @@
 <div class="container house-for">
 	<div>
-		<h1 class="title">Ước lượng giá nhà đất của các khu vực và chi tiết </h1>
+		<h2 class="text-center">Ước lượng giá nhà đất của các khu vực và chi tiết </h2>
 	</div>
 	<div class="col-xs-12 col-sm-6">
 	<div class="panel" style="padding : 0">
@@ -87,10 +87,10 @@
 		</div>
 	</div>
 
-	<div class="map-marker col-xs-12" id="map" ng-if="select == true">
-		<h1 class="title">Bản đồ hiển thị giá nhà đất khu vực {{address}}</h1>
+	<div class="col-xs-12" id="map" ng-if="select == true">
+		<h2 class="text-center">Bản đồ hiển thị nhà đất khu vực {{address}}</h2>
 	<!-- <div class="map-marker"> -->
-		<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
+		<ui-gmap-google-map class="map-estimate" center="map.center" zoom="map.zoom" draggable="true" bounds="map.bounds">
 		    <ui-gmap-markers models="nearMarkers" idKey="nearMarkers.id" icon="'icon'" coords="'self'" options="'options'" events="map.nearMarkersEvents">
 		    </ui-gmap-markers>
 		</ui-gmap-google-map>
@@ -99,9 +99,12 @@
 <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
 			<div class="container">
 				<div class="row" style="margin-top: 30px;">
+				<!-- <div class="wrapper"> -->
 					<h3 class="title-suggest">Nhà mới đăng gần đây</h3>
 					<div class="col-xs-6 col-sm-3 suggest" ng-repeat="new in newest">
+					<!-- <div class="suggest" ng-repeat="new in newest"> -->
 						<a href="#!/houses/{{new.id}}">
+						<!-- <a href="#!/houses/{{new.id}}" class="a-suggest"> -->
 							<div class="house-suggest">
 								<img ng-if="!new.images[0]" src="../../asset/icon/house-no-image.png" alt="" class="home-image">
 								<img ng-if="new.images[0]" ng-src="http://ngocdon.me:3000/{{new.images[0]}}" alt="{{new.address}}" class="home-image">
@@ -146,8 +149,8 @@
 					</div>
 				</div>
 				<div class="row" style="margin-top: 30px;">
-					<h3 class="title-suggest" ng-if="house.priceHouse">Nhà có giá dưới {{priceSuggest}}</h3>
-					<h3 class="title-suggest" ng-if="!house.priceHouse">Nhà có giá thoả thuận</h3>
+					<h3 class="title-suggest" ng-if="priceCookies">Nhà có giá dưới {{priceCookiesConvert}}</h3>
+					<h3 class="title-suggest" ng-if="!priceCookies">Nhà có giá thoả thuận</h3>
 					<div class="col-xs-6 col-sm-3 suggest" ng-repeat="max in MaxPrice">
 						<a href="#!/houses/{{max.id}}">
 							<div class="house-suggest">
