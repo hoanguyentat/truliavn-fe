@@ -326,7 +326,7 @@ app.controller('HouseDetailController', ['$rootScope','$scope', '$http', '$log',
 							latitude : lat,
 							longitude : lon,
 							content : content,
-							url : "http://trulia.sunkhoai.vn/#!/houses/" + neighbor[i].id,
+							url : "http://trulia.sunkhoai.com/#!/houses/" + neighbor[i].id,
 							options : {labelClass : 'marker_labels', labelContent : ''},
 							icon : "../../asset/icon/neighbor.png"
 						}

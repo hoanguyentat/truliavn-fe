@@ -24,8 +24,8 @@
 								<li ng-repeat="house in houses  | orderBy:attr:reserve | startFrom : (currentPage-1)*pageSize | limitTo: pageSize" class="thumbnail row" style=" box-shadow: 0px 2px 1px 1px rgba(1,201,3,0.1);">
 									<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="padding-left: 0px; padding-right: 0px;">
 										<a href="#!/houses/{{house.id}}" class="thumb">
-										<img ng-if="house.images[0]" ng-src="{{'http://trulia.sunkhoai.vn:3000/' + house.images[0]}}" class="img img-responsive" alt="{{house.address}}"/>
-										<img ng-if="!house.images[0]" src='http://nemanjakovacevic.net/wp-content/uploads/2013/07/placeholder.png'>
+										<img ng-if="house.images[0]" ng-src="{{'http://trulia.sunkhoai.com:3000/' + house.images[0]}}" class="img img-responsive" alt="{{house.address}}"/>
+										<img ng-if="!house.images[0]" src='http://trulia.sunkhoai.com/asset/icon/placeholder.png'>
 										
 										</a>
 									</div>

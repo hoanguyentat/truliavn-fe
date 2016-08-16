@@ -4,7 +4,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 	var user = null;
 	var userName;
 	var userId = "";
-	var host = 'http://trulia.sunkhoai.vn:3000';
+	var host = 'http://trulia.sunkhoai.com:3000';
 	return ({
 		isLoggedIn: isLoggedIn,
 		getUserStatus: getUserStatus,
@@ -15,7 +15,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 		logout: logout,
 		register: register,
 		update : update,
-		hostName : 'http://trulia.sunkhoai.vn:3000'
+		hostName : 'http://trulia.sunkhoai.com:3000'
 	});
 
 	function isLoggedIn(){
@@ -171,7 +171,7 @@ app.factory('AuthService', ['$q', '$timeout', '$rootScope', '$http', '$cookies',
 
 //House feature service
 app.factory('HouseService', ['$q', '$http', '$timeout', function($q, $http, $timeout){
-	var host = 'http://trulia.sunkhoai.vn:3000';
+	var host = 'http://trulia.sunkhoai.com:3000';
 	return ({
 		addHouse: addHouse,
 		editHouse: editHouse,
